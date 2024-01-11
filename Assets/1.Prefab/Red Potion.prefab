@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2669451802890784204}
   - component: {fileID: 2669451802890784205}
   - component: {fileID: 6874632315880494206}
+  - component: {fileID: -3398891928446573634}
   m_Layer: 0
   m_Name: Red Potion
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1d21fd1ac53c84f86fb3fd4631a8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  potionType: 0
   xIndex: 0
   yIndex: 0
   isMatched: 0
@@ -136,7 +138,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1d21fd1ac53c84f86fb3fd4631a8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  potionType: 0
   xIndex: 0
   yIndex: 0
   isMatched: 0
   isMoving: 0
+--- !u!61 &-3398891928446573634
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2669451802890784202}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8125, y: 1.125}
+    newSize: {x: 0.8125, y: 1.125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8125, y: 1.125}
+  m_EdgeRadius: 0

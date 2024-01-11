@@ -162,6 +162,9 @@ MonoBehaviour:
   - {fileID: 5381883497048418265, guid: 5d5f4c6b276cb824fa824733e04411cc, type: 3}
   - {fileID: 2669451802890784202, guid: 75e35c561d5161b4a8c761c05f64413f, type: 3}
   - {fileID: 2110615214030144666, guid: 50333abec689ce54d92f8d82c88da889, type: 3}
+  potionsToDestroy: []
+  selectedPotion: {fileID: 0}
+  isProcessingMove: 0
   potionBoardGO: {fileID: 1789982044}
   arrayLayout:
     rows:

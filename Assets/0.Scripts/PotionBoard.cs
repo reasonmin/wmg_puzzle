@@ -42,6 +42,26 @@ public class PotionBoard : MonoBehaviour
         InitializeBoard();
     }
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);    //마우스와 충돌한 객체를 저장
+
+            if (hit.collider != null && hit.collider.GetComponent<Potion>())    //마우스와 충돌한 객체가 null이 아니고, Potion 이라는 Component를 갖고 있음
+            {
+                if (isProcessingMove == true)
+                {
+                    return;
+                }
+
+                Potion potion = hit.collider.gameObject.GetComponent<Potion>();
+                Debug.Log("물약을 클릭했습니다, 물약은 : " + potion.gameObject);
+            }
+        }
+    }
+
     void InitializeBoard()  //보드, 물약 생성
     {
         DestroyPotions();
@@ -75,7 +95,7 @@ public class PotionBoard : MonoBehaviour
         if (CheckBoard() == true)
         {
             Debug.Log("일치하는 항목이 없습니다, 보드를 다시 만듬니다.");
-            InitializeBoard();
+            //InitializeBoard();
         }
         else
         {
@@ -95,7 +115,7 @@ public class PotionBoard : MonoBehaviour
         }
     }
 
-    public bool CheckBoard()    //일치하는 물이 있는지 확인, 물약 제거
+    public bool CheckBoard()    //일치하는 물약이 있는지 확인, 물약 제거
     {
         Debug.Log("Checking Board");
         bool hasMatched = false;
@@ -271,13 +291,15 @@ public class PotionBoard : MonoBehaviour
             return;
         }
 
-        //주변에 있다면 교환 시작
+        DoSwap(_currentPotion, _targetPotion);
 
 
         isProcessingMove = true;
+
+        StartCoroutine(ProcessMatches(_currentPotion, _targetPotion));
     }
-    //실제 교환
-    private void DoSwap(Potion _currentPotion, Potion _targetPotion)
+    
+    private void DoSwap(Potion _currentPotion, Potion _targetPotion)    //위치 교환
     {
         GameObject temp = potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion;
 
@@ -285,6 +307,29 @@ public class PotionBoard : MonoBehaviour
         potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion = temp;
 
         //위치 업데이트( #4 Swapping Potions2 2분 5초)
+        int tempXIndex = _currentPotion.xIndex;
+        int tempYIndex = _currentPotion.yIndex;
+
+        _currentPotion.xIndex = _targetPotion.xIndex;
+        _currentPotion.yIndex = _targetPotion.yIndex;
+        _targetPotion.xIndex = tempXIndex;
+        _targetPotion.yIndex = tempYIndex;
+
+        _currentPotion.MoveToTarget(potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].transform.position);    //현재 물약 -> 목표 물약
+        _targetPotion.MoveToTarget(potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].transform.position);    //목표 물약 -> 현재 물약
+    }
+
+    private IEnumerator ProcessMatches(Potion _currentPotion, Potion _targetPotion) //원래의 위치로 되돌리기
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        bool hasMatch = CheckBoard();
+
+        if (hasMatch == false)
+        {
+            DoSwap(_currentPotion, _targetPotion);
+        }
+        isProcessingMove = false;
     }
 
     //주변에 있는지 확인
