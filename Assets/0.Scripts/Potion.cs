@@ -32,12 +32,12 @@ public class Potion : MonoBehaviour
     }
 
     //MoveToTarget
-    public void MoveToTarget(Vector2 _targetPos)
+    public void MoveToTarget(Vector2 targetPosition)
     {
-        StartCoroutine(MoveCoroutine(_targetPos));
+        StartCoroutine(MoveCoroutine(targetPosition));
     }
-    //MoveCoroutine
-    private IEnumerator MoveCoroutine(Vector2 _targetPos)
+    
+    private IEnumerator MoveCoroutine(Vector2 targetPosition)
     {
         isMoving = true;
         float duration = 0.2f;    //물약이 이동하는데 걸리는 시간
@@ -49,16 +49,15 @@ public class Potion : MonoBehaviour
         {
             float t = elaspedTime / duration;
 
-            //transform.position = Vector2.Lerp(startPosition, targetPos, t);
-            transform.position = Vector2.MoveTowards(transform.position, _targetPos, 1f * Time.deltaTime);   //이동 애니매이션
-
+            transform.position = Vector2.Lerp(startPosition, targetPosition, t);
+            //transform.position = Vector2.MoveTowards(startPosition, _targetPos, 1f * Time.deltaTime);   //이동 애니매이션
 
             elaspedTime += Time.deltaTime;
 
             yield return null;  //5분 20초
         }
 
-        transform.position = _targetPos; //위치 이동
+        transform.position = targetPosition; //위치 이동
         isMoving = false;
     }
 }

@@ -49,7 +49,7 @@ public class PotionBoard : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);    //마우스와 충돌한 객체를 저장
 
-            if (hit.collider != null && hit.collider.GetComponent<Potion>())    //마우스와 충돌한 객체가 null이 아니고, Potion 이라는 Component를 갖고 있음
+            if (hit.collider != null && hit.collider.gameObject.GetComponent<Potion>())    //마우스와 충돌한 객체가 null이 아니고, Potion 이라는 Component를 갖고 있음
             {
                 if (isProcessingMove == true)
                 {
@@ -58,6 +58,8 @@ public class PotionBoard : MonoBehaviour
 
                 Potion potion = hit.collider.gameObject.GetComponent<Potion>();
                 Debug.Log("물약을 클릭했습니다, 물약은 : " + potion.gameObject);
+
+                SelectPotion(potion);
             }
         }
     }
@@ -137,9 +139,11 @@ public class PotionBoard : MonoBehaviour
 
                         if (matchedPotions.connectedPotions.Count >= 3) //3개 이상 일치
                         {
-                            potionsToRemove.AddRange(matchedPotions.connectedPotions);
+                            MatchResult superMathedPotions = SuperMatch(matchedPotions);
 
-                            foreach (Potion pot in matchedPotions.connectedPotions)
+                            potionsToRemove.AddRange(superMathedPotions.connectedPotions);
+
+                            foreach (Potion pot in superMathedPotions.connectedPotions)
                                 pot.isMatched = true;
 
                             hasMatched = true;
@@ -152,7 +156,72 @@ public class PotionBoard : MonoBehaviour
         return hasMatched;
     }
 
-    MatchResult IsConnected(Potion potion)  //물약이 일치함
+    private MatchResult SuperMatch(MatchResult _matchedPotions)
+    {
+        //가로 또는 긴 가로 일치
+        if (_matchedPotions.direction == MatchDirection.Horizontal || _matchedPotions.direction == MatchDirection.LongHorizontal)
+        {
+            foreach (Potion pot in _matchedPotions.connectedPotions)
+            {
+                List<Potion> extraConnentedPotions = new();
+                //Check up
+                CheckDirection(pot, new Vector2Int(0, 1), extraConnentedPotions);
+                //Check down
+                CheckDirection(pot, new Vector2Int(0, -1), extraConnentedPotions);
+
+                if (extraConnentedPotions.Count >= 2)   //2개 이상 일치
+                {
+                    Debug.Log("Super Horizontal Match");
+                    extraConnentedPotions.AddRange(_matchedPotions.connectedPotions);
+
+                    return new MatchResult
+                    {
+                        connectedPotions = extraConnentedPotions,
+                        direction = MatchDirection.Super
+                    };
+                }
+            }
+            return new MatchResult
+            {
+                connectedPotions = _matchedPotions.connectedPotions,
+                direction = _matchedPotions.direction
+            };
+        }
+
+        //세로 혹은 긴 세로 일치
+        else if (_matchedPotions.direction == MatchDirection.Vertical || _matchedPotions.direction == MatchDirection.LongVertical)
+        {
+            foreach (Potion pot in _matchedPotions.connectedPotions)
+            {
+                List<Potion> extraConnentedPotions = new();
+                //check right
+                CheckDirection(pot, new Vector2Int(1, 0), extraConnentedPotions);
+                //check left
+                CheckDirection(pot, new Vector2Int(-1, 0), extraConnentedPotions);
+
+                if (extraConnentedPotions.Count >= 2)   //2개 이상 일치
+                {
+                    Debug.Log("Super Vertical Match");
+                    extraConnentedPotions.AddRange(_matchedPotions.connectedPotions);
+
+                    return new MatchResult
+                    {
+                        connectedPotions = extraConnentedPotions,
+                        direction = MatchDirection.Super
+                    };
+                }
+            }
+            return new MatchResult
+            {
+                connectedPotions = _matchedPotions.connectedPotions,
+                direction = _matchedPotions.direction
+            };
+        }
+        return null;    //모든것이 일치하지 않을 때
+    }
+    
+
+    MatchResult IsConnected(Potion potion)  //MatchResult 부여
     {
         List<Potion> connectedPotions = new();  //연결된 포션
         PotionType potionType = potion.potionType;  //포션 유형
@@ -282,8 +351,8 @@ public class PotionBoard : MonoBehaviour
             selectedPotion = null;
         }
     }
-    //물약 교체(logic)
-    private void SwapPotion(Potion _currentPotion, Potion _targetPotion)
+    
+    private void SwapPotion(Potion _currentPotion, Potion _targetPotion)    //물약 교체(logic)
     {
         //주변에 없다면 말하지 않고
         if (!IsAdjacent(_currentPotion, _targetPotion))
@@ -315,8 +384,8 @@ public class PotionBoard : MonoBehaviour
         _targetPotion.xIndex = tempXIndex;
         _targetPotion.yIndex = tempYIndex;
 
-        _currentPotion.MoveToTarget(potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].transform.position);    //현재 물약 -> 목표 물약
-        _targetPotion.MoveToTarget(potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].transform.position);    //목표 물약 -> 현재 물약
+        _currentPotion.MoveToTarget(potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion.transform.position);    //현재 물약 -> 목표 물약
+        _targetPotion.MoveToTarget(potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion.transform.position);    //목표 물약 -> 현재 물약
     }
 
     private IEnumerator ProcessMatches(Potion _currentPotion, Potion _targetPotion) //원래의 위치로 되돌리기
@@ -354,6 +423,6 @@ public enum MatchDirection
     Horizontal, //수평
     LongVertical,   //긴 수직 일치(3개 이상 일치)
     LongHorizontal, //긴 수평 일치
-    Super,
+    Super,  //33
     None    //일치 방향 없음
 }
