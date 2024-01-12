@@ -54,7 +54,7 @@ public class Potion : MonoBehaviour
 
             elaspedTime += Time.deltaTime;
 
-            yield return null;  //5분 20초
+            yield return null;
         }
 
         transform.position = targetPosition; //위치 이동

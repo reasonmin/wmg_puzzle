@@ -5,8 +5,6 @@ using System.Collections;
 [CustomPropertyDrawer(typeof(ArrayLayout))]
 public class CustPropertyDrawer : PropertyDrawer
 {
-
-
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 	{
 		EditorGUI.PrefixLabel(position, label);
