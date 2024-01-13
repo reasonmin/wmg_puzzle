@@ -180,8 +180,11 @@ public class PotionBoard : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                Debug.Log($"The location X :{x} Y : {y} is empty, attempting to refill it");
-                RefillPotion(x, y);
+                if (potionBoard[x, y].potion == null)
+                {
+                    Debug.Log($"The location X :{x} Y : {y} is empty, attempting to refill it");
+                    RefillPotion(x, y);
+                }
             }
         }
     }
@@ -198,7 +201,7 @@ public class PotionBoard : MonoBehaviour
             yOffset++;
         }
 
-        //판의 윗부분을 덮쳤거나 물약을 발견했을 때
+        //we've either hit the top of the board or we found a potion
         if (y + yOffset < height && potionBoard[x, y + yOffset].potion != null)
         {
             //물약에 도달
@@ -210,13 +213,30 @@ public class PotionBoard : MonoBehaviour
             Debug.Log("I've found a potion when refilling the board and it  was in the location : [" + x + "," + (y + yOffset) +"] we have moved it to the location : [" + x + "," + y +"]");
             //위치 이동
             potionAbove.MoveToTarget(targetPos);
-            //아래로 이동
+            //update inclidces
+            potionAbove.SetIndicies(x, y);
+            //update our potionBoard
+            potionBoard[x, y] = potionBoard[x, y + yOffset];
+            //물약에서 나온 위치를 null로 설정
+            potionBoard[x, y + yOffset] = new Node(true, null);
         }
+
+        //if we've hit the top of the board without finding a potion
+        if (y + yOffset ==  height)
+        {
+            Debug.Log("I've reached the top of the board without finding a potion");
+            SpawnPotionAtTop(x);
+        }
+    }
+
+    private void SpawnPotionAtTop(int x)
+    {
+        throw new System.NotImplementedException();
     }
 
     #region Cascading Potions
 
-    
+
 
     //SpawnPotionAtTop();
 
