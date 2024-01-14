@@ -19,6 +19,7 @@ public class PotionBoard : MonoBehaviour
     public GameObject[] potionPrefabs;
 
     public List<GameObject> potionsToDestroy = new();    //물약 파괴
+    public GameObject potionParent;
 
     [SerializeField] private Potion selectedPotion; //이동할 물약 선택
 
@@ -87,6 +88,7 @@ public class PotionBoard : MonoBehaviour
                     int randomIndex = Random.Range(0, potionPrefabs.Length);     //물약 생성(Random)
 
                     GameObject potion = Instantiate(potionPrefabs[randomIndex], position, Quaternion.identity); //물약 생성
+                    potion.transform.SetParent(potionParent.transform);
                     potion.GetComponent<Potion>().SetIndicies(x, y);
                     potionBoard[x, y] = new Node(true, potion); //물약을 보드에 배치
                     potionsToDestroy.Add(potion);
@@ -94,7 +96,7 @@ public class PotionBoard : MonoBehaviour
             }
         }
 
-        if (CheckBoard() == true)
+        if (CheckBoard(false))
         {
             Debug.Log("일치하는 항목이 없습니다, 보드를 다시 만듬니다.");
             //InitializeBoard();
@@ -123,6 +125,14 @@ public class PotionBoard : MonoBehaviour
         bool hasMatched = false;
 
         List<Potion> potionsToRemove = new();   //제거할 물약
+
+        foreach (Node nodepotion in potionBoard)
+        {
+            if (nodepotion.potion != null)  //
+            {
+                nodepotion.potion.GetComponent<Potion>().isMatched = false;
+            }
+        }
 
         for (int x = 0; x < width; x++)
         {
@@ -154,7 +164,17 @@ public class PotionBoard : MonoBehaviour
         }
         if (_takeAction)
         {
+            foreach (Potion potionToRemove in potionsToRemove)    //제거할 물약
+            {
+                potionToRemove.isMatched = false;
+            }
+
             RemovAndRefill(potionsToRemove);
+
+            if (CheckBoard(false))
+            {
+                CheckBoard(true);
+            }
         }
 
         return hasMatched;
@@ -209,7 +229,7 @@ public class PotionBoard : MonoBehaviour
             Potion potionAbove = potionBoard[x, y + yOffset].potion.GetComponent<Potion>();
 
             //Move it to the correct location
-            Vector3 targetPos = new Vector3(x - spacingX, y - spacingY, potionAbove.transform.z);
+            Vector3 targetPos = new Vector3(x - spacingX, y - spacingY, potionAbove.transform.position.z);
             Debug.Log("I've found a potion when refilling the board and it  was in the location : [" + x + "," + (y + yOffset) +"] we have moved it to the location : [" + x + "," + y +"]");
             //위치 이동
             potionAbove.MoveToTarget(targetPos);
@@ -231,16 +251,36 @@ public class PotionBoard : MonoBehaviour
 
     private void SpawnPotionAtTop(int x)
     {
-        throw new System.NotImplementedException();
+        int index = FindIndexOfLowestNull(x);
+        int locationToMoveTo = 8 - index;
+        Debug.Log("About to spawn a potion, ideally i'd like to put it in the index if : " + index);
+        //get a random potion
+        int randomIndex = Random.Range(0, potionPrefabs.Length);
+        GameObject newPotion = Instantiate(potionPrefabs[randomIndex], new Vector2(x - spacingX, height - spacingY), Quaternion.identity);
+        newPotion.transform.SetParent(potionParent.transform);
+        //set indicies
+        newPotion.GetComponent<Potion>().SetIndicies(x, index);
+        //set it on the potion board
+        potionBoard[x, index] = new Node(true, newPotion);
+        //move it to that location 
+        Vector3 targetPostion = new Vector3(newPotion.transform.position.x, newPotion.transform.position.y - locationToMoveTo, newPotion.transform.position.z);
+        newPotion.GetComponent<Potion>().MoveToTarget(targetPostion);
     }
 
+    private int FindIndexOfLowestNull(int x)
+    {
+        int lowestNull = 99;
+        for (int y = 7; y >= 0; y--)
+        {
+            if (potionBoard[x, y].potion == null)
+            {
+                lowestNull = y;
+            }
+        }
+        return lowestNull;
+    }
     #region Cascading Potions
 
-
-
-    //SpawnPotionAtTop();
-
-    //FindIndexOfLowestNull
     #endregion
 
     private MatchResult SuperMatch(MatchResult _matchedPotions) //33
@@ -479,7 +519,7 @@ public class PotionBoard : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
 
-        bool hasMatch = CheckBoard();
+        bool hasMatch = CheckBoard(true);
 
         if (hasMatch == false)
         {
