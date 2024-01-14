@@ -8,8 +8,8 @@ public class PotionBoard : MonoBehaviour
     public static PotionBoard Instance;
 
     //보드의 크기 정하기
-    public int width = 8;   //가로
-    public int height = 7;  //세로
+    public int width = 8;  //가로
+    public int height = 7; //세로
 
     //보드의 간격 정하기
     public float spacingX;
