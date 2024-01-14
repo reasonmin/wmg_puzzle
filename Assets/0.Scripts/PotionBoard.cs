@@ -128,7 +128,7 @@ public class PotionBoard : MonoBehaviour
 
         foreach (Node nodepotion in potionBoard)
         {
-            if (nodepotion.potion != null)  //
+            if (nodepotion.potion != null)
             {
                 nodepotion.potion.GetComponent<Potion>().isMatched = false;
             }
@@ -221,19 +221,19 @@ public class PotionBoard : MonoBehaviour
             yOffset++;
         }
 
-        //we've either hit the top of the board or we found a potion
+        //we've either hit the top of the board or we found a potion 보드 위를 치거나 물약을 찾았을 때?
         if (y + yOffset < height && potionBoard[x, y + yOffset].potion != null)
         {
             //물약에 도달
 
             Potion potionAbove = potionBoard[x, y + yOffset].potion.GetComponent<Potion>();
 
-            //Move it to the correct location
+            //적절한 위치로 이동
             Vector3 targetPos = new Vector3(x - spacingX, y - spacingY, potionAbove.transform.position.z);
             Debug.Log("I've found a potion when refilling the board and it  was in the location : [" + x + "," + (y + yOffset) +"] we have moved it to the location : [" + x + "," + y +"]");
             //위치 이동
             potionAbove.MoveToTarget(targetPos);
-            //update inclidces
+            //update inclidces->?
             potionAbove.SetIndicies(x, y);
             //update our potionBoard
             potionBoard[x, y] = potionBoard[x, y + yOffset];
@@ -241,7 +241,7 @@ public class PotionBoard : MonoBehaviour
             potionBoard[x, y + yOffset] = new Node(true, null);
         }
 
-        //if we've hit the top of the board without finding a potion
+        //if we've hit the top of the board without finding a potion 물약을 찾지 못하고 보드 위를 쳤을 때?
         if (y + yOffset ==  height)
         {
             Debug.Log("I've reached the top of the board without finding a potion");
@@ -254,15 +254,15 @@ public class PotionBoard : MonoBehaviour
         int index = FindIndexOfLowestNull(x);
         int locationToMoveTo = 8 - index;
         Debug.Log("About to spawn a potion, ideally i'd like to put it in the index if : " + index);
-        //get a random potion
+        //랜덤으로 물약 얻기
         int randomIndex = Random.Range(0, potionPrefabs.Length);
         GameObject newPotion = Instantiate(potionPrefabs[randomIndex], new Vector2(x - spacingX, height - spacingY), Quaternion.identity);
         newPotion.transform.SetParent(potionParent.transform);
-        //set indicies
+        //지표 설정하기
         newPotion.GetComponent<Potion>().SetIndicies(x, index);
-        //set it on the potion board
+        //포션보드 위에 지표 설정하기
         potionBoard[x, index] = new Node(true, newPotion);
-        //move it to that location 
+        //해당 위치로 움직이기
         Vector3 targetPostion = new Vector3(newPotion.transform.position.x, newPotion.transform.position.y - locationToMoveTo, newPotion.transform.position.z);
         newPotion.GetComponent<Potion>().MoveToTarget(targetPostion);
     }
