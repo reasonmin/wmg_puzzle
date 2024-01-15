@@ -11,24 +11,27 @@ public class CustPropertyDrawer : PropertyDrawer
 		Rect newposition = position;
 		newposition.y += 144f;
 		SerializedProperty data = property.FindPropertyRelative("rows");
-		//data.rows[0][]
-		if (data.arraySize != 8)
-			data.arraySize = 8;
-		for (int j = 0; j < 8; j++)
-		{
-			SerializedProperty row = data.GetArrayElementAtIndex(j).FindPropertyRelative("row");
-			newposition.height = 18f;
-			if (row.arraySize != 6)
-				row.arraySize = 6;
-			newposition.width = position.width / 6;
-			for (int i = 0; i < 6; i++)
+        //data.rows[0][]
+        if (PotionBoard.Instance != null)
+        {
+			if (data.arraySize != PotionBoard.Instance.height)
+				data.arraySize = PotionBoard.Instance.height;
+			for (int j = 0; j < PotionBoard.Instance.height; j++)
 			{
-				EditorGUI.PropertyField(newposition, row.GetArrayElementAtIndex(i), GUIContent.none);
-				newposition.x += newposition.width;
-			}
+				SerializedProperty row = data.GetArrayElementAtIndex(j).FindPropertyRelative("row");
+				newposition.height = 18f;
+				if (row.arraySize != PotionBoard.Instance.width)
+					row.arraySize = PotionBoard.Instance.width;
+				newposition.width = position.width / PotionBoard.Instance.width;
+				for (int i = 0; i < PotionBoard.Instance.width; i++)
+				{
+					EditorGUI.PropertyField(newposition, row.GetArrayElementAtIndex(i), GUIContent.none);
+					newposition.x += newposition.width;
+				}
 
-			newposition.x = position.x;
-			newposition.y -= 18f;
+				newposition.x = position.x;
+				newposition.y -= 18f;
+			}
 		}
 	}
 

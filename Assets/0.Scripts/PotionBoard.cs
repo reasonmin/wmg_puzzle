@@ -11,6 +11,9 @@ public class PotionBoard : MonoBehaviour
     public int width = 8;  //가로
     public int height = 7; //세로
 
+    public float imageSizeX;
+    public float imageSizeY;
+
     //보드의 간격 정하기
     public float spacingX;
     public float spacingY;
@@ -70,15 +73,17 @@ public class PotionBoard : MonoBehaviour
         DestroyPotions();
         potionBoard = new Node[width, height];
 
-        spacingX = (float)(width - 1) / 2;  //X축 간격 계산(2.5)
-        spacingY = (float)((height - 1) / 2) + 1;   //Y축 간격 계산(3.5)
+        //spacingX = (float)(width - 1) / 2;  //X축 간격 계산(2.5)
+        //spacingY = (float)((height - 1) / 2) + 1;   //Y축 간격 계산(3.5)
+        
+        
 
         //보드 생성(좌측 하단 -> 우측 상단)
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
             {
-                Vector2 position = new Vector2(x - spacingX, y - spacingY);  //물약이 생성될 위치
+                Vector2 position = new Vector2(x * ((imageSizeX/100f) + spacingX), y * ((imageSizeY/100f) + spacingY)); //물약이 생성될 위치
                 if (arrayLayout.rows[y].row[x])
                 {
                     potionBoard[x, y] = new Node(false, null);
@@ -96,10 +101,14 @@ public class PotionBoard : MonoBehaviour
             }
         }
 
+        // 부모의 보드 위치 수정
+        potionParent.transform.position = new Vector2(-((width * (imageSizeX / 100f)) / 2), -((height * (imageSizeY / 120f)) / 2));
+
         if (CheckBoard(false))
         {
             Debug.Log("일치하는 항목이 없습니다, 보드를 다시 만듬니다.");
-            //InitializeBoard();
+            potionParent.transform.position = new Vector2(0, 0);
+            InitializeBoard();
         }
         else
         {
@@ -252,7 +261,7 @@ public class PotionBoard : MonoBehaviour
     private void SpawnPotionAtTop(int x)
     {
         int index = FindIndexOfLowestNull(x);
-        int locationToMoveTo = 8 - index;
+        int locationToMoveTo = width - index;
         Debug.Log("About to spawn a potion, ideally i'd like to put it in the index if : " + index);
         //랜덤으로 물약 얻기
         int randomIndex = Random.Range(0, potionPrefabs.Length);
@@ -270,7 +279,7 @@ public class PotionBoard : MonoBehaviour
     private int FindIndexOfLowestNull(int x)
     {
         int lowestNull = 99;
-        for (int y = 7; y >= 0; y--)
+        for (int y = height; y >= 0; y--)
         {
             if (potionBoard[x, y].potion == null)
             {
