@@ -211,7 +211,7 @@ public class PotionBoard : MonoBehaviour
             {
                 if (potionBoard[x, y].potion == null)
                 {
-                    Debug.Log($"The location X :{x} Y : {y} is empty, attempting to refill it");
+                    Debug.Log($"위치 X :{x} Y : {y} 는 비었고, 다시 채우려고 합니다.");
                     RefillPotion(x, y);
                 }
             }
@@ -239,10 +239,10 @@ public class PotionBoard : MonoBehaviour
 
             //적절한 위치로 이동
             Vector3 targetPos = new Vector3(x - spacingX, y - spacingY, potionAbove.transform.position.z);
-            Debug.Log("I've found a potion when refilling the board and it  was in the location : [" + x + "," + (y + yOffset) +"] we have moved it to the location : [" + x + "," + y +"]");
+            Debug.Log("보드를 다시 채울 때 물약을 찾았고, 그것의 위치는 : [" + x + "," + (y + yOffset) +"] 물약을 움직일 위치는 : [" + x + "," + y +"]");
             //위치 이동
             potionAbove.MoveToTarget(targetPos);
-            //update inclidces->?
+            //update inclidces
             potionAbove.SetIndicies(x, y);
             //update our potionBoard
             potionBoard[x, y] = potionBoard[x, y + yOffset];
@@ -250,10 +250,10 @@ public class PotionBoard : MonoBehaviour
             potionBoard[x, y + yOffset] = new Node(true, null);
         }
 
-        //if we've hit the top of the board without finding a potion 물약을 찾지 못하고 보드 위를 쳤을 때?
+        //물약을 찾지 못하고 보드 위를 눌렀을 때?
         if (y + yOffset ==  height)
         {
-            Debug.Log("I've reached the top of the board without finding a potion");
+            Debug.Log("물약을 찾지 못하고 보드 맨 위에 도달했다");
             SpawnPotionAtTop(x);
         }
     }
@@ -262,7 +262,7 @@ public class PotionBoard : MonoBehaviour
     {
         int index = FindIndexOfLowestNull(x);
         int locationToMoveTo = width - index;
-        Debug.Log("About to spawn a potion, ideally i'd like to put it in the index if : " + index);
+        Debug.Log("물약을 spawn하려는데, 이상적으로 인덱스에 물약을 넣고 싶다 if : " + index);
         //랜덤으로 물약 얻기
         int randomIndex = Random.Range(0, potionPrefabs.Length);
         GameObject newPotion = Instantiate(potionPrefabs[randomIndex], new Vector2(x - spacingX, height - spacingY), Quaternion.identity);
