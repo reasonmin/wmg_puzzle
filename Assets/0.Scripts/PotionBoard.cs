@@ -24,7 +24,7 @@ public class PotionBoard : MonoBehaviour
     public List<GameObject> potionsToDestroy = new();    //물약 파괴
     public GameObject potionParent;
 
-    [SerializeField] private Potion selectedPotion; //이동할 물약 선택
+    private Potion selectedPotion; //이동할 물약 선택
 
     [SerializeField] private bool isProcessingMove; //물약이 이동하고 있는지 확인
 
@@ -73,8 +73,8 @@ public class PotionBoard : MonoBehaviour
         DestroyPotions();
         potionBoard = new Node[width, height];
 
-        //spacingX = (float)(width - 1) / 2;  //X축 간격 계산(2.5)
-        //spacingY = (float)((height - 1) / 2) + 1;   //Y축 간격 계산(3.5)
+        spacingX = (float)(width - 1) / 2;  //X축 간격 계산(2.5)
+        spacingY = (float)((height - 1) / 2) + 1;   //Y축 간격 계산(3.5)
         
         
 
@@ -83,7 +83,7 @@ public class PotionBoard : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                Vector2 position = new Vector2(x * ((imageSizeX/100f) + spacingX), y * ((imageSizeY/100f) + spacingY)); //물약이 생성될 위치
+                Vector2 position = new Vector2(x * ((imageSizeX/100f)), y * ((imageSizeY/100f))); //물약이 생성될 위치
                 if (arrayLayout.rows[y].row[x])
                 {
                     potionBoard[x, y] = new Node(false, null);
@@ -106,13 +106,13 @@ public class PotionBoard : MonoBehaviour
 
         if (CheckBoard(false))
         {
-            Debug.Log("일치하는 항목이 없습니다, 보드를 다시 만듬니다.");
+            //Debug.Log("일치하는 항목이 없습니다, 보드를 다시 만듬니다.");
             potionParent.transform.position = new Vector2(0, 0);
             InitializeBoard();
         }
         else
         {
-            Debug.Log("일치하는 항목이 있습니다, 게임을 시작하겠습니다.");
+            //Debug.Log("일치하는 항목이 있습니다, 게임을 시작하겠습니다.");
         }
     }
 
@@ -130,7 +130,7 @@ public class PotionBoard : MonoBehaviour
 
     public bool CheckBoard(bool _takeAction)    //일치하는 물약이 있는지 확인, 물약 제거
     {
-        Debug.Log("Checking Board");
+        //Debug.Log("Checking Board");
         bool hasMatched = false;
 
         List<Potion> potionsToRemove = new();   //제거할 물약
@@ -152,7 +152,7 @@ public class PotionBoard : MonoBehaviour
                 {
                     Potion potion = potionBoard[x, y].potion.GetComponent<Potion>();    //물약 변수 생성
 
-                    if (potion.isMatched == false)  //물약이 일치하는지 확인
+                    if (potion.isMatched == false && potion != null)  //물약이 일치하는지 확인
                     {
                         MatchResult matchedPotions = IsConnected(potion);   //일치된 물약(연결되어 있음)
 
@@ -211,7 +211,7 @@ public class PotionBoard : MonoBehaviour
             {
                 if (potionBoard[x, y].potion == null)
                 {
-                    Debug.Log($"위치 X :{x} Y : {y} 는 비었고, 다시 채우려고 합니다.");
+                    //Debug.Log($"위치 X :{x} Y : {y} 는 비었고, 다시 채우려고 합니다.");
                     RefillPotion(x, y);
                 }
             }
@@ -222,75 +222,75 @@ public class PotionBoard : MonoBehaviour
     {
         int yOffset = 1;
 
-        //현재 셀 위에 있는 셀은 Null이고 우리는 보드의 높이 아래에 있습니다.
+        // 현재 셀 위에 있는 셀은 Null이고 우리는 보드의 높이 아래에 있습니다.
         while (y + yOffset < height && potionBoard[x, y + yOffset].potion == null)
         {
-            //yOffset 증가
-            Debug.Log($"제 위의 물약은 Null이지만 아직 보드의 맨 위에 있지 않으므로 yOffset을 추가하고 다시 시도하십시오. 현재 오프셋은 다음과 같습니다 : {yOffset} 1개를 증가할려고 합니다.");
+            // yOffset 증가
+            Debug.Log($"제 위의 물약은 Null이지만 아직 보드의 맨 위에 있지 않으므로 yOffset을 추가하고 다시 시도하십시오. 현재 오프셋은 다음과 같습니다: {yOffset} 1개를 증가할려고 합니다.");
             yOffset++;
         }
 
-        //we've either hit the top of the board or we found a potion 보드 위를 치거나 물약을 찾았을 때?
-        if (y + yOffset < height && potionBoard[x, y + yOffset].potion != null)
+        // 물약을 찾지 못하고 보드 위를 눌렀을 때
+        if (y + yOffset == height)
         {
-            //물약에 도달
-
-            Potion potionAbove = potionBoard[x, y + yOffset].potion.GetComponent<Potion>();
-
-            //적절한 위치로 이동
-            Vector3 targetPos = new Vector3(x - spacingX, y - spacingY, potionAbove.transform.position.z);
-            Debug.Log("보드를 다시 채울 때 물약을 찾았고, 그것의 위치는 : [" + x + "," + (y + yOffset) +"] 물약을 움직일 위치는 : [" + x + "," + y +"]");
-            //위치 이동
-            potionAbove.MoveToTarget(targetPos);
-            //update inclidces
-            potionAbove.SetIndicies(x, y);
-            //update our potionBoard
-            potionBoard[x, y] = potionBoard[x, y + yOffset];
-            //물약에서 나온 위치를 null로 설정
-            potionBoard[x, y + yOffset] = new Node(true, null);
-        }
-
-        //물약을 찾지 못하고 보드 위를 눌렀을 때?
-        if (y + yOffset ==  height)
-        {
-            Debug.Log("물약을 찾지 못하고 보드 맨 위에 도달했다");
+            Debug.Log("물약을 찾지 못하고 보드 맨 위에 도달했습니다.");
             SpawnPotionAtTop(x);
         }
-    }
+        // 물약에 도달
+        else if (y + yOffset < height && potionBoard[x, y + yOffset].potion != null)
+        {
+            // 물약 위에 있는 물약 개체 가져오기
+            Potion potionAbove = potionBoard[x, y + yOffset].potion.GetComponent<Potion>();
 
+            // 적절한 위치로 이동
+            Vector3 targetPos = new Vector3(x - spacingX, y - spacingY, potionAbove.transform.position.z);
+            Debug.Log("보드를 다시 채울 때 물약을 찾았고, 그것의 위치는: [" + x + "," + (y + yOffset) + "] 물약을 움직일 위치는: [" + x + "," + y + "]");
+            // 위치 이동
+            potionAbove.MoveToTarget(targetPos);
+            // 인덱스 업데이트
+            potionAbove.SetIndicies(x, y);
+            // 포션 보드 업데이트
+            potionBoard[x, y] = potionBoard[x, y + yOffset];
+            // 물약에서 나온 위치를 null로 설정
+            potionBoard[x, y + yOffset] = new Node(true, null);
+        }
+    }
+    
     private void SpawnPotionAtTop(int x)
     {
         int index = FindIndexOfLowestNull(x);
         int locationToMoveTo = width - index;
-        Debug.Log("물약을 spawn하려는데, 이상적으로 인덱스에 물약을 넣고 싶다 if : " + index);
-        //랜덤으로 물약 얻기
+        Debug.Log("물약을 spawn하려는데, 이상적으로 인덱스에 물약을 넣고 싶다 if: " + index);
+        // 랜덤으로 물약 얻기
         int randomIndex = Random.Range(0, potionPrefabs.Length);
         GameObject newPotion = Instantiate(potionPrefabs[randomIndex], new Vector2(x - spacingX, height - spacingY), Quaternion.identity);
         newPotion.transform.SetParent(potionParent.transform);
-        //지표 설정하기
+        // 지표 설정하기
         newPotion.GetComponent<Potion>().SetIndicies(x, index);
-        //포션보드 위에 지표 설정하기
+        // 포션 보드 위에 지표 설정하기
         potionBoard[x, index] = new Node(true, newPotion);
-        //해당 위치로 움직이기
-        Vector3 targetPostion = new Vector3(newPotion.transform.position.x, newPotion.transform.position.y - locationToMoveTo, newPotion.transform.position.z);
-        newPotion.GetComponent<Potion>().MoveToTarget(targetPostion);
+        // 해당 위치로 움직이기
+        Vector3 targetPosition = new Vector3(newPotion.transform.position.x, newPotion.transform.position.y - locationToMoveTo, newPotion.transform.position.z);
+        newPotion.GetComponent<Potion>().MoveToTarget(targetPosition);
     }
 
     private int FindIndexOfLowestNull(int x)
     {
-        int lowestNull = 99;
-        for (int y = height; y >= 0; y--)
+        int lowestNull = -1; // 초기값을 -1로 설정
+        for (int y = height - 1; y >= 0; y--) // y의 범위 설정 변경
         {
-            if (potionBoard[x, y].potion == null)
+            if (x >= 0 && x < potionBoard.GetLength(0) && y >= 0 && y < potionBoard.GetLength(1)) // 배열 범위 확인
             {
-                lowestNull = y;
+                if (potionBoard[x, y].potion == null)
+                {
+                    lowestNull = y;
+                    break; // null을 찾았으면 반복문을 종료합니다.
+                }
             }
         }
         return lowestNull;
     }
-    #region Cascading Potions
 
-    #endregion
 
     private MatchResult SuperMatch(MatchResult _matchedPotions) //33
     {
@@ -469,7 +469,6 @@ public class PotionBoard : MonoBehaviour
         //현재 선택된 물약이 없다면 방금 클릭한 포션을 selectedPotion으로 설정
         if (selectedPotion == null)
         {
-            Debug.Log(_potion);
             selectedPotion = _potion;
         }
 
@@ -499,7 +498,7 @@ public class PotionBoard : MonoBehaviour
         DoSwap(_currentPotion, _targetPotion);
 
 
-        isProcessingMove = true;
+        isProcessingMove = true;    //물약 이동 중
 
         StartCoroutine(ProcessMatches(_currentPotion, _targetPotion));
     }
@@ -511,7 +510,7 @@ public class PotionBoard : MonoBehaviour
         potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion = potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion;
         potionBoard[_targetPotion.xIndex, _targetPotion.yIndex].potion = temp;
 
-        //위치 업데이트( #4 Swapping Potions2 2분 5초)
+        //위치 업데이트
         int tempXIndex = _currentPotion.xIndex;
         int tempYIndex = _currentPotion.yIndex;
 
@@ -526,7 +525,7 @@ public class PotionBoard : MonoBehaviour
 
     private IEnumerator ProcessMatches(Potion _currentPotion, Potion _targetPotion) //원래의 위치로 되돌리기
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f);  //0.2초 후에
 
         bool hasMatch = CheckBoard(true);
 
@@ -534,11 +533,10 @@ public class PotionBoard : MonoBehaviour
         {
             DoSwap(_currentPotion, _targetPotion);
         }
-        isProcessingMove = false;
+        isProcessingMove = false;   //물약 이동 중 아님
     }
-
-    //주변에 있는지 확인
-    private bool IsAdjacent(Potion _currentPotion, Potion _targetPotion)
+    
+    private bool IsAdjacent(Potion _currentPotion, Potion _targetPotion)    ////_targetPotion이 _currentPotion 옆에 있는지 확인
     {
         return Mathf.Abs(_currentPotion.xIndex - _targetPotion.xIndex) + Mathf.Abs(_currentPotion.yIndex - _targetPotion.yIndex) == 1;
     }
