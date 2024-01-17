@@ -56,14 +56,14 @@ public class Bead : MonoBehaviour
                 else if ((vec - startPos).normalized.y > 0 && ((vec - startPos).normalized.x > -0.5f && //위쪽
                     (vec - startPos).normalized.x < 0.5f))
                 {
-                    transform.position = new Vector2(vec.x, transform.position.y);
+                    transform.position = new Vector2(transform.position.x, vec.y);
                     Debug.Log("위쪽으로 이동");
                 }
 
                 else if ((vec - startPos).normalized.y < 0 && ((vec - startPos).normalized.x > -0.5f && //아래쪽
                    (vec - startPos).normalized.x < 0.5f))
                 {
-                    transform.position = new Vector2(vec.x, transform.position.y);
+                    transform.position = new Vector2(transform.position.x, vec.y);
                     Debug.Log("아래쪽으로 이동");
                 }
 
