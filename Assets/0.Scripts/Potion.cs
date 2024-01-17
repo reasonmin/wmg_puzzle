@@ -14,7 +14,7 @@ public class Potion : MonoBehaviour
 
     public bool isMatched;  //물약이 보드 안에 있는지 확인
 
-    public bool isMoving;   //물약이 이동중인지 확인
+    public bool isMoving;   //물약이 이동중인지 확인(true : 이동 중, false : 이동 중 아님)
 
 
     public Potion(int _x, int _y)   //생성자

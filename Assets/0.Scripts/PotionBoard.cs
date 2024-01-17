@@ -26,7 +26,7 @@ public class PotionBoard : MonoBehaviour
 
     private Potion selectedPotion; //이동할 물약 선택
 
-    [SerializeField] private bool isProcessingMove; //물약이 이동하고 있는지 확인
+    [SerializeField] private bool isProcessingMove; //물약이 이동하고 있는지 확인(true : 이동 중, false : 이동 중 아님)
 
     //보드
     public Node[,] potionBoard; //물약 보드(2차원 배열)
@@ -35,6 +35,11 @@ public class PotionBoard : MonoBehaviour
 
     //물약을 생성하지 않을곳(Inspector에서 선택)
     public ArrayLayout arrayLayout;
+
+    //-----------------------------------------------------
+    public List<Bead> beads = new();
+
+    //-----------------------------------------------------
 
     private void Awake()
     {
@@ -73,11 +78,6 @@ public class PotionBoard : MonoBehaviour
         DestroyPotions();
         potionBoard = new Node[width, height];
 
-        spacingX = (float)(width - 1) / 2;  //X축 간격 계산(2.5)
-        spacingY = (float)((height - 1) / 2) + 1;   //Y축 간격 계산(3.5)
-        
-        
-
         //보드 생성(좌측 하단 -> 우측 상단)
         for (int y = 0; y < height; y++)
         {
@@ -107,18 +107,18 @@ public class PotionBoard : MonoBehaviour
         if (CheckBoard(false))
         {
             //Debug.Log("일치하는 항목이 없습니다, 보드를 다시 만듬니다.");
-            potionParent.transform.position = new Vector2(0, 0);
+            potionParent.transform.position = Vector2.zero;
             InitializeBoard();
-        }
-        else
-        {
-            //Debug.Log("일치하는 항목이 있습니다, 게임을 시작하겠습니다.");
         }
     }
 
+    /// <summary>
+    /// 파괴 가능 퍼즐 체크
+    /// </summary>
     private void DestroyPotions()
     {
-        if (potionsToDestroy != null)   //파괴할 물약이 있을 경우
+        //파괴할 물약이 있을 경우
+        if (potionsToDestroy != null)   
         {
             foreach (GameObject potion in potionsToDestroy)
             {
@@ -189,7 +189,7 @@ public class PotionBoard : MonoBehaviour
         return hasMatched;
     }
 
-    private void RemovAndRefill(List<Potion> _potionsToRemove)
+    private void RemovAndRefill(List<Potion> _potionsToRemove)  //문제
     {
         //물약을 제거하고 해당 위치의 보드를 비워줌
         foreach (Potion potion in _potionsToRemove)
@@ -218,7 +218,7 @@ public class PotionBoard : MonoBehaviour
         }
     }
 
-    private void RefillPotion(int x, int y)
+    private void RefillPotion(int x, int y) //문제
     {
         int yOffset = 1;
 
@@ -256,7 +256,7 @@ public class PotionBoard : MonoBehaviour
         }
     }
     
-    private void SpawnPotionAtTop(int x)
+    private void SpawnPotionAtTop(int x)    //문제
     {
         int index = FindIndexOfLowestNull(x);
         int locationToMoveTo = width - index;
@@ -357,7 +357,7 @@ public class PotionBoard : MonoBehaviour
     }
 
 
-    MatchResult IsConnected(Potion potion)  //MatchResult 부여
+    MatchResult IsConnected(Potion potion)  //MatchResult(물약 목록, 일치 방향) 부여
     {
         List<Potion> connectedPotions = new();  //연결된 포션
         PotionType potionType = potion.potionType;  //포션 유형
@@ -429,7 +429,7 @@ public class PotionBoard : MonoBehaviour
         }
     }
 
-    void CheckDirection(Potion pot, Vector2Int direction, List<Potion> connectedPotions)    //방향 확인(pot : 방향, direction : 움직이는 방향, connectedPotions : 물약 유형)
+    void CheckDirection(Potion pot, Vector2Int direction, List<Potion> connectedPotions)    //방향 확인(pot : 포션, direction : 움직이는 방향, connectedPotions : 물약 유형)
     {
         PotionType potionType = pot.potionType;
         int x = pot.xIndex + direction.x;
@@ -503,7 +503,7 @@ public class PotionBoard : MonoBehaviour
         StartCoroutine(ProcessMatches(_currentPotion, _targetPotion));
     }
     
-    private void DoSwap(Potion _currentPotion, Potion _targetPotion)    //위치 교환
+    private void DoSwap(Potion _currentPotion, Potion _targetPotion)    //위치 교환(_currentPotion : 선택한 포션, _targetPotion : 이동 할 위치)
     {
         GameObject temp = potionBoard[_currentPotion.xIndex, _currentPotion.yIndex].potion;
 
@@ -516,6 +516,7 @@ public class PotionBoard : MonoBehaviour
 
         _currentPotion.xIndex = _targetPotion.xIndex;
         _currentPotion.yIndex = _targetPotion.yIndex;
+
         _targetPotion.xIndex = tempXIndex;
         _targetPotion.yIndex = tempYIndex;
 
