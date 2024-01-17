@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
+    [SerializeField] private List<ChapterBoard> chapterBoards;
+    [SerializeField] private Image Star;
+
     [SerializeField] private GameObject SettingPanel;
     [SerializeField] private GameObject MainBoardPanel;
     [SerializeField] private GameObject RuleBookPanel;
@@ -15,14 +19,33 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int starNum = 2;
+
+        for (int i = 0; i < chapterBoards.Count; i++)
+        {
+            for (int j = 0; j < chapterBoards[i].stageButtons.Count; j++)
+            {
+                chapterBoards[i].stageButtons[j].stageNumText.text = (i + 1).ToString() + "-" + (j + 1).ToString();
+
+                for (int k = 0; k < starNum; k++)
+                {
+                    chapterBoards[i].stageButtons[j].starImages[k].sprite = Star.sprite;
+                }
+            }
+        }
+
         SettingPanel.SetActive(false);
         OnStageView();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LoadJson()
     {
-        
+
+    }
+
+    private void SaveJson()
+    {
+
     }
 
     public void OnSettingPanel()
