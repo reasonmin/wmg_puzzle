@@ -23,13 +23,23 @@ public class ChapterData
 [System.Serializable]
 public class ChapterDatas
 {
+    public int musicVolume;
+    public int soundEffectVolume;
+    public bool isMusic;
+    public bool isSoundEffect;
+
     public Item item;
     public List<ChapterData> chapterData = new();
-
-    public ChapterDatas(List<ChapterData> _chapterData, Item _item)
+    
+    public ChapterDatas( List<ChapterData> _chapterData, Item _item)
     {
         chapterData = _chapterData;
         item = _item;
+
+        musicVolume = 50;
+        musicVolume = 50;
+        isMusic = true;
+        isSoundEffect = true;
     }
 }
 
@@ -43,11 +53,27 @@ public class MainManager : MonoBehaviour
     [SerializeField] private GameObject RuleBookPanel;
     [SerializeField] private GameObject AudioPanel;
     [SerializeField] private GameObject LanguagePanel;
+
+    [SerializeField] private Slider MusicSlider;
+    [SerializeField] private Slider SoundEffectSlider;
+
     [SerializeField] private GameObject BeforeButton;
     [SerializeField] private GameObject StageView;
     [SerializeField] private GameObject StoreView;
 
     private ChapterDatas chapterDatas;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //ResetJson();
+        LoadJson();// Player 정보 불러오기
+
+        SetStageStar();// 불러온 정보로 스테이지 스타 세팅
+
+        SettingPanel.SetActive(false);// 설정창 끄기
+        OnStageView();// 뷰를 스테이지 뷰로 설정
+    }
 
     private void LoadJson() //불러오기
     {
@@ -84,11 +110,8 @@ public class MainManager : MonoBehaviour
         File.WriteAllText(filePath, json);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void SetStageStar()
     {
-        LoadJson();
-
         for (int i = 0; i < chapterBoards.Count; i++)
         {
             for (int j = 0; j < chapterBoards[i].stageButtons.Count; j++)
@@ -101,12 +124,52 @@ public class MainManager : MonoBehaviour
                 }
             }
         }
-
-        SettingPanel.SetActive(false);
-        OnStageView();
     }
 
-    // Setting 관련 함수
+    // 음량 조절
+    //-----------------------------------------------------
+    public void OnMusicVolume()
+    {
+        if (chapterDatas.isMusic)
+            chapterDatas.musicVolume = (int)MusicSlider.value;
+
+        Debug.Log(chapterDatas.musicVolume);
+    }
+
+    public void OnSoundEffectVolume()
+    {
+        if (chapterDatas.isMusic)
+            chapterDatas.soundEffectVolume = (int)SoundEffectSlider.value;
+
+        Debug.Log(chapterDatas.soundEffectVolume);
+    }
+
+    public void OnMusic()
+    {
+        chapterDatas.isMusic = !chapterDatas.isMusic;
+
+        if (!chapterDatas.isMusic)
+            chapterDatas.musicVolume = 0;
+        else
+            chapterDatas.musicVolume = (int)MusicSlider.value;
+
+        Debug.Log(chapterDatas.musicVolume);
+    }
+
+    public void OnSoundEffect()
+    {
+        chapterDatas.isSoundEffect = !chapterDatas.isSoundEffect;
+
+        if (!chapterDatas.isSoundEffect)
+            chapterDatas.soundEffectVolume = 0;
+        else
+            chapterDatas.soundEffectVolume = (int)SoundEffectSlider.value;
+
+        Debug.Log(chapterDatas.soundEffectVolume);
+    }
+    //-----------------------------------------------------
+
+    // SettingPanel 관련 함수
     //-----------------------------------------------------
     public void OnSettingPanel()
     {

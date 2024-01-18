@@ -1,4 +1,8 @@
 {
+    "musicVolume": 50,
+    "soundEffectVolume": 0,
+    "isMusic": true,
+    "isSoundEffect": true,
     "item": {
         "candy": 0
     },
