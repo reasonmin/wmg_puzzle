@@ -42,6 +42,7 @@ public class MainManager : MonoBehaviour
     [SerializeField] private GameObject MainBoardPanel;
     [SerializeField] private GameObject RuleBookPanel;
     [SerializeField] private GameObject AudioPanel;
+    [SerializeField] private GameObject LanguagePanel;
     [SerializeField] private GameObject BeforeButton;
     [SerializeField] private GameObject StageView;
     [SerializeField] private GameObject StoreView;
@@ -119,6 +120,7 @@ public class MainManager : MonoBehaviour
         MainBoardPanel.SetActive(false);
         RuleBookPanel.SetActive(false);
         AudioPanel.SetActive(false);
+        LanguagePanel.SetActive(false);
 
         Panel.SetActive(true);
     }
@@ -138,6 +140,12 @@ public class MainManager : MonoBehaviour
     public void OnAudioPanel()
     {
         ResetPanel(AudioPanel);
+        BeforeButton.SetActive(true);
+    }
+
+    public void OnLanguagePanel()
+    {
+        ResetPanel(LanguagePanel);
         BeforeButton.SetActive(true);
     }
     //-----------------------------------------------------
