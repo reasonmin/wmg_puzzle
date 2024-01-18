@@ -48,7 +48,7 @@ public class MainManager : MonoBehaviour
 
     private ChapterDatas chapterDatas;
 
-    private void LoadJson()
+    private void LoadJson() //불러오기
     {
         string filePath = "Assets/Main/3.Data/PlayerData.json";
         string json = File.ReadAllText(filePath);
@@ -56,7 +56,7 @@ public class MainManager : MonoBehaviour
         chapterDatas = JsonUtility.FromJson<ChapterDatas>(json);
     }
 
-    private void SaveJson()
+    private void SaveJson() //저장
     {
         string filePath = "Assets/Main/3.Data/PlayerData.json";
         string json = JsonUtility.ToJson(chapterDatas, true);
@@ -64,7 +64,7 @@ public class MainManager : MonoBehaviour
         File.WriteAllText(filePath, json);
     }
 
-    private void ResetJson()
+    private void ResetJson() //초기화
     {
         List<ChapterData> chapterData = new List<ChapterData>();
         List<int> li = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -105,6 +105,8 @@ public class MainManager : MonoBehaviour
         OnStageView();
     }
 
+    // Setting 관련 함수
+    //-----------------------------------------------------
     public void OnSettingPanel()
     {
         ResetPanel(MainBoardPanel);
@@ -138,7 +140,10 @@ public class MainManager : MonoBehaviour
         ResetPanel(AudioPanel);
         BeforeButton.SetActive(true);
     }
+    //-----------------------------------------------------
 
+    // View 관련 함수
+    //-----------------------------------------------------
     public void ResetView(GameObject View)
     {
         StageView.SetActive(false);
@@ -156,4 +161,5 @@ public class MainManager : MonoBehaviour
     {
         ResetView(StoreView);
     }
+    //-----------------------------------------------------
 }
