@@ -2,6 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+
+[System.Serializable]
+public class ChapterData
+{
+    public List<int> stageData;
+    public ChapterData(List<int> _stageData)
+    {
+        stageData = _stageData;
+    }
+}
+
+[System.Serializable]
+public class ChapterDatas
+{
+    public List<ChapterData> chapterData = new();
+
+    public ChapterDatas(List<ChapterData> _chapterData)
+    {
+        chapterData = _chapterData;
+    }
+}
 
 public class MainManager : MonoBehaviour
 {
@@ -16,10 +38,44 @@ public class MainManager : MonoBehaviour
     [SerializeField] private GameObject StageView;
     [SerializeField] private GameObject StoreView;
 
+    private ChapterDatas chapterDatas;
+
+    private void LoadJson()
+    {
+        string filePath = "Assets/Main/3.Data/PlayerData.json";
+        string json = File.ReadAllText(filePath);
+
+        chapterDatas = JsonUtility.FromJson<ChapterDatas>(json);
+    }
+
+    private void SaveJson()
+    {
+        string filePath = "Assets/Main/3.Data/PlayerData.json";
+        string json = JsonUtility.ToJson(chapterDatas, true);
+
+        File.WriteAllText(filePath, json);
+    }
+
+    private void ResetJson()
+    {
+        List<ChapterData> chapterData = new List<ChapterData>();
+        List<int> li = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+        for (int i = 0; i < chapterBoards.Count; i++)
+            chapterData.Add(new ChapterData(li));
+
+        chapterDatas = new ChapterDatas(chapterData);
+
+        string filePath = "Assets/Main/3.Data/PlayerData.json";
+        string json = JsonUtility.ToJson(chapterDatas, true);
+
+        File.WriteAllText(filePath, json);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        int starNum = 2;
+        LoadJson();
 
         for (int i = 0; i < chapterBoards.Count; i++)
         {
@@ -27,7 +83,7 @@ public class MainManager : MonoBehaviour
             {
                 chapterBoards[i].stageButtons[j].stageNumText.text = (i + 1).ToString() + "-" + (j + 1).ToString();
 
-                for (int k = 0; k < starNum; k++)
+                for (int k = 0; k < chapterDatas.chapterData[i].stageData[j]; k++)
                 {
                     chapterBoards[i].stageButtons[j].starImages[k].sprite = Star.sprite;
                 }
@@ -36,16 +92,6 @@ public class MainManager : MonoBehaviour
 
         SettingPanel.SetActive(false);
         OnStageView();
-    }
-
-    private void LoadJson()
-    {
-
-    }
-
-    private void SaveJson()
-    {
-
     }
 
     public void OnSettingPanel()
