@@ -5,6 +5,12 @@ using UnityEngine.UI;
 using System.IO;
 
 [System.Serializable]
+public class Item
+{
+    public int candy;
+}
+
+[System.Serializable]
 public class ChapterData
 {
     public List<int> stageData;
@@ -17,11 +23,13 @@ public class ChapterData
 [System.Serializable]
 public class ChapterDatas
 {
+    public Item item;
     public List<ChapterData> chapterData = new();
 
-    public ChapterDatas(List<ChapterData> _chapterData)
+    public ChapterDatas(List<ChapterData> _chapterData, Item _item)
     {
         chapterData = _chapterData;
+        item = _item;
     }
 }
 
@@ -64,7 +72,10 @@ public class MainManager : MonoBehaviour
         for (int i = 0; i < chapterBoards.Count; i++)
             chapterData.Add(new ChapterData(li));
 
-        chapterDatas = new ChapterDatas(chapterData);
+        Item items = new Item();
+        items.candy = 0;
+
+        chapterDatas = new ChapterDatas(chapterData, items);
 
         string filePath = "Assets/Main/3.Data/PlayerData.json";
         string json = JsonUtility.ToJson(chapterDatas, true);
