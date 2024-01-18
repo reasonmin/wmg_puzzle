@@ -13,15 +13,15 @@ public class Item
 [System.Serializable]
 public class ChapterData
 {
-    public List<int> stageData;
+    public List<int> stageDatas;
     public ChapterData(List<int> _stageData)
     {
-        stageData = _stageData;
+        stageDatas = _stageData;
     }
 }
 
 [System.Serializable]
-public class ChapterDatas
+public class PlayerData
 {
     public int musicVolume;
     public int soundEffectVolume;
@@ -29,17 +29,23 @@ public class ChapterDatas
     public bool isSoundEffect;
 
     public Item item;
-    public List<ChapterData> chapterData = new();
+
+    public int curChapter;
+    public int curStage;
+    public List<ChapterData> chapterDatas = new();
     
-    public ChapterDatas( List<ChapterData> _chapterData, Item _item)
+    public PlayerData( List<ChapterData> _chapterData, Item _item)
     {
-        chapterData = _chapterData;
+        chapterDatas = _chapterData;
         item = _item;
 
         musicVolume = 50;
-        musicVolume = 50;
+       soundEffectVolume = 50;
         isMusic = true;
         isSoundEffect = true;
+
+        curChapter = 1;
+        curStage = 1;
     }
 }
 
@@ -61,15 +67,20 @@ public class MainManager : MonoBehaviour
     [SerializeField] private GameObject StageView;
     [SerializeField] private GameObject StoreView;
 
-    private ChapterDatas chapterDatas;
+    private PlayerData playerData;
 
     // Start is called before the first frame update
     void Start()
     {
-        //ResetJson();
+        ResetJson();
         LoadJson();// Player 정보 불러오기
 
         SetStageStar();// 불러온 정보로 스테이지 스타 세팅
+
+        if (playerData.isMusic)
+            MusicSlider.value = playerData.musicVolume;
+        if (playerData.isMusic)
+            SoundEffectSlider.value = playerData.soundEffectVolume;
 
         SettingPanel.SetActive(false);// 설정창 끄기
         OnStageView();// 뷰를 스테이지 뷰로 설정
@@ -80,13 +91,13 @@ public class MainManager : MonoBehaviour
         string filePath = "Assets/Main/3.Data/PlayerData.json";
         string json = File.ReadAllText(filePath);
 
-        chapterDatas = JsonUtility.FromJson<ChapterDatas>(json);
+        playerData = JsonUtility.FromJson<PlayerData>(json);
     }
 
     private void SaveJson() //저장
     {
         string filePath = "Assets/Main/3.Data/PlayerData.json";
-        string json = JsonUtility.ToJson(chapterDatas, true);
+        string json = JsonUtility.ToJson(playerData, true);
 
         File.WriteAllText(filePath, json);
     }
@@ -102,10 +113,10 @@ public class MainManager : MonoBehaviour
         Item items = new Item();
         items.candy = 0;
 
-        chapterDatas = new ChapterDatas(chapterData, items);
+        playerData = new PlayerData(chapterData, items);
 
         string filePath = "Assets/Main/3.Data/PlayerData.json";
-        string json = JsonUtility.ToJson(chapterDatas, true);
+        string json = JsonUtility.ToJson(playerData, true);
 
         File.WriteAllText(filePath, json);
     }
@@ -118,7 +129,7 @@ public class MainManager : MonoBehaviour
             {
                 chapterBoards[i].stageButtons[j].stageNumText.text = (i + 1).ToString() + "-" + (j + 1).ToString();
 
-                for (int k = 0; k < chapterDatas.chapterData[i].stageData[j]; k++)
+                for (int k = 0; k < playerData.chapterDatas[i].stageDatas[j]; k++)
                 {
                     chapterBoards[i].stageButtons[j].starImages[k].sprite = Star.sprite;
                 }
@@ -130,42 +141,42 @@ public class MainManager : MonoBehaviour
     //-----------------------------------------------------
     public void OnMusicVolume()
     {
-        if (chapterDatas.isMusic)
-            chapterDatas.musicVolume = (int)MusicSlider.value;
+        if (playerData.isMusic)
+            playerData.musicVolume = (int)MusicSlider.value;
 
-        Debug.Log(chapterDatas.musicVolume);
+        Debug.Log(playerData.musicVolume);
     }
 
     public void OnSoundEffectVolume()
     {
-        if (chapterDatas.isMusic)
-            chapterDatas.soundEffectVolume = (int)SoundEffectSlider.value;
+        if (playerData.isMusic)
+            playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
-        Debug.Log(chapterDatas.soundEffectVolume);
+        Debug.Log(playerData.soundEffectVolume);
     }
 
     public void OnMusic()
     {
-        chapterDatas.isMusic = !chapterDatas.isMusic;
+        playerData.isMusic = !playerData.isMusic;
 
-        if (!chapterDatas.isMusic)
-            chapterDatas.musicVolume = 0;
+        if (!playerData.isMusic)
+            playerData.musicVolume = 0;
         else
-            chapterDatas.musicVolume = (int)MusicSlider.value;
+            playerData.musicVolume = (int)MusicSlider.value;
 
-        Debug.Log(chapterDatas.musicVolume);
+        Debug.Log(playerData.musicVolume);
     }
 
     public void OnSoundEffect()
     {
-        chapterDatas.isSoundEffect = !chapterDatas.isSoundEffect;
+        playerData.isSoundEffect = !playerData.isSoundEffect;
 
-        if (!chapterDatas.isSoundEffect)
-            chapterDatas.soundEffectVolume = 0;
+        if (!playerData.isSoundEffect)
+            playerData.soundEffectVolume = 0;
         else
-            chapterDatas.soundEffectVolume = (int)SoundEffectSlider.value;
+            playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
-        Debug.Log(chapterDatas.soundEffectVolume);
+        Debug.Log(playerData.soundEffectVolume);
     }
     //-----------------------------------------------------
 
