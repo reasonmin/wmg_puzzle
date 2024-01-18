@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a4565296ae5b9499cf27b2d034d5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  potionType: 1
   sprite: []
+  clampVec2: {x: 1.5, y: 1.5}
 --- !u!58 &260948859071555051
 CircleCollider2D:
   m_ObjectHideFlags: 0
