@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
+public enum PotionType  //물약 종류
+{
+    Fire,
+    Ice,
+    Dark,
+    Heal,
+    Light
+}
 
 public class Potion : MonoBehaviour
 {
@@ -56,13 +63,4 @@ public class Potion : MonoBehaviour
         transform.position = targetPosition; //위치 이동
         isMoving = false;
     }
-}
-
-public enum PotionType  //물약 종류
-{
-    Red,
-    Blue,
-    Pink,
-    Green,
-    White
 }

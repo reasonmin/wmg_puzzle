@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MatchDirection
+{
+    Vertical,   //수직
+    Horizontal, //수평
+    LongVertical,   //긴 수직 일치(3개 이상 일치)
+    LongHorizontal, //긴 수평 일치
+    Super,  //33
+    None    //일치 방향 없음
+}
+
 public class PotionBoard : MonoBehaviour
 {
     //자신
@@ -550,14 +560,4 @@ public class MatchResult     //연결된 물약 있음, 방향 확인 됨
 {
     public List<Potion> connectedPotions;   //물약 목록
     public MatchDirection direction;    //일치 방향
-}
-
-public enum MatchDirection
-{
-    Vertical,   //수직
-    Horizontal, //수평
-    LongVertical,   //긴 수직 일치(3개 이상 일치)
-    LongHorizontal, //긴 수평 일치
-    Super,  //33
-    None    //일치 방향 없음
 }
