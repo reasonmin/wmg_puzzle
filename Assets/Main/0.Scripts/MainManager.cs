@@ -52,7 +52,8 @@ public class PlayerData
 public class MainManager : MonoBehaviour
 {
     [SerializeField] private List<ChapterBoard> chapterBoards;
-    [SerializeField] private Image Star;
+    [SerializeField] private Image StarImage;
+    [SerializeField] private Image StageButtonImage;
 
     [SerializeField] private GameObject SettingPanel;
     [SerializeField] private GameObject MainBoardPanel;
@@ -131,8 +132,16 @@ public class MainManager : MonoBehaviour
 
                 for (int k = 0; k < playerData.chapterDatas[i].stageDatas[j]; k++)
                 {
-                    chapterBoards[i].stageButtons[j].starImages[k].sprite = Star.sprite;
+                    chapterBoards[i].stageButtons[j].starImages[k].sprite = StarImage.sprite;
                 }
+            }
+        }
+
+        for (int i = 0; i < playerData.curChapter; i++)
+        {
+            for (int j = 0; j < playerData.curStage; j++)
+            {
+                chapterBoards[i].stageButtons[j].ButtonImage.sprite = StageButtonImage.sprite;
             }
         }
     }

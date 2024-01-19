@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class StageButton : MonoBehaviour
 {
+    public Image ButtonImage;
     public TMP_Text stageNumText;
     public List<Image> starImages;
 }
