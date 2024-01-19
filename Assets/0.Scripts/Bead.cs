@@ -5,11 +5,11 @@ using UnityEngine.EventSystems;
 
 public enum BeadType
 {
-    Red,
-    Blue,
-    Pink,
-    Green,
-    White
+    Fire,
+    Ice,
+    Dark,
+    Heal,
+    Light
 }
 
 public class Bead : MonoBehaviour
@@ -20,6 +20,7 @@ public class Bead : MonoBehaviour
 
 
     Vector2 startPos = new();
+    Vector2 endPos = new();
     Collider2D target = null;
 
     public Vector2 clampVec2;
@@ -34,8 +35,6 @@ public class Bead : MonoBehaviour
                 target = GetHit2D().collider;
                 startPos = transform.position;
                 isMoving = true;
-                Debug.Log("startPos : " + startPos);
-                Debug.Log("potionType : " + potionType);
             }
         }
 
@@ -43,37 +42,45 @@ public class Bead : MonoBehaviour
         {
             if (target != null)
             {
-                Debug.Log(target);
+                if (transform.position.x != startPos.x)
+                {
+                    
+                }
+                else if (transform.position.y != startPos.y)
+                {
+                    
+                }
+
                 Vector2 vec = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                Debug.Log(vec);
                 vec = Camera.main.ScreenToWorldPoint(vec);
+
                 // 위치 제한을 위해 Mathf.Clamp 사용
                 float clampedX = Mathf.Clamp(vec.x, -(clampVec2.x), clampVec2.x);
                 float clampedY = Mathf.Clamp(vec.y, -(clampVec2.y), clampVec2.y);
                 vec = new Vector2(clampedX, clampedY);
 
-                if((vec - startPos).normalized.x > 0 && ((vec - startPos).normalized.y > -0.5f &&   //오른쪽
-                    (vec - startPos).normalized.y < 0.5f))
+                if ((vec - startPos).normalized.x > 0 && ((vec - startPos).normalized.y > -0.5f  //오른쪽
+                    && (vec - startPos).normalized.y < 0.5f))
                 {
-                    target.transform.position = new Vector2(vec.x, transform.position.y);
+                    target.transform.position = new Vector2(vec.x, startPos.y);   //transform.position.y
                     //Debug.Log("오른쪽으로 이동");
                 }
-                else if ((vec - startPos).normalized.x < 0 && ((vec - startPos).normalized.y > -0.5f && //왼쪽
-                    (vec - startPos).normalized.y < 0.5f))
+                else if ((vec - startPos).normalized.x < 0 && ((vec - startPos).normalized.y > -0.5f    //왼쪽
+                    && (vec - startPos).normalized.y < 0.5f))
                 {
-                    target.transform.position = new Vector2(vec.x, transform.position.y);
+                    target.transform.position = new Vector2(vec.x, startPos.y);
                     //Debug.Log("왼쪽으로 이동");
                 }
-                else if ((vec - startPos).normalized.y > 0 && ((vec - startPos).normalized.x > -0.5f && //위쪽
-                    (vec - startPos).normalized.x < 0.5f))
-                {
-                    target.transform.position = new Vector2(transform.position.x, vec.y);
-                    //Debug.Log("위쪽으로 이동");
-                }
-                else if ((vec - startPos).normalized.y < 0 && ((vec - startPos).normalized.x > -0.5f // 아래
+                else if ((vec - startPos).normalized.y > 0 && ((vec - startPos).normalized.x > -0.5f    //위쪽
                     && (vec - startPos).normalized.x < 0.5f))
                 {
-                    target.transform.position = new Vector2(transform.position.x, vec.y);
+                    target.transform.position = new Vector2(startPos.x, vec.y); //transform.position.x
+                    //Debug.Log("위쪽으로 이동");
+                }
+                else if ((vec - startPos).normalized.y < 0 && ((vec - startPos).normalized.x > -0.5f    // 아래
+                    && (vec - startPos).normalized.x < 0.5f))
+                {
+                    target.transform.position = new Vector2(startPos.x, vec.y);
                     //Debug.Log("아래쪽으로 이동");
                 }
 
@@ -83,13 +90,36 @@ public class Bead : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))  //마우스를 눌렀다가 놓았을 때
         {
-                transform.position = startPos;
-                isMoving = false;
-                {
-                if (isMoving != true)
-                    target = null;
+            endPos = transform.position;
 
-                }
+            Debug.Log(endPos.x);
+            Debug.Log(startPos.x);
+
+            if (endPos.x - startPos.x > 0.2f)
+            {//1.5          //0
+                Debug.Log("오른쪽");
+            }
+            else if (endPos.x - startPos.x < 0.2f)
+            {//1.5          //0
+                Debug.Log("왼쪽");
+            }
+            if (endPos.y - startPos.y > 0.2f)
+            {//1.5          //0
+                Debug.Log("위쪽");
+            }
+            else if (endPos.y - startPos.y < 0.2f)
+            {//1.5          //0
+                Debug.Log("아래쪽");
+            }
+
+            transform.position = startPos;
+
+            isMoving = false;
+            if (isMoving != true)
+            {
+                target = null;
+
+            }
         }
     }
 
