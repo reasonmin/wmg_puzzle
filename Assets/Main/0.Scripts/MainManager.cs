@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 
+public enum Language
+{
+    English,
+    Korean
+}
+
 [System.Serializable]
 public class Item
 {
@@ -23,6 +29,8 @@ public class ChapterData
 [System.Serializable]
 public class PlayerData
 {
+    public Language language;
+
     public int musicVolume;
     public int soundEffectVolume;
     public bool isMusic;
@@ -38,6 +46,8 @@ public class PlayerData
     {
         chapterDatas = _chapterData;
         item = _item;
+
+        language = Language.English;
 
         musicVolume = 50;
        soundEffectVolume = 50;
@@ -144,6 +154,21 @@ public class MainManager : MonoBehaviour
                 chapterBoards[i].stageButtons[j].ButtonImage.sprite = StageButtonImage.sprite;
             }
         }
+    }
+
+    public void OnLanguageChange(int n)
+    {
+        switch (n)
+        {
+            case (int)Language.English:
+                playerData.language = Language.English;
+                break;
+            case (int)Language.Korean:
+                playerData.language = Language.Korean;
+                break;
+        }
+
+        Debug.Log(playerData.language);
     }
 
     // 음량 조절
