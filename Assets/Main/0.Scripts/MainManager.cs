@@ -50,7 +50,7 @@ public class PlayerData
         language = Language.English;
 
         musicVolume = 50;
-       soundEffectVolume = 50;
+        soundEffectVolume = 50;
         isMusic = true;
         isSoundEffect = true;
 
@@ -73,6 +73,8 @@ public class MainManager : MonoBehaviour
 
     [SerializeField] private Slider MusicSlider;
     [SerializeField] private Slider SoundEffectSlider;
+    [SerializeField] private GameObject MusicBanImage;
+    [SerializeField] private GameObject SoundEffectBanImage;
 
     [SerializeField] private GameObject BeforeButton;
     [SerializeField] private GameObject StageView;
@@ -86,12 +88,8 @@ public class MainManager : MonoBehaviour
         ResetJson();
         LoadJson();// Player 정보 불러오기
 
-        SetStageStar();// 불러온 정보로 스테이지 스타 세팅
-
-        if (playerData.isMusic)
-            MusicSlider.value = playerData.musicVolume;
-        if (playerData.isMusic)
-            SoundEffectSlider.value = playerData.soundEffectVolume;
+        SetStageButton();// 불러온 정보로 스테이지 버튼 세팅
+        SetVolume();// 음향 세팅
 
         SettingPanel.SetActive(false);// 설정창 끄기
         OnStageView();// 뷰를 스테이지 뷰로 설정
@@ -132,8 +130,20 @@ public class MainManager : MonoBehaviour
         File.WriteAllText(filePath, json);
     }
 
-    private void SetStageStar()
+    private void SetVolume()
     {
+        if (playerData.isMusic)
+            MusicSlider.value = playerData.musicVolume;
+        if (playerData.isMusic)
+            SoundEffectSlider.value = playerData.soundEffectVolume;
+
+        MusicBanImage.SetActive(!playerData.isMusic);
+        SoundEffectBanImage.SetActive(!playerData.isSoundEffect);
+    }
+
+    private void SetStageButton()
+    {
+        // 스테이지 스타 개수 + 레밸 넘버 수정
         for (int i = 0; i < chapterBoards.Count; i++)
         {
             for (int j = 0; j < chapterBoards[i].stageButtons.Count; j++)
@@ -147,6 +157,7 @@ public class MainManager : MonoBehaviour
             }
         }
 
+        // 완료된 스테이지 이미지 세팅 
         for (int i = 0; i < playerData.curChapter; i++)
         {
             for (int j = 0; j < playerData.curStage; j++)
@@ -198,6 +209,8 @@ public class MainManager : MonoBehaviour
         else
             playerData.musicVolume = (int)MusicSlider.value;
 
+        MusicBanImage.SetActive(!playerData.isMusic);
+
         Debug.Log(playerData.musicVolume);
     }
 
@@ -209,6 +222,8 @@ public class MainManager : MonoBehaviour
             playerData.soundEffectVolume = 0;
         else
             playerData.soundEffectVolume = (int)SoundEffectSlider.value;
+
+        SoundEffectBanImage.SetActive(!playerData.isSoundEffect);
 
         Debug.Log(playerData.soundEffectVolume);
     }
