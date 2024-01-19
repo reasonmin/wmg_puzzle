@@ -61,6 +61,8 @@ public class PlayerData
 
 public class MainManager : MonoBehaviour
 {
+    public static MainManager instance;
+
     [SerializeField] private List<ChapterBoard> chapterBoards;
     [SerializeField] private Image StarImage;
     [SerializeField] private Image StageButtonImage;
@@ -80,7 +82,12 @@ public class MainManager : MonoBehaviour
     [SerializeField] private GameObject StageView;
     [SerializeField] private GameObject StoreView;
 
-    private PlayerData playerData;
+    public PlayerData playerData;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
