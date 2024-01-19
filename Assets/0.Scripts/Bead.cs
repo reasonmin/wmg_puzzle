@@ -29,7 +29,7 @@ public class Bead : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))    //마우스를 눌렀을 때
         {
-            if (GetHit2D().collider != null && isMoving != true)
+            if (GetHit2D().collider != null)
             {
                 target = GetHit2D().collider;
                 startPos = transform.position;
@@ -43,9 +43,10 @@ public class Bead : MonoBehaviour
         {
             if (target != null)
             {
+                Debug.Log(target);
                 Vector2 vec = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                Debug.Log(vec);
                 vec = Camera.main.ScreenToWorldPoint(vec);
-
                 // 위치 제한을 위해 Mathf.Clamp 사용
                 float clampedX = Mathf.Clamp(vec.x, -(clampVec2.x), clampVec2.x);
                 float clampedY = Mathf.Clamp(vec.y, -(clampVec2.y), clampVec2.y);
@@ -57,23 +58,20 @@ public class Bead : MonoBehaviour
                     target.transform.position = new Vector2(vec.x, transform.position.y);
                     //Debug.Log("오른쪽으로 이동");
                 }
-
                 else if ((vec - startPos).normalized.x < 0 && ((vec - startPos).normalized.y > -0.5f && //왼쪽
                     (vec - startPos).normalized.y < 0.5f))
                 {
                     target.transform.position = new Vector2(vec.x, transform.position.y);
                     //Debug.Log("왼쪽으로 이동");
                 }
-
                 else if ((vec - startPos).normalized.y > 0 && ((vec - startPos).normalized.x > -0.5f && //위쪽
                     (vec - startPos).normalized.x < 0.5f))
                 {
                     target.transform.position = new Vector2(transform.position.x, vec.y);
                     //Debug.Log("위쪽으로 이동");
                 }
-
-                else if ((vec - startPos).normalized.y < 0 && ((vec - startPos).normalized.x > -0.5f && //아래쪽
-                   (vec - startPos).normalized.x < 0.5f))
+                else if ((vec - startPos).normalized.y < 0 && ((vec - startPos).normalized.x > -0.5f // 아래
+                    && (vec - startPos).normalized.x < 0.5f))
                 {
                     target.transform.position = new Vector2(transform.position.x, vec.y);
                     //Debug.Log("아래쪽으로 이동");
@@ -101,9 +99,7 @@ public class Bead : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // 레이캐스트를 통해 레이와 충돌한 객체에 대한 정보 저장
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-
-        return hit;
+        return Physics2D.Raycast(ray.origin, ray.direction); ;
     }
 
     public Bead SetBeadSprite(int index)
@@ -111,16 +107,5 @@ public class Bead : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = sprite[index];
 
         return this;
-    }
-
-    public void OnDrag()
-    {
-        transform.position = Input.mousePosition;
-        Debug.Log("OnDrag");
-    }
-
-    public void OnDrag(BaseEventData data)
-    {
-        Debug.Log("Drag");
     }
 }
