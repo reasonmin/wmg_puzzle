@@ -65,7 +65,7 @@ public class MainManager : MonoBehaviour
 
     [SerializeField] private List<ChapterBoard> chapterBoards;
     [SerializeField] private Image StarImage;
-    [SerializeField] private Image StageButtonImage;
+    [SerializeField] private Image LockStageButtonImage;
 
     [SerializeField] private GameObject SettingPanel;
     [SerializeField] private GameObject MainBoardPanel;
@@ -92,7 +92,7 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ResetJson();
+        //ResetJson();
         LoadJson();// Player 정보 불러오기
 
         SetStageButton();// 불러온 정보로 스테이지 버튼 세팅
@@ -164,14 +164,12 @@ public class MainManager : MonoBehaviour
             }
         }
 
-        // 완료된 스테이지 이미지 세팅 
+        // 스테이지 해금
         for (int i = 0; i < playerData.curChapter; i++)
-        {
             for (int j = 0; j < playerData.curStage; j++)
-            {
-                chapterBoards[i].stageButtons[j].ButtonImage.sprite = StageButtonImage.sprite;
-            }
-        }
+                chapterBoards[i].stageButtons[j].gameObject.SetActive(true);
+
+        chapterBoards[playerData.curChapter - 1].stageButtons[playerData.curStage - 1].ButtonImage.sprite = LockStageButtonImage.sprite;
     }
 
     public void OnLanguageChange(int n)

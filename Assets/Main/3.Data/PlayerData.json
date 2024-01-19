@@ -8,12 +8,12 @@
         "candy": 0
     },
     "curChapter": 1,
-    "curStage": 1,
+    "curStage": 3,
     "chapterDatas": [
         {
             "stageDatas": [
-                0,
-                0,
+                3,
+                1,
                 0,
                 0,
                 0,
