@@ -57,6 +57,7 @@ public class Bead : MonoBehaviour
                 // 위치 제한을 위해 Mathf.Clamp 사용
                 float clampedX = Mathf.Clamp(vec.x, -(clampVec2.x), clampVec2.x);
                 float clampedY = Mathf.Clamp(vec.y, -(clampVec2.y), clampVec2.y);
+
                 vec = new Vector2(clampedX, clampedY);
 
                 if ((vec - startPos).normalized.x > 0 && ((vec - startPos).normalized.y > -0.5f  //오른쪽
@@ -92,33 +93,28 @@ public class Bead : MonoBehaviour
         {
             endPos = transform.position;
 
-            Debug.Log(endPos.x);
-            Debug.Log(startPos.x);
+            Debug.Log("start : " + startPos.x);
+            Debug.Log("end : " + endPos.x);
 
-            if (endPos.x - startPos.x > 0.2f)
-            {//1.5          //0
-                Debug.Log("오른쪽");
-            }
-            else if (endPos.x - startPos.x < 0.2f)
-            {//1.5          //0
-                Debug.Log("왼쪽");
-            }
-            if (endPos.y - startPos.y > 0.2f)
-            {//1.5          //0
-                Debug.Log("위쪽");
-            }
-            else if (endPos.y - startPos.y < 0.2f)
-            {//1.5          //0
-                Debug.Log("아래쪽");
-            }
+            //endPos와 startPos 사이의 거리 계산
+            float distanceX = Mathf.Abs(endPos.x - startPos.x);
+            float distanceY = Mathf.Abs(endPos.y - startPos.y);
 
-            transform.position = startPos;
+            if (distanceX > 1.2f || distanceY > 1.2f)
+            {
+                Vector2 newPosition = transform.position;
+                
+                transform.position = newPosition;
+            }
+            else
+            {
+                transform.position = startPos;
+            }
 
             isMoving = false;
-            if (isMoving != true)
+            if (!isMoving)
             {
                 target = null;
-
             }
         }
     }

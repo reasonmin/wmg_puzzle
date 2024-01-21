@@ -615,7 +615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2243017084486827323, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7408540213448601372, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}
       propertyPath: potionType
