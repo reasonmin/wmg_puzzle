@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 public class SceneChange : MonoBehaviour
 {
     public static SceneChange instance;
-    //public RectTransform ScrollContents;
-
 
 
     private void Update()
@@ -24,7 +22,6 @@ public class SceneChange : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(instance);
-            //setRectPosition();
         }
     }
 
@@ -37,13 +34,4 @@ public class SceneChange : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
-
-    /*
-    public void setRectPosition()
-    {
-        float y = ScrollContents.anchoredPosition.y;
-        ScrollContents.anchoredPosition = new Vector2(0, y);
-    }
-    */
-
 }
