@@ -25,9 +25,10 @@ public class Bead : MonoBehaviour
 
     public Vector2 clampVec2;
     private bool isMoving = false;
-
+    string direction;
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(0))    //마우스를 눌렀을 때
         {
             if (GetHit2D().collider != null)
@@ -42,47 +43,49 @@ public class Bead : MonoBehaviour
         {
             if (target != null)
             {
-                if (transform.position.x != startPos.x)
-                {
-                    
-                }
-                else if (transform.position.y != startPos.y)
-                {
-                    
-                }
-
                 Vector2 vec = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 vec = Camera.main.ScreenToWorldPoint(vec);
 
                 // 위치 제한을 위해 Mathf.Clamp 사용
-                float clampedX = Mathf.Clamp(vec.x, -(clampVec2.x), clampVec2.x);
+                float clampedX = Mathf.Clamp(vec.x,  -(clampVec2.x), clampVec2.x);
                 float clampedY = Mathf.Clamp(vec.y, -(clampVec2.y), clampVec2.y);
+
+                //transform.position과 startPos 사이의 거리 계산
+                float distanceX = Mathf.Abs(transform.position.x - startPos.x);
+                float distanceY = Mathf.Abs(transform.position.y - startPos.y);
 
                 vec = new Vector2(clampedX, clampedY);
 
-                if ((vec - startPos).normalized.x > 0 && ((vec - startPos).normalized.y > -0.5f  //오른쪽
-                    && (vec - startPos).normalized.y < 0.5f))
+                if (distanceY < 0.3f)
                 {
-                    target.transform.position = new Vector2(vec.x, startPos.y);   //transform.position.y
-                    //Debug.Log("오른쪽으로 이동");
+                    if ((vec - startPos).normalized.x > 0 && ((vec - startPos).normalized.y > -0.5f  //오른쪽
+                        && (vec - startPos).normalized.y < 0.5f))
+                    {
+                        target.transform.localPosition = new Vector2(vec.x, startPos.y);   //transform.position.y
+                        direction = "right";
+                    }
+                    else if ((vec - startPos).normalized.x < 0 && ((vec - startPos).normalized.y > -0.5f    //왼쪽
+                        && (vec - startPos).normalized.y < 0.5f))
+                    {
+                        target.transform.localPosition = new Vector2(vec.x, startPos.y);
+                        direction = "left";
+                    }
                 }
-                else if ((vec - startPos).normalized.x < 0 && ((vec - startPos).normalized.y > -0.5f    //왼쪽
-                    && (vec - startPos).normalized.y < 0.5f))
+
+                if(distanceX < 0.3f)
                 {
-                    target.transform.position = new Vector2(vec.x, startPos.y);
-                    //Debug.Log("왼쪽으로 이동");
-                }
-                else if ((vec - startPos).normalized.y > 0 && ((vec - startPos).normalized.x > -0.5f    //위쪽
-                    && (vec - startPos).normalized.x < 0.5f))
-                {
-                    target.transform.position = new Vector2(startPos.x, vec.y); //transform.position.x
-                    //Debug.Log("위쪽으로 이동");
-                }
-                else if ((vec - startPos).normalized.y < 0 && ((vec - startPos).normalized.x > -0.5f    // 아래
-                    && (vec - startPos).normalized.x < 0.5f))
-                {
-                    target.transform.position = new Vector2(startPos.x, vec.y);
-                    //Debug.Log("아래쪽으로 이동");
+                    if ((vec - startPos).normalized.y > 0 && ((vec - startPos).normalized.x > -0.5f    //위쪽
+                        && (vec - startPos).normalized.x < 0.5f))
+                    {
+                        target.transform.localPosition = new Vector2(startPos.x, vec.y); //transform.position.x
+                        direction = "up";
+                    }
+                    else if ((vec - startPos).normalized.y < 0 && ((vec - startPos).normalized.x > -0.5f    // 아래
+                        && (vec - startPos).normalized.x < 0.5f))
+                    {
+                        target.transform.localPosition = new Vector2(startPos.x, vec.y);
+                        direction = "down";
+                    }
                 }
 
                 //Debug.Log((vec - startPos).normalized);
@@ -93,17 +96,29 @@ public class Bead : MonoBehaviour
         {
             endPos = transform.position;
 
-            Debug.Log("start : " + startPos.x);
-            Debug.Log("end : " + endPos.x);
-
             //endPos와 startPos 사이의 거리 계산
             float distanceX = Mathf.Abs(endPos.x - startPos.x);
             float distanceY = Mathf.Abs(endPos.y - startPos.y);
 
-            if (distanceX > 1.2f || distanceY > 1.2f)
+            if (distanceX > 1 || distanceY > 1)
             {
+                //어느쪽으로 이동 했는지 확인
+                switch (direction)
+                {
+                    case "right":   //오른쪽
+                        break;
+                    case "left":   //왼쪽
+
+                        break;
+                    case "up":   //위
+
+                        break;
+                    case "down":   //아래
+
+                        break;
+                }
+
                 Vector2 newPosition = transform.position;
-                
                 transform.position = newPosition;
             }
             else

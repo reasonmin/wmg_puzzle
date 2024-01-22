@@ -140,7 +140,6 @@ public class PotionBoard : MonoBehaviour
 
     public bool CheckBoard(bool _takeAction)    //일치하는 물약이 있는지 확인, 물약 제거
     {
-        //Debug.Log("Checking Board");
         bool hasMatched = false;
 
         List<Potion> potionsToRemove = new();   //제거할 물약
