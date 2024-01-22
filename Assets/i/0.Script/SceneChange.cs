@@ -7,7 +7,7 @@ public class SceneChange : MonoBehaviour
 {
     public static SceneChange instance;
 
-
+    public float y;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
