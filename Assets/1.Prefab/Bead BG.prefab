@@ -99,7 +99,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionType: 0
-  sprite: []
+  sprite:
+  - {fileID: 528523113, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
+  - {fileID: 1453105598, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
+  - {fileID: 138564630, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
+  - {fileID: -372352177, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
+  - {fileID: -973794597, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
   clampVec2: {x: 0, y: 0}
 --- !u!58 &260948859071555051
 CircleCollider2D:
@@ -116,7 +121,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
 --- !u!1 &2243017084486827323
 GameObject:
   m_ObjectHideFlags: 0

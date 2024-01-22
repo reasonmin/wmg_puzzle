@@ -7,9 +7,9 @@ public enum BeadType
 {
     Fire,
     Ice,
-    Dark,
     Heal,
-    Light
+    Light,
+    Dark
 }
 
 public class Bead : MonoBehaviour
@@ -102,29 +102,9 @@ public class Bead : MonoBehaviour
 
             if (distanceX > 1 || distanceY > 1)
             {
-                //어느쪽으로 이동 했는지 확인
-                switch (direction)
-                {
-                    case "right":   //오른쪽
-                        break;
-                    case "left":   //왼쪽
-
-                        break;
-                    case "up":   //위
-
-                        break;
-                    case "down":   //아래
-
-                        break;
-                }
-
-                Vector2 newPosition = transform.position;
-                transform.position = newPosition;
+                SetBeadSprite(direction);
             }
-            else
-            {
-                transform.position = startPos;
-            }
+            transform.position = startPos;
 
             isMoving = false;
             if (!isMoving)
@@ -133,6 +113,54 @@ public class Bead : MonoBehaviour
             }
         }
     }
+    public Bead SetBeadSprite(string direction)
+    {
+        // 이동한 방향에 있는 게임 오브젝트의 스프라이트 가져오기
+        GameObject targetObject = GetTargetObjectInDirection(direction);
+        if (targetObject != null)
+        {
+            Sprite targetSprite = targetObject.GetComponent<SpriteRenderer>().sprite;
+
+            targetObject.GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+            gameObject.GetComponent<SpriteRenderer>().sprite = targetSprite;
+        }
+
+        return this;
+    }
+
+    private GameObject GetTargetObjectInDirection(string direction)
+    {
+        // 이동한 방향에 따라 탐색할 방향 벡터 설정
+        Vector2 directionVector = Vector2.zero;
+        switch (direction)
+        {
+            case "right":
+                directionVector = Vector2.right;
+                break;
+            case "left":
+                directionVector = Vector2.left;
+                break;
+            case "up":
+                directionVector = Vector2.up;
+                break;
+            case "down":
+                directionVector = Vector2.down;
+                break;
+        }
+
+        // 이동한 방향에 있는 게임 오브젝트 탐색
+        RaycastHit2D hit = Physics2D.Raycast(transform.localPosition, directionVector);
+
+        if (hit.collider != null && hit.collider.gameObject != gameObject)
+        {
+            GameObject targetObject = hit.collider.gameObject;
+            Debug.Log(targetObject.GetComponent<Bead>().potionType);
+            return targetObject;
+        }
+
+        return null;    //게임 오브젝트를 찾지 못 했을 때 null를 반환
+    }
+
 
     RaycastHit2D GetHit2D()
     {
@@ -140,13 +168,6 @@ public class Bead : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // 레이캐스트를 통해 레이와 충돌한 객체에 대한 정보 저장
-        return Physics2D.Raycast(ray.origin, ray.direction); ;
-    }
-
-    public Bead SetBeadSprite(int index)
-    {
-        GetComponent<SpriteRenderer>().sprite = sprite[index];
-
-        return this;
+        return Physics2D.Raycast(ray.origin, ray.direction);
     }
 }
