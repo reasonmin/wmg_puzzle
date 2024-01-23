@@ -14,45 +14,61 @@ public enum BeadType
 
 public class Bead : MonoBehaviour
 {
-    public PotionType potionType;
+    //자신
+    public static Bead Instance;
 
     [SerializeField] private List<Sprite> sprite;
 
+    public BeadType beadType; //종류
+    public Vector2 clampVec2;   //이동 범위
 
-    Vector2 startPos = new();
-    Vector2 endPos = new();
-    Collider2D target = null;
+    Vector2 startPos = new();   //시작 위치(눌렀을 때)
+    Vector2 endPos = new(); //끝 위치(놨을 때)
 
-    public Vector2 clampVec2;
-    private bool isMoving = false;
-    string direction;
+    Collider2D target = null; //내가 누른 구슬
+    private bool isMoving = false;  //구슬이 이동중인지 확인(true : 이동 중, false : 이동 중 아님)
+
+    string direction;   //구슬이 이동한 방향
+    
+    //------------------------------------
+    public int xIndex;  //보드의 x좌표
+    public int yIndex;  //보드의 y좌표
+    //------------------------------------
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Update()
     {
-        
         if (Input.GetMouseButtonDown(0))    //마우스를 눌렀을 때
         {
             if (GetHit2D().collider != null)
             {
                 target = GetHit2D().collider;
-                startPos = transform.position;
+                startPos = Vector2.zero;
                 isMoving = true;
             }
         }
 
         if (Input.GetMouseButton(0))    //마우스를 누르고 있을 때
         {
-            if (target != null)
+            if (target == GetComponent<Collider2D>())
             {
                 Vector2 vec = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 vec = Camera.main.ScreenToWorldPoint(vec);
 
+                //Debug.Log($"{vec.x}, {vec.y}");
+                //Debug.Log($"{transform.position.x}, {transform.position.y}");
                 // 위치 제한을 위해 Mathf.Clamp 사용
-                float clampedX = Mathf.Clamp(vec.x,  -(clampVec2.x), clampVec2.x);
-                float clampedY = Mathf.Clamp(vec.y, -(clampVec2.y), clampVec2.y);
-
+                float clampedX = Mathf.Clamp(vec.x - transform.parent.transform.position.x,  -(clampVec2.x), clampVec2.x);
+                float clampedY = Mathf.Clamp(vec.y - transform.parent.transform.position.y, -(clampVec2.y), clampVec2.y);
+                Debug.Log($"{gameObject.name}");
+                Debug.Log($"{vec.x - transform.parent.transform.position.x}, {vec.y - transform.parent.transform.position.y}");
                 //transform.position과 startPos 사이의 거리 계산
-                float distanceX = Mathf.Abs(transform.position.x - startPos.x);
-                float distanceY = Mathf.Abs(transform.position.y - startPos.y);
+                float distanceX = Mathf.Abs(transform.localPosition.x - startPos.x);
+                float distanceY = Mathf.Abs(transform.localPosition.y - startPos.y);
 
                 vec = new Vector2(clampedX, clampedY);
 
@@ -94,17 +110,17 @@ public class Bead : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))  //마우스를 눌렀다가 놓았을 때
         {
-            endPos = transform.position;
+            endPos = transform.localPosition;
 
             //endPos와 startPos 사이의 거리 계산
             float distanceX = Mathf.Abs(endPos.x - startPos.x);
             float distanceY = Mathf.Abs(endPos.y - startPos.y);
 
-            if (distanceX > 1 || distanceY > 1)
+            if (distanceX > 0.7f || distanceY > 0.7f)
             {
                 SetBeadSprite(direction);
             }
-            transform.position = startPos;
+            transform.localPosition = Vector2.zero;
 
             isMoving = false;
             if (!isMoving)
@@ -120,9 +136,15 @@ public class Bead : MonoBehaviour
         if (targetObject != null)
         {
             Sprite targetSprite = targetObject.GetComponent<SpriteRenderer>().sprite;
+            BeadType targetBeadType = targetObject.GetComponent<Bead>().beadType;
 
+            //스프라이트 변경
             targetObject.GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
             gameObject.GetComponent<SpriteRenderer>().sprite = targetSprite;
+
+            //포션 타입 변경
+            targetObject.GetComponent<Bead>().beadType = beadType;
+            gameObject.GetComponent<Bead>().beadType = targetBeadType;
         }
 
         return this;
@@ -154,7 +176,7 @@ public class Bead : MonoBehaviour
         if (hit.collider != null && hit.collider.gameObject != gameObject)
         {
             GameObject targetObject = hit.collider.gameObject;
-            Debug.Log(targetObject.GetComponent<Bead>().potionType);
+            Debug.Log(targetObject.GetComponent<Bead>().beadType);
             return targetObject;
         }
 

@@ -14,6 +14,7 @@ public enum MatchDirection
 
 public class PotionBoard : MonoBehaviour
 {
+    /*
     //자신
     public static PotionBoard Instance;
 
@@ -48,7 +49,6 @@ public class PotionBoard : MonoBehaviour
 
     //-----------------------------------------------------
     public List<Bead> beads = new();
-
     //-----------------------------------------------------
 
     private void Awake()
@@ -58,29 +58,12 @@ public class PotionBoard : MonoBehaviour
 
     void Start()
     {
-        InitializeBoard();
+        //InitializeBoard();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);    //마우스와 충돌한 객체를 저장
 
-            if (hit.collider != null && hit.collider.gameObject.GetComponent<Potion>())    //마우스와 충돌한 객체가 null이 아니고, Potion 이라는 Component를 갖고 있음
-            {
-                if (isProcessingMove == true)
-                {
-                    return;
-                }
-
-                Potion potion = hit.collider.gameObject.GetComponent<Potion>();
-                Debug.Log("물약을 클릭했습니다, 물약은 : " + potion.gameObject);
-
-                SelectPotion(potion);
-            }
-        }
     }
 
     void InitializeBoard()  //보드, 물약 생성
@@ -553,6 +536,7 @@ public class PotionBoard : MonoBehaviour
 
     //일치
     #endregion
+    */
 }
 
 public class MatchResult     //연결된 물약 있음, 방향 확인 됨
