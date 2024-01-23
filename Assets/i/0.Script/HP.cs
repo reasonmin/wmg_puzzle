@@ -5,19 +5,25 @@ using UnityEngine.UI;
 
 public class HP : MonoBehaviour
 {
-    [SerializeField] private Image hp;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Image hpImage;
+
+    private void Start()
     {
-        hp.fillAmount = 0;
+        hpImage.fillAmount = 1;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            hp.fillAmount += 0.1f;
+            hpImage.fillAmount -= 0.1f;
         }
+
+        if (hpImage.fillAmount == 0)
+        {
+            hpImage.fillAmount = 1;
+        }
+
+        //coolTimeImage.fillAmount = delta / cooltime;
     }
 }
