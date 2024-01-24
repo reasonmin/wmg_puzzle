@@ -7,8 +7,9 @@ public class Skill: MonoBehaviour
 {
     [SerializeField] private Image fillImage;
     [SerializeField] private Button fillButton;
-    [SerializeField] private float fillTime = 5f;
+    [SerializeField] private Image hp;
 
+    private float fillTime = 5f;
     private bool isFilling = false;
     private float fillTimer = 0f;
 
@@ -33,10 +34,16 @@ public class Skill: MonoBehaviour
                 fillTimer = 0f;
             }
         }
+
+        if(hp.fillAmount == 0)
+        {
+            hp.fillAmount = 1;
+        }
     }
 
-    void StartFilling()
+    private void StartFilling()
     {
         isFilling = true;
+        hp.fillAmount -= 0.1f;
     }
 }
