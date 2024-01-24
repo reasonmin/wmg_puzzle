@@ -200,16 +200,6 @@ MonoBehaviour:
   potionParent: {fileID: 345965240}
   isProcessingMove: 0
   potionBoardGO: {fileID: 0}
-  arrayLayout:
-    rows:
-    - row: 
-    - row: 
-    - row: 
-    - row: 
-    - row: 
-    - row: 
-    - row: 
-    - row: 
   beads: []
 --- !u!4 &466770884
 Transform:
@@ -464,6 +454,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7408540213448601372, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}
+      propertyPath: beadType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7408540213448601372, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}
       propertyPath: potionType
       value: 3
       objectReference: {fileID: 0}
@@ -548,6 +542,10 @@ PrefabInstance:
     - target: {fileID: 2243017084486827323, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7408540213448601372, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}
+      propertyPath: beadType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7408540213448601372, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}
       propertyPath: potionType
@@ -901,6 +899,10 @@ PrefabInstance:
     - target: {fileID: 2243017084486827323, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7408540213448601372, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}
+      propertyPath: beadType
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7408540213448601372, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}
       propertyPath: potionType
