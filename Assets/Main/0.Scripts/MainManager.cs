@@ -11,6 +11,13 @@ public enum Language
 }
 
 [System.Serializable]
+public class Sentence
+{
+    public string English;
+    public string Korean;
+}
+
+[System.Serializable]
 public class Item
 {
     public int candy;
