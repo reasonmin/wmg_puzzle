@@ -191,7 +191,8 @@ public class MainManager : MonoBehaviour
                 break;
         }
 
-        Debug.Log(playerData.language);
+        SaveJson();
+        //Debug.Log(playerData.language);
     }
 
     // 음량 조절
@@ -201,6 +202,7 @@ public class MainManager : MonoBehaviour
         if (playerData.isMusic)
             playerData.musicVolume = (int)MusicSlider.value;
 
+        SaveJson();
         Debug.Log(playerData.musicVolume);
     }
 
@@ -209,6 +211,7 @@ public class MainManager : MonoBehaviour
         if (playerData.isMusic)
             playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
+        SaveJson();
         Debug.Log(playerData.soundEffectVolume);
     }
 
@@ -223,6 +226,7 @@ public class MainManager : MonoBehaviour
 
         MusicBanImage.SetActive(!playerData.isMusic);
 
+        SaveJson();
         Debug.Log(playerData.musicVolume);
     }
 
@@ -237,6 +241,7 @@ public class MainManager : MonoBehaviour
 
         SoundEffectBanImage.SetActive(!playerData.isSoundEffect);
 
+        SaveJson();
         Debug.Log(playerData.soundEffectVolume);
     }
     //-----------------------------------------------------
