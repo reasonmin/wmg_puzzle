@@ -36,14 +36,15 @@ public class ChapterData
 [System.Serializable]
 public class PlayerData
 {
+    public int gold;
+    public Item item;
+
     public Language language;
 
     public int musicVolume;
     public int soundEffectVolume;
     public bool isMusic;
     public bool isSoundEffect;
-
-    public Item item;
 
     public int curChapter;
     public int curStage;
@@ -54,6 +55,7 @@ public class PlayerData
         chapterDatas = _chapterData;
         item = _item;
 
+        gold = 0;
         language = Language.English;
 
         musicVolume = 50;
