@@ -28,7 +28,8 @@ public class Bead : MonoBehaviour
 
     [HideInInspector] public Collider2D target = null; //내가 누른 구슬
 
-    private bool isMoving = false;  //구슬이 이동중인지 확인(true : 이동 중, false : 이동 중 아님)
+    [HideInInspector] public bool isMoving;  //구슬이 이동중인지 확인(true : 이동 중, false : 이동 중 아님)
+    [HideInInspector] public bool isMatched;  //물약이 보드 안에 있는지 확인
 
     string direction;   //구슬이 이동한 방향
     
