@@ -37,8 +37,6 @@ public class PotionBoard : MonoBehaviour
     private float spacingX;
     private float spacingY;
 
-    private bool isProcessingMove; //물약이 이동하고 있는지 확인(true : 이동 중, false : 이동 중 아님)
-
     //보드
     public Node[,] beadBoard; //물약 보드(2차원 배열)
 
@@ -105,18 +103,19 @@ public class PotionBoard : MonoBehaviour
         }
     }
 
-    public bool CheckBoard(bool _takeAction)    //일치하는 물약이 있는지 확인, 물약 제거
+    public bool CheckBoard(bool _takeAction)    //일치하는 물약이 있는지 확인, 물약 제거(_takeAction = true : 제거, false : 제거 안 함)
     {
         bool hasMatched = false;
 
         List<Bead> beadsToRemove = new();   //제거할 물약
+
         if (beadBoard != null)
         {
             foreach (Node nodebead in beadBoard)
             {
                 if (nodebead.bead != null)
                 {
-                    nodebead.bead.GetComponent<Bead>().isMatched = false;   //문제(nodebead.bead에는 Bead 스크렙트가 없음 Bead_BG가 있음)
+                    nodebead.bead.GetComponent<Bead_BG>().bead.GetComponent<Bead>().isMatched = false;
                 }
             }
         }
@@ -130,22 +129,24 @@ public class PotionBoard : MonoBehaviour
                 {
                     if (beadBoard[x, y].isUsable)
                     {
-                        Bead bead = beadBoard[x, y].bead.GetComponent<Bead>();    //물약 변수 생성
-
-                        if (bead.isMatched == false && bead != null)  //물약이 일치하는지 확인
+                        Bead bead = beadBoard[x, y].bead.GetComponent<Bead_BG>().bead.GetComponent<Bead>();
+                        if (bead != null)
                         {
-                            MatchResult matchedBeads = IsConnected(bead);   //일치된 물약(연결되어 있음)
-
-                            if (matchedBeads.connectedBeads.Count >= 3) //3개 이상 일치
+                            if (bead.isMatched == false)  //물약이 일치하는지 확인
                             {
-                                MatchResult superMathedBeads = SuperMatch(matchedBeads);
+                                MatchResult matchedBeads = IsConnected(bead);   //일치된 물약(연결되어 있음)
 
-                                beadsToRemove.AddRange(superMathedBeads.connectedBeads);
+                                if (matchedBeads.connectedBeads.Count >= 3) //3개 이상 일치
+                                {
+                                    MatchResult superMathedBeads = SuperMatch(matchedBeads);
 
-                                foreach (Bead pot in superMathedBeads.connectedBeads)
-                                    pot.isMatched = true;
+                                    beadsToRemove.AddRange(superMathedBeads.connectedBeads);
 
-                                hasMatched = true;
+                                    //foreach (Bead pot in superMathedBeads.connectedBeads)
+                                        //pot.isMatched = true;
+
+                                    hasMatched = true;
+                                }
                             }
                         }
                     }
@@ -153,7 +154,7 @@ public class PotionBoard : MonoBehaviour
             }
         }
 
-        if (_takeAction)
+        if (_takeAction == true)
         {
             foreach (Bead beadToRemove in beadsToRemove)    //제거할 물약
             {
@@ -171,6 +172,7 @@ public class PotionBoard : MonoBehaviour
         return hasMatched;
     }
 
+    #region 삭제, 재설치
     private void RemovAndRefill(List<Bead> _potionsToRemove)
     {
         //물약을 제거하고 해당 위치의 보드를 비워줌
@@ -216,7 +218,7 @@ public class PotionBoard : MonoBehaviour
         if (y + yOffset == height)
         {
             Debug.Log("물약을 찾지 못하고 보드 맨 위에 도달했습니다.");
-            //SpawnPotionAtTop(x);
+            SpawnPotionAtTop(x);
         }
         // 물약에 도달
         else if (y + yOffset < height && beadBoard[x, y + yOffset].bead != null)
@@ -235,24 +237,22 @@ public class PotionBoard : MonoBehaviour
         }
     }
     
-    /*
+    
     private void SpawnPotionAtTop(int x)
     {
         int index = FindIndexOfLowestNull(x);
         int locationToMoveTo = width - index;
         Debug.Log("물약을 spawn하려는데, 이상적으로 인덱스에 물약을 넣고 싶다 if: " + index);
-        // 랜덤으로 물약 얻기
-        int randomIndex = Random.Range(0, potionPrefabs.Length);
-        GameObject newPotion = Instantiate(potionPrefabs[randomIndex], new Vector2(x - spacingX, height - spacingY), Quaternion.identity);
+        //랜덤으로 물약 얻기
+        GameObject newPotion = Instantiate(beadPrefab, new Vector2(x - spacingX, height - spacingY), Quaternion.identity);
         newPotion.transform.SetParent(potionParent.transform);
-        // 지표 설정하기
+
+        //좌표 설정하기
         newPotion.GetComponent<Bead>().SetIndicies(x, index);
-        // 포션 보드 위에 지표 설정하기
-        potionBoard[x, index] = new Node(true, newPotion);
-        // 해당 위치로 움직이기
-        Vector3 targetPosition = new Vector3(newPotion.transform.position.x, newPotion.transform.position.y - locationToMoveTo, newPotion.transform.position.z);
-        //newPotion.GetComponent<Potion>().MoveToTarget(targetPosition);
-    }*/
+        //포션 보드 위에 좌표 설정하기
+        beadBoard[x, index] = new Node(true, newPotion);
+        //해당 위치로 움직이기
+    }
 
     private int FindIndexOfLowestNull(int x)
     {
@@ -270,8 +270,8 @@ public class PotionBoard : MonoBehaviour
         }
         return lowestNull;
     }
+    #endregion
 
-    #region 일치 항목
     private MatchResult SuperMatch(MatchResult _matchedBeads) //33
     {
         //가로 또는 긴 가로 일치
@@ -335,68 +335,66 @@ public class PotionBoard : MonoBehaviour
         }
         return null;    //모든것이 일치하지 않을 때
     }
-    #endregion
 
-
-    MatchResult IsConnected(Bead potion)  //MatchResult(물약 목록, 일치 방향) 부여
+    MatchResult IsConnected(Bead bead)  //MatchResult(물약 목록, 일치 방향) 부여
     {
-        List<Bead> connectedPotions = new();  //연결된 포션
-        //PotionType potionType = potion.potionType;  //포션 유형
+        List<Bead> connectedBeads = new();  //연결된 포션
+        BeadType beadType = bead.beadType;  //포션 유형
 
-        connectedPotions.Add(potion);
+        connectedBeads.Add(bead);
 
         //check right
-        CheckDirection(potion, new Vector2Int(1, 0), connectedPotions);
+        CheckDirection(bead, new Vector2Int(1, 0), connectedBeads);
         //check left
-        CheckDirection(potion, new Vector2Int(-1, 0), connectedPotions);
+        CheckDirection(bead, new Vector2Int(-1, 0), connectedBeads);
 
-        if (connectedPotions.Count == 3)    //3개 일치 (Horizontal Match)
+        if (connectedBeads.Count == 3)    //3개 일치 (Horizontal Match)
         {
-            Debug.Log("일치 색상과 수직 일치가 있게 됩니다. 연결된 물약 : " + connectedPotions[0].beadType);
+            Debug.Log("일치 색상과 수직 일치가 있게 됩니다. 연결된 물약 : " + connectedBeads[0].beadType);
 
             return new MatchResult
             {
-                connectedBeads = connectedPotions,
+                connectedBeads = connectedBeads,
                 direction = MatchDirection.Horizontal
             };
         }
-        else if (connectedPotions.Count > 3)    //3개 초과 일치 (Long horizontal Match)
+        else if (connectedBeads.Count > 3)    //3개 초과 일치 (Long horizontal Match)
         {
-            Debug.Log("색상과 긴수직 일치가 있게 됩니다. 연결된 물약 : " + connectedPotions[0].beadType);
+            Debug.Log("색상과 긴수직 일치가 있게 됩니다. 연결된 물약 : " + connectedBeads[0].beadType);
 
             return new MatchResult
             {
-                connectedBeads = connectedPotions,
+                connectedBeads = connectedBeads,
                 direction = MatchDirection.LongHorizontal
             };
         }
         //연결된 물약 제거
-        connectedPotions.Clear();
+        connectedBeads.Clear();
         //초기 물약을 다시 추가
-        connectedPotions.Add(potion);
+        connectedBeads.Add(bead);
 
         //check up
-        CheckDirection(potion, new Vector2Int(0, 1), connectedPotions);
+        CheckDirection(bead, new Vector2Int(0, 1), connectedBeads);
         //check down
-        CheckDirection(potion, new Vector2Int(0, -1), connectedPotions);
+        CheckDirection(bead, new Vector2Int(0, -1), connectedBeads);
 
-        if (connectedPotions.Count == 3)    //3개 일치 (Horizontal Match)
+        if (connectedBeads.Count == 3)    //3개 일치 (Horizontal Match)
         {
-            Debug.Log("일치 색상과 수직 일치가 있게 됩니다. 연결된 물약 : " + connectedPotions[0].beadType);
+            Debug.Log("일치 색상과 수직 일치가 있게 됩니다. 연결된 물약 : " + connectedBeads[0].beadType);
 
             return new MatchResult
             {
-                connectedBeads = connectedPotions,
+                connectedBeads = connectedBeads,
                 direction = MatchDirection.Vertical
             };
         }
-        else if (connectedPotions.Count > 3)    //3개 초과 일치 (Long horizontal Match)
+        else if (connectedBeads.Count > 3)    //3개 초과 일치 (Long horizontal Match)
         {
-            Debug.Log("색상과 긴수직 일치가 있게 됩니다. 연결된 물약 : " + connectedPotions[0].beadType);
+            Debug.Log("색상과 긴수직 일치가 있게 됩니다. 연결된 물약 : " + connectedBeads[0].beadType);
 
             return new MatchResult
             {
-                connectedBeads = connectedPotions,
+                connectedBeads = connectedBeads,
                 direction = MatchDirection.LongVertical
             };
         }
@@ -404,23 +402,25 @@ public class PotionBoard : MonoBehaviour
         {
             return new MatchResult
             {
-                connectedBeads = connectedPotions,
+                connectedBeads = connectedBeads,
                 direction = MatchDirection.None
             };
         }
     }
 
-    void CheckDirection(Bead bead, Vector2Int direction, List<Bead> connectedBeads)    //방향 확인(pot : 구슬, direction : 움직이는 방향, connectedPotions : 물약 유형)
+    void CheckDirection(Bead bead, Vector2Int direction, List<Bead> connectedBeads)    //방향 확인(bead : 구슬, direction : 움직이는 방향, connectedBeads : 물약 유형)
     {
         BeadType beadType = bead.beadType;
         int x = bead.xIndex + direction.x;
         int y = bead.yIndex + direction.y;
 
+        return;
+
         while (x >= 0 && x < width && y >= 0 && y < height) //경계 안에 있는지 확인
         {
             if (beadBoard[x, y].isUsable)  //보드가 채워질 수 있는지 확인
             {
-                Bead neighbourBead = beadBoard[x, y].bead.GetComponent<Bead>();
+                Bead neighbourBead = beadBoard[x, y].bead.GetComponent<Bead_BG>().bead.GetComponent<Bead>();
 
                 //이웃 물약이 보드 안에 있고, 물약의 종류가 같음
                 if (neighbourBead.isMatched == false && neighbourBead.beadType == beadType)
@@ -461,6 +461,8 @@ public class PotionBoard : MonoBehaviour
             //포션 타입 변경
             targetObject.GetComponent<Bead>().beadType = Bead.Instance.target.GetComponent<Bead>().beadType;
             Bead.Instance.target.GetComponent<Bead>().beadType = targetBeadType;
+
+            //if문으로 둘이 바꿀 수 있는지 확인 하고 못 바꾸면 다시 바꿔줌(0.2초 뒤에 바꿔줌 IEnumerator 사용)
         }
 
         return null;
