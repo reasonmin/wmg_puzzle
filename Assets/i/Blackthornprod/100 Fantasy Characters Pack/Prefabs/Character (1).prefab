@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9004148122923463584}
   - component: {fileID: 9004148122923463615}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Wing Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9004148123338886052}
   - component: {fileID: 9004148123338886051}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9004148123409344355}
   - component: {fileID: 9004148123409344354}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ Transform:
   - {fileID: 9004148123338886052}
   - {fileID: 9004148122923463584}
   - {fileID: 9004148123724671368}
-  m_Father: {fileID: 9004148124358793284}
+  m_Father: {fileID: 8109387992727016149}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9004148123409344354
@@ -265,7 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9004148123724671368}
   - component: {fileID: 9004148123724671367}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Wing Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,16 +347,16 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9004148124358793284}
+  - component: {fileID: 8109387992727016149}
   - component: {fileID: 3123773668918704367}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Character (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9004148124358793284
+--- !u!4 &8109387992727016149
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -364,8 +364,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9004148124358793283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9004148123409344355}
@@ -374,7 +374,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3123773668918704367
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -391,4 +391,5 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

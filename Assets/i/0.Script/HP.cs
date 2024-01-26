@@ -14,10 +14,12 @@ public class HP : MonoBehaviour
 
     private void Update()
     {   
+        /*
         if (hpImage.fillAmount == 0)
         {
             hpImage.fillAmount = 1;
         }
+        */
     }
 
     public void Damage()

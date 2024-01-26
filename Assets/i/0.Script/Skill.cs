@@ -26,7 +26,7 @@ public class Skill: MonoBehaviour
         {
             fillButton.interactable = false;
         }
-        // 채우기 중인 경우
+
         if (isFilling)
         {
             fillButton.interactable = false;
@@ -36,7 +36,6 @@ public class Skill: MonoBehaviour
 
             if (fillTimer >= fillTime)
             {
-                fillButton.interactable = false;
                 isFilling = false;
                 fillTimer = 0f;
             }
@@ -45,7 +44,7 @@ public class Skill: MonoBehaviour
         if(Input.GetKeyDown(key) && fillImage.fillAmount != 1)
         {
             fillButton.interactable = false;
-            fillImage.fillAmount += 0.1f;
+            fillImage.fillAmount += 0.3f;
         }
 
         if (fillImage.fillAmount == 1)
@@ -53,10 +52,12 @@ public class Skill: MonoBehaviour
             fillButton.interactable = true;
         }
 
+        /*
         if(hp.fillAmount == 0)
         {
             hp.fillAmount = 1;
         }
+        */
         
     }
 
