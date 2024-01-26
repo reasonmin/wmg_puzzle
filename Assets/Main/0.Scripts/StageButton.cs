@@ -9,4 +9,9 @@ public class StageButton : MonoBehaviour
     public Image ButtonImage;
     public TMP_Text stageNumText;
     public List<Image> starImages;
+
+    public void OnStart()
+    {
+        MainManager.instance.SetGameStartPanel(stageNumText.text);
+    }
 }

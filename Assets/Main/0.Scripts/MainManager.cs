@@ -3,70 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-
-public enum Language
-{
-    English,
-    Korean
-}
-
-[System.Serializable]
-public class Sentence
-{
-    public string English;
-    public string Korean;
-}
-
-[System.Serializable]
-public class Item
-{
-    public int candy;
-}
-
-[System.Serializable]
-public class ChapterData
-{
-    public List<int> stageDatas;
-    public ChapterData(List<int> _stageData)
-    {
-        stageDatas = _stageData;
-    }
-}
-
-[System.Serializable]
-public class PlayerData
-{
-    public int gold;
-    public Item item;
-
-    public Language language;
-
-    public int musicVolume;
-    public int soundEffectVolume;
-    public bool isMusic;
-    public bool isSoundEffect;
-
-    public int curChapter;
-    public int curStage;
-    public List<ChapterData> chapterDatas = new();
-    
-    public PlayerData( List<ChapterData> _chapterData, Item _item)
-    {
-        chapterDatas = _chapterData;
-        item = _item;
-
-        gold = 0;
-        language = Language.English;
-
-        musicVolume = 50;
-        soundEffectVolume = 50;
-        isMusic = true;
-        isSoundEffect = true;
-
-        curChapter = 1;
-        curStage = 1;
-    }
-}
+using TMPro;
 
 public class MainManager : MonoBehaviour
 {
@@ -91,6 +28,11 @@ public class MainManager : MonoBehaviour
     [SerializeField] private GameObject StageView;
     [SerializeField] private GameObject StoreView;
 
+    [SerializeField] private GameStartPanel gameStartPanel;
+    [SerializeField] private ItemButtons itemButtons;
+
+    [SerializeField] private RectTransform rTransform;
+
     public PlayerData playerData;
 
     private void Awake()
@@ -101,6 +43,13 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneChange.instance.y > 0)
+        {
+            rTransform.anchoredPosition = new Vector2(0, SceneChange.instance.y);
+        }
+
+        gameStartPanel.Panel.SetActive(false);
+
         ResetJson();
         LoadJson();// Player 정보 불러오기
 
@@ -136,7 +85,9 @@ public class MainManager : MonoBehaviour
             chapterData.Add(new ChapterData(li));
 
         Item items = new Item();
-        items.candy = 0;
+        items.gold = 0;
+        items.silver = 0;
+        items.bronze = 0;
 
         playerData = new PlayerData(chapterData, items);
 
@@ -196,6 +147,28 @@ public class MainManager : MonoBehaviour
         SaveJson();
         //Debug.Log(playerData.language);
     }
+
+    // 게임시작
+    //-----------------------------------------------------
+    public void SetGameStartPanel(string stageNum)
+    {
+        gameStartPanel.Title_Text.text = stageNum;
+        itemButtons.bronze._Text.text = playerData.item.bronze.ToString();
+
+        gameStartPanel.Panel.SetActive(true);
+    }
+
+    public void OnGameStartPanel()
+    {
+        gameStartPanel.Panel.SetActive(false);
+    }
+
+    public void OnGameStart()
+    {
+        SceneChange.instance.y = rTransform.anchoredPosition.y;
+        SceneChange.instance.OnGoGame();
+    }
+    //-----------------------------------------------------
 
     // 음량 조절
     //-----------------------------------------------------
@@ -312,4 +285,85 @@ public class MainManager : MonoBehaviour
         ResetView(StoreView);
     }
     //-----------------------------------------------------
+}
+
+public enum Language
+{
+    English,
+    Korean
+}
+
+[System.Serializable]
+public class Sentence
+{
+    public string English;
+    public string Korean;
+}
+
+[System.Serializable]
+public class GameStartPanel
+{
+    public GameObject Panel;
+    public TMP_Text Title_Text;
+}
+
+[System.Serializable]
+public class Item
+{
+    public int gold;
+    public int silver;
+    public int bronze;
+}
+
+[System.Serializable]
+public class ItemButtons
+{
+    public ItemButton gold;
+    public ItemButton silver;
+    public ItemButton bronze;
+}
+
+[System.Serializable]
+public class ChapterData
+{
+    public List<int> stageDatas;
+    public ChapterData(List<int> _stageData)
+    {
+        stageDatas = _stageData;
+    }
+}
+
+[System.Serializable]
+public class PlayerData
+{
+    public int gold;
+    public Item item;
+
+    public Language language;
+
+    public int musicVolume;
+    public int soundEffectVolume;
+    public bool isMusic;
+    public bool isSoundEffect;
+
+    public int curChapter;
+    public int curStage;
+    public List<ChapterData> chapterDatas = new();
+
+    public PlayerData(List<ChapterData> _chapterData, Item _item)
+    {
+        chapterDatas = _chapterData;
+        item = _item;
+
+        gold = 0;
+        language = Language.English;
+
+        musicVolume = 50;
+        soundEffectVolume = 50;
+        isMusic = true;
+        isSoundEffect = true;
+
+        curChapter = 1;
+        curStage = 1;
+    }
 }

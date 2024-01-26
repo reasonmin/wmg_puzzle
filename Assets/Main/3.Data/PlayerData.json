@@ -1,9 +1,11 @@
 {
     "gold": 0,
     "item": {
-        "candy": 0
+        "gold": 0,
+        "silver": 0,
+        "bronze": 1
     },
-    "language": 1,
+    "language": 0,
     "musicVolume": 50,
     "soundEffectVolume": 50,
     "isMusic": true,
