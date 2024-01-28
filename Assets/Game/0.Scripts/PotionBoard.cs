@@ -103,6 +103,7 @@ public class PotionBoard : MonoBehaviour
         }
     }
 
+
     public bool CheckBoard(bool _takeAction)    //일치하는 물약이 있는지 확인, 물약 제거(_takeAction = true : 제거, false : 제거 안 함)
     {
         bool hasMatched = false;
@@ -142,8 +143,8 @@ public class PotionBoard : MonoBehaviour
 
                                     beadsToRemove.AddRange(superMathedBeads.connectedBeads);
 
-                                    //foreach (Bead pot in superMathedBeads.connectedBeads)
-                                        //pot.isMatched = true;
+                                    foreach (Bead pot in superMathedBeads.connectedBeads)
+                                        pot.isMatched = true;
 
                                     hasMatched = true;
                                 }
@@ -408,40 +409,35 @@ public class PotionBoard : MonoBehaviour
         }
     }
 
-    void CheckDirection(Bead bead, Vector2Int direction, List<Bead> connectedBeads)    //방향 확인(bead : 구슬, direction : 움직이는 방향, connectedBeads : 물약 유형)
-    {
+   void CheckDirection(Bead bead, Vector2Int direction, List<Bead> connectedBeads)
+   {
         BeadType beadType = bead.beadType;
         int x = bead.xIndex + direction.x;
         int y = bead.yIndex + direction.y;
 
         return;
-
-        while (x >= 0 && x < width && y >= 0 && y < height) //경계 안에 있는지 확인
+        while (x >= 0 && x < width && y >= 0 && y < height) // 경계 안에 있는지 확인
         {
-            if (beadBoard[x, y].isUsable)  //보드가 채워질 수 있는지 확인
+            if (!beadBoard[x, y].isUsable) // 보드가 채워질 수 없는 경우
+                break;
+
+            Bead neighbourBead = beadBoard[x, y].bead.GetComponent<Bead_BG>().bead.GetComponent<Bead>();
+
+            // 이웃 물약이 보드 안에 있고, 물약의 종류가 같음
+            if (!neighbourBead.isMatched && neighbourBead.beadType == beadType)
             {
-                Bead neighbourBead = beadBoard[x, y].bead.GetComponent<Bead_BG>().bead.GetComponent<Bead>();
+                connectedBeads.Add(neighbourBead);
 
-                //이웃 물약이 보드 안에 있고, 물약의 종류가 같음
-                if (neighbourBead.isMatched == false && neighbourBead.beadType == beadType)
-                {
-                    connectedBeads.Add(neighbourBead);
-
-                    x += direction.x;
-                    y += direction.y;
-                }
-                else
-                {
-                    break;
-                }
-
+                x += direction.x;
+                y += direction.y;
             }
             else
             {
                 break;
             }
         }
-    }
+   }
+
 
     #region 구슬 교환
     public Bead SetBeadSprite(string direction)

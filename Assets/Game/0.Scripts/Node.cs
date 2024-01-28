@@ -8,9 +8,9 @@ public class Node : MonoBehaviour
 
     public GameObject bead;
 
-    public Node(bool _isUsable, GameObject _potion) //持失切
+    public Node(bool _isUsable, GameObject _bead) //持失切
     {
         isUsable = _isUsable;
-        bead = _potion;
+        bead = _bead;
     }
 }
