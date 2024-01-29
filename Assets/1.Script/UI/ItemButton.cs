@@ -10,8 +10,11 @@ public class ItemButton : MonoBehaviour
 
     public void OnUseItem()
     {
-        _Text.gameObject.SetActive(!_Text.gameObject.activeSelf);
-        CheckImage.SetActive(!CheckImage.activeSelf);
+        if(_Text.text != "0")
+        {
+            _Text.gameObject.SetActive(!_Text.gameObject.activeSelf);
+            CheckImage.SetActive(!CheckImage.activeSelf);
+        }
     }
 
     public void ReSetting()

@@ -67,8 +67,8 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneChange.instance.y > 0)
-            rTransform.anchoredPosition = new Vector2(0, SceneChange.instance.y);
+        //if (SceneChange.instance.y > 0)
+        //    rTransform.anchoredPosition = new Vector2(0, SceneChange.instance.y);
 
         gameStartPanel.Panel.SetActive(false);
 

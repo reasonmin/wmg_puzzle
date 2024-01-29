@@ -79,7 +79,7 @@ public class PlayerDataManager : MonoBehaviour
         Item items = new Item();
         items.gold = 0;
         items.silver = 0;
-        items.bronze = 0;
+        items.bronze = 3;
 
         playerData = new PlayerData(chapterData, items);
 
