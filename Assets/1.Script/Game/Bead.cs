@@ -14,12 +14,9 @@ public enum BeadType
 
 public class Bead : MonoBehaviour
 {
-    //자신
-    public static Bead Instance;
-
     [SerializeField] private List<Sprite> sprite;
 
-    public BeadType beadType; //종류
+    public BeadType type; //종류
 
     public Vector2 clampVec2;   //이동 범위
 
@@ -39,11 +36,7 @@ public class Bead : MonoBehaviour
     [HideInInspector] public int yIndex;  //보드의 y좌표
     //------------------------------------
 
-    private void Awake()
-    {
-        Instance = this;
-    }
-
+    public bool isUsable;
     void Update()
     {
         if (Input.GetMouseButtonDown(0))    //마우스를 눌렀을 때
@@ -117,12 +110,16 @@ public class Bead : MonoBehaviour
 
             if (distanceX > 0.7f || distanceY > 0.7f)
             {
+                /*
                 PotionBoard.Instance.SetBeadSprite(direction);
 
                 if (PotionBoard.Instance.CheckBoard(false) == true)
                 {
                     Debug.Log("test");
                 }
+                */
+                BoardManager.Instance.ChangeBead();
+                BoardManager.Instance.BeadBoradCheck();
             }
 
             transform.localPosition = Vector2.zero;
@@ -148,5 +145,11 @@ public class Bead : MonoBehaviour
 
         // 레이캐스트를 통해 레이와 충돌한 객체에 대한 정보 저장
         return Physics2D.Raycast(ray.origin, ray.direction);
+    }
+
+    public void SetBead()
+    {
+        type = (BeadType)Random.Range(0, (int)BeadType.Dark + 1);
+        GetComponent<SpriteRenderer>().sprite = sprite[(int)type];
     }
 }

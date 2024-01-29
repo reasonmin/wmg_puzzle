@@ -116,7 +116,7 @@ public class PotionBoard : MonoBehaviour
             {
                 if (nodebead.bead != null)
                 {
-                    nodebead.bead.GetComponent<Bead_BG>().bead.GetComponent<Bead>().isMatched = false;
+                    //nodebead.bead.GetComponent<Bead_BG>().bead.GetComponent<Bead>().isMatched = false;
                 }
             }
         }
@@ -130,6 +130,7 @@ public class PotionBoard : MonoBehaviour
                 {
                     if (beadBoard[x, y].isUsable)
                     {
+                        /*
                         Bead bead = beadBoard[x, y].bead.GetComponent<Bead_BG>().bead.GetComponent<Bead>();
                         if (bead != null)
                         {
@@ -150,6 +151,7 @@ public class PotionBoard : MonoBehaviour
                                 }
                             }
                         }
+                        */
                     }
                 }
             }
@@ -339,6 +341,7 @@ public class PotionBoard : MonoBehaviour
 
     MatchResult IsConnected(Bead bead)  //MatchResult(물약 목록, 일치 방향) 부여
     {
+        /*
         List<Bead> connectedBeads = new();  //연결된 포션
         BeadType beadType = bead.beadType;  //포션 유형
 
@@ -407,10 +410,13 @@ public class PotionBoard : MonoBehaviour
                 direction = MatchDirection.None
             };
         }
+        */
+        return null;
     }
 
    void CheckDirection(Bead bead, Vector2Int direction, List<Bead> connectedBeads)
    {
+        /*
         BeadType beadType = bead.beadType;
         int x = bead.xIndex + direction.x;
         int y = bead.yIndex + direction.y;
@@ -421,6 +427,7 @@ public class PotionBoard : MonoBehaviour
             if (!beadBoard[x, y].isUsable) // 보드가 채워질 수 없는 경우
                 break;
 
+            
             Bead neighbourBead = beadBoard[x, y].bead.GetComponent<Bead_BG>().bead.GetComponent<Bead>();
 
             // 이웃 물약이 보드 안에 있고, 물약의 종류가 같음
@@ -435,13 +442,16 @@ public class PotionBoard : MonoBehaviour
             {
                 break;
             }
+            
         }
+        */
    }
 
 
     #region 구슬 교환
     public Bead SetBeadSprite(string direction)
     {
+        /*
         // 이동한 방향에 있는 게임 오브젝트의 스프라이트 가져오기
         GameObject targetObject = GetTargetObjectInDirection(direction);
 
@@ -451,16 +461,16 @@ public class PotionBoard : MonoBehaviour
             BeadType targetBeadType = targetObject.GetComponent<Bead>().beadType;
 
             //스프라이트 변경
-            targetObject.GetComponent<SpriteRenderer>().sprite = Bead.Instance.target.GetComponent<SpriteRenderer>().sprite;
-            Bead.Instance.target.GetComponent<SpriteRenderer>().sprite = targetSprite;
+            //targetObject.GetComponent<SpriteRenderer>().sprite = Bead.Instance.target.GetComponent<SpriteRenderer>().sprite;
+            //Bead.Instance.target.GetComponent<SpriteRenderer>().sprite = targetSprite;
 
             //포션 타입 변경
-            targetObject.GetComponent<Bead>().beadType = Bead.Instance.target.GetComponent<Bead>().beadType;
-            Bead.Instance.target.GetComponent<Bead>().beadType = targetBeadType;
+            //targetObject.GetComponent<Bead>().beadType = Bead.Instance.target.GetComponent<Bead>().beadType;
+            //Bead.Instance.target.GetComponent<Bead>().beadType = targetBeadType;
 
             //if문으로 둘이 바꿀 수 있는지 확인 하고 못 바꾸면 다시 바꿔줌(0.2초 뒤에 바꿔줌 IEnumerator 사용)
         }
-
+        */
         return null;
     }
 
@@ -485,23 +495,26 @@ public class PotionBoard : MonoBehaviour
         }
 
         // 이동한 방향에 있는 게임 오브젝트 탐색
+        /*
         Vector2 startPosition = Bead.Instance.target.transform.position;
         Vector2 _direction = directionVector.normalized;
 
         float raycastDistance = 1f; // 레이캐스트의 최대 거리 설정
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, _direction, raycastDistance);
-
+        
         foreach (RaycastHit2D hit in hits)
         {
+            
             if (hit.collider.gameObject != Bead.Instance.target.gameObject)
             {
                 GameObject targetObject = hit.collider.gameObject;
                 Debug.Log(targetObject.GetComponent<Bead>().beadType);
                 return targetObject;
             }
+            
         }
-
+        */
         return null;    //게임 오브젝트를 찾지 못 했을 때 null를 반환
     }
     #endregion
