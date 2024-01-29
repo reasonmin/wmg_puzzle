@@ -10,6 +10,8 @@ public class Monster : MonoBehaviour
 
     private float destroytimer = 0f;
     private float destroytime = 2f;
+
+    private Color originColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +24,10 @@ public class Monster : MonoBehaviour
         if (hp.fillAmount == 0)
         {
             destroytimer += Time.deltaTime;
-            float desvalue = 255f - (destroytimer / destroytime);
-            Color color = eImage.color;
-            color.a = Mathf.Clamp01(desvalue);
+            float desvalue = 1f - (destroytimer / destroytime);
+            Color newColor = new(originColor.r, originColor.g, originColor.b, Mathf.Clamp01(desvalue));
+            eImage.color = newColor;
+            hp.color = newColor;
         }
     }
 }

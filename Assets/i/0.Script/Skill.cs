@@ -44,7 +44,7 @@ public class Skill: MonoBehaviour
         if(Input.GetKeyDown(key) && fillImage.fillAmount != 1)
         {
             fillButton.interactable = false;
-            fillImage.fillAmount += 0.3f;
+            fillImage.fillAmount += 0.5f;
         }
 
         if (fillImage.fillAmount == 1)
@@ -64,6 +64,6 @@ public class Skill: MonoBehaviour
     private void StartFilling()
     {
         isFilling = true;
-        hp.fillAmount -= 0.1f;
+        hp.fillAmount -= 0.5f;
     }
 }
