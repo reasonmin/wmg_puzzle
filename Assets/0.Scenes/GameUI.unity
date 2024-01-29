@@ -884,8 +884,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1330094568}
-  m_Father: {fileID: 2056547199}
-  m_RootOrder: 1
+  m_Father: {fileID: 862688491}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1040,7 +1040,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 722661890}
   m_Father: {fileID: 2056547199}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2011,7 +2012,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 862688491}
-  - {fileID: 722661890}
   m_Father: {fileID: 1297720781}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2034,3 +2034,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eImage: {fileID: 862688492}
   hp: {fileID: 1330094569}
+  hpbg: {fileID: 722661891}
+  hpGameobject: {fileID: 862688490}
