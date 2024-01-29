@@ -12,13 +12,15 @@ public enum BeadType
     Dark
 }
 
-public class Bead : MonoBehaviour
+public class Bead : Singleton<Bead>
 {
     [SerializeField] private List<Sprite> sprite;
 
     public BeadType type; //종류
 
     public Vector2 clampVec2;   //이동 범위
+
+    Vector2 directionVector = Vector2.zero;
 
     Vector2 startPos = new();   //시작 위치(눌렀을 때)
     Vector2 endPos = new(); //끝 위치(놨을 때)
@@ -29,8 +31,6 @@ public class Bead : MonoBehaviour
 
     [HideInInspector] public bool isMatched;  //물약이 보드 안에 있는지 확인
 
-    string direction;   //구슬이 이동한 방향
-    
     //------------------------------------
     [HideInInspector] public int xIndex;  //보드의 x좌표
     [HideInInspector] public int yIndex;  //보드의 y좌표
@@ -72,13 +72,13 @@ public class Bead : MonoBehaviour
                         && (vec - startPos).normalized.y < 0.5f))
                     {
                         target.transform.localPosition = new Vector2(vec.x, startPos.y);   //transform.position.y
-                        direction = "right";
+                        directionVector = Vector2.right;
                     }
                     else if ((vec - startPos).normalized.x < 0 && ((vec - startPos).normalized.y > -0.5f    //왼쪽
                         && (vec - startPos).normalized.y < 0.5f))
                     {
                         target.transform.localPosition = new Vector2(vec.x, startPos.y);
-                        direction = "left";
+                        directionVector = Vector2.left;
                     }
                 }
 
@@ -88,13 +88,13 @@ public class Bead : MonoBehaviour
                         && (vec - startPos).normalized.x < 0.5f))
                     {
                         target.transform.localPosition = new Vector2(startPos.x, vec.y); //transform.position.x
-                        direction = "up";
+                        directionVector = Vector2.up;
                     }
                     else if ((vec - startPos).normalized.y < 0 && ((vec - startPos).normalized.x > -0.5f    // 아래
                         && (vec - startPos).normalized.x < 0.5f))
                     {
                         target.transform.localPosition = new Vector2(startPos.x, vec.y);
-                        direction = "down";
+                        directionVector = Vector2.down;
                     }
                 }
             }
@@ -110,15 +110,9 @@ public class Bead : MonoBehaviour
 
             if (distanceX > 0.7f || distanceY > 0.7f)
             {
-                /*
-                PotionBoard.Instance.SetBeadSprite(direction);
+                //PotionBoard.Instance.SetBeadSprite(direction);
 
-                if (PotionBoard.Instance.CheckBoard(false) == true)
-                {
-                    Debug.Log("test");
-                }
-                */
-                BoardManager.Instance.ChangeBead();
+                BoardManager.Instance.ChangeBead(directionVector);
                 BoardManager.Instance.BeadBoradCheck();
             }
 
@@ -147,7 +141,7 @@ public class Bead : MonoBehaviour
         return Physics2D.Raycast(ray.origin, ray.direction);
     }
 
-    public void SetBead()
+    public void SetBead()   //랜덤으로 type(sprite) 정해주기
     {
         type = (BeadType)Random.Range(0, (int)BeadType.Dark + 1);
         GetComponent<SpriteRenderer>().sprite = sprite[(int)type];

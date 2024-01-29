@@ -449,72 +449,47 @@ public class PotionBoard : MonoBehaviour
 
 
     #region 구슬 교환
-    public Bead SetBeadSprite(string direction)
+    public Bead SetBeadSprite(Vector2 directionVector)
     {
-        /*
+        
         // 이동한 방향에 있는 게임 오브젝트의 스프라이트 가져오기
-        GameObject targetObject = GetTargetObjectInDirection(direction);
+        GameObject targetObject = GetTargetObjectInDirection(directionVector);
 
         if (targetObject != null)
         {
             Sprite targetSprite = targetObject.GetComponent<SpriteRenderer>().sprite;
-            BeadType targetBeadType = targetObject.GetComponent<Bead>().beadType;
+            BeadType targetBeadType = targetObject.GetComponent<Bead>().type;
 
             //스프라이트 변경
-            //targetObject.GetComponent<SpriteRenderer>().sprite = Bead.Instance.target.GetComponent<SpriteRenderer>().sprite;
-            //Bead.Instance.target.GetComponent<SpriteRenderer>().sprite = targetSprite;
+            targetObject.GetComponent<SpriteRenderer>().sprite = Bead.Instance.target.GetComponent<SpriteRenderer>().sprite;
+            Bead.Instance.target.GetComponent<SpriteRenderer>().sprite = targetSprite;
 
             //포션 타입 변경
-            //targetObject.GetComponent<Bead>().beadType = Bead.Instance.target.GetComponent<Bead>().beadType;
-            //Bead.Instance.target.GetComponent<Bead>().beadType = targetBeadType;
-
-            //if문으로 둘이 바꿀 수 있는지 확인 하고 못 바꾸면 다시 바꿔줌(0.2초 뒤에 바꿔줌 IEnumerator 사용)
+            targetObject.GetComponent<Bead>().type = Bead.Instance.target.GetComponent<Bead>().type;
+            Bead.Instance.target.GetComponent<Bead>().type = targetBeadType;
         }
-        */
+        
         return null;
     }
 
-    private GameObject GetTargetObjectInDirection(string direction)
+    private GameObject GetTargetObjectInDirection(Vector2 directionVector)
     {
-        // 이동한 방향에 따라 탐색할 방향 벡터 설정
-        Vector2 directionVector = Vector2.zero;
-        switch (direction)
-        {
-            case "right":
-                directionVector = Vector2.right;
-                break;
-            case "left":
-                directionVector = Vector2.left;
-                break;
-            case "up":
-                directionVector = Vector2.up;
-                break;
-            case "down":
-                directionVector = Vector2.down;
-                break;
-        }
-
         // 이동한 방향에 있는 게임 오브젝트 탐색
-        /*
         Vector2 startPosition = Bead.Instance.target.transform.position;
-        Vector2 _direction = directionVector.normalized;
 
         float raycastDistance = 1f; // 레이캐스트의 최대 거리 설정
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, _direction, raycastDistance);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, directionVector.normalized, raycastDistance);
         
         foreach (RaycastHit2D hit in hits)
         {
-            
             if (hit.collider.gameObject != Bead.Instance.target.gameObject)
             {
                 GameObject targetObject = hit.collider.gameObject;
-                Debug.Log(targetObject.GetComponent<Bead>().beadType);
                 return targetObject;
             }
             
         }
-        */
         return null;    //게임 오브젝트를 찾지 못 했을 때 null를 반환
     }
     #endregion

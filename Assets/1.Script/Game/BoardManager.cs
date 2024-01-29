@@ -24,12 +24,6 @@ public class BoardManager : Singleton<BoardManager>
         CreateBead();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void CreateBeadBG()
     {
         for (int y = 0; y < height; y++)
@@ -75,7 +69,8 @@ public class BoardManager : Singleton<BoardManager>
     /// </summary>
     public void BeadBoradCheck()
     {
-        List<List<bool>> check = new List<List<bool>>(); 
+        List<List<bool>> check = new List<List<bool>>();
+
         for (int i = 0; i < beads.Count; i++)
         {
             check.Add(new List<bool>());
@@ -85,6 +80,7 @@ public class BoardManager : Singleton<BoardManager>
                 BeadType bType = beads[i][j].type;
                 if (bType == beads[i][j + 1].type)
                 {
+                    Debug.Log("test");
                     checkCnt++;
                 }
                 else
@@ -101,11 +97,47 @@ public class BoardManager : Singleton<BoardManager>
         }
     }
 
-    /// <summary>
-    /// 구슬 바꾸기
-    /// </summary>
-    public void ChangeBead()
+    #region 구슬 교환
+    public Bead ChangeBead(Vector2 directionVector)
     {
-        
+        // 이동한 방향에 있는 게임 오브젝트 가져오기
+        GameObject targetObject = GetTargetObjectInDirection(directionVector);
+
+        if (targetObject != null)
+        {
+            Sprite targetSprite = targetObject.GetComponent<SpriteRenderer>().sprite;
+            BeadType targetBeadType = targetObject.GetComponent<Bead>().type;
+
+            //스프라이트 변경
+            targetObject.GetComponent<SpriteRenderer>().sprite = Bead.Instance.target.GetComponent<SpriteRenderer>().sprite;
+            Bead.Instance.target.GetComponent<SpriteRenderer>().sprite = targetSprite;
+
+            //타입 변경
+            targetObject.GetComponent<Bead>().type = Bead.Instance.target.GetComponent<Bead>().type;
+            Bead.Instance.target.GetComponent<Bead>().type = targetBeadType;
+        }
+
+        return null;
     }
+
+    private GameObject GetTargetObjectInDirection(Vector2 directionVector)
+    {
+        Vector2 startPosition = Bead.Instance.target.transform.position;
+
+        float raycastDistance = 1f; // 레이캐스트의 최대 거리 설정
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, directionVector.normalized, raycastDistance);
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider.gameObject != Bead.Instance.target.gameObject)
+            {
+                GameObject targetObject = hit.collider.gameObject;
+                return targetObject;
+            }
+
+        }
+        return null;    //게임 오브젝트를 찾지 못 했을 때 null를 반환
+    }
+    #endregion
 }
