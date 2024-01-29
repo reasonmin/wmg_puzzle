@@ -2,14 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 using TMPro;
+
+[System.Serializable]
+public class Item
+{
+    public int gold;
+    public int silver;
+    public int bronze;
+}
+
+[System.Serializable]
+public class GameStartPanel
+{
+    public GameObject Panel;
+    public TMP_Text Title_Text;
+    public ItemButton gold;
+    public ItemButton silver;
+    public ItemButton bronze;
+}
+
+[System.Serializable]
+public class ChapterData
+{
+    public List<int> stageDatas;
+    public ChapterData(List<int> _stageData)
+    {
+        stageDatas = _stageData;
+    }
+}
 
 public class MainManager : MonoBehaviour
 {
     public static MainManager instance;
 
-    [SerializeField] private List<ChapterBoard> chapterBoards;
+    public List<ChapterBoard> chapterBoards;
     [SerializeField] private Image StarImage;
     [SerializeField] private Image LockStageButtonImage;
 
@@ -29,11 +56,8 @@ public class MainManager : MonoBehaviour
     [SerializeField] private GameObject StoreView;
 
     [SerializeField] private GameStartPanel gameStartPanel;
-    [SerializeField] private ItemButtons itemButtons;
 
     [SerializeField] private RectTransform rTransform;
-
-    public PlayerData playerData;
 
     private void Awake()
     {
@@ -44,14 +68,12 @@ public class MainManager : MonoBehaviour
     void Start()
     {
         if (SceneChange.instance.y > 0)
-        {
             rTransform.anchoredPosition = new Vector2(0, SceneChange.instance.y);
-        }
 
         gameStartPanel.Panel.SetActive(false);
 
-        ResetJson();
-        LoadJson();// Player 정보 불러오기
+        PlayerDataManager.instance.ResetJson();
+        PlayerDataManager.instance.LoadJson();// Player 정보 불러오기
 
         SetStageButton();// 불러온 정보로 스테이지 버튼 세팅
         SetVolume();// 음향 세팅
@@ -60,52 +82,15 @@ public class MainManager : MonoBehaviour
         OnStageView();// 뷰를 스테이지 뷰로 설정
     }
 
-    private void LoadJson() //불러오기
-    {
-        string filePath = "Assets/Main/3.Data/PlayerData.json";
-        string json = File.ReadAllText(filePath);
-
-        playerData = JsonUtility.FromJson<PlayerData>(json);
-    }
-
-    private void SaveJson() //저장
-    {
-        string filePath = "Assets/Main/3.Data/PlayerData.json";
-        string json = JsonUtility.ToJson(playerData, true);
-
-        File.WriteAllText(filePath, json);
-    }
-
-    private void ResetJson() //초기화
-    {
-        List<ChapterData> chapterData = new List<ChapterData>();
-        List<int> li = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-        for (int i = 0; i < chapterBoards.Count; i++)
-            chapterData.Add(new ChapterData(li));
-
-        Item items = new Item();
-        items.gold = 0;
-        items.silver = 0;
-        items.bronze = 0;
-
-        playerData = new PlayerData(chapterData, items);
-
-        string filePath = "Assets/Main/3.Data/PlayerData.json";
-        string json = JsonUtility.ToJson(playerData, true);
-
-        File.WriteAllText(filePath, json);
-    }
-
     private void SetVolume()
     {
-        if (playerData.isMusic)
-            MusicSlider.value = playerData.musicVolume;
-        if (playerData.isMusic)
-            SoundEffectSlider.value = playerData.soundEffectVolume;
+        if (PlayerDataManager.instance.playerData.isMusic)
+            MusicSlider.value = PlayerDataManager.instance.playerData.musicVolume;
+        if (PlayerDataManager.instance.playerData.isMusic)
+            SoundEffectSlider.value = PlayerDataManager.instance.playerData.soundEffectVolume;
 
-        MusicBanImage.SetActive(!playerData.isMusic);
-        SoundEffectBanImage.SetActive(!playerData.isSoundEffect);
+        MusicBanImage.SetActive(!PlayerDataManager.instance.playerData.isMusic);
+        SoundEffectBanImage.SetActive(!PlayerDataManager.instance.playerData.isSoundEffect);
     }
 
     private void SetStageButton()
@@ -117,7 +102,7 @@ public class MainManager : MonoBehaviour
             {
                 chapterBoards[i].stageButtons[j].stageNumText.text = (i + 1).ToString() + "-" + (j + 1).ToString();
 
-                for (int k = 0; k < playerData.chapterDatas[i].stageDatas[j]; k++)
+                for (int k = 0; k < PlayerDataManager.instance.playerData.chapterDatas[i].stageDatas[j]; k++)
                 {
                     chapterBoards[i].stageButtons[j].starImages[k].sprite = StarImage.sprite;
                 }
@@ -125,26 +110,26 @@ public class MainManager : MonoBehaviour
         }
 
         // 스테이지 해금
-        for (int i = 0; i < playerData.curChapter; i++)
-            for (int j = 0; j < playerData.curStage; j++)
+        for (int i = 0; i < PlayerDataManager.instance.playerData.curChapter; i++)
+            for (int j = 0; j < PlayerDataManager.instance.playerData.curStage; j++)
                 chapterBoards[i].stageButtons[j].gameObject.SetActive(true);
 
-        chapterBoards[playerData.curChapter - 1].stageButtons[playerData.curStage - 1].ButtonImage.sprite = LockStageButtonImage.sprite;
+        chapterBoards[PlayerDataManager.instance.playerData.curChapter - 1].stageButtons[PlayerDataManager.instance.playerData.curStage - 1].ButtonImage.sprite = LockStageButtonImage.sprite;
     }
 
     public void OnLanguageChange(int n)
     {
         switch (n)
         {
-            case (int)Language.English:
-                playerData.language = Language.English;
+            case (int)LanguageType.English:
+                PlayerDataManager.instance.playerData.language = LanguageType.English;
                 break;
-            case (int)Language.Korean:
-                playerData.language = Language.Korean;
+            case (int)LanguageType.Korean:
+                PlayerDataManager.instance.playerData.language = LanguageType.Korean;
                 break;
         }
 
-        SaveJson();
+        PlayerDataManager.instance.SaveJson();
         //Debug.Log(playerData.language);
     }
 
@@ -153,7 +138,9 @@ public class MainManager : MonoBehaviour
     public void SetGameStartPanel(string stageNum)
     {
         gameStartPanel.Title_Text.text = stageNum;
-        itemButtons.bronze._Text.text = playerData.item.bronze.ToString();
+        gameStartPanel.bronze._Text.text = PlayerDataManager.instance.playerData.item.bronze.ToString();
+        gameStartPanel.silver._Text.text = PlayerDataManager.instance.playerData.item.silver.ToString();
+        gameStartPanel.gold._Text.text = PlayerDataManager.instance.playerData.item.gold.ToString();
 
         gameStartPanel.Panel.SetActive(true);
     }
@@ -174,50 +161,50 @@ public class MainManager : MonoBehaviour
     //-----------------------------------------------------
     public void OnMusicVolume()
     {
-        if (playerData.isMusic)
-            playerData.musicVolume = (int)MusicSlider.value;
+        if (PlayerDataManager.instance.playerData.isMusic)
+            PlayerDataManager.instance.playerData.musicVolume = (int)MusicSlider.value;
 
-        SaveJson();
-        Debug.Log(playerData.musicVolume);
+        PlayerDataManager.instance.SaveJson();
+        Debug.Log(PlayerDataManager.instance.playerData.musicVolume);
     }
 
     public void OnSoundEffectVolume()
     {
-        if (playerData.isMusic)
-            playerData.soundEffectVolume = (int)SoundEffectSlider.value;
+        if (PlayerDataManager.instance.playerData.isMusic)
+            PlayerDataManager.instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
-        SaveJson();
-        Debug.Log(playerData.soundEffectVolume);
+        PlayerDataManager.instance.SaveJson();
+        Debug.Log(PlayerDataManager.instance.playerData.soundEffectVolume);
     }
 
     public void OnMusic()
     {
-        playerData.isMusic = !playerData.isMusic;
+        PlayerDataManager.instance.playerData.isMusic = !PlayerDataManager.instance.playerData.isMusic;
 
-        if (!playerData.isMusic)
-            playerData.musicVolume = 0;
+        if (!PlayerDataManager.instance.playerData.isMusic)
+            PlayerDataManager.instance.playerData.musicVolume = 0;
         else
-            playerData.musicVolume = (int)MusicSlider.value;
+            PlayerDataManager.instance.playerData.musicVolume = (int)MusicSlider.value;
 
-        MusicBanImage.SetActive(!playerData.isMusic);
+        MusicBanImage.SetActive(!PlayerDataManager.instance.playerData.isMusic);
 
-        SaveJson();
-        Debug.Log(playerData.musicVolume);
+        PlayerDataManager.instance.SaveJson();
+        Debug.Log(PlayerDataManager.instance.playerData.musicVolume);
     }
 
     public void OnSoundEffect()
     {
-        playerData.isSoundEffect = !playerData.isSoundEffect;
+        PlayerDataManager.instance.playerData.isSoundEffect = !PlayerDataManager.instance.playerData.isSoundEffect;
 
-        if (!playerData.isSoundEffect)
-            playerData.soundEffectVolume = 0;
+        if (!PlayerDataManager.instance.playerData.isSoundEffect)
+            PlayerDataManager.instance.playerData.soundEffectVolume = 0;
         else
-            playerData.soundEffectVolume = (int)SoundEffectSlider.value;
+            PlayerDataManager.instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
-        SoundEffectBanImage.SetActive(!playerData.isSoundEffect);
+        SoundEffectBanImage.SetActive(!PlayerDataManager.instance.playerData.isSoundEffect);
 
-        SaveJson();
-        Debug.Log(playerData.soundEffectVolume);
+        PlayerDataManager.instance.SaveJson();
+        Debug.Log(PlayerDataManager.instance.playerData.soundEffectVolume);
     }
     //-----------------------------------------------------
 
@@ -285,85 +272,4 @@ public class MainManager : MonoBehaviour
         ResetView(StoreView);
     }
     //-----------------------------------------------------
-}
-
-public enum Language
-{
-    English,
-    Korean
-}
-
-[System.Serializable]
-public class Sentence
-{
-    public string English;
-    public string Korean;
-}
-
-[System.Serializable]
-public class GameStartPanel
-{
-    public GameObject Panel;
-    public TMP_Text Title_Text;
-}
-
-[System.Serializable]
-public class Item
-{
-    public int gold;
-    public int silver;
-    public int bronze;
-}
-
-[System.Serializable]
-public class ItemButtons
-{
-    public ItemButton gold;
-    public ItemButton silver;
-    public ItemButton bronze;
-}
-
-[System.Serializable]
-public class ChapterData
-{
-    public List<int> stageDatas;
-    public ChapterData(List<int> _stageData)
-    {
-        stageDatas = _stageData;
-    }
-}
-
-[System.Serializable]
-public class PlayerData
-{
-    public int gold;
-    public Item item;
-
-    public Language language;
-
-    public int musicVolume;
-    public int soundEffectVolume;
-    public bool isMusic;
-    public bool isSoundEffect;
-
-    public int curChapter;
-    public int curStage;
-    public List<ChapterData> chapterDatas = new();
-
-    public PlayerData(List<ChapterData> _chapterData, Item _item)
-    {
-        chapterDatas = _chapterData;
-        item = _item;
-
-        gold = 0;
-        language = Language.English;
-
-        musicVolume = 50;
-        soundEffectVolume = 50;
-        isMusic = true;
-        isSoundEffect = true;
-
-        curChapter = 1;
-        curStage = 1;
-    }
 }

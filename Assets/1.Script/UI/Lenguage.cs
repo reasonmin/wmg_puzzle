@@ -3,6 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+public enum LanguageType
+{
+    English,
+    Korean
+}
+
+[System.Serializable]
+public class Sentence
+{
+    public string English;
+    public string Korean;
+}
+
 public class Lenguage : MonoBehaviour
 {
     [SerializeField] private TMP_Text _Text;
@@ -11,12 +24,12 @@ public class Lenguage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (MainManager.instance.playerData.language)
+        switch (PlayerDataManager.instance.playerData.language)
         {
-            case Language.English:
+            case LanguageType.English:
                 _Text.text = sentence.English;
                 break;
-            case Language.Korean:
+            case LanguageType.Korean:
                 _Text.text = sentence.Korean;
                 break;
         }
