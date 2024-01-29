@@ -7,6 +7,10 @@ public class Monster : MonoBehaviour
 {
     [SerializeField] private Image eImage;
     [SerializeField] private Image hp;
+    [SerializeField] private Image hpbg;
+    [SerializeField] private GameObject hpGameobject;
+    //[SerializeField] private GameObject mon;
+    //[SerializeField] private Transform monParent;
 
     private float destroytimer = 0f;
     private float destroytime = 2f;
@@ -15,7 +19,7 @@ public class Monster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        originColor = eImage.color;
     }
 
     // Update is called once per frame
@@ -27,7 +31,12 @@ public class Monster : MonoBehaviour
             float desvalue = 1f - (destroytimer / destroytime);
             Color newColor = new(originColor.r, originColor.g, originColor.b, Mathf.Clamp01(desvalue));
             eImage.color = newColor;
-            hp.color = newColor;
+            hpbg.color = newColor;
+
+            if(newColor.a == 0f)
+            {
+                Destroy(hpGameobject);
+            }
         }
     }
 }
