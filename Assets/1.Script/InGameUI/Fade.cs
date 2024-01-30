@@ -3,26 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Monster : MonoBehaviour
+public class Fade : MonoBehaviour
 {
-    [SerializeField] private Image eImage;
+    [SerializeField] private SpriteRenderer[] es;
     [SerializeField] private Image hp;
     [SerializeField] private Image hpbg;
     [SerializeField] private GameObject hpGameobject;
-    //[SerializeField] private GameObject mon;
-    //[SerializeField] private Transform monParent;
 
     private float destroytimer = 0f;
     private float destroytime = 2f;
 
     private Color originColor;
-    // Start is called before the first frame update
+
     void Start()
     {
-        originColor = eImage.color;
+        originColor = es[1].color;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (hp.fillAmount == 0)
@@ -30,13 +27,17 @@ public class Monster : MonoBehaviour
             destroytimer += Time.deltaTime;
             float desvalue = 1f - (destroytimer / destroytime);
             Color newColor = new(originColor.r, originColor.g, originColor.b, Mathf.Clamp01(desvalue));
-            eImage.color = newColor;
+            for (int i = 0; i < 4; i++)
+            {
+                es[i].color = newColor;
+            }
             hpbg.color = newColor;
 
-            if(newColor.a == 0f)
+            if (newColor.a == 0f)
             {
                 Destroy(hpGameobject);
             }
+            
         }
     }
 }

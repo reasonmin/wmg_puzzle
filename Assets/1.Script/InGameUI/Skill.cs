@@ -58,6 +58,11 @@ public class Skill: MonoBehaviour
             hp.fillAmount = 1;
         }
         */
+
+        if (hp.fillAmount == 0)
+        {
+            gameObject.SetActive(false);
+        }
         
     }
 
