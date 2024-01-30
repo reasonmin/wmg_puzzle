@@ -17,7 +17,7 @@ public class BoardManager : Singleton<BoardManager>
     //private Node[,] beadBoard; //물약 보드(2차원 배열)
 
     private List<List<Bead>> beads = new List<List<Bead>>();
-    // Start is called before the first frame update
+
     void Start()
     {
         CreateBeadBG();
@@ -38,7 +38,6 @@ public class BoardManager : Singleton<BoardManager>
                     .transform.SetParent(transform);
             }
         }
-
         // 부모의 보드 위치 수정
         transform.position = new Vector2(-((width * (imageSizeX / 100f)) / 2), -((height * (imageSizeY / 120f)) / 2));
     }
@@ -54,14 +53,7 @@ public class BoardManager : Singleton<BoardManager>
             if(y != 0 && i % height == 0)
                 y++;
         }
-        /*
-        if (CheckBoard(false))
-        {
-            Debug.Log("일치하는 항목이 없습니다, 보드를 다시 만듬니다.");
-            potionParent.transform.position = Vector2.zero;
-            InitializeBoard();
-        }
-        */
+        //일차하는 항목이 있는지 확인 한 다음 없다면 다시 생성
     }
 
     /// <summary>
@@ -71,21 +63,20 @@ public class BoardManager : Singleton<BoardManager>
     {
         List<List<bool>> check = new List<List<bool>>();
 
-        for (int i = 0; i < beads.Count; i++)
+        for (int i = 0; i < beads.Count; i++)   //7
         {
             check.Add(new List<bool>());
             int checkCnt = 0;
-            for (int j = 0; j < beads[i].Count - 1; j++)
+            for (int j = 0; j < beads[i].Count - 1; j++)    //55
             {
                 BeadType bType = beads[i][j].type;
                 if (bType == beads[i][j + 1].type)
                 {
-                    Debug.Log("test");
                     checkCnt++;
                 }
                 else
                 {
-                    if(checkCnt >= 2)
+                    if(checkCnt >= 2)   //동일한 type을 가진 bead가 3개 이상 있다면 삭제
                     {
                         for (int delcnt = checkCnt; delcnt >= 0; delcnt--)
                         {
@@ -98,7 +89,7 @@ public class BoardManager : Singleton<BoardManager>
     }
 
     #region 구슬 교환
-    public Bead ChangeBead(Vector2 directionVector)
+    public Bead ChangeBead(Vector2 directionVector) //이 방법 말고 target의 beads를 갖고 오는게 더 효율적임
     {
         // 이동한 방향에 있는 게임 오브젝트 가져오기
         GameObject targetObject = GetTargetObjectInDirection(directionVector);
@@ -116,7 +107,6 @@ public class BoardManager : Singleton<BoardManager>
             targetObject.GetComponent<Bead>().type = Bead.Instance.target.GetComponent<Bead>().type;
             Bead.Instance.target.GetComponent<Bead>().type = targetBeadType;
         }
-
         return null;
     }
 
@@ -135,7 +125,6 @@ public class BoardManager : Singleton<BoardManager>
                 GameObject targetObject = hit.collider.gameObject;
                 return targetObject;
             }
-
         }
         return null;    //게임 오브젝트를 찾지 못 했을 때 null를 반환
     }

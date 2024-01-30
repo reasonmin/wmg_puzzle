@@ -27,8 +27,6 @@ public class Bead : Singleton<Bead>
 
     [HideInInspector] public Collider2D target = null; //내가 누른 구슬
 
-    [HideInInspector] public bool isMoving;  //구슬이 이동중인지 확인(true : 이동 중, false : 이동 중 아님)
-
     [HideInInspector] public bool isMatched;  //물약이 보드 안에 있는지 확인
 
     //------------------------------------
@@ -45,7 +43,6 @@ public class Bead : Singleton<Bead>
             {
                 target = GetHit2D().collider;
                 startPos = Vector2.zero;
-                isMoving = true;
             }
         }
 
@@ -65,17 +62,18 @@ public class Bead : Singleton<Bead>
                 float distanceY = Mathf.Abs(transform.localPosition.y - startPos.y);
 
                 vec = new Vector2(clampedX, clampedY);
+                Vector2 diff = vec - startPos;
 
                 if (distanceY < 0.3f)
                 {
-                    if ((vec - startPos).normalized.x > 0 && ((vec - startPos).normalized.y > -0.5f  //오른쪽
-                        && (vec - startPos).normalized.y < 0.5f))
+                    if (diff.normalized.x > 0 && (diff.normalized.y > -0.5f  //오른쪽
+                        && diff.normalized.y < 0.5f))
                     {
-                        target.transform.localPosition = new Vector2(vec.x, startPos.y);   //transform.position.y
+                        target.transform.localPosition = new Vector2(vec.x, startPos.y);
                         directionVector = Vector2.right;
                     }
-                    else if ((vec - startPos).normalized.x < 0 && ((vec - startPos).normalized.y > -0.5f    //왼쪽
-                        && (vec - startPos).normalized.y < 0.5f))
+                    else if (diff.normalized.x < 0 && (diff.normalized.y > -0.5f    //왼쪽
+                        && diff.normalized.y < 0.5f))
                     {
                         target.transform.localPosition = new Vector2(vec.x, startPos.y);
                         directionVector = Vector2.left;
@@ -84,14 +82,14 @@ public class Bead : Singleton<Bead>
 
                 if(distanceX < 0.3f)
                 {
-                    if ((vec - startPos).normalized.y > 0 && ((vec - startPos).normalized.x > -0.5f    //위쪽
-                        && (vec - startPos).normalized.x < 0.5f))
+                    if (diff.normalized.y > 0 && (diff.normalized.x > -0.5f    //위쪽
+                        && diff.normalized.x < 0.5f))
                     {
-                        target.transform.localPosition = new Vector2(startPos.x, vec.y); //transform.position.x
+                        target.transform.localPosition = new Vector2(startPos.x, vec.y);
                         directionVector = Vector2.up;
                     }
-                    else if ((vec - startPos).normalized.y < 0 && ((vec - startPos).normalized.x > -0.5f    // 아래
-                        && (vec - startPos).normalized.x < 0.5f))
+                    else if (diff.normalized.y < 0 && (diff.normalized.x > -0.5f    // 아래
+                        && diff.normalized.x < 0.5f))
                     {
                         target.transform.localPosition = new Vector2(startPos.x, vec.y);
                         directionVector = Vector2.down;
@@ -110,19 +108,13 @@ public class Bead : Singleton<Bead>
 
             if (distanceX > 0.7f || distanceY > 0.7f)
             {
-                //PotionBoard.Instance.SetBeadSprite(direction);
-
                 BoardManager.Instance.ChangeBead(directionVector);
-                BoardManager.Instance.BeadBoradCheck();
+                //BoardManager.Instance.BeadBoradCheck();
+                //일치하는 항목이 없다면 이동 한 구슬을 원 상태로 되돌리기
             }
 
             transform.localPosition = Vector2.zero;
-
-            isMoving = false;
-            if (!isMoving)
-            {
-                target = null;
-            }
+            target = null;
         }
     }
 

@@ -103,7 +103,6 @@ public class PotionBoard : MonoBehaviour
         }
     }
 
-
     public bool CheckBoard(bool _takeAction)    //일치하는 물약이 있는지 확인, 물약 제거(_takeAction = true : 제거, false : 제거 안 함)
     {
         bool hasMatched = false;
