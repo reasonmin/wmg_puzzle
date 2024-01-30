@@ -59,6 +59,8 @@ public class MainManager : MonoBehaviour
 
     [SerializeField] private RectTransform rTransform;
 
+    [SerializeField] private TMP_Text Coin_Text;
+
     private void Awake()
     {
         instance = this;
@@ -67,30 +69,36 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneChange.instance.y > 0)
-            rTransform.anchoredPosition = new Vector2(0, SceneChange.instance.y);
+        //if (SceneChange.instance.y > 0)
+        //    rTransform.anchoredPosition = new Vector2(0, SceneChange.instance.y);
 
         gameStartPanel.Panel.SetActive(false);
 
-        PlayerDataManager.instance.ResetJson();
-        PlayerDataManager.instance.LoadJson();// Player 정보 불러오기
+        Singleton<PlayerDataManager>.Instance.ResetJson();
+        Singleton<PlayerDataManager>.Instance.LoadJson();// Player 정보 불러오기
 
         SetStageButton();// 불러온 정보로 스테이지 버튼 세팅
         SetVolume();// 음향 세팅
+        SetCoin();// 코인 개수 세팅
 
         SettingPanel.SetActive(false);// 설정창 끄기
         OnStageView();// 뷰를 스테이지 뷰로 설정
     }
 
+    public void SetCoin()
+    {
+        Coin_Text.text = Singleton<PlayerDataManager>.Instance.playerData.coin.ToString();
+    }
+
     private void SetVolume()
     {
-        if (PlayerDataManager.instance.playerData.isMusic)
-            MusicSlider.value = PlayerDataManager.instance.playerData.musicVolume;
-        if (PlayerDataManager.instance.playerData.isMusic)
-            SoundEffectSlider.value = PlayerDataManager.instance.playerData.soundEffectVolume;
+        if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
+            MusicSlider.value = PlayerDataManager.Instance.playerData.musicVolume;
+        if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
+            SoundEffectSlider.value = Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume;
 
-        MusicBanImage.SetActive(!PlayerDataManager.instance.playerData.isMusic);
-        SoundEffectBanImage.SetActive(!PlayerDataManager.instance.playerData.isSoundEffect);
+        MusicBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isMusic);
+        SoundEffectBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect);
     }
 
     private void SetStageButton()
@@ -102,7 +110,7 @@ public class MainManager : MonoBehaviour
             {
                 chapterBoards[i].stageButtons[j].stageNumText.text = (i + 1).ToString() + "-" + (j + 1).ToString();
 
-                for (int k = 0; k < PlayerDataManager.instance.playerData.chapterDatas[i].stageDatas[j]; k++)
+                for (int k = 0; k < Singleton<PlayerDataManager>.Instance.playerData.chapterDatas[i].stageDatas[j]; k++)
                 {
                     chapterBoards[i].stageButtons[j].starImages[k].sprite = StarImage.sprite;
                 }
@@ -110,11 +118,11 @@ public class MainManager : MonoBehaviour
         }
 
         // 스테이지 해금
-        for (int i = 0; i < PlayerDataManager.instance.playerData.curChapter; i++)
-            for (int j = 0; j < PlayerDataManager.instance.playerData.curStage; j++)
+        for (int i = 0; i < Singleton<PlayerDataManager>.Instance.playerData.curChapter; i++)
+            for (int j = 0; j < Singleton<PlayerDataManager>.Instance.playerData.curStage; j++)
                 chapterBoards[i].stageButtons[j].gameObject.SetActive(true);
 
-        chapterBoards[PlayerDataManager.instance.playerData.curChapter - 1].stageButtons[PlayerDataManager.instance.playerData.curStage - 1].ButtonImage.sprite = LockStageButtonImage.sprite;
+        chapterBoards[Singleton<PlayerDataManager>.Instance.playerData.curChapter - 1].stageButtons[Singleton<PlayerDataManager>.Instance.playerData.curStage - 1].ButtonImage.sprite = LockStageButtonImage.sprite;
     }
 
     public void OnLanguageChange(int n)
@@ -122,14 +130,14 @@ public class MainManager : MonoBehaviour
         switch (n)
         {
             case (int)LanguageType.English:
-                PlayerDataManager.instance.playerData.language = LanguageType.English;
+                Singleton<PlayerDataManager>.Instance.playerData.language = LanguageType.English;
                 break;
             case (int)LanguageType.Korean:
-                PlayerDataManager.instance.playerData.language = LanguageType.Korean;
+                Singleton<PlayerDataManager>.Instance.playerData.language = LanguageType.Korean;
                 break;
         }
 
-        PlayerDataManager.instance.SaveJson();
+        Singleton<PlayerDataManager>.Instance.SaveJson();
         //Debug.Log(playerData.language);
     }
 
@@ -138,9 +146,9 @@ public class MainManager : MonoBehaviour
     public void SetGameStartPanel(string stageNum)
     {
         gameStartPanel.Title_Text.text = stageNum;
-        gameStartPanel.bronze._Text.text = PlayerDataManager.instance.playerData.item.bronze.ToString();
-        gameStartPanel.silver._Text.text = PlayerDataManager.instance.playerData.item.silver.ToString();
-        gameStartPanel.gold._Text.text = PlayerDataManager.instance.playerData.item.gold.ToString();
+        gameStartPanel.bronze._Text.text = Singleton<PlayerDataManager>.Instance.playerData.item.bronze.ToString();
+        gameStartPanel.silver._Text.text = Singleton<PlayerDataManager>.Instance.playerData.item.silver.ToString();
+        gameStartPanel.gold._Text.text = Singleton<PlayerDataManager>.Instance.playerData.item.gold.ToString();
 
         gameStartPanel.Panel.SetActive(true);
     }
@@ -161,50 +169,50 @@ public class MainManager : MonoBehaviour
     //-----------------------------------------------------
     public void OnMusicVolume()
     {
-        if (PlayerDataManager.instance.playerData.isMusic)
-            PlayerDataManager.instance.playerData.musicVolume = (int)MusicSlider.value;
+        if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
+            Singleton<PlayerDataManager>.Instance.playerData.musicVolume = (int)MusicSlider.value;
 
-        PlayerDataManager.instance.SaveJson();
-        Debug.Log(PlayerDataManager.instance.playerData.musicVolume);
+        Singleton<PlayerDataManager>.Instance.SaveJson();
+        Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.musicVolume);
     }
 
     public void OnSoundEffectVolume()
     {
-        if (PlayerDataManager.instance.playerData.isMusic)
-            PlayerDataManager.instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
+        if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
+            Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
-        PlayerDataManager.instance.SaveJson();
-        Debug.Log(PlayerDataManager.instance.playerData.soundEffectVolume);
+        Singleton<PlayerDataManager>.Instance.SaveJson();
+        Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume);
     }
 
     public void OnMusic()
     {
-        PlayerDataManager.instance.playerData.isMusic = !PlayerDataManager.instance.playerData.isMusic;
+        Singleton<PlayerDataManager>.Instance.playerData.isMusic = !Singleton<PlayerDataManager>.Instance.playerData.isMusic;
 
-        if (!PlayerDataManager.instance.playerData.isMusic)
-            PlayerDataManager.instance.playerData.musicVolume = 0;
+        if (!Singleton<PlayerDataManager>.Instance.playerData.isMusic)
+            Singleton<PlayerDataManager>.Instance.playerData.musicVolume = 0;
         else
-            PlayerDataManager.instance.playerData.musicVolume = (int)MusicSlider.value;
+            Singleton<PlayerDataManager>.Instance.playerData.musicVolume = (int)MusicSlider.value;
 
-        MusicBanImage.SetActive(!PlayerDataManager.instance.playerData.isMusic);
+        MusicBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isMusic);
 
-        PlayerDataManager.instance.SaveJson();
-        Debug.Log(PlayerDataManager.instance.playerData.musicVolume);
+        Singleton<PlayerDataManager>.Instance.SaveJson();
+        Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.musicVolume);
     }
 
     public void OnSoundEffect()
     {
-        PlayerDataManager.instance.playerData.isSoundEffect = !PlayerDataManager.instance.playerData.isSoundEffect;
+        Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect = !Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect;
 
-        if (!PlayerDataManager.instance.playerData.isSoundEffect)
-            PlayerDataManager.instance.playerData.soundEffectVolume = 0;
+        if (!Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect)
+            Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume = 0;
         else
-            PlayerDataManager.instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
+            Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
-        SoundEffectBanImage.SetActive(!PlayerDataManager.instance.playerData.isSoundEffect);
+        SoundEffectBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect);
 
-        PlayerDataManager.instance.SaveJson();
-        Debug.Log(PlayerDataManager.instance.playerData.soundEffectVolume);
+        Singleton<PlayerDataManager>.Instance.SaveJson();
+        Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume);
     }
     //-----------------------------------------------------
 

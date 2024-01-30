@@ -1,5 +1,5 @@
 {
-    "gold": 0,
+    "coin": 10,
     "item": {
         "gold": 0,
         "silver": 0,
@@ -11,7 +11,7 @@
     "isMusic": true,
     "isSoundEffect": true,
     "curChapter": 1,
-    "curStage": 1,
+    "curStage": 10,
     "chapterDatas": [
         {
             "stageDatas": [

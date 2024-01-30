@@ -6,7 +6,7 @@ using System.IO;
 [System.Serializable]
 public class PlayerData
 {
-    public int gold;
+    public int coin;
     public Item item;
 
     public LanguageType language;
@@ -25,7 +25,7 @@ public class PlayerData
         chapterDatas = _chapterData;
         item = _item;
 
-        gold = 0;
+        coin = 10;
         language = LanguageType.English;
 
         musicVolume = 50;
@@ -34,23 +34,12 @@ public class PlayerData
         isSoundEffect = true;
 
         curChapter = 1;
-        curStage = 1;
+        curStage = 10;
     }
 }
 
-public class PlayerDataManager : MonoBehaviour
+public class PlayerDataManager : Singleton<PlayerDataManager>
 {
-    public static PlayerDataManager instance;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
-    }
-
     public PlayerData playerData;
     private string filePath = "Assets/8.Data/PlayerData.json";
 
