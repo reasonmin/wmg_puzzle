@@ -8,6 +8,7 @@ public class Skill: MonoBehaviour
     [SerializeField] private Image fillImage;
     [SerializeField] private Button fillButton;
     [SerializeField] private Image hp;
+    [SerializeField] private Skill skillCs;
     [SerializeField] private KeyCode key;
 
     private float fillTime = 2f;
@@ -61,7 +62,7 @@ public class Skill: MonoBehaviour
 
         if (hp.fillAmount == 0)
         {
-            gameObject.SetActive(false);
+            skillCs.enabled = false;
         }
         
     }

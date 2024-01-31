@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Fade : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer[] es;
+    [SerializeField] private Animator eAni;
     [SerializeField] private Image hp;
     [SerializeField] private Image hpbg;
     [SerializeField] private GameObject hpGameobject;
@@ -31,6 +32,7 @@ public class Fade : MonoBehaviour
             {
                 es[i].color = newColor;
             }
+            eAni.enabled = false;
             hpbg.color = newColor;
 
             if (newColor.a == 0f)
