@@ -111,11 +111,12 @@ public class BoardManager : Singleton<BoardManager>
     {
         List<List<bool>> check = new List<List<bool>>();
 
-        for (int i = 0; i < beads.Count; i++)   //7
+        // 가로 방향 계산
+        for (int i = 0; i < beads.Count; i++)
         {
             check.Add(new List<bool>());
             int checkCnt = 0;
-            for (int j = 0; j < beads[i].Count - 1; j++)    //55
+            for (int j = 0; j < beads[i].Count - 1; j++)
             {
                 BeadType bType = beads[i][j].type;
                 if (bType == beads[i][j + 1].type)
@@ -124,12 +125,36 @@ public class BoardManager : Singleton<BoardManager>
                 }
                 else
                 {
-                    if(checkCnt >= 2)   //동일한 type을 가진 bead가 3개 이상 있다면 삭제
+                    if (checkCnt >= 2)
                     {
-                        for (int delcnt = j; delcnt >= j-checkCnt; delcnt--)
+                        for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
-                            //Debug.Log("Destroy");
                             Destroy(beads[i][delcnt].gameObject);
+                        }
+                    }
+                    checkCnt = 0;
+                }
+            }
+        }
+
+        // 세로 방향 계산
+        for (int j = 0; j < beads[0].Count; j++)
+        {
+            int checkCnt = 0;
+            for (int i = 0; i < beads.Count - 1; i++)
+            {
+                BeadType bType = beads[i][j].type;
+                if (bType == beads[i + 1][j].type)
+                {
+                    checkCnt++;
+                }
+                else
+                {
+                    if (checkCnt >= 2)
+                    {
+                        for (int delcnt = i; delcnt >= i - checkCnt; delcnt--)
+                        {
+                            Destroy(beads[delcnt][j].gameObject);
                         }
                     }
                     checkCnt = 0;
@@ -159,6 +184,7 @@ public class BoardManager : Singleton<BoardManager>
 
         if(findBead != null)
         {
+            Destroy(findBead);
             Sprite targetSprite = findBead.GetComponent<SpriteRenderer>().sprite;
             BeadType targetBeadType = findBead.GetComponent<Bead>().type;
 
