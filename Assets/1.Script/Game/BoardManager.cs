@@ -22,8 +22,53 @@ public class BoardManager : Singleton<BoardManager>
     {
         CreateBeadBG();
         CreateBead();
+        //StartCoroutine(Test());
     }
 
+    IEnumerator Test()
+    {
+        yield return TestSimulation();
+        yield return TestSimulation2();
+    }
+
+    IEnumerator TestSimulation()
+    {
+        for (int y = 0; y < height; y++)
+        {
+            beads.Add(new List<Bead>());
+            for (int x = 0; x < width; x++)
+            {
+                Vector2 position = new Vector2(x * ((imageSizeX / 100f)), y * ((imageSizeY / 100f))); //구슬이 생성될 위치
+
+                // 구슬 배경 미리 생성
+                Instantiate(beadBG, position, Quaternion.identity)
+                    .transform.SetParent(transform);
+
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+        // 부모의 보드 위치 수정
+        transform.position = new Vector2(-((width * (imageSizeX / 100f)) / 2), -((height * (imageSizeY / 120f)) / 2));
+    }
+
+    IEnumerator TestSimulation2()
+    {
+        int y = 0;
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Bead b = Instantiate(bead, transform.GetChild(i));
+            b.SetBead();
+            beads[y].Add(b);
+            if (y != 0 && i % height == 0)
+                y++;
+
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    /// <summary>
+    /// 구슬의 부모생성...
+    /// </summary>
     void CreateBeadBG()
     {
         for (int y = 0; y < height; y++)
@@ -42,6 +87,9 @@ public class BoardManager : Singleton<BoardManager>
         transform.position = new Vector2(-((width * (imageSizeX / 100f)) / 2), -((height * (imageSizeY / 120f)) / 2));
     }
 
+    /// <summary>
+    /// 각자 구슬 생성
+    /// </summary>
     void CreateBead()  //물약 생성
     {
         int y = 0;
@@ -78,21 +126,56 @@ public class BoardManager : Singleton<BoardManager>
                 {
                     if(checkCnt >= 2)   //동일한 type을 가진 bead가 3개 이상 있다면 삭제
                     {
-                        for (int delcnt = checkCnt; delcnt >= 0; delcnt--)
+                        for (int delcnt = j; delcnt >= j-checkCnt; delcnt--)
                         {
-                            Destroy(beads[i][j].gameObject);
+                            //Debug.Log("Destroy");
+                            Destroy(beads[i][delcnt].gameObject);
                         }
                     }
+                    checkCnt = 0;
                 }
             }
         }
     }
 
     #region 구슬 교환
-    public Bead ChangeBead(Vector2 directionVector) //이 방법 말고 target의 beads를 갖고 오는게 더 효율적임
+
+    public void TargetBead(Bead b)
+    {
+        Bead findBead = null;
+        foreach (var yBead in beads)
+        {
+            foreach (var xBead in yBead)
+            {
+                if(xBead.Equals(b))
+                {
+                    findBead = xBead;
+                    break;
+                }
+            }
+            if (findBead != null)
+                break;
+        }
+
+        if(findBead != null)
+        {
+            Sprite targetSprite = findBead.GetComponent<SpriteRenderer>().sprite;
+            BeadType targetBeadType = findBead.GetComponent<Bead>().type;
+
+            //스프라이트 변경
+            findBead.GetComponent<SpriteRenderer>().sprite = Bead.Instance.target.GetComponent<SpriteRenderer>().sprite;
+            Bead.Instance.target.GetComponent<SpriteRenderer>().sprite = targetSprite;
+
+            //타입 변경
+            findBead.GetComponent<Bead>().type = Bead.Instance.target.GetComponent<Bead>().type;
+            Bead.Instance.target.GetComponent<Bead>().type = targetBeadType;
+        }
+    }
+
+    public Bead ChangeBead(Vector2 directionVector) //target의 beads를 갖고 오는게 더 효율적임
     {
         // 이동한 방향에 있는 게임 오브젝트 가져오기
-        GameObject targetObject = GetTargetObjectInDirection(directionVector);
+        GameObject targetObject = GetTargetObjectDirection(directionVector);
 
         if (targetObject != null)
         {
@@ -110,7 +193,7 @@ public class BoardManager : Singleton<BoardManager>
         return null;
     }
 
-    private GameObject GetTargetObjectInDirection(Vector2 directionVector)
+    private GameObject GetTargetObjectDirection(Vector2 directionVector)
     {
         Vector2 startPosition = Bead.Instance.target.transform.position;
 
