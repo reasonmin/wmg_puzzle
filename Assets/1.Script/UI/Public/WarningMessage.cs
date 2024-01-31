@@ -19,7 +19,6 @@ public class WarningMessage : MonoBehaviour
 
     public void Act()
     {
-        StopAllCoroutines();
         StartCoroutine(Acting());
     }
 
