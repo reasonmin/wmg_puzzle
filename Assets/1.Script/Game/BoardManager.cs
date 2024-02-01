@@ -111,7 +111,7 @@ public class BoardManager : Singleton<BoardManager>
     {
         List<List<bool>> check = new List<List<bool>>();
 
-        for (int i = 0; i < beads.Count; i++)
+        /*for (int i = 0; i < beads.Count; i++)
         {
             check.Add(new List<bool>());
             int checkCnt = 0;
@@ -135,32 +135,32 @@ public class BoardManager : Singleton<BoardManager>
                     checkCnt = 0;
                 }
             }
-        }
+        }*/
 
-        //// 세로 방향 계산
-        //for (int j = 0; j < beads[0].Count; j++)
-        //{
-        //    int checkCnt = 0;
-        //    for (int i = 0; i < beads.Count - 1; i++)
-        //    {
-        //        BeadType bType = beads[i][j].type;
-        //        if (bType == beads[i + 1][j].type)
-        //        {
-        //            checkCnt++;
-        //        }
-        //        else
-        //        {
-        //            if (checkCnt >= 2)
-        //            {
-        //                for (int delcnt = i; delcnt >= i - checkCnt; delcnt--)
-        //                {
-        //                    Destroy(beads[delcnt][j].gameObject);
-        //                }
-        //            }
-        //            checkCnt = 0;
-        //        }
-        //    }
-        //}
+        // 세로 방향 계산
+        for (int j = 0; j < beads[0].Count; j++)
+        {
+            int checkCnt = 0;
+            for (int i = 0; i < beads.Count; i++)
+            {
+                BeadType bType = beads[i][j].type;
+                if (i + 1 < beads.Count  && bType == beads[i + 1][j].type)
+                {
+                    checkCnt++;
+                }
+                else
+                {
+                    if (checkCnt >= 2)
+                    {
+                        for (int delcnt = i; delcnt >= i - checkCnt; delcnt--)
+                        {
+                            Destroy(beads[delcnt][j].gameObject);
+                        }
+                    }
+                    checkCnt = 0;
+                }
+            }
+        }
     }
 
     #region 구슬 교환
