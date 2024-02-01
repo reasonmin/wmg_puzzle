@@ -98,7 +98,7 @@ public class BoardManager : Singleton<BoardManager>
             Bead b = Instantiate(bead, transform.GetChild(i));
             b.SetBead();
             beads[y].Add(b);
-            if(y != 0 && i % height == 0)
+            if((i + 1) % width == 0)
                 y++;
         }
         //일차하는 항목이 있는지 확인 한 다음 없다면 다시 생성
