@@ -22,48 +22,6 @@ public class BoardManager : Singleton<BoardManager>
     {
         CreateBeadBG();
         CreateBead();
-        //StartCoroutine(Test());
-    }
-
-    IEnumerator Test()
-    {
-        yield return TestSimulation();
-        yield return TestSimulation2();
-    }
-
-    IEnumerator TestSimulation()
-    {
-        for (int y = 0; y < height; y++)
-        {
-            beads.Add(new List<Bead>());
-            for (int x = 0; x < width; x++)
-            {
-                Vector2 position = new Vector2(x * ((imageSizeX / 100f)), y * ((imageSizeY / 100f))); //구슬이 생성될 위치
-
-                // 구슬 배경 미리 생성
-                Instantiate(beadBG, position, Quaternion.identity)
-                    .transform.SetParent(transform);
-
-                yield return new WaitForSeconds(0.5f);
-            }
-        }
-        // 부모의 보드 위치 수정
-        transform.position = new Vector2(-((width * (imageSizeX / 100f)) / 2), -((height * (imageSizeY / 120f)) / 2));
-    }
-
-    IEnumerator TestSimulation2()
-    {
-        int y = 0;
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            Bead b = Instantiate(bead, transform.GetChild(i));
-            b.SetBead();
-            beads[y].Add(b);
-            if (y != 0 && i % height == 0)
-                y++;
-
-            yield return new WaitForSeconds(0.5f);
-        }
     }
 
     /// <summary>
@@ -111,7 +69,7 @@ public class BoardManager : Singleton<BoardManager>
     {
         List<List<bool>> check = new List<List<bool>>();
 
-        /*for (int i = 0; i < beads.Count; i++)
+        for (int i = 0; i < beads.Count; i++)
         {
             check.Add(new List<bool>());
             int checkCnt = 0;
@@ -119,7 +77,7 @@ public class BoardManager : Singleton<BoardManager>
             for (int j = 0; j < beads[i].Count; j++)
             {
                 BeadType bType = beads[i][j].type;
-                if (j + 1 <  beads[i].Count &&  bType == beads[i][j + 1].type)
+                if (j + 1 < beads[i].Count && bType == beads[i][j + 1].type)
                 {
                     checkCnt++;
                 }
@@ -135,7 +93,7 @@ public class BoardManager : Singleton<BoardManager>
                     checkCnt = 0;
                 }
             }
-        }*/
+        }
 
         // 세로 방향 계산
         for (int j = 0; j < beads[0].Count; j++)
