@@ -76,6 +76,7 @@ public class BoardManager : Singleton<BoardManager>
 
             for (int j = 0; j < beads[i].Count; j++)
             {
+                check[i].Add(false);
                 BeadType bType = beads[i][j].type;
                 if (j + 1 < beads[i].Count && bType == beads[i][j + 1].type)
                 {
@@ -87,7 +88,7 @@ public class BoardManager : Singleton<BoardManager>
                     {
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
-                            Destroy(beads[i][delcnt].gameObject);
+                            check[i][delcnt] = true;
                         }
                     }
                     checkCnt = 0;
@@ -95,7 +96,7 @@ public class BoardManager : Singleton<BoardManager>
             }
         }
 
-        // 세로 방향 계산
+        /*// 세로 방향 계산
         for (int j = 0; j < beads[0].Count; j++)
         {
             int checkCnt = 0;
@@ -117,6 +118,19 @@ public class BoardManager : Singleton<BoardManager>
                     }
                     checkCnt = 0;
                 }
+            }
+        }*/
+
+        for (int i = 0; i < check.Count; i++)
+        {
+            for (int j = 0; j < check[i].Count; j++)
+            {
+                if (check[i][j])
+                {
+                    Destroy(beads[i][j].gameObject);
+                    beads[i][j] = null;
+                }
+                // Debug.Log(beads[i][j] + ", " + check[i][j] + ", " + i + ", " + j);
             }
         }
     }
