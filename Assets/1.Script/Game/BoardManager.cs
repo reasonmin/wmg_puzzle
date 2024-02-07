@@ -14,8 +14,6 @@ public class BoardManager : Singleton<BoardManager>
     [SerializeField] private GameObject beadBG;
     [SerializeField] private Bead bead;
 
-    //private Node[,] beadBoard; //물약 보드(2차원 배열)
-
     private List<List<Bead>> beads = new List<List<Bead>>();
 
     void Start()
@@ -34,7 +32,7 @@ public class BoardManager : Singleton<BoardManager>
             beads.Add(new List<Bead>());
             for (int x = 0; x < width; x++)
             {
-                Vector2 position = new Vector2(x * ((imageSizeX / 100f)), y * ((imageSizeY / 100f))); //구슬이 생성될 위치
+                Vector2 position = new Vector2(x * ((imageSizeX / 100f)), -(y * ((imageSizeY / 100f)))); //구슬이 생성될 위치
 
                 // 구슬 배경 미리 생성
                 Instantiate(beadBG, position, Quaternion.identity)
@@ -42,7 +40,7 @@ public class BoardManager : Singleton<BoardManager>
             }
         }
         // 부모의 보드 위치 수정
-        transform.position = new Vector2(-((width * (imageSizeX / 100f)) / 2), -((height * (imageSizeY / 120f)) / 2));
+        transform.position = new Vector2(-3.95f, 1);
     }
 
     /// <summary>
@@ -54,7 +52,7 @@ public class BoardManager : Singleton<BoardManager>
         for (int i = 0; i < transform.childCount; i++)
         {
             Bead b = Instantiate(bead, transform.GetChild(i));
-            b.SetBead();
+            b.SetBead(Random.Range(0, (int)BeadType.Dark + 1));
             beads[y].Add(b);
             if((i + 1) % width == 0)
                 y++;
@@ -72,13 +70,20 @@ public class BoardManager : Singleton<BoardManager>
         for (int i = 0; i < beads.Count; i++)
         {
             check.Add(new List<bool>());
-            int checkCnt = 0;
-
             for (int j = 0; j < beads[i].Count; j++)
             {
                 check[i].Add(false);
-                BeadType bType = beads[i][j].type;
-                if (j + 1 < beads[i].Count && bType == beads[i][j + 1].type)
+            }
+        }
+
+        // 가로 체크
+        for (int i = 0; i < beads.Count; i++)
+        {
+            int checkCnt = 0;
+            for (int j = 0; j < beads[i].Count; j++)
+            {
+                BeadType bType = beads[i][j].Type;
+                if (j + 1 < beads[i].Count && bType == beads[i][j + 1].Type)
                 {
                     checkCnt++;
                 }
@@ -96,14 +101,14 @@ public class BoardManager : Singleton<BoardManager>
             }
         }
 
-        /*// 세로 방향 계산
-        for (int j = 0; j < beads[0].Count; j++)
+        // 세로 체크
+        for (int i = 0; i < width; i++) // 8
         {
             int checkCnt = 0;
-            for (int i = 0; i < beads.Count; i++)
+            for (int j = 0; j < height - 1; j++)
             {
-                BeadType bType = beads[i][j].type;
-                if (i + 1 < beads.Count  && bType == beads[i + 1][j].type)
+                BeadType bType = beads[j][i].Type;
+                if (i + 1 < beads[j].Count && bType == beads[j + 1][i].Type)
                 {
                     checkCnt++;
                 }
@@ -111,62 +116,76 @@ public class BoardManager : Singleton<BoardManager>
                 {
                     if (checkCnt >= 2)
                     {
-                        for (int delcnt = i; delcnt >= i - checkCnt; delcnt--)
+                        for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
-                            Destroy(beads[delcnt][j].gameObject);
+                            check[delcnt][i] = true;
                         }
                     }
                     checkCnt = 0;
                 }
             }
-        }*/
-
+        }
+        // 체크된것 전부 비활성화
         for (int i = 0; i < check.Count; i++)
         {
             for (int j = 0; j < check[i].Count; j++)
             {
                 if (check[i][j])
                 {
-                    Destroy(beads[i][j].gameObject);
-                    beads[i][j] = null;
+                    //Destroy(beads[i][j].gameObject);
+                    beads[i][j].gameObject.SetActive(false);
                 }
-                // Debug.Log(beads[i][j] + ", " + check[i][j] + ", " + i + ", " + j);
             }
         }
+        BeadDown();
     }
 
     #region 구슬 교환
-
-    public void TargetBead(Bead b)
+    /// <summary>
+    /// 빈자리 구슬을 있는것과 데이터 교체
+    /// </summary>
+    void BeadDown()
     {
-        Bead findBead = null;
-        foreach (var yBead in beads)
+        bool isChange = false;
+        for (int i = 0; i < width; i++) // 8
         {
-            foreach (var xBead in yBead)
+            for (int j = 0; j < height - 1; j++)
             {
-                if(xBead.Equals(b))
+                if (beads[j][i].gameObject.activeInHierarchy == true &&
+                    beads[j + 1][i].gameObject.activeInHierarchy == false)
                 {
-                    findBead = xBead;
-                    break;
+                    // 속성 교체
+                    BeadType type = beads[j][i].Type;
+                    beads[j][i].Type = beads[j + 1][i].Type;
+                    beads[j + 1][i].Type = type;
+
+                    // 다음것은 켬, 내것은 끔
+                    beads[j][i].gameObject.SetActive(false);
+                    beads[j + 1][i].gameObject.SetActive(true);
+
+                    isChange = true;
                 }
             }
-            if (findBead != null)
-                break;
         }
 
-        if(findBead != null)
+        if (isChange == true)
         {
-            Destroy(findBead);
-            Sprite targetSprite = findBead.GetComponent<SpriteRenderer>().sprite;
-            BeadType targetBeadType = findBead.GetComponent<Bead>().type;
-
-            //스프라이트 변경
-            findBead.GetComponent<SpriteRenderer>().sprite = Bead.Instance.target.GetComponent<SpriteRenderer>().sprite;
-            Bead.Instance.target.GetComponent<SpriteRenderer>().sprite = targetSprite;
-
-            //타입 변경
-            findBead.GetComponent<Bead>().type = Bead.Instance.target.GetComponent<Bead>().type;
-            Bead.Instance.target.GetComponent<Bead>().type = targetBeadType;
+            BeadDown();
+        }
+        else
+        {
+            // 구슬 데이터 리플레쉬
+            for (int i = 0; i < width; i++) // 8
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    if (beads[j][i].gameObject.activeInHierarchy == false)
+                    {
+                        beads[j][i].gameObject.SetActive(true);
+                        beads[j][i].SetBead(Random.Range(0, (int)BeadType.Dark + 1));
+                    }
+                }
+            }
         }
     }
 
@@ -178,15 +197,15 @@ public class BoardManager : Singleton<BoardManager>
         if (targetObject != null)
         {
             Sprite targetSprite = targetObject.GetComponent<SpriteRenderer>().sprite;
-            BeadType targetBeadType = targetObject.GetComponent<Bead>().type;
+            BeadType targetBeadType = targetObject.GetComponent<Bead>().Type;
 
             //스프라이트 변경
             targetObject.GetComponent<SpriteRenderer>().sprite = Bead.Instance.target.GetComponent<SpriteRenderer>().sprite;
             Bead.Instance.target.GetComponent<SpriteRenderer>().sprite = targetSprite;
 
             //타입 변경
-            targetObject.GetComponent<Bead>().type = Bead.Instance.target.GetComponent<Bead>().type;
-            Bead.Instance.target.GetComponent<Bead>().type = targetBeadType;
+            targetObject.GetComponent<Bead>().Type = Bead.Instance.target.GetComponent<Bead>().Type;
+            Bead.Instance.target.GetComponent<Bead>().Type = targetBeadType;
         }
         return null;
     }

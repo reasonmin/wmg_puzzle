@@ -16,7 +16,17 @@ public class Bead : Singleton<Bead>
 {
     [SerializeField] private List<Sprite> sprite;
 
-    public BeadType type; //종류
+    // 종류
+    private BeadType type;
+    public BeadType Type
+    {
+        get { return type; }
+        set
+        {
+            type = value;
+            GetComponent<SpriteRenderer>().sprite = sprite[(int)type];
+        }
+    }
 
     public Vector2 clampVec2;   //이동 범위
 
@@ -108,7 +118,6 @@ public class Bead : Singleton<Bead>
 
             if (distanceX > 0.7f || distanceY > 0.7f)
             {
-                //BoardManager.Instance.TargetBead(this);
                 BoardManager.Instance.ChangeBead(directionVector);
                 BoardManager.Instance.BeadBoradCheck();
                 //일치하는 항목이 없다면 이동 한 구슬을 원 상태로 되돌리기
@@ -134,9 +143,9 @@ public class Bead : Singleton<Bead>
         return Physics2D.Raycast(ray.origin, ray.direction);
     }
 
-    public void SetBead()   //랜덤으로 type(sprite) 정해주기
+    public void SetBead(int rand)   //랜덤으로 type(sprite) 정해주기
     {
-        type = (BeadType)Random.Range(0, (int)BeadType.Dark + 1);
-        GetComponent<SpriteRenderer>().sprite = sprite[(int)type];
+        type = (BeadType)rand;
+        GetComponent<SpriteRenderer>().sprite = sprite[(int)Type];
     }
 }

@@ -457,15 +457,15 @@ public class PotionBoard : MonoBehaviour
         if (targetObject != null)
         {
             Sprite targetSprite = targetObject.GetComponent<SpriteRenderer>().sprite;
-            BeadType targetBeadType = targetObject.GetComponent<Bead>().type;
+            BeadType targetBeadType = targetObject.GetComponent<Bead>().Type;
 
             //스프라이트 변경
             targetObject.GetComponent<SpriteRenderer>().sprite = Bead.Instance.target.GetComponent<SpriteRenderer>().sprite;
             Bead.Instance.target.GetComponent<SpriteRenderer>().sprite = targetSprite;
 
             //포션 타입 변경
-            targetObject.GetComponent<Bead>().type = Bead.Instance.target.GetComponent<Bead>().type;
-            Bead.Instance.target.GetComponent<Bead>().type = targetBeadType;
+            targetObject.GetComponent<Bead>().Type = Bead.Instance.target.GetComponent<Bead>().Type;
+            Bead.Instance.target.GetComponent<Bead>().Type = targetBeadType;
         }
         
         return null;
