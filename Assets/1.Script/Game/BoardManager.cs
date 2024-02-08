@@ -23,7 +23,7 @@ public class BoardManager : Singleton<BoardManager>
     }
 
     /// <summary>
-    /// 구슬의 부모생성...
+    /// 구슬의 부모생성
     /// </summary>
     void CreateBeadBG()
     {
@@ -189,30 +189,62 @@ public class BoardManager : Singleton<BoardManager>
         }
     }
 
-    public Bead ChangeBead(Vector2 directionVector) //target의 beads를 갖고 오는게 더 효율적임
+    public void ChangeBead(Bead bead, Vector2 dir) //target의 beads를 갖고 오는게 더 효율적임
     {
-        // 이동한 방향에 있는 게임 오브젝트 가져오기
-        GameObject targetObject = GetTargetObjectDirection(directionVector);
-
-        if (targetObject != null)
+        int x = -1; 
+        int y = -1;
+        for (int i = 0; i < height; i++) //세로
         {
-            Sprite targetSprite = targetObject.GetComponent<SpriteRenderer>().sprite;
-            BeadType targetBeadType = targetObject.GetComponent<Bead>().Type;
+            for (int j = 0; j < width; j++) //가로
+            {
+                if(beads[j][i].Equals(bead) == true)
+                {
+                    x = j;
+                    y = i;
+                    Debug.Log($"x : {x}, y : {y}");
+                    break;
+                }
+            }
 
-            //스프라이트 변경
-            targetObject.GetComponent<SpriteRenderer>().sprite = Bead.Instance.target.GetComponent<SpriteRenderer>().sprite;
-            Bead.Instance.target.GetComponent<SpriteRenderer>().sprite = targetSprite;
-
-            //타입 변경
-            targetObject.GetComponent<Bead>().Type = Bead.Instance.target.GetComponent<Bead>().Type;
-            Bead.Instance.target.GetComponent<Bead>().Type = targetBeadType;
+            if (x != -1 && y != -1)
+                break;
         }
-        return null;
-    }
 
-    private GameObject GetTargetObjectDirection(Vector2 directionVector)
+        if(dir == Vector2.up)
+        {
+            x += 1;
+            Debug.Log($"update(up) x : {x}, y : {y}");
+        }
+        else if (dir == Vector2.down)
+        {
+            x -= 1;
+            Debug.Log($"update(down) x : {x}, y : {y}");
+        }
+        else if (dir == Vector2.left)
+        {
+            y -= 1;
+            Debug.Log($"update(left) x : {x}, y : {y}");
+        }
+        else if (dir == Vector2.right)
+        {
+            y += 1;
+            Debug.Log($"update(right) x : {x}, y : {y}");
+        }
+
+        //타입 변경
+        BeadType targetBeadType = bead.Type;
+        bead.Type = beads[y][x].Type;
+        beads[y][x].Type = targetBeadType;
+
+        //스프라이트 변경
+        Sprite targetSprite = bead.GetComponent<SpriteRenderer>().sprite;
+        bead.GetComponent<SpriteRenderer>().sprite = beads[y][x].GetComponent<SpriteRenderer>().sprite;
+        beads[y][x].GetComponent<SpriteRenderer>().sprite = targetSprite;
+    }
+    /*
+    private GameObject GetTargetObjectDirection(Vector2 directionVector, Vector2 targetPos)
     {
-        Vector2 startPosition = Bead.Instance.target.transform.position;
+        Vector2 startPosition = Bead.Instance.target.transform.localPosition;
 
         float raycastDistance = 1f; // 레이캐스트의 최대 거리 설정
 
@@ -228,5 +260,6 @@ public class BoardManager : Singleton<BoardManager>
         }
         return null;    //게임 오브젝트를 찾지 못 했을 때 null를 반환
     }
+    */
     #endregion
 }

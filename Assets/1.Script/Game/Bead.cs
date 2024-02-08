@@ -12,7 +12,7 @@ public enum BeadType
     Dark
 }
 
-public class Bead : Singleton<Bead>
+public class Bead : MonoBehaviour
 {
     [SerializeField] private List<Sprite> sprite;
 
@@ -37,14 +37,11 @@ public class Bead : Singleton<Bead>
 
     [HideInInspector] public Collider2D target = null; //내가 누른 구슬
 
-    [HideInInspector] public bool isMatched;  //물약이 보드 안에 있는지 확인
-
     //------------------------------------
     [HideInInspector] public int xIndex;  //보드의 x좌표
     [HideInInspector] public int yIndex;  //보드의 y좌표
     //------------------------------------
 
-    public bool isUsable;
     void Update()
     {
         if (Input.GetMouseButtonDown(0))    //마우스를 눌렀을 때
@@ -118,20 +115,14 @@ public class Bead : Singleton<Bead>
 
             if (distanceX > 0.7f || distanceY > 0.7f)
             {
-                BoardManager.Instance.ChangeBead(directionVector);
-                BoardManager.Instance.BeadBoradCheck();
+                BoardManager.Instance.ChangeBead(this, directionVector);
+                //BoardManager.Instance.BeadBoradCheck();
                 //일치하는 항목이 없다면 이동 한 구슬을 원 상태로 되돌리기
             }
 
             transform.localPosition = Vector2.zero;
             target = null;
         }
-    }
-
-    public void SetIndicies(int _x, int _y)
-    {
-        xIndex = _x;
-        yIndex = _y;
     }
 
     RaycastHit2D GetHit2D()

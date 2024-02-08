@@ -160,7 +160,7 @@ public class PotionBoard : MonoBehaviour
         {
             foreach (Bead beadToRemove in beadsToRemove)    //제거할 물약
             {
-                beadToRemove.isMatched = false;
+                //beadToRemove.isMatched = false;
             }
 
             RemovAndRefill(beadsToRemove);
@@ -231,7 +231,7 @@ public class PotionBoard : MonoBehaviour
             // 적절한 위치로 이동
             Debug.Log("보드를 다시 채울 때 물약을 찾았고, 그것의 위치는: [" + x + "," + (y + yOffset) + "] 물약을 움직일 위치는: [" + x + "," + y + "]");
             // 인덱스 업데이트
-            potionAbove.SetIndicies(x, y);
+            //potionAbove.SetIndicies(x, y);
             // 포션 보드 업데이트
             beadBoard[x, y] = beadBoard[x, y + yOffset];
             // 물약에서 나온 위치를 null로 설정
@@ -250,7 +250,7 @@ public class PotionBoard : MonoBehaviour
         newPotion.transform.SetParent(potionParent.transform);
 
         //좌표 설정하기
-        newPotion.GetComponent<Bead>().SetIndicies(x, index);
+        //newPotion.GetComponent<Bead>().SetIndicies(x, index);
         //포션 보드 위에 좌표 설정하기
         beadBoard[x, index] = new Node(true, newPotion);
         //해당 위치로 움직이기
@@ -451,6 +451,7 @@ public class PotionBoard : MonoBehaviour
     public Bead SetBeadSprite(Vector2 directionVector)
     {
         
+        /*
         // 이동한 방향에 있는 게임 오브젝트의 스프라이트 가져오기
         GameObject targetObject = GetTargetObjectInDirection(directionVector);
 
@@ -467,12 +468,13 @@ public class PotionBoard : MonoBehaviour
             targetObject.GetComponent<Bead>().Type = Bead.Instance.target.GetComponent<Bead>().Type;
             Bead.Instance.target.GetComponent<Bead>().Type = targetBeadType;
         }
-        
+        */
         return null;
     }
 
     private GameObject GetTargetObjectInDirection(Vector2 directionVector)
     {
+        /*
         // 이동한 방향에 있는 게임 오브젝트 탐색
         Vector2 startPosition = Bead.Instance.target.transform.position;
 
@@ -489,6 +491,7 @@ public class PotionBoard : MonoBehaviour
             }
             
         }
+        */
         return null;    //게임 오브젝트를 찾지 못 했을 때 null를 반환
     }
     #endregion
