@@ -104,14 +104,10 @@ MonoBehaviour:
   - {fileID: 138564630, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
   - {fileID: -372352177, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
   - {fileID: -973794597, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
-  beadType: 0
   clampVec2: {x: 1.35, y: 1.35}
   target: {fileID: 0}
-  isMoving: 0
-  isMatched: 0
   xIndex: 0
   yIndex: 0
-  isUsable: 0
 --- !u!58 &8223745659859485743
 CircleCollider2D:
   m_ObjectHideFlags: 0

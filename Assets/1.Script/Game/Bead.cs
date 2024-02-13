@@ -116,7 +116,7 @@ public class Bead : MonoBehaviour
             if (distanceX > 0.7f || distanceY > 0.7f)
             {
                 BoardManager.Instance.ChangeBead(this, directionVector);
-                //BoardManager.Instance.BeadBoradCheck();
+                BoardManager.Instance.BeadBoradCheck();
                 //일치하는 항목이 없다면 이동 한 구슬을 원 상태로 되돌리기
             }
 

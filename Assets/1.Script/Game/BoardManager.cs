@@ -76,6 +76,51 @@ public class BoardManager : Singleton<BoardManager>
             }
         }
 
+        /*// 가로 및 세로 체크
+        for (int i = 0; i < beads.Count; i++)
+        {
+            int horizontalCheckCnt = 0;
+            int verticalCheckCnt = 0;
+
+            for (int j = 0; j < beads[i].Count; j++)
+            {
+                BeadType horizontalBeadType = beads[i][j].Type;
+                BeadType verticalBeadType = beads[j][i].Type;
+
+                if (j + 1 < beads[i].Count && horizontalBeadType == beads[i][j + 1].Type)
+                {
+                    horizontalCheckCnt++;
+                }
+                else
+                {
+                    if (horizontalCheckCnt >= 2)
+                    {
+                        for (int delcnt = j; delcnt >= j - horizontalCheckCnt; delcnt--)
+                        {
+                            check[i][delcnt] = true;
+                        }
+                    }
+                    horizontalCheckCnt = 0;
+                }
+
+                if (j + 1 < beads.Count && verticalBeadType == beads[j + 1][i].Type)
+                {
+                    verticalCheckCnt++;
+                }
+                else
+                {
+                    if (verticalCheckCnt >= 2)
+                    {
+                        for (int delcnt = j; delcnt >= j - verticalCheckCnt; delcnt--)
+                        {
+                            check[delcnt][i] = true;
+                        }
+                    }
+                    verticalCheckCnt = 0;
+                }
+            }
+        }*/
+
         // 가로 체크
         for (int i = 0; i < beads.Count; i++)
         {
@@ -132,7 +177,6 @@ public class BoardManager : Singleton<BoardManager>
             {
                 if (check[i][j])
                 {
-                    //Destroy(beads[i][j].gameObject);
                     beads[i][j].gameObject.SetActive(false);
                 }
             }
@@ -189,77 +233,47 @@ public class BoardManager : Singleton<BoardManager>
         }
     }
 
-    public void ChangeBead(Bead bead, Vector2 dir) //target의 beads를 갖고 오는게 더 효율적임
+    /// <summary>
+    /// Bead Type, Sprite 변경
+    /// </summary>
+    public void ChangeBead(Bead bead, Vector2 dir)
     {
         int x = -1; 
         int y = -1;
-        for (int i = 0; i < height; i++) //세로
+        for (int i = 0; i <= height; i++) //세로
         {
-            for (int j = 0; j < width; j++) //가로
+            for (int j = 0; j <= width; j++) //가로
             {
                 if(beads[j][i].Equals(bead) == true)
                 {
-                    x = j;
-                    y = i;
-                    Debug.Log($"x : {x}, y : {y}");
+                    x = i;
+                    y = j;
                     break;
                 }
             }
 
             if (x != -1 && y != -1)
-                break;
-        }
-
-        if(dir == Vector2.up)
-        {
-            x += 1;
-            Debug.Log($"update(up) x : {x}, y : {y}");
-        }
-        else if (dir == Vector2.down)
-        {
-            x -= 1;
-            Debug.Log($"update(down) x : {x}, y : {y}");
-        }
-        else if (dir == Vector2.left)
-        {
-            y -= 1;
-            Debug.Log($"update(left) x : {x}, y : {y}");
-        }
-        else if (dir == Vector2.right)
-        {
-            y += 1;
-            Debug.Log($"update(right) x : {x}, y : {y}");
-        }
-
-        //타입 변경
-        BeadType targetBeadType = bead.Type;
-        bead.Type = beads[y][x].Type;
-        beads[y][x].Type = targetBeadType;
-
-        //스프라이트 변경
-        Sprite targetSprite = bead.GetComponent<SpriteRenderer>().sprite;
-        bead.GetComponent<SpriteRenderer>().sprite = beads[y][x].GetComponent<SpriteRenderer>().sprite;
-        beads[y][x].GetComponent<SpriteRenderer>().sprite = targetSprite;
-    }
-    /*
-    private GameObject GetTargetObjectDirection(Vector2 directionVector, Vector2 targetPos)
-    {
-        Vector2 startPosition = Bead.Instance.target.transform.localPosition;
-
-        float raycastDistance = 1f; // 레이캐스트의 최대 거리 설정
-
-        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, directionVector.normalized, raycastDistance);
-
-        foreach (RaycastHit2D hit in hits)
-        {
-            if (hit.collider.gameObject != Bead.Instance.target.gameObject)
             {
-                GameObject targetObject = hit.collider.gameObject;
-                return targetObject;
+                break;
             }
         }
-        return null;    //게임 오브젝트를 찾지 못 했을 때 null를 반환
+
+
+        if(dir == Vector2.up)
+            y -= 1;
+        else if (dir == Vector2.down)
+            y += 1;
+        else if (dir == Vector2.left)
+            x -= 1;
+        else if (dir == Vector2.right)
+            x += 1;
+
+        Bead nextBead = beads[y][x];
+
+        //타입 변경
+        BeadType targetBeadType = bead.Type;    //내 타입 저장
+        bead.Type = nextBead.Type;   //내 타입 변경
+        nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
     }
-    */
     #endregion
 }
