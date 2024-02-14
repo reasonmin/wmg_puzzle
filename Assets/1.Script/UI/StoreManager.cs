@@ -7,7 +7,10 @@ public class StoreManager : MonoBehaviour
 {
     public static StoreManager instance;
 
-    [SerializeField] private WarningMessage CoinShortage_Text;
+    [SerializeField] private Transform canvas;
+    [SerializeField] private GameObject CoinShortage_Text;
+
+    GameObject obj = null;
 
     private void Awake()
     {
@@ -23,8 +26,13 @@ public class StoreManager : MonoBehaviour
         }
         else
         {
-            CoinShortage_Text.gameObject.SetActive(true);
-            CoinShortage_Text.Act();
+            if (obj == null)
+                obj = Instantiate(CoinShortage_Text, canvas);
+            else
+            {
+                Destroy(obj);
+                obj = Instantiate(CoinShortage_Text, canvas);
+            }
         }
     }
 }
