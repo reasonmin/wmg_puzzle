@@ -230,7 +230,7 @@ public class BoardManager : Singleton<BoardManager>
                 break;
             }
         }
-
+        Bead nowBead = beads[y][x];
 
         if(dir == Vector2.up)
             y -= 1;
@@ -243,10 +243,61 @@ public class BoardManager : Singleton<BoardManager>
 
         Bead nextBead = beads[y][x];
 
-        //타입 변경
-        BeadType targetBeadType = bead.Type;    //내 타입 저장
-        bead.Type = nextBead.Type;   //내 타입 변경
-        nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
+        Debug.Log($"now Type : {nowBead.Type}");
+
+        if (nowBead.Type == beads[y][x+1].Type && nowBead.Type == beads[y][x + 2].Type) //right
+        {
+            Debug.Log("right");
+            //타입 변경
+            BeadType targetBeadType = bead.Type;    //내 타입 저장
+            bead.Type = nextBead.Type;   //내 타입 변경
+            nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
+        }
+        else if (nowBead.Type == beads[y][x - 1].Type && nowBead.Type == beads[y][x - 2].Type) //left
+        {
+            Debug.Log("left");
+            //타입 변경
+            BeadType targetBeadType = bead.Type;    //내 타입 저장
+            bead.Type = nextBead.Type;   //내 타입 변경
+            nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
+        }
+        else if (nowBead.Type == beads[y - 1][x].Type && nowBead.Type == beads[y - 2][x].Type) //up
+        {
+            Debug.Log("up");
+            //타입 변경
+            BeadType targetBeadType = bead.Type;    //내 타입 저장
+            bead.Type = nextBead.Type;   //내 타입 변경
+            nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
+        }
+        else if (nowBead.Type == beads[y +1][x].Type && nowBead.Type == beads[y + 2][x].Type) //down
+        {
+            Debug.Log("down");
+            //타입 변경
+            BeadType targetBeadType = bead.Type;    //내 타입 저장
+            bead.Type = nextBead.Type;   //내 타입 변경
+            nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
+        }
+        else if (nowBead.Type == beads[y + 1][x].Type && nowBead.Type == beads[y - 1][x].Type)
+        {
+            Debug.Log("세로");
+            //타입 변경
+            BeadType targetBeadType = bead.Type;    //내 타입 저장
+            bead.Type = nextBead.Type;   //내 타입 변경
+            nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
+        }
+        else if (nowBead.Type == beads[y][x + 1].Type && nowBead.Type == beads[y][x - 1].Type)
+        {
+            Debug.Log("가로");
+            //타입 변경
+            BeadType targetBeadType = bead.Type;    //내 타입 저장
+            bead.Type = nextBead.Type;   //내 타입 변경
+            nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
+        }
+        else
+        {
+            Debug.Log("false");
+        }
     }
+        
     #endregion
 }
