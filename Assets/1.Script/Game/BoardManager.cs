@@ -89,13 +89,13 @@ public class BoardManager : Singleton<BoardManager>
         }
 
         // 가로 체크
-        for (int i = 0; i < beads.Count; i++)
+        for (int i = 0; i < height; i++)//8
         {
             int checkCnt = 0;
-            for (int j = 0; j < beads[i].Count; j++)
+            for (int j = 0; j < width; j++)
             {
                 BeadType bType = beads[i][j].Type;
-                if (j + 1 < beads[i].Count && bType == beads[i][j + 1].Type)
+                if (j + 1 < width && bType == beads[i][j + 1].Type)
                 {
                     checkCnt++;
                 }
@@ -114,13 +114,13 @@ public class BoardManager : Singleton<BoardManager>
         }
 
         // 세로 체크
-        for (int i = 0; i < width; i++) //7
+        for (int i = 0; i < width; i++)
         {
             int checkCnt = 0;
-            for (int j = 0; j < height - 1; j++)    //8
+            for (int j = 0; j < height; j++)
             {
                 BeadType bType = beads[j][i].Type;
-                if (bType == beads[j + 1][i].Type)
+                if (j + 1 < height && bType == beads[j + 1][i].Type)
                 {
                     checkCnt++;
                 }
@@ -137,6 +137,7 @@ public class BoardManager : Singleton<BoardManager>
                 }
             }
         }
+
         // 체크된것 전부 비활성화
         for (int i = 0; i < check.Count; i++)
         {
