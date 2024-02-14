@@ -5,7 +5,7 @@ using UnityEngine;
 public class Eskill : MonoBehaviour
 {
     [SerializeField] private Sprite[] sprites;
-    [SerializeField] private GameObject spriteObjectPrefab;
+    [SerializeField] private GameObject BoomtPrefab;
     [SerializeField] private Transform parent;
 
     void Update()
@@ -13,7 +13,7 @@ public class Eskill : MonoBehaviour
         // 스페이스 바를 눌렀을 때
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject newObject = Instantiate(spriteObjectPrefab, parent);
+            GameObject newObject = Instantiate(BoomtPrefab, parent);
             Eskillexample script = newObject.AddComponent<Eskillexample>();
             script.sprites = sprites;
             script.isRunning = true;

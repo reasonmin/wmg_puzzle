@@ -2024,7 +2024,7 @@ MonoBehaviour:
   - {fileID: 7034660610512690298, guid: 1b274654f1967224e892dc9c7c1f2625, type: 3}
   - {fileID: -8874246152023096229, guid: 1b274654f1967224e892dc9c7c1f2625, type: 3}
   - {fileID: 4221536321085816454, guid: 1b274654f1967224e892dc9c7c1f2625, type: 3}
-  spriteObjectPrefab: {fileID: 2821440133366982411, guid: 0017c6442c504df4d9e253624a18d4c1, type: 3}
+  BoomtPrefab: {fileID: 2821440133366982411, guid: 0017c6442c504df4d9e253624a18d4c1, type: 3}
   parent: {fileID: 1675944020}
 --- !u!4 &1675944020
 Transform:
