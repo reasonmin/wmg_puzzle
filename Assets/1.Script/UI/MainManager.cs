@@ -88,6 +88,7 @@ public class MainManager : MonoBehaviour
     public void SetCoin()
     {
         Coin_Text.text = Singleton<PlayerDataManager>.Instance.playerData.coin.ToString();
+        Singleton<PlayerDataManager>.Instance.SaveJson();
     }
 
     private void SetVolume()

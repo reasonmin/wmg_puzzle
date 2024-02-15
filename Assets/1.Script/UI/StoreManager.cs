@@ -21,6 +21,9 @@ public class StoreManager : MonoBehaviour
     {
         if(Value <= Singleton<PlayerDataManager>.Instance.playerData.coin)
         {
+
+
+
             Singleton<PlayerDataManager>.Instance.playerData.coin -= Value;
             MainManager.instance.SetCoin();
         }

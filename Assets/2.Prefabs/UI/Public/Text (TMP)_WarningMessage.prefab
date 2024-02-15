@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8726576716209257103}
   - component: {fileID: 8726576716209257138}
   m_Layer: 5
-  m_Name: Text (TMP)_CoinShortage
+  m_Name: Text (TMP)_WarningMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: We don't have enough coins!
+  m_text: WarningMessage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
   m_sharedMaterial: {fileID: 4185114828617532660, guid: b31cdd0824492a74aa607b9c538c4462, type: 2}
@@ -150,5 +150,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Text: {fileID: 8726576716209257103}
   sentence:
-    English: We don't have enough coins!
-    Korean: "\uCF54\uC778\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4!"
+    English: WarningMessage
+    Korean: "\uACBD\uACE0 \uBA54\uC2DC\uC9C0"
