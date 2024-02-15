@@ -151,6 +151,10 @@ public class MainManager : MonoBehaviour
         gameStartPanel.silver._Text.text = Singleton<PlayerDataManager>.Instance.playerData.item.silver.ToString();
         gameStartPanel.gold._Text.text = Singleton<PlayerDataManager>.Instance.playerData.item.gold.ToString();
 
+        gameStartPanel.bronze.ReSetting();
+        gameStartPanel.silver.ReSetting();
+        gameStartPanel.gold.ReSetting();
+
         gameStartPanel.Panel.SetActive(true);
     }
 
