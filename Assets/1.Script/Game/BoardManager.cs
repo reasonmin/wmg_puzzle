@@ -245,91 +245,38 @@ public class BoardManager : Singleton<BoardManager>
 
         Debug.Log($"now Type : {nowBead.Type}");
 
-        /* if (nowBead.Type == beads[y][x + 1].Type && nowBead.Type == beads[y][x + 2].Type) //right
-         {
-             Debug.Log("right");
-             //타입 변경
-             BeadType targetBeadType = bead.Type;    //내 타입 저장
-             bead.Type = nextBead.Type;   //내 타입 변경
-             nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
-         }
-         else if (nowBead.Type == beads[y][x - 1].Type && nowBead.Type == beads[y][x - 2].Type) //left
-         {
-             Debug.Log("left");
-             //타입 변경
-             BeadType targetBeadType = bead.Type;    //내 타입 저장
-             bead.Type = nextBead.Type;   //내 타입 변경
-             nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
-         }
-         else if (nowBead.Type == beads[y - 1][x].Type && nowBead.Type == beads[y - 2][x].Type) //up
-         {
-             Debug.Log("up");
-             //타입 변경
-             BeadType targetBeadType = bead.Type;    //내 타입 저장
-             bead.Type = nextBead.Type;   //내 타입 변경
-             nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
-         }
-         else if (nowBead.Type == beads[y + 1][x].Type && nowBead.Type == beads[y + 2][x].Type) //down
-         {
-             Debug.Log("down");
-             //타입 변경
-             BeadType targetBeadType = bead.Type;    //내 타입 저장
-             bead.Type = nextBead.Type;   //내 타입 변경
-             nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
-         }
-         else if (nowBead.Type == beads[y + 1][x].Type && nowBead.Type == beads[y - 1][x].Type)
-         {
-             Debug.Log("세로");
-             //타입 변경
-             BeadType targetBeadType = bead.Type;    //내 타입 저장
-             bead.Type = nextBead.Type;   //내 타입 변경
-             nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
-         }
-         else if (nowBead.Type == beads[y][x + 1].Type && nowBead.Type == beads[y][x - 1].Type)
-         {
-             Debug.Log("가로");
-             //타입 변경
-             BeadType targetBeadType = bead.Type;    //내 타입 저장
-             bead.Type = nextBead.Type;   //내 타입 변경
-             nextBead.Type = targetBeadType;  //상대 타입을 내것으로 변경
-         }
-         else
-         {
-             Debug.Log("false");
-         }*/
-
-        /*// 오른쪽으로 세 개가 연속된 경우
-        if (CheckMatch(nowBead, beads[y][x + 1], beads[y][x + 2]))
+        // 오른쪽으로 세 개가 연속된 경우
+        if (x + 2 < width && CheckMatch(nowBead, beads[y][x + 1], beads[y][x + 2]))
         {
             Debug.Log("right");
             SwapBeads(bead, nextBead);
         }
         // 왼쪽으로 세 개가 연속된 경우
-        else if (CheckMatch(nowBead, beads[y][x - 1], beads[y][x - 2]))
+        else if (x - 2 >= 0 && CheckMatch(nowBead, beads[y][x - 1], beads[y][x - 2]))
         {
             Debug.Log("left");
             SwapBeads(bead, nextBead);
         }
         // 위로 세 개가 연속된 경우
-        else if (CheckMatch(nowBead, beads[y - 1][x], beads[y - 2][x]))
+        else if (y - 2 >= 0 && CheckMatch(nowBead, beads[y - 1][x], beads[y - 2][x]))
         {
             Debug.Log("up");
             SwapBeads(bead, nextBead);
         }
         // 아래로 세 개가 연속된 경우
-        else if (CheckMatch(nowBead, beads[y + 1][x], beads[y + 2][x]))
+        else if (y + 2 < height && CheckMatch(nowBead, beads[y + 1][x], beads[y + 2][x]))
         {
             Debug.Log("down");
             SwapBeads(bead, nextBead);
         }
         // 세로로 두 개가 연속된 경우
-        else if (CheckMatch(nowBead, beads[y + 1][x], beads[y - 1][x]))
+        else if (y - 1 >= 0 && y + 1 < height && CheckMatch(nowBead, beads[y + 1][x], beads[y - 1][x]))
         {
             Debug.Log("세로");
             SwapBeads(bead, nextBead);
         }
         // 가로로 두 개가 연속된 경우
-        else if (CheckMatch(nowBead, beads[y][x + 1], beads[y][x - 1]))
+        else if (x + 1 < width && x - 1 >= 0 && CheckMatch(nowBead, beads[y][x + 1], beads[y][x - 1]))
         {
             Debug.Log("가로");
             SwapBeads(bead, nextBead);
@@ -352,7 +299,7 @@ public class BoardManager : Singleton<BoardManager>
         bool CheckMatch(Bead bead1, Bead bead2, Bead bead3)
         {
             return nowBead.Type == bead1.Type && nowBead.Type == bead2.Type && nowBead.Type == bead3.Type;
-        }*/
+        }
 
     }
 
