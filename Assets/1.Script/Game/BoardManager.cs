@@ -21,7 +21,7 @@ public class BoardManager : Singleton<BoardManager>
         CreateBeadBG();
         CreateBead();
 
-        BeadBoradCheck();
+        BeadBoardCheck();
     }
 
     /// <summary>
@@ -57,15 +57,7 @@ public class BoardManager : Singleton<BoardManager>
             Bead b = Instantiate(bead, transform.GetChild(i));
             b.SetBead(Random.Range(0, (int)BeadType.Dark + 1));
             beads[y].Add(b);
-            /*
-            if (beads[y][-1].Type == beads[y][x].Type)
-            {
-                count++;
-            }
-            if (count == 2)
-            {
-                beads[y][x].SetBead(Random.Range(0, (int)BeadType.Dark + 1));
-            }*/
+
             if ((i + 1) % width == 0)
                 y++;
         }
@@ -75,7 +67,7 @@ public class BoardManager : Singleton<BoardManager>
     /// <summary>
     /// 상호작용이 가능한 구슬이 있는지 체크
     /// </summary>
-    public void BeadBoradCheck()
+    public void BeadBoardCheck()
     {
         List<List<bool>> check = new List<List<bool>>();
 
@@ -89,7 +81,7 @@ public class BoardManager : Singleton<BoardManager>
         }
 
         // 가로 체크
-        for (int i = 0; i < height; i++)//8
+        for (int i = 0; i < height; i++)
         {
             int checkCnt = 0;
             for (int j = 0; j < width; j++)
@@ -159,7 +151,7 @@ public class BoardManager : Singleton<BoardManager>
     void BeadDown()
     {
         bool isChange = false;
-        for (int i = 0; i < width; i++) // 8
+        for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height - 1; j++)
             {
@@ -202,7 +194,7 @@ public class BoardManager : Singleton<BoardManager>
             }
 
             if (isReflush)
-                BeadBoradCheck();
+                BeadBoardCheck();
         }
     }
 
@@ -243,50 +235,27 @@ public class BoardManager : Singleton<BoardManager>
 
         Bead nextBead = beads[y][x];
 
-        Debug.Log($"now Type : {nowBead.Type}");
-
         // 오른쪽으로 세 개가 연속된 경우
         if (x + 2 < width && CheckMatch(nowBead, beads[y][x + 1], beads[y][x + 2]))
-        {
-            Debug.Log("right");
             SwapBeads(bead, nextBead);
-        }
         // 왼쪽으로 세 개가 연속된 경우
         else if (x - 2 >= 0 && CheckMatch(nowBead, beads[y][x - 1], beads[y][x - 2]))
-        {
-            Debug.Log("left");
             SwapBeads(bead, nextBead);
-        }
         // 위로 세 개가 연속된 경우
         else if (y - 2 >= 0 && CheckMatch(nowBead, beads[y - 1][x], beads[y - 2][x]))
-        {
-            Debug.Log("up");
             SwapBeads(bead, nextBead);
-        }
         // 아래로 세 개가 연속된 경우
         else if (y + 2 < height && CheckMatch(nowBead, beads[y + 1][x], beads[y + 2][x]))
-        {
-            Debug.Log("down");
             SwapBeads(bead, nextBead);
-        }
         // 세로로 두 개가 연속된 경우
         else if (y - 1 >= 0 && y + 1 < height && CheckMatch(nowBead, beads[y + 1][x], beads[y - 1][x]))
-        {
-            Debug.Log("세로");
             SwapBeads(bead, nextBead);
-        }
         // 가로로 두 개가 연속된 경우
         else if (x + 1 < width && x - 1 >= 0 && CheckMatch(nowBead, beads[y][x + 1], beads[y][x - 1]))
-        {
-            Debug.Log("가로");
             SwapBeads(bead, nextBead);
-        }
-        else
-        {
-            Debug.Log("false");
-        }
 
-        // 비드를 교환하는 함수
+
+        //비드를 교환하는 함수
         void SwapBeads(Bead bead1, Bead bead2)
         {
             BeadType targetBeadType = bead1.Type;
@@ -300,8 +269,6 @@ public class BoardManager : Singleton<BoardManager>
         {
             return nowBead.Type == bead1.Type && nowBead.Type == bead2.Type && nowBead.Type == bead3.Type;
         }
-
     }
-
     #endregion
 }
