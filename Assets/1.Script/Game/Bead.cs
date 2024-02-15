@@ -37,11 +37,6 @@ public class Bead : MonoBehaviour
 
     [HideInInspector] public Collider2D target = null; //내가 누른 구슬
 
-    //------------------------------------
-    [HideInInspector] public int xIndex;  //보드의 x좌표
-    [HideInInspector] public int yIndex;  //보드의 y좌표
-    //------------------------------------
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0))    //마우스를 눌렀을 때
@@ -116,7 +111,7 @@ public class Bead : MonoBehaviour
             if (distanceX > 0.7f || distanceY > 0.7f)
             {
                 BoardManager.Instance.ChangeBead(this, directionVector);
-                BoardManager.Instance.BeadBoradCheck();
+                BoardManager.Instance.BeadBoardCheck();
                 //일치하는 항목이 없다면 이동 한 구슬을 원 상태로 되돌리기
             }
 
