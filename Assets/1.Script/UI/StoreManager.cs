@@ -10,19 +10,20 @@ public class StoreManager : MonoBehaviour
     [SerializeField] private Transform canvas;
     [SerializeField] private GameObject CoinShortage_Text;
 
-    GameObject obj = null;
+    private GameObject obj = null;
 
     private void Awake()
     {
         instance = this;
     }
 
-    public void BuyProduct(int Value)
+    public void BuyProduct(int Value, Item items)
     {
         if(Value <= Singleton<PlayerDataManager>.Instance.playerData.coin)
         {
-
-
+            Singleton<PlayerDataManager>.Instance.playerData.item.bronze += items.bronze;
+            Singleton<PlayerDataManager>.Instance.playerData.item.silver += items.silver;
+            Singleton<PlayerDataManager>.Instance.playerData.item.gold += items.gold;
 
             Singleton<PlayerDataManager>.Instance.playerData.coin -= Value;
             MainManager.instance.SetCoin();

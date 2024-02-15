@@ -25,7 +25,7 @@ public class PlayerData
         chapterDatas = _chapterData;
         item = _item;
 
-        coin = 10;
+        coin = 50;
         language = LanguageType.English;
 
         musicVolume = 50;
@@ -68,7 +68,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         Item items = new Item();
         items.gold = 0;
         items.silver = 0;
-        items.bronze = 3;
+        items.bronze = 0;
 
         playerData = new PlayerData(chapterData, items);
 

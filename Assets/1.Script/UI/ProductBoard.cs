@@ -6,21 +6,10 @@ using TMPro;
 public class ProductBoard : MonoBehaviour
 {
     [SerializeField] private TMP_Text BuyButton_Text;
+    [SerializeField] private Item items;
 
     public void OnBuy()
     {
-        StoreManager.instance.BuyProduct(int.Parse(BuyButton_Text.text));
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        StoreManager.instance.BuyProduct(int.Parse(BuyButton_Text.text), items);
     }
 }
