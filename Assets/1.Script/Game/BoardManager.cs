@@ -238,12 +238,8 @@ public class BoardManager : Singleton<BoardManager>
         else if (dir == Vector2.right)
             m = x + 1;
 
-        Debug.Log(w);
-        Debug.Log(m);
         nextBead = beads[w][m];
         beads[y][x].Type = nextBead.Type;
-        Debug.Log(nowBead);
-        Debug.Log(nextBead.Type);
 
         // 오른쪽으로 세 개가 연속된 경우
         if (m + 2 < width && CheckMatch(beads[w][m + 1], beads[w][m + 2]))
@@ -278,10 +274,6 @@ public class BoardManager : Singleton<BoardManager>
         // 세 개가 같은지 확인하는 함수
         bool CheckMatch(Bead bead1, Bead bead2)
         {
-            Debug.Log("!");
-            Debug.Log(bead1.Type);
-            Debug.Log(bead2.Type);
-
             if (nowBead == bead1.Type && nowBead == bead2.Type)
             {
                 return true;
