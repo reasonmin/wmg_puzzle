@@ -222,52 +222,71 @@ public class BoardManager : Singleton<BoardManager>
                 break;
             }
         }
-        Bead nowBead = beads[y][x];
 
-        if(dir == Vector2.up)
-            y -= 1;
+        Bead nextBead = new();
+        BeadType nowBead = beads[y][x].Type;
+
+        int w = y;
+        int m = x;
+
+        if (dir == Vector2.up)
+            w = y - 1;
         else if (dir == Vector2.down)
-            y += 1;
+            w = y + 1;
         else if (dir == Vector2.left)
-            x -= 1;
+            m = x - 1;
         else if (dir == Vector2.right)
-            x += 1;
+            m = x + 1;
 
-        Bead nextBead = beads[y][x];
+        Debug.Log(w);
+        Debug.Log(m);
+        nextBead = beads[w][m];
+        beads[y][x].Type = nextBead.Type;
+        Debug.Log(nowBead);
+        Debug.Log(nextBead.Type);
 
         // 오른쪽으로 세 개가 연속된 경우
-        if (x + 2 < width && CheckMatch(nowBead, beads[y][x + 1], beads[y][x + 2]))
-            SwapBeads(bead, nextBead);
+        if (m + 2 < width && CheckMatch(beads[w][m + 1], beads[w][m + 2]))
+            SwapBeads(nowBead, nextBead);
         // 왼쪽으로 세 개가 연속된 경우
-        else if (x - 2 >= 0 && CheckMatch(nowBead, beads[y][x - 1], beads[y][x - 2]))
-            SwapBeads(bead, nextBead);
+        else if (m - 2 >= 0 && CheckMatch(beads[w][m - 1], beads[w][m - 2]))
+            SwapBeads(nowBead, nextBead);
         // 위로 세 개가 연속된 경우
-        else if (y - 2 >= 0 && CheckMatch(nowBead, beads[y - 1][x], beads[y - 2][x]))
-            SwapBeads(bead, nextBead);
+        else if (w - 2 >= 0 && CheckMatch(beads[w - 1][m], beads[w - 2][m]))
+            SwapBeads(nowBead, nextBead);
         // 아래로 세 개가 연속된 경우
-        else if (y + 2 < height && CheckMatch(nowBead, beads[y + 1][x], beads[y + 2][x]))
-            SwapBeads(bead, nextBead);
+        else if (w + 2 < height && CheckMatch(beads[w + 1][m], beads[w + 2][m]))
+            SwapBeads(nowBead, nextBead);
         // 세로로 두 개가 연속된 경우
-        else if (y - 1 >= 0 && y + 1 < height && CheckMatch(nowBead, beads[y + 1][x], beads[y - 1][x]))
-            SwapBeads(bead, nextBead);
+        else if (w - 1 >= 0 && w + 1 < height && CheckMatch(beads[w + 1][m], beads[w - 1][m]))
+            SwapBeads(nowBead, nextBead);
         // 가로로 두 개가 연속된 경우
-        else if (x + 1 < width && x - 1 >= 0 && CheckMatch(nowBead, beads[y][x + 1], beads[y][x - 1]))
-            SwapBeads(bead, nextBead);
+        else if (m + 1 < width && m - 1 >= 0 && CheckMatch(beads[w][m + 1], beads[w][m - 1]))
+            SwapBeads(nowBead, nextBead);
+        else
+            beads[y][x].Type = nowBead;
 
 
         //비드를 교환하는 함수
-        void SwapBeads(Bead bead1, Bead bead2)
+        void SwapBeads(BeadType bead1, Bead bead2)
         {
-            BeadType targetBeadType = bead1.Type;
-            bead1.Type = bead2.Type;
+            BeadType targetBeadType = bead1;
+            bead.Type = bead2.Type;
             bead2.Type = targetBeadType;
         }
 
-
         // 세 개가 같은지 확인하는 함수
-        bool CheckMatch(Bead bead1, Bead bead2, Bead bead3)
+        bool CheckMatch(Bead bead1, Bead bead2)
         {
-            return nowBead.Type == bead1.Type && nowBead.Type == bead2.Type && nowBead.Type == bead3.Type;
+            Debug.Log("!");
+            Debug.Log(bead1.Type);
+            Debug.Log(bead2.Type);
+
+            if (nowBead == bead1.Type && nowBead == bead2.Type)
+            {
+                return true;
+            }
+            return false;
         }
     }
     #endregion
