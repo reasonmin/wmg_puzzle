@@ -274,11 +274,7 @@ public class BoardManager : Singleton<BoardManager>
         // 세 개가 같은지 확인하는 함수
         bool CheckMatch(Bead bead1, Bead bead2)
         {
-            if (nowBead == bead1.Type && nowBead == bead2.Type)
-            {
-                return true;
-            }
-            return false;
+            return  nowBead == bead1.Type && nowBead == bead2.Type;
         }
     }
     #endregion
