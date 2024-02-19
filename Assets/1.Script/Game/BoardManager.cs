@@ -239,23 +239,27 @@ public class BoardManager : Singleton<BoardManager>
         Bead nextBead = beads[w][m];
         beads[y][x].Type = nextBead.Type;
 
+        //SwapBeads(nowBead, nextBead);
+
         // 오른쪽으로 세 개가 연속된 경우
-        if (m + 2 < width && CheckMatch(beads[w][m + 1], beads[w][m + 2]))
+        if (m + 2 < width && CheckMatch(beads[w][m + 1], beads[w][m + 2]) || x + 2 < width && NextCheckMatch(beads[y][x + 1], beads[y][x + 2]))
             SwapBeads(nowBead, nextBead);
         // 왼쪽으로 세 개가 연속된 경우
-        else if (m - 2 >= 0 && CheckMatch(beads[w][m - 1], beads[w][m - 2]))
+        else if (m - 2 >= 0 && CheckMatch(beads[w][m - 1], beads[w][m - 2]) || x - 2 >= 0 && NextCheckMatch(beads[y][x - 1], beads[y][x - 2]))
             SwapBeads(nowBead, nextBead);
         // 위로 세 개가 연속된 경우
-        else if (w - 2 >= 0 && CheckMatch(beads[w - 1][m], beads[w - 2][m]))
+        else if (w - 2 >= 0 && CheckMatch(beads[w - 1][m], beads[w - 2][m]) || y - 2 >= 0 && NextCheckMatch(beads[y - 1][x], beads[y - 2][x]))
             SwapBeads(nowBead, nextBead);
         // 아래로 세 개가 연속된 경우
-        else if (w + 2 < height && CheckMatch(beads[w + 1][m], beads[w + 2][m]))
+        else if (w + 2 < height && CheckMatch(beads[w + 1][m], beads[w + 2][m]) || y + 2 < height && NextCheckMatch(beads[y + 1][x], beads[y + 2][x]))
             SwapBeads(nowBead, nextBead);
         // 세로로 두 개가 연속된 경우
-        else if (w - 1 >= 0 && w + 1 < height && CheckMatch(beads[w + 1][m], beads[w - 1][m]))
+        else if (w - 1 >= 0 && w + 1 < height && CheckMatch(beads[w + 1][m], beads[w - 1][m]) || 
+                 y - 1 >= 0 && y + 1 < height && CheckMatch(beads[y + 1][x], beads[y - 1][x]))
             SwapBeads(nowBead, nextBead);
         // 가로로 두 개가 연속된 경우
-        else if (m + 1 < width && m - 1 >= 0 && CheckMatch(beads[w][m + 1], beads[w][m - 1]))
+        else if (m + 1 < width && m - 1 >= 0 && CheckMatch(beads[w][m + 1], beads[w][m - 1]) || 
+                 x + 1 < width && x - 1 >= 0 && CheckMatch(beads[y][x + 1], beads[y][x - 1]))
             SwapBeads(nowBead, nextBead);
         else
             beads[y][x].Type = nowBead;
@@ -272,7 +276,11 @@ public class BoardManager : Singleton<BoardManager>
         // 세 개가 같은지 확인하는 함수
         bool CheckMatch(Bead bead1, Bead bead2)
         {
-            return  nowBead == bead1.Type && nowBead == bead2.Type;
+            return nowBead == bead1.Type && nowBead == bead2.Type;
+        }
+        bool NextCheckMatch(Bead bead1, Bead bead2)
+        {
+            return nextBead.Type == bead1.Type && nextBead.Type == bead2.Type;
         }
     }
     #endregion
