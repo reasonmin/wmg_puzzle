@@ -255,11 +255,11 @@ public class BoardManager : Singleton<BoardManager>
             SwapBeads(nowBead, nextBead);
         // 세로로 두 개가 연속된 경우
         else if (w - 1 >= 0 && w + 1 < height && CheckMatch(beads[w + 1][m], beads[w - 1][m]) || 
-                 y - 1 >= 0 && y + 1 < height && CheckMatch(beads[y + 1][x], beads[y - 1][x]))
+                 y - 1 >= 0 && y + 1 < height && NextCheckMatch(beads[y + 1][x], beads[y - 1][x]))
             SwapBeads(nowBead, nextBead);
         // 가로로 두 개가 연속된 경우
         else if (m + 1 < width && m - 1 >= 0 && CheckMatch(beads[w][m + 1], beads[w][m - 1]) || 
-                 x + 1 < width && x - 1 >= 0 && CheckMatch(beads[y][x + 1], beads[y][x - 1]))
+                 x + 1 < width && x - 1 >= 0 && NextCheckMatch(beads[y][x + 1], beads[y][x - 1]))
             SwapBeads(nowBead, nextBead);
         else
             beads[y][x].Type = nowBead;
@@ -278,6 +278,7 @@ public class BoardManager : Singleton<BoardManager>
         {
             return nowBead == bead1.Type && nowBead == bead2.Type;
         }
+
         bool NextCheckMatch(Bead bead1, Bead bead2)
         {
             return nextBead.Type == bead1.Type && nextBead.Type == bead2.Type;
