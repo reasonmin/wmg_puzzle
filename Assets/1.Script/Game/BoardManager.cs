@@ -51,7 +51,6 @@ public class BoardManager : Singleton<BoardManager>
     void CreateBead()  //물약 생성
     {
         int y = 0;
-        int count = 0;
         for (int i = 0; i < transform.childCount; i++)
         {
             Bead b = Instantiate(bead, transform.GetChild(i));
@@ -223,7 +222,6 @@ public class BoardManager : Singleton<BoardManager>
             }
         }
 
-        Bead nextBead = new();
         BeadType nowBead = beads[y][x].Type;
 
         int w = y;
@@ -238,7 +236,7 @@ public class BoardManager : Singleton<BoardManager>
         else if (dir == Vector2.right)
             m = x + 1;
 
-        nextBead = beads[w][m];
+        Bead nextBead = beads[w][m];
         beads[y][x].Type = nextBead.Type;
 
         // 오른쪽으로 세 개가 연속된 경우
