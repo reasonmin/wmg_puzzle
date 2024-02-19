@@ -36451,6 +36451,7 @@ MonoBehaviour:
     bronze: {fileID: 1566543662}
   rTransform: {fileID: 764917245}
   Coin_Text: {fileID: 880925086}
+  click_Audio: {fileID: 1082920904}
 --- !u!224 &1082920902
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36492,7 +36493,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082920898}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3d1fc54a2f6df7840a89b832c0c32427, type: 3}

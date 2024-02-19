@@ -61,6 +61,8 @@ public class MainManager : MonoBehaviour
 
     [SerializeField] private TMP_Text Coin_Text;
 
+    public AudioSource click_Audio;
+
     private void Awake()
     {
         instance = this;
@@ -128,6 +130,8 @@ public class MainManager : MonoBehaviour
 
     public void OnLanguageChange(int n)
     {
+        click_Audio.Play();
+
         switch (n)
         {
             case (int)LanguageType.English:
@@ -160,11 +164,15 @@ public class MainManager : MonoBehaviour
 
     public void OnGameStartPanel()
     {
+        click_Audio.Play();
+
         gameStartPanel.Panel.SetActive(false);
     }
 
     public void OnGameStart()
     {
+        click_Audio.Play();
+
         SceneChange.instance.y = rTransform.anchoredPosition.y;
         SceneChange.instance.OnGoGame();
     }
@@ -174,6 +182,8 @@ public class MainManager : MonoBehaviour
     //-----------------------------------------------------
     public void OnMusicVolume()
     {
+        click_Audio.Play();
+
         if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
             Singleton<PlayerDataManager>.Instance.playerData.musicVolume = (int)MusicSlider.value;
 
@@ -183,6 +193,8 @@ public class MainManager : MonoBehaviour
 
     public void OnSoundEffectVolume()
     {
+        click_Audio.Play();
+
         if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
             Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
@@ -192,6 +204,8 @@ public class MainManager : MonoBehaviour
 
     public void OnMusic()
     {
+        click_Audio.Play();
+
         Singleton<PlayerDataManager>.Instance.playerData.isMusic = !Singleton<PlayerDataManager>.Instance.playerData.isMusic;
 
         if (!Singleton<PlayerDataManager>.Instance.playerData.isMusic)
@@ -207,6 +221,8 @@ public class MainManager : MonoBehaviour
 
     public void OnSoundEffect()
     {
+        click_Audio.Play();
+
         Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect = !Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect;
 
         if (!Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect)
@@ -232,6 +248,8 @@ public class MainManager : MonoBehaviour
 
     public void ResetPanel(GameObject Panel)
     {
+        click_Audio.Play();
+
         MainBoardPanel.SetActive(false);
         RuleBookPanel.SetActive(false);
         AudioPanel.SetActive(false);
@@ -269,6 +287,8 @@ public class MainManager : MonoBehaviour
     //-----------------------------------------------------
     public void ResetView(GameObject View)
     {
+        click_Audio.Play();
+
         StageView.SetActive(false);
         StoreView.SetActive(false);
 
