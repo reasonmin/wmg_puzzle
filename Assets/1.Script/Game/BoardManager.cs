@@ -13,6 +13,7 @@ public class BoardManager : Singleton<BoardManager>
 
     [SerializeField] private GameObject beadBG;
     [SerializeField] private Bead bead;
+    [SerializeField] private Animator animator;
 
     private List<List<Bead>> beads = new List<List<Bead>>();
 
@@ -157,6 +158,8 @@ public class BoardManager : Singleton<BoardManager>
                 if (beads[j][i].gameObject.activeInHierarchy == true &&
                     beads[j + 1][i].gameObject.activeInHierarchy == false)
                 {
+                    animator.SetTrigger("down");
+
                     // 속성 교체
                     BeadType type = beads[j][i].Type;
                     beads[j][i].Type = beads[j + 1][i].Type;

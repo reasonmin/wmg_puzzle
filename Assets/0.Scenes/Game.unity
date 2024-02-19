@@ -257,3 +257,4 @@ MonoBehaviour:
   imageSizeY: 125
   beadBG: {fileID: 6902920276832668293, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}
   bead: {fileID: 1688817508495773400, guid: 9e54890f35f8fec409ab016ce02d8f2d, type: 3}
+  animator: {fileID: 3917229775319695013, guid: 9e54890f35f8fec409ab016ce02d8f2d, type: 3}
