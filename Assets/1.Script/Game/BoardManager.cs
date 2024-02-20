@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BoardManager : Singleton<BoardManager>
 {
@@ -157,9 +158,13 @@ public class BoardManager : Singleton<BoardManager>
                 if (beads[j][i].gameObject.activeInHierarchy == true &&
                     beads[j + 1][i].gameObject.activeInHierarchy == false)
                 {
-                    Vector2 b = new (0, -1.25f);
-                    beads[i][j].transform.position = Vector2.Lerp(beads[i][j].transform.position, b, 1);
-                    beads[i][j].transform.position = Vector3.zero;
+                    Tweener tweener = beads[j][i].transform.DOLocalMove(new Vector2(0, -1.25f), 1f);
+                    /*beads[j][i].transform.DOLocalMove(new Vector2(0, -1.25f), 1)
+                        .OnComplete(()=> {
+                            beads[j][i].transform.position = Vector2.zero;
+                        });*/
+
+                    tweener.Play();
 
                     // 속성 교체
                     BeadType type = beads[j][i].Type;
@@ -187,7 +192,7 @@ public class BoardManager : Singleton<BoardManager>
             {
                 for (int j = 0; j < height; j++)
                 {
-                    if (beads[j][i].gameObject.activeInHierarchy == false)
+                    if (beads[j][i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
                     {
                         isReflush = true;
                         beads[j][i].gameObject.SetActive(true);
@@ -199,6 +204,85 @@ public class BoardManager : Singleton<BoardManager>
             if (isReflush)
                 BeadBoardCheck();
         }
+    }
+
+    public bool IsMoveCheck()
+    {
+        List<List<bool>> check = new List<List<bool>>();
+
+        for (int i = 0; i < beads.Count; i++)
+        {
+            check.Add(new List<bool>());
+            for (int j = 0; j < beads[i].Count; j++)
+            {
+                check[i].Add(false);
+            }
+        }
+
+        // 가로 체크
+        for (int i = 0; i < height; i++)
+        {
+            int checkCnt = 0;
+            for (int j = 0; j < width; j++)
+            {
+                BeadType bType = beads[i][j].Type;
+                if (j + 1 < width && bType == beads[i][j + 1].Type)
+                {
+                    checkCnt++;
+                }
+                else
+                {
+                    if (checkCnt >= 2)
+                    {
+                        for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
+                        {
+                            check[i][delcnt] = true;
+                        }
+                    }
+                    checkCnt = 0;
+                }
+            }
+        }
+
+        // 세로 체크
+        for (int i = 0; i < width; i++)
+        {
+            int checkCnt = 0;
+            for (int j = 0; j < height; j++)
+            {
+                BeadType bType = beads[j][i].Type;
+                if (j + 1 < height && bType == beads[j + 1][i].Type)
+                {
+                    checkCnt++;
+                }
+                else
+                {
+                    if (checkCnt >= 2)
+                    {
+                        for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
+                        {
+                            check[delcnt][i] = true;
+                        }
+                    }
+                    checkCnt = 0;
+                }
+            }
+        }
+
+        // 체크된것 전부 비활성화
+        bool isCheck = false;
+        for (int i = 0; i < check.Count; i++)
+        {
+            for (int j = 0; j < check[i].Count; j++)
+            {
+                if (check[i][j])
+                {
+                    isCheck = true;
+                }
+            }
+        }
+
+        return isCheck;
     }
 
     /// <summary>
