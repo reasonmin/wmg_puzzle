@@ -13,7 +13,6 @@ public class BoardManager : Singleton<BoardManager>
 
     [SerializeField] private GameObject beadBG;
     [SerializeField] private Bead bead;
-    [SerializeField] private Animator animator;
 
     private List<List<Bead>> beads = new List<List<Bead>>();
 
@@ -158,7 +157,9 @@ public class BoardManager : Singleton<BoardManager>
                 if (beads[j][i].gameObject.activeInHierarchy == true &&
                     beads[j + 1][i].gameObject.activeInHierarchy == false)
                 {
-                    animator.SetTrigger("down");
+                    Vector2 b = new (0, -1.25f);
+                    beads[i][j].transform.position = Vector2.Lerp(beads[i][j].transform.position, b, 1);
+                    beads[i][j].transform.position = Vector3.zero;
 
                     // 속성 교체
                     BeadType type = beads[j][i].Type;
