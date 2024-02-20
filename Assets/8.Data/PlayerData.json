@@ -7,9 +7,9 @@
     },
     "language": 0,
     "musicVolume": 50,
-    "soundEffectVolume": 50,
+    "soundEffectVolume": 0,
     "isMusic": true,
-    "isSoundEffect": true,
+    "isSoundEffect": false,
     "curChapter": 1,
     "curStage": 10,
     "chapterDatas": [

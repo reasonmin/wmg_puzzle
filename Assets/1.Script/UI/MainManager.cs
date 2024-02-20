@@ -84,7 +84,9 @@ public class MainManager : MonoBehaviour
         SetCoin();// 코인 개수 세팅
 
         SettingPanel.SetActive(false);// 설정창 끄기
-        OnStageView();// 뷰를 스테이지 뷰로 설정
+
+        StoreView.SetActive(false);
+        StageView.SetActive(true);// 뷰를 스테이지 뷰로 설정
     }
 
     public void SetCoin()
@@ -150,6 +152,8 @@ public class MainManager : MonoBehaviour
     //-----------------------------------------------------
     public void SetGameStartPanel(string stageNum)
     {
+        click_Audio.Play();
+
         gameStartPanel.Title_Text.text = stageNum;
         gameStartPanel.bronze._Text.text = Singleton<PlayerDataManager>.Instance.playerData.item.bronze.ToString();
         gameStartPanel.silver._Text.text = Singleton<PlayerDataManager>.Instance.playerData.item.silver.ToString();
@@ -182,8 +186,6 @@ public class MainManager : MonoBehaviour
     //-----------------------------------------------------
     public void OnMusicVolume()
     {
-        click_Audio.Play();
-
         if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
             Singleton<PlayerDataManager>.Instance.playerData.musicVolume = (int)MusicSlider.value;
 
@@ -193,11 +195,10 @@ public class MainManager : MonoBehaviour
 
     public void OnSoundEffectVolume()
     {
-        click_Audio.Play();
-
         if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
             Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
+        click_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume / 100f;
         Singleton<PlayerDataManager>.Instance.SaveJson();
         Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume);
     }
@@ -232,6 +233,7 @@ public class MainManager : MonoBehaviour
 
         SoundEffectBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect);
 
+        click_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume / 100f;
         Singleton<PlayerDataManager>.Instance.SaveJson();
         Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume);
     }
