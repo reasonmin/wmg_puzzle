@@ -61,6 +61,7 @@ public class MainManager : MonoBehaviour
 
     [SerializeField] private TMP_Text Coin_Text;
 
+    public AudioSource Music_Audio;
     public AudioSource click_Audio;
 
     private void Awake()
@@ -87,6 +88,8 @@ public class MainManager : MonoBehaviour
 
         StoreView.SetActive(false);
         StageView.SetActive(true);// ºä¸¦ ½ºÅ×ÀÌÁö ºä·Î ¼³Á¤
+
+        Music_Audio.Play();
     }
 
     public void SetCoin()
@@ -99,8 +102,11 @@ public class MainManager : MonoBehaviour
     {
         if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
             MusicSlider.value = PlayerDataManager.Instance.playerData.musicVolume;
-        if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
+        if (Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect)
             SoundEffectSlider.value = Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume;
+
+        Music_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.musicVolume / 100f;
+        click_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume / 100f;
 
         MusicBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isMusic);
         SoundEffectBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect);
@@ -189,18 +195,19 @@ public class MainManager : MonoBehaviour
         if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
             Singleton<PlayerDataManager>.Instance.playerData.musicVolume = (int)MusicSlider.value;
 
+        Music_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.musicVolume / 100f;
         Singleton<PlayerDataManager>.Instance.SaveJson();
-        Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.musicVolume);
+        //Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.musicVolume);
     }
 
     public void OnSoundEffectVolume()
     {
-        if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
+        if (Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect)
             Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
         click_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume / 100f;
         Singleton<PlayerDataManager>.Instance.SaveJson();
-        Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume);
+        //Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume);
     }
 
     public void OnMusic()
@@ -216,8 +223,9 @@ public class MainManager : MonoBehaviour
 
         MusicBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isMusic);
 
+        Music_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.musicVolume / 100f;
         Singleton<PlayerDataManager>.Instance.SaveJson();
-        Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.musicVolume);
+        //Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.musicVolume);
     }
 
     public void OnSoundEffect()
@@ -235,7 +243,7 @@ public class MainManager : MonoBehaviour
 
         click_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume / 100f;
         Singleton<PlayerDataManager>.Instance.SaveJson();
-        Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume);
+        //Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume);
     }
     //-----------------------------------------------------
 
