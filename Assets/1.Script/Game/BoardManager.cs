@@ -174,6 +174,12 @@ public class BoardManager : Singleton<BoardManager>
                 if (beads[j, i].gameObject.activeInHierarchy == true &&
                     beads[j + 1, i].gameObject.activeInHierarchy == false)
                 {
+                    beads[j, i].transform.DOLocalMove(new Vector2(0, -1.25f), 1)
+                        .OnComplete(() =>
+                        {
+                            beads[j, i].transform.localPosition = Vector2.zero;
+                        });
+                    
                     // 속성 교체
                     BeadType type = beads[j, i].Type;
                     beads[j, i].Type = beads[j + 1, i].Type;
