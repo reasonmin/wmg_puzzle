@@ -34,7 +34,7 @@ public class PlayerData
         isSoundEffect = true;
 
         curChapter = 1;
-        curStage = 10;
+        curStage = 1;
     }
 }
 
