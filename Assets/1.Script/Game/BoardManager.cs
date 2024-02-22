@@ -157,14 +157,14 @@ public class BoardManager : Singleton<BoardManager>
                 }
             }
         }
-        BeadDown();
+        StartCoroutine(BeadDown());
     }
 
     #region 구슬 교환
     /// <summary>
     /// 빈자리 구슬을 있는것과 데이터 교체
     /// </summary>
-    void BeadDown()
+    IEnumerator BeadDown()
     {
         bool isChange = false;
         for (int i = 0; i < width; i++)
@@ -182,6 +182,8 @@ public class BoardManager : Singleton<BoardManager>
                             beads[m, n].transform.localPosition = Vector2.zero;
                         });
 
+                    yield return new WaitForSeconds(0.3f);
+
                     // 속성 교체
                     BeadType type = beads[j, i].Type;
                     beads[j, i].Type = beads[j + 1, i].Type;
@@ -197,7 +199,7 @@ public class BoardManager : Singleton<BoardManager>
         }
 
         if (isChange == true)
-            BeadDown();
+            StartCoroutine(BeadDown());
 
         else
         {
