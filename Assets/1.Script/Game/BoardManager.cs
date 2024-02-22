@@ -169,17 +169,19 @@ public class BoardManager : Singleton<BoardManager>
         bool isChange = false;
         for (int i = 0; i < width; i++)
         {
+            int n = i;
             for (int j = 0; j < height - 1; j++)
             {
+                int m = j;
                 if (beads[j, i].gameObject.activeInHierarchy == true &&
                     beads[j + 1, i].gameObject.activeInHierarchy == false)
                 {
                     beads[j, i].transform.DOLocalMove(new Vector2(0, -1.25f), 1)
                         .OnComplete(() =>
                         {
-                            beads[j, i].transform.localPosition = Vector2.zero;
+                            beads[m, n].transform.localPosition = Vector2.zero;
                         });
-                    
+
                     // 속성 교체
                     BeadType type = beads[j, i].Type;
                     beads[j, i].Type = beads[j + 1, i].Type;
@@ -218,8 +220,6 @@ public class BoardManager : Singleton<BoardManager>
                 BeadBoardCheck();
         }
     }
-
-    
 
     public bool IsMoveCheck()
     {
