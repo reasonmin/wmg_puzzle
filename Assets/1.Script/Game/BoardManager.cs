@@ -176,13 +176,11 @@ public class BoardManager : Singleton<BoardManager>
                 if (beads[j, i].gameObject.activeInHierarchy == true &&
                     beads[j + 1, i].gameObject.activeInHierarchy == false)
                 {
-                    beads[j, i].transform.DOLocalMove(new Vector2(0, -1.25f), 1)
+                    beads[j, i].transform.DOLocalMoveY(-1.25f, 0.3f)
                         .OnComplete(() =>
                         {
                             beads[m, n].transform.localPosition = Vector2.zero;
                         });
-
-                    yield return new WaitForSeconds(0.3f);
 
                     // 속성 교체
                     BeadType type = beads[j, i].Type;
@@ -195,7 +193,7 @@ public class BoardManager : Singleton<BoardManager>
 
                     isChange = true;
                 }
-            }
+            }            
         }
 
         if (isChange == true)
@@ -207,11 +205,15 @@ public class BoardManager : Singleton<BoardManager>
             bool isReflush = false;
             for (int i = 0; i < width; i++) // 8
             {
+                int n = i;
                 for (int j = 0; j < height; j++)
                 {
+                    int m = j;
                     if (beads[j, i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
                     {
                         isReflush = true;
+                        beads[j, i].transform.localPosition = new Vector2(0, 1.25f);
+                        beads[j, i].transform.DOLocalMoveY(0f, 0.3f);
                         beads[j, i].gameObject.SetActive(true);
                         beads[j, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1));
                     }
@@ -221,6 +223,7 @@ public class BoardManager : Singleton<BoardManager>
             if (isReflush)
                 BeadBoardCheck();
         }
+        yield return new WaitForSeconds(0.3f);
     }
 
     public bool IsMoveCheck()
