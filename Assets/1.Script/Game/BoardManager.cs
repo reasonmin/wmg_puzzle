@@ -20,10 +20,11 @@ public class BoardManager : Singleton<BoardManager>
     void Start()
     {
         beads = new Bead[height, width];
+
         CreateBeadBG();
         CreateBead();
 
-        BeadBoardCheck();
+        SetBeadBoardCheck();
     }
 
     /// <summary>
@@ -124,6 +125,81 @@ public class BoardManager : Singleton<BoardManager>
         }
     }
 
+    public void SetBeadBoardCheck()
+    {
+        List<List<bool>> check = new List<List<bool>>();
+
+        for (int i = 0; i < height; i++)
+        {
+            check.Add(new List<bool>());
+            for (int j = 0; j < width; j++)
+            {
+                check[i].Add(false);
+            }
+        }
+
+        // 가로 체크
+        RowCheck(ref check);
+
+        // 세로 체크
+        ColCheck(ref check);
+
+        // 체크된것 전부 비활성화
+        for (int i = 0; i < check.Count; i++)
+        {
+            for (int j = 0; j < check[i].Count; j++)
+            {
+                if (check[i][j])
+                {
+                    beads[i, j].gameObject.SetActive(false);
+                }
+            }
+        }
+        SetBeadDown();
+    }
+    void SetBeadDown()
+    {
+        bool isRefresh = false;
+        for (int i = 0; i < width; i++)
+        {
+            if (beads[0, i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
+            {
+                isRefresh = true;
+                beads[0, i].gameObject.SetActive(true);
+                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1));
+            }
+        }
+
+        bool isChange = false;
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = height - 2; j >= 0; j--)
+            {
+                if (beads[j, i].gameObject.activeInHierarchy == true &&
+                    beads[j + 1, i].gameObject.activeInHierarchy == false)
+                {
+                    //yield return new WaitForSeconds(0.05f);
+
+                    // 속성 교체
+                    BeadType type = beads[j, i].Type;
+                    beads[j, i].Type = beads[j + 1, i].Type;
+                    beads[j + 1, i].Type = type;
+
+                    // 다음것은 켬, 내것은 끔
+                    beads[j, i].gameObject.SetActive(false);
+                    beads[j + 1, i].gameObject.SetActive(true);
+
+                    isChange = true;
+                }
+            }
+        }
+
+        if (isChange)
+            SetBeadDown();
+        else if (isRefresh)
+            SetBeadBoardCheck();
+    }
+
     /// <summary>
     /// 상호작용이 가능한 구슬이 있는지 체크
     /// </summary>
@@ -166,64 +242,57 @@ public class BoardManager : Singleton<BoardManager>
     /// </summary>
     IEnumerator BeadDown()
     {
-        bool isChange = false;
+        bool isRefresh = false;
         for (int i = 0; i < width; i++)
         {
-            int n = i;
-            for (int j = 0; j < height - 1; j++)
+            if (beads[0, i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
             {
-                int m = j;
-                if (beads[j, i].gameObject.activeInHierarchy == true &&
-                    beads[j + 1, i].gameObject.activeInHierarchy == false)
+                isRefresh = true;
+                beads[0, i].gameObject.SetActive(true);
+                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1));
+
+                beads[0, i].transform.localPosition = new Vector2(0, 1.25f);
+                beads[0, i].transform.DOLocalMoveY(0, 1f);
+            }
+        }
+
+        bool isChange = false;
+
+        for (int i = height - 2; i >= 0; i--)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                if (beads[i, j].gameObject.activeInHierarchy == true &&
+                    beads[i + 1, j].gameObject.activeInHierarchy == false)
                 {
-                    beads[j, i].transform.DOLocalMoveY(-1.25f, 0.3f)
-                        .OnComplete(() =>
-                        {
-                            beads[m, n].transform.localPosition = Vector2.zero;
-                        });
+                    //yield return new WaitForSeconds(0.1f);
+                    isChange = true;
 
                     // 속성 교체
-                    BeadType type = beads[j, i].Type;
-                    beads[j, i].Type = beads[j + 1, i].Type;
-                    beads[j + 1, i].Type = type;
+                    BeadType type = beads[i, j].Type;
+                    beads[i, j].Type = beads[i + 1, j].Type;
+                    beads[i + 1, j].Type = type;
 
                     // 다음것은 켬, 내것은 끔
-                    beads[j, i].gameObject.SetActive(false);
-                    beads[j + 1, i].gameObject.SetActive(true);
+                    beads[i, j].gameObject.SetActive(false);
+                    beads[i + 1, j].gameObject.SetActive(true);
 
-                    isChange = true;
+                    beads[i + 1, j].transform.localPosition = new Vector2(0, 1.25f);
+                    beads[i + 1, j].transform.DOLocalMoveY(0, 1f);
                 }
-            }            
+            }
         }
 
         if (isChange == true)
-            StartCoroutine(BeadDown());
-
-        else
         {
-            // 구슬 데이터 리플레쉬
-            bool isReflush = false;
-            for (int i = 0; i < width; i++) // 8
-            {
-                int n = i;
-                for (int j = 0; j < height; j++)
-                {
-                    int m = j;
-                    if (beads[j, i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
-                    {
-                        isReflush = true;
-                        beads[j, i].transform.localPosition = new Vector2(0, 1.25f);
-                        beads[j, i].transform.DOLocalMoveY(0f, 0.3f);
-                        beads[j, i].gameObject.SetActive(true);
-                        beads[j, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1));
-                    }
-                }
-            }
-
-            if (isReflush)
-                BeadBoardCheck();
+            StartCoroutine(BeadDown());
         }
-        yield return new WaitForSeconds(0.3f);
+        else if(isRefresh)
+        {
+            yield return new WaitForSeconds(1f);
+            Debug.Log("End");
+            BeadBoardCheck();
+        }
     }
 
     public bool IsMoveCheck()
@@ -266,13 +335,13 @@ public class BoardManager : Singleton<BoardManager>
     /// </summary>
     public void ChangeBead(Bead bead, Vector2 dir)
     {
-        int x = -1; 
+        int x = -1;
         int y = -1;
         for (int i = 0; i <= height; i++) //세로
         {
             for (int j = 0; j <= width; j++) //가로
             {
-                if(beads[j, i].Equals(bead) == true)
+                if (beads[j, i].Equals(bead) == true)
                 {
                     x = i;
                     y = j;
@@ -300,7 +369,7 @@ public class BoardManager : Singleton<BoardManager>
 
         Bead nextBead = beads[nextY, nextX];
         SwapBeads(bead, nextBead);
-        if(IsMoveCheck() == false)
+        if (IsMoveCheck() == false)
         {
             SwapBeads(bead, nextBead);
         }
