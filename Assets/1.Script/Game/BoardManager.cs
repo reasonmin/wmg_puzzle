@@ -24,7 +24,7 @@ public class BoardManager : Singleton<BoardManager>
         CreateBeadBG();
         CreateBead();
 
-        SetBeadBoardCheck();
+        BeadBoardCheck();
     }
 
     /// <summary>
@@ -123,81 +123,6 @@ public class BoardManager : Singleton<BoardManager>
                 }
             }
         }
-    }
-
-    public void SetBeadBoardCheck()
-    {
-        List<List<bool>> check = new List<List<bool>>();
-
-        for (int i = 0; i < height; i++)
-        {
-            check.Add(new List<bool>());
-            for (int j = 0; j < width; j++)
-            {
-                check[i].Add(false);
-            }
-        }
-
-        // 가로 체크
-        RowCheck(ref check);
-
-        // 세로 체크
-        ColCheck(ref check);
-
-        // 체크된것 전부 비활성화
-        for (int i = 0; i < check.Count; i++)
-        {
-            for (int j = 0; j < check[i].Count; j++)
-            {
-                if (check[i][j])
-                {
-                    beads[i, j].gameObject.SetActive(false);
-                }
-            }
-        }
-        SetBeadDown();
-    }
-    void SetBeadDown()
-    {
-        bool isRefresh = false;
-        for (int i = 0; i < width; i++)
-        {
-            if (beads[0, i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
-            {
-                isRefresh = true;
-                beads[0, i].gameObject.SetActive(true);
-                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1));
-            }
-        }
-
-        bool isChange = false;
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = height - 2; j >= 0; j--)
-            {
-                if (beads[j, i].gameObject.activeInHierarchy == true &&
-                    beads[j + 1, i].gameObject.activeInHierarchy == false)
-                {
-                    //yield return new WaitForSeconds(0.05f);
-
-                    // 속성 교체
-                    BeadType type = beads[j, i].Type;
-                    beads[j, i].Type = beads[j + 1, i].Type;
-                    beads[j + 1, i].Type = type;
-
-                    // 다음것은 켬, 내것은 끔
-                    beads[j, i].gameObject.SetActive(false);
-                    beads[j + 1, i].gameObject.SetActive(true);
-
-                    isChange = true;
-                }
-            }
-        }
-
-        if (isChange)
-            SetBeadDown();
-        else if (isRefresh)
-            SetBeadBoardCheck();
     }
 
     /// <summary>
