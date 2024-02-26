@@ -68,7 +68,7 @@ public class BoardManager : Singleton<BoardManager>
     /// <summary>
     /// 가로 체크
     /// </summary>
-    void RowCheck(ref List<List<bool>> check)
+    void RowCheck(ref bool[,] check)
     {
         for (int i = 0; i < height; i++)
         {
@@ -86,7 +86,7 @@ public class BoardManager : Singleton<BoardManager>
                     {
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
-                            check[i][delcnt] = true;
+                            check[i, delcnt] = true;
                         }
                     }
                     checkCnt = 0;
@@ -98,7 +98,7 @@ public class BoardManager : Singleton<BoardManager>
     /// <summary>
     /// 세로 체크
     /// </summary>
-    void ColCheck(ref List<List<bool>> check)
+    void ColCheck(ref bool[,] check)
     {
         for (int i = 0; i < width; i++)
         {
@@ -116,7 +116,7 @@ public class BoardManager : Singleton<BoardManager>
                     {
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
-                            check[delcnt][i] = true;
+                            check[delcnt, i] = true;
                         }
                     }
                     checkCnt = 0;
@@ -130,14 +130,13 @@ public class BoardManager : Singleton<BoardManager>
     /// </summary>
     public void BeadBoardCheck()
     {
-        List<List<bool>> check = new List<List<bool>>();
+        bool[,] check = new bool[height, width];
 
         for (int i = 0; i < height; i++)
         {
-            check.Add(new List<bool>());
             for (int j = 0; j < width; j++)
             {
-                check[i].Add(false);
+                check[i, j] = false;
             }
         }
 
@@ -149,11 +148,11 @@ public class BoardManager : Singleton<BoardManager>
 
         bool isRefresh = false;
         // 체크된것 전부 비활성화
-        for (int i = 0; i < check.Count; i++)
+        for (int i = 0; i < height; i++)
         {
-            for (int j = 0; j < check[i].Count; j++)
+            for (int j = 0; j < width; j++)
             {
-                if (check[i][j])
+                if (check[i, j])
                 {
                     isRefresh = true;
                     beads[i, j].gameObject.SetActive(false);
@@ -236,14 +235,13 @@ public class BoardManager : Singleton<BoardManager>
 
     public bool IsMoveCheck()
     {
-        List<List<bool>> check = new List<List<bool>>();
+        bool[,] check = new bool[height, width];
 
         for (int i = 0; i < height; i++)
         {
-            check.Add(new List<bool>());
             for (int j = 0; j < width; j++)
             {
-                check[i].Add(false);
+                check[i, j] = false;
             }
         }
 
@@ -255,11 +253,11 @@ public class BoardManager : Singleton<BoardManager>
 
         // 체크된것 전부 비활성화
         bool isCheck = false;
-        for (int i = 0; i < check.Count; i++)
+        for (int i = 0; i < height; i++)
         {
-            for (int j = 0; j < check[i].Count; j++)
+            for (int j = 0; j < width; j++)
             {
-                if (check[i][j])
+                if (check[i, j])
                 {
                     isCheck = true;
                 }
