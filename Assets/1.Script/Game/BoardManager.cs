@@ -158,6 +158,7 @@ public class BoardManager : Singleton<BoardManager>
                 }
             }
         }
+
         StartCoroutine(BeadDown());
     }
 
