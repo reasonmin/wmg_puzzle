@@ -168,6 +168,8 @@ public class BoardManager : Singleton<BoardManager>
     /// </summary>
     IEnumerator BeadDown()
     {
+        float speed = 0.2f;
+
         bool isRefresh = false;
         for (int i = 0; i < width; i++)
         {
@@ -178,12 +180,11 @@ public class BoardManager : Singleton<BoardManager>
                 beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1));
 
                 beads[0, i].transform.localPosition = new Vector2(0, 1.25f);
-                beads[0, i].transform.DOLocalMoveY(0, 1f);
+                beads[0, i].transform.DOLocalMoveY(0, speed).SetEase(Ease.Linear);
             }
         }
 
         bool isChange = false;
-
         for (int i = height - 2; i >= 0; i--)
         {
             for (int j = 0; j < width; j++)
@@ -204,18 +205,19 @@ public class BoardManager : Singleton<BoardManager>
                     beads[i + 1, j].gameObject.SetActive(true);
 
                     beads[i + 1, j].transform.localPosition = new Vector2(0, 1.25f);
-                    beads[i + 1, j].transform.DOLocalMoveY(0, 1f);
+                    beads[i + 1, j].transform.DOLocalMoveY(0, speed).SetEase(Ease.Linear);
                 }
             }
         }
 
         if (isChange == true)
         {
+            yield return new WaitForSeconds(speed);
             StartCoroutine(BeadDown());
         }
         else if(isRefresh)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(speed);
             Debug.Log("End");
             BeadBoardCheck();
         }
