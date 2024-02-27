@@ -127,10 +127,10 @@ public class BoardManager : Singleton<BoardManager>
 
                     if (checkCnt >= 2)
                     {
-                        /*if (checkCnt == 3)
-                            checkbeads[i, j] = SpecialBT.Four;
+                        if (checkCnt == 3)
+                            checkbeads[j, i] = SpecialBT.Four;
                         if (checkCnt == 4)
-                            checkbeads[i, j] = SpecialBT.Five;*/
+                            checkbeads[j, i] = SpecialBT.Five;
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[delcnt, i] = true;
@@ -178,7 +178,7 @@ public class BoardManager : Singleton<BoardManager>
                     }
                     else
                     {
-                        Debug.Log($"{i}, {j}: {checkbeads[i, j]}");
+                        Debug.Log($"{i}, {j} : {checkbeads[i, j]}");
                         beads[i, j].SetBead((int)beads[i, j].Type, checkbeads[i, j]);
                     }
 
