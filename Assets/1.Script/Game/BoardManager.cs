@@ -16,10 +16,17 @@ public class BoardManager : Singleton<BoardManager>
     [SerializeField] private Bead bead;
 
     private Bead[,] beads;
+    private SpecialBT[,] checkbeads;
 
     void Start()
     {
         beads = new Bead[height, width];
+        checkbeads = new SpecialBT[height, width];
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+                checkbeads[i, j] = SpecialBT.Normal;
+        }
 
         CreateBeadBG();
         CreateBead();
@@ -85,6 +92,14 @@ public class BoardManager : Singleton<BoardManager>
                 {
                     if (checkCnt >= 2)
                     {
+                        if (checkCnt == 3)
+                        {
+                            checkbeads[i, j] = SpecialBT.Four;
+                        }
+                        else if (checkCnt == 4)
+                        {
+                            checkbeads[i, j] = SpecialBT.Five;
+                        }
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[i, delcnt] = true;
@@ -107,15 +122,23 @@ public class BoardManager : Singleton<BoardManager>
             for (int j = 0; j < height; j++)
             {
                 BeadType bType = beads[j, i].Type;
-
                 if (j + 1 < height && bType == beads[j + 1, i].Type)
                 {
                     checkCnt++;
                 }
                 else
                 {
+
                     if (checkCnt >= 2)
                     {
+                        if (checkCnt == 3)
+                        {
+                            checkbeads[i, j] = SpecialBT.Four;
+                        }
+                        else if (checkCnt == 4)
+                        {
+                            checkbeads[i, j] = SpecialBT.Five;
+                        }
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[delcnt, i] = true;
@@ -156,8 +179,18 @@ public class BoardManager : Singleton<BoardManager>
             {
                 if (check[i, j])
                 {
-                    isRefresh = true;
-                    beads[i, j].gameObject.SetActive(false);
+                    if (checkbeads[i, j] == SpecialBT.Normal)
+                    {
+                        isRefresh = true;
+                        beads[i, j].gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        Debug.Log($"{i}, {j}: {checkbeads[i, j]}");
+                        beads[i, j].SetBead((int)beads[i, j].Type, checkbeads[i, j]);
+                    }
+
+                    checkbeads[i, j] = SpecialBT.Normal;
                 }
             }
         }
@@ -230,6 +263,7 @@ public class BoardManager : Singleton<BoardManager>
         }
         else if(isRefresh)
         {
+            yield return new WaitForSeconds(0.2f);
             //Debug.Log("End");
             BeadBoardCheck();
         }
