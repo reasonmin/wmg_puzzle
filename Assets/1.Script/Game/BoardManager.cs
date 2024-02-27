@@ -93,13 +93,9 @@ public class BoardManager : Singleton<BoardManager>
                     if (checkCnt >= 2)
                     {
                         if (checkCnt == 3)
-                        {
                             checkbeads[i, j] = SpecialBT.Four;
-                        }
-                        else if (checkCnt == 4)
-                        {
+                        if (checkCnt == 4)
                             checkbeads[i, j] = SpecialBT.Five;
-                        }
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[i, delcnt] = true;
@@ -131,14 +127,10 @@ public class BoardManager : Singleton<BoardManager>
 
                     if (checkCnt >= 2)
                     {
-                        if (checkCnt == 3)
-                        {
+                        /*if (checkCnt == 3)
                             checkbeads[i, j] = SpecialBT.Four;
-                        }
-                        else if (checkCnt == 4)
-                        {
-                            checkbeads[i, j] = SpecialBT.Five;
-                        }
+                        if (checkCnt == 4)
+                            checkbeads[i, j] = SpecialBT.Five;*/
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[delcnt, i] = true;
