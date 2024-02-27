@@ -140,10 +140,10 @@ public class Bead : MonoBehaviour
         return Physics2D.Raycast(ray.origin, ray.direction);
     }
 
-    public void SetBead(int rand)   //랜덤으로 type(sprite) 정해주기
+    public void SetBead(int rand, SpecialBT specialBT)   //랜덤으로 type(sprite) 정해주기
     {
         type = (BeadType)rand;
-        Stype = SpecialBT.Normal;
+        Stype = specialBT;
         GetComponent<SpriteRenderer>().sprite = sprite[(int)Type];
     }
 }

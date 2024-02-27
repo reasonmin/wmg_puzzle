@@ -58,7 +58,7 @@ public class BoardManager : Singleton<BoardManager>
             for (int j = 0; j < width; j++)
             {
                 Bead b = Instantiate(bead, transform.GetChild(t));
-                b.SetBead(Random.Range(0, (int)BeadType.Dark + 1));
+                b.SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
                 beads[i, j] = b;
                 t++;
             }
@@ -76,6 +76,7 @@ public class BoardManager : Singleton<BoardManager>
             for (int j = 0; j < width; j++)
             {
                 BeadType bType = beads[i, j].Type;
+                
                 if (j + 1 < width && bType == beads[i, j + 1].Type)
                 {
                     checkCnt++;
@@ -106,6 +107,7 @@ public class BoardManager : Singleton<BoardManager>
             for (int j = 0; j < height; j++)
             {
                 BeadType bType = beads[j, i].Type;
+
                 if (j + 1 < height && bType == beads[j + 1, i].Type)
                 {
                     checkCnt++;
@@ -165,7 +167,7 @@ public class BoardManager : Singleton<BoardManager>
             if (beads[0, i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
             {
                 beads[0, i].gameObject.SetActive(true);
-                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1));
+                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
 
                 beads[0, i].transform.localPosition = new Vector2(0, 1.25f);
                 beads[0, i].transform.DOLocalMoveY(0, 0.2f).SetEase(Ease.Linear);
@@ -214,7 +216,7 @@ public class BoardManager : Singleton<BoardManager>
             if (beads[0, i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
             {
                 beads[0, i].gameObject.SetActive(true);
-                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1));
+                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
 
                 beads[0, i].transform.localPosition = new Vector2(0, 1.25f);
                 beads[0, i].transform.DOLocalMoveY(0, speed).SetEase(Ease.Linear);
@@ -228,7 +230,7 @@ public class BoardManager : Singleton<BoardManager>
         }
         else if(isRefresh)
         {
-            Debug.Log("End");
+            //Debug.Log("End");
             BeadBoardCheck();
         }
     }
