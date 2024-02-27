@@ -12,6 +12,14 @@ public enum BeadType
     Dark
 }
 
+public enum SpecialBT
+{
+    Normal,
+    Three,
+    Four,
+    Five
+}
+
 public class Bead : MonoBehaviour
 {
     [SerializeField] private List<Sprite> sprite;
