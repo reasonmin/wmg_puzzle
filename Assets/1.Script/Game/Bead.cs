@@ -47,7 +47,7 @@ public class Bead : MonoBehaviour
                     GetComponent<SpriteRenderer>().sprite = _FourSprite[(int)type];
                     break;
                 case SpecialBT.Five:
-                    GetComponent<SpriteRenderer>().sprite = _FiveSprite;
+                    GetComponent<SpriteRenderer>().sprite = _NormalSprite[(int)type];
                     break;
                 default:
                     break;
