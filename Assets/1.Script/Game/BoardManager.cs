@@ -221,6 +221,10 @@ public class BoardManager : Singleton<BoardManager>
                     //yield return new WaitForSeconds(0.1f);
                     isChange = true;
 
+                    SpecialBT stype = beads[i, j].Stype;
+                    beads[i, j].Stype = beads[i + 1, j].Stype;
+                    beads[i + 1, j].Stype = stype;
+
                     // 속성 교체
                     BeadType type = beads[i, j].Type;
                     beads[i, j].Type = beads[i + 1, j].Type;
