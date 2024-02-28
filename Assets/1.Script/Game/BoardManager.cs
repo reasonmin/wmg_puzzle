@@ -84,7 +84,7 @@ public class BoardManager : Singleton<BoardManager>
             {
                 BeadType bType = beads[i, j].Type;
                 
-                if (j + 1 < width && bType == beads[i, j + 1].Type)
+                if (beads[i, j].Stype != SpecialBT.Five && j + 1 < width && bType == beads[i, j + 1].Type)
                 {
                     checkCnt++;
                 }
@@ -118,7 +118,7 @@ public class BoardManager : Singleton<BoardManager>
             for (int j = 0; j < height; j++)
             {
                 BeadType bType = beads[j, i].Type;
-                if (j + 1 < height && bType == beads[j + 1, i].Type)
+                if (beads[j, 1].Stype != SpecialBT.Five && j + 1 < height && bType == beads[j + 1, i].Type)
                 {
                     checkCnt++;
                 }
@@ -345,6 +345,10 @@ public class BoardManager : Singleton<BoardManager>
         //비드를 교환하는 함수
         void SwapBeads(Bead bead1, Bead bead2)
         {
+            SpecialBT targetStype = bead1.Stype;
+            bead.Stype = bead2.Stype;
+            bead2.Stype = targetStype;
+
             BeadType targetBeadType = bead1.Type;
             bead.Type = bead2.Type;
             bead2.Type = targetBeadType;
