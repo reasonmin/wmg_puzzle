@@ -24,7 +24,7 @@ public class Bead : MonoBehaviour
 {
     [SerializeField] private List<Sprite> sprite;
 
-    public SpecialBT Stype;
+    public SpecialBT stype;
     // 종류
     private BeadType type;
     public BeadType Type
@@ -143,7 +143,7 @@ public class Bead : MonoBehaviour
     public void SetBead(int rand, SpecialBT specialBT)   //랜덤으로 type(sprite) 정해주기
     {
         type = (BeadType)rand;
-        Stype = specialBT;
+        stype = specialBT;
         GetComponent<SpriteRenderer>().sprite = sprite[(int)Type];
     }
 }
