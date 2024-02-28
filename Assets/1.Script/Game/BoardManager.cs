@@ -65,7 +65,7 @@ public class BoardManager : Singleton<BoardManager>
             for (int j = 0; j < width; j++)
             {
                 Bead b = Instantiate(bead, transform.GetChild(t));
-                b.SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
+                b.SetBead(Random.Range(0, (int)BeadType.Dark), SpecialBT.Normal);
                 beads[i, j] = b;
                 t++;
             }
@@ -84,7 +84,7 @@ public class BoardManager : Singleton<BoardManager>
             {
                 BeadType bType = beads[i, j].Type;
                 
-                if (beads[i, j].stype != SpecialBT.Five && j + 1 < width && bType == beads[i, j + 1].Type)
+                if (j + 1 < width && bType == beads[i, j + 1].Type)
                 {
                     checkCnt++;
                 }
@@ -118,13 +118,12 @@ public class BoardManager : Singleton<BoardManager>
             for (int j = 0; j < height; j++)
             {
                 BeadType bType = beads[j, i].Type;
-                if (beads[j, 1].stype != SpecialBT.Five && j + 1 < height && bType == beads[j + 1, i].Type)
+                if (j + 1 < height && bType == beads[j + 1, i].Type)
                 {
                     checkCnt++;
                 }
                 else
                 {
-
                     if (checkCnt >= 2)
                     {
                         if (checkCnt == 3)
@@ -192,7 +191,7 @@ public class BoardManager : Singleton<BoardManager>
             if (beads[0, i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
             {
                 beads[0, i].gameObject.SetActive(true);
-                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
+                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark), SpecialBT.Normal);
 
                 beads[0, i].transform.localPosition = new Vector2(0, 1.25f);
                 beads[0, i].transform.DOLocalMoveY(0, 0.2f).SetEase(Ease.Linear);
@@ -244,7 +243,7 @@ public class BoardManager : Singleton<BoardManager>
             if (beads[0, i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
             {
                 beads[0, i].gameObject.SetActive(true);
-                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
+                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark), SpecialBT.Normal);
 
                 beads[0, i].transform.localPosition = new Vector2(0, 1.25f);
                 beads[0, i].transform.DOLocalMoveY(0, speed).SetEase(Ease.Linear);
