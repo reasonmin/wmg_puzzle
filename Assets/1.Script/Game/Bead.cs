@@ -71,6 +71,7 @@ public class Bead : MonoBehaviour
             if (GetHit2D().collider != null)
             {
                 target = GetHit2D().collider;
+                target.GetComponent<SpriteRenderer>().sortingOrder = 1;
                 startPos = Vector2.zero;
             }
         }
@@ -145,6 +146,8 @@ public class Bead : MonoBehaviour
             }
             else
                 transform.localPosition = Vector2.zero;
+
+            target.GetComponent<SpriteRenderer>().sortingOrder = 0;
             target = null;
         }
     }
