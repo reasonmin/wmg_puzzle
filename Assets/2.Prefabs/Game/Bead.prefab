@@ -98,12 +98,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a4565296ae5b9499cf27b2d034d5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite:
+  _NormalSprite:
   - {fileID: 528523113, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
   - {fileID: 1453105598, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
   - {fileID: 138564630, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
   - {fileID: -372352177, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
   - {fileID: -973794597, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
+  _FourSprite: []
+  _FiveSprite: []
+  Stype: 0
   clampVec2: {x: 1.35, y: 1.35}
   target: {fileID: 0}
 --- !u!58 &8223745659859485743

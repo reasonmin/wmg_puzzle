@@ -22,9 +22,11 @@ public enum SpecialBT
 
 public class Bead : MonoBehaviour
 {
-    [SerializeField] private List<Sprite> sprite;
+    [SerializeField] private Sprite[] _NormalSprite;
+    [SerializeField] private Sprite[] _FourSprite;
+    [SerializeField] private Sprite[] _FiveSprite;
 
-    public SpecialBT stype;
+    public SpecialBT Stype;
     // 종류
     private BeadType type;
     public BeadType Type
@@ -33,7 +35,7 @@ public class Bead : MonoBehaviour
         set
         {
             type = value;
-            GetComponent<SpriteRenderer>().sprite = sprite[(int)type];
+            GetComponent<SpriteRenderer>().sprite = _NormalSprite[(int)type];
         }
     }
 
@@ -65,7 +67,7 @@ public class Bead : MonoBehaviour
                 vec = Camera.main.ScreenToWorldPoint(vec);
 
                 // 위치 제한을 위해 Mathf.Clamp 사용
-                float clampedX = Mathf.Clamp(vec.x - transform.parent.transform.position.x,  -(clampVec2.x), clampVec2.x);
+                float clampedX = Mathf.Clamp(vec.x - transform.parent.transform.position.x, -(clampVec2.x), clampVec2.x);
                 float clampedY = Mathf.Clamp(vec.y - transform.parent.transform.position.y, -(clampVec2.y), clampVec2.y);
 
                 //transform.position과 startPos 사이의 거리 계산
@@ -91,7 +93,7 @@ public class Bead : MonoBehaviour
                     }
                 }
 
-                if(distanceX < 0.3f)
+                if (distanceX < 0.3f)
                 {
                     if (diff.normalized.y > 0 && (diff.normalized.x > -0.5f    //위쪽
                         && diff.normalized.x < 0.5f))
@@ -143,7 +145,7 @@ public class Bead : MonoBehaviour
     public void SetBead(int rand, SpecialBT specialBT)   //랜덤으로 type(sprite) 정해주기
     {
         type = (BeadType)rand;
-        stype = specialBT;
-        GetComponent<SpriteRenderer>().sprite = sprite[(int)Type];
+        Stype = specialBT;
+        Type = type;
     }
 }
