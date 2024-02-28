@@ -26,7 +26,7 @@ public class Bead : MonoBehaviour
     [SerializeField] private Sprite[] _FourSprite;
     [SerializeField] private Sprite _FiveSprite;
 
-    public SpecialBT Stype;
+    public SpecialBT stype;
     // 종류
     private BeadType type;
     public BeadType Type
@@ -36,7 +36,7 @@ public class Bead : MonoBehaviour
         {
             type = value;
 
-            switch (Stype)
+            switch (stype)
             {
                 case SpecialBT.Normal:
                     GetComponent<SpriteRenderer>().sprite = _NormalSprite[(int)type];
@@ -147,7 +147,9 @@ public class Bead : MonoBehaviour
             else
                 transform.localPosition = Vector2.zero;
 
-            target.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            if (target != null)
+                target.GetComponent<SpriteRenderer>().sortingOrder = 0;
+
             target = null;
         }
     }
@@ -164,7 +166,7 @@ public class Bead : MonoBehaviour
     public void SetBead(int rand, SpecialBT specialBT)   //랜덤으로 type(sprite) 정해주기
     {
         type = (BeadType)rand;
-        Stype = specialBT;
+        stype = specialBT;
         Type = type;
     }
 }
