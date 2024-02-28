@@ -308,7 +308,7 @@ public class BoardManager : Singleton<BoardManager>
         {
             for (int j = 0; j <= width; j++) //°¡·Î
             {
-                if (beads[j, i].Equals(bead) == true)
+                if (beads[j, i].Equals(bead))
                 {
                     x = i;
                     y = j;
@@ -317,24 +317,20 @@ public class BoardManager : Singleton<BoardManager>
             }
 
             if (x != -1 && y != -1)
-            {
                 break;
-            }
         }
 
-        int nextY = y;
-        int nextX = x;
 
         if (dir == Vector2.up)
-            nextY = y - 1;
+            y -= 1;
         else if (dir == Vector2.down)
-            nextY = y + 1;
+            y += 1;
         else if (dir == Vector2.left)
-            nextX = x - 1;
+            x -= 1;
         else if (dir == Vector2.right)
-            nextX = x + 1;
+            x += 1;
 
-        Bead nextBead = beads[nextY, nextX];
+        Bead nextBead = beads[y, x];
         SwapBeads(bead, nextBead);
         if (IsMoveCheck() == false)
         {
