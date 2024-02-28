@@ -24,7 +24,7 @@ public class Bead : MonoBehaviour
 {
     [SerializeField] private Sprite[] _NormalSprite;
     [SerializeField] private Sprite[] _FourSprite;
-    [SerializeField] private Sprite[] _FiveSprite;
+    [SerializeField] private Sprite _FiveSprite;
 
     public SpecialBT Stype;
     // Á¾·ù
@@ -35,7 +35,23 @@ public class Bead : MonoBehaviour
         set
         {
             type = value;
-            GetComponent<SpriteRenderer>().sprite = _NormalSprite[(int)type];
+
+            switch (Stype)
+            {
+                case SpecialBT.Normal:
+                    GetComponent<SpriteRenderer>().sprite = _NormalSprite[(int)type];
+                    break;
+                case SpecialBT.Three:
+                    break;
+                case SpecialBT.Four:
+                    GetComponent<SpriteRenderer>().sprite = _FourSprite[(int)type];
+                    break;
+                case SpecialBT.Five:
+                    GetComponent<SpriteRenderer>().sprite = _FiveSprite;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
