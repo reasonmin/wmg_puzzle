@@ -84,6 +84,7 @@ public class Bead : MonoBehaviour
                 vec = Camera.main.ScreenToWorldPoint(vec);
 
                 // 위치 제한을 위해 Mathf.Clamp 사용
+
                 float clampedX = Mathf.Clamp(vec.x - transform.parent.transform.position.x, -(clampVec2.x), clampVec2.x);
                 float clampedY = Mathf.Clamp(vec.y - transform.parent.transform.position.y, -(clampVec2.y), clampVec2.y);
 

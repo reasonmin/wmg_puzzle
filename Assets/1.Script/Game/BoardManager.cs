@@ -301,14 +301,14 @@ public class BoardManager : Singleton<BoardManager>
         int x = -1;
         int y = -1;
 
-        for (int i = 0; i <= height; i++) //세로
+        for (int i = 0; i < height; i++) //세로
         {
-            for (int j = 0; j <= width; j++) //가로
+            for (int j = 0; j < width; j++) //가로
             {
-                if (beads[j, i].Equals(bead))
+                if (beads[i, j].Equals(bead))
                 {
-                    x = i;
-                    y = j;
+                    y = i;
+                    x = j;
                     break;
                 }
             }

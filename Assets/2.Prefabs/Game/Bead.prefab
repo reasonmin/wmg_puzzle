@@ -111,7 +111,8 @@ MonoBehaviour:
   - {fileID: 219320109, guid: 9ac76027abdfe074994de8a8d2744f1b, type: 3}
   - {fileID: -466519166, guid: 9ac76027abdfe074994de8a8d2744f1b, type: 3}
   _FiveSprite: {fileID: 1112564460, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
-  Stype: 0
+  stype: 0
+  type: 0
   clampVec2: {x: 1.35, y: 1.35}
   target: {fileID: 0}
 --- !u!58 &8223745659859485743
