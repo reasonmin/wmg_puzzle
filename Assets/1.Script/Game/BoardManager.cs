@@ -22,11 +22,6 @@ public class BoardManager : Singleton<BoardManager>
     {
         beads = new Bead[height, width];
         checkbeads = new SpecialBT[height, width];
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-                checkbeads[i, j] = SpecialBT.Normal;
-        }
 
         CreateBeadBG();
         CreateBead();
@@ -43,7 +38,7 @@ public class BoardManager : Singleton<BoardManager>
         {
             for (int x = 0; x < width; x++)
             {
-                Vector2 position = new Vector2(x * ((imageSizeX / 100f)), -(y * ((imageSizeY / 100f)))); //구슬이 생성될 위치
+                Vector2 position = new Vector2(x * (imageSizeX / 100f), -(y * (imageSizeY / 100f))); //구슬이 생성될 위치
 
                 // 구슬 배경 미리 생성
                 Instantiate(beadBG, position, Quaternion.identity)
@@ -96,6 +91,7 @@ public class BoardManager : Singleton<BoardManager>
                             checkbeads[i, j] = SpecialBT.Four;
                         if (checkCnt == 4)
                             checkbeads[i, j] = SpecialBT.Five;
+
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[i, delcnt] = true;
@@ -130,6 +126,7 @@ public class BoardManager : Singleton<BoardManager>
                             checkbeads[j, i] = SpecialBT.Four;
                         if (checkCnt == 4)
                             checkbeads[j, i] = SpecialBT.Five;
+
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[delcnt, i] = true;
@@ -258,7 +255,6 @@ public class BoardManager : Singleton<BoardManager>
         else if(isRefresh)
         {
             yield return new WaitForSeconds(0.2f);
-            //Debug.Log("End");
             BeadBoardCheck();
         }
     }
@@ -304,6 +300,7 @@ public class BoardManager : Singleton<BoardManager>
     {
         int x = -1;
         int y = -1;
+
         for (int i = 0; i <= height; i++) //세로
         {
             for (int j = 0; j <= width; j++) //가로
@@ -319,7 +316,6 @@ public class BoardManager : Singleton<BoardManager>
             if (x != -1 && y != -1)
                 break;
         }
-
 
         if (dir == Vector2.up)
             y -= 1;
