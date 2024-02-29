@@ -29,7 +29,7 @@ public class BoardManager : Singleton<BoardManager>
         CreateBeadBG();
         CreateBead();
 
-        BeadBoardCheck(false);
+        BeadBoardCheck();
     }
 
     /// <summary>
@@ -162,7 +162,7 @@ public class BoardManager : Singleton<BoardManager>
     /// <summary>
     /// 상호작용이 가능한 구슬이 있는지 체크
     /// </summary>
-    public void BeadBoardCheck(bool isF)
+    public void BeadBoardCheck()
     {
         bool[,] check = new bool[height, width];
 
@@ -276,7 +276,7 @@ public class BoardManager : Singleton<BoardManager>
         else if(isRefresh)
         {
             yield return new WaitForSeconds(0.2f);
-            BeadBoardCheck(false);
+            BeadBoardCheck();
         }
     }
 
