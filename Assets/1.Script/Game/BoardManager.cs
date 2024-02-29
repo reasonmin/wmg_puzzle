@@ -79,7 +79,7 @@ public class BoardManager : Singleton<BoardManager>
             {
                 BeadType bType = beads[i, j].Type;
                 
-                if (j + 1 < width && bType == beads[i, j + 1].Type)
+                if (j + 1 < width && beads[i, j].stype != SpecialBT.Five && beads[i, j + 1].stype != SpecialBT.Five && bType == beads[i, j + 1].Type)
                 {
                     checkCnt++;
                 }
@@ -114,7 +114,7 @@ public class BoardManager : Singleton<BoardManager>
             for (int j = 0; j < height; j++)
             {
                 BeadType bType = beads[j, i].Type;
-                if (j + 1 < height && bType == beads[j + 1, i].Type)
+                if (j + 1 < height && beads[j, i].stype != SpecialBT.Five && beads[j + 1, i].stype != SpecialBT.Five && bType == beads[j + 1, i].Type)
                 {
                     checkCnt++;
                 }

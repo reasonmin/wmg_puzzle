@@ -10,7 +10,6 @@ public enum BeadType
     Heal,
     Light,
     Dark,
-    None
 }
 
 public enum SpecialBT
@@ -49,7 +48,6 @@ public class Bead : MonoBehaviour
                     break;
                 case SpecialBT.Five:
                     GetComponent<SpriteRenderer>().sprite = _FiveSprite;
-                    type = BeadType.None;
                     break;
                 default:
                     break;
