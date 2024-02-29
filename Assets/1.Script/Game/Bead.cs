@@ -141,7 +141,7 @@ public class Bead : MonoBehaviour
             {
                 BoardManager.Instance.ChangeBead(this, directionVector);
                 transform.localPosition = Vector2.zero;
-                BoardManager.Instance.BeadBoardCheck();
+                BoardManager.Instance.BeadBoardCheck(true);
 
                 //일치하는 항목이 없다면 이동 한 구슬을 원 상태로 되돌리기
             }

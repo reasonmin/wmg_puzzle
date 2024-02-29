@@ -18,6 +18,9 @@ public class BoardManager : Singleton<BoardManager>
     private Bead[,] beads;
     private SpecialBT[,] checkbeads;
 
+    private Vector2Int curVector2;
+    private Vector2Int targetVector2;
+
     void Start()
     {
         beads = new Bead[height, width];
@@ -26,7 +29,7 @@ public class BoardManager : Singleton<BoardManager>
         CreateBeadBG();
         CreateBead();
 
-        BeadBoardCheck();
+        BeadBoardCheck(false);
     }
 
     /// <summary>
@@ -87,14 +90,23 @@ public class BoardManager : Singleton<BoardManager>
                 {
                     if (checkCnt >= 2)
                     {
-                        if (checkCnt == 3)
-                            checkbeads[i, j] = SpecialBT.Four;
-                        if (checkCnt == 4)
-                            checkbeads[i, j] = SpecialBT.Five;
-
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[i, delcnt] = true;
+                            if(curVector2 == new Vector2Int(i, delcnt))
+                            {
+                                if (checkCnt == 3)
+                                    checkbeads[i, delcnt] = SpecialBT.Four;
+                                if (checkCnt == 4)
+                                    checkbeads[i, delcnt] = SpecialBT.Five;
+                            }
+                            else if (targetVector2 == new Vector2Int(i, delcnt))
+                            {
+                                if (checkCnt == 3)
+                                    checkbeads[i, delcnt] = SpecialBT.Four;
+                                if (checkCnt == 4)
+                                    checkbeads[i, delcnt] = SpecialBT.Five;
+                            }
                         }
                     }
                     checkCnt = 0;
@@ -122,14 +134,23 @@ public class BoardManager : Singleton<BoardManager>
                 {
                     if (checkCnt >= 2)
                     {
-                        if (checkCnt == 3)
-                            checkbeads[j, i] = SpecialBT.Four;
-                        if (checkCnt == 4)
-                            checkbeads[j, i] = SpecialBT.Five;
-
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[delcnt, i] = true;
+                            if (curVector2 == new Vector2Int(delcnt, i))
+                            {
+                                if (checkCnt == 3)
+                                    checkbeads[delcnt, i] = SpecialBT.Four;
+                                if (checkCnt == 4)
+                                    checkbeads[delcnt, i] = SpecialBT.Five;
+                            }
+                            else if (targetVector2 == new Vector2Int(delcnt, i))
+                            {
+                                if (checkCnt == 3)
+                                    checkbeads[delcnt, i] = SpecialBT.Four;
+                                if (checkCnt == 4)
+                                    checkbeads[delcnt, i] = SpecialBT.Five;
+                            }
                         }
                     }
                     checkCnt = 0;
@@ -141,7 +162,7 @@ public class BoardManager : Singleton<BoardManager>
     /// <summary>
     /// 상호작용이 가능한 구슬이 있는지 체크
     /// </summary>
-    public void BeadBoardCheck()
+    public void BeadBoardCheck(bool isF)
     {
         bool[,] check = new bool[height, width];
 
@@ -255,7 +276,7 @@ public class BoardManager : Singleton<BoardManager>
         else if(isRefresh)
         {
             yield return new WaitForSeconds(0.2f);
-            BeadBoardCheck();
+            BeadBoardCheck(false);
         }
     }
 
@@ -317,6 +338,8 @@ public class BoardManager : Singleton<BoardManager>
                 break;
         }
 
+        curVector2 = new Vector2Int(y, x);
+
         if (dir == Vector2.up)
             y -= 1;
         else if (dir == Vector2.down)
@@ -325,6 +348,8 @@ public class BoardManager : Singleton<BoardManager>
             x -= 1;
         else if (dir == Vector2.right)
             x += 1;
+
+        targetVector2 = new Vector2Int(y, x);
 
         Bead nextBead = beads[y, x];
         SwapBeads(bead, nextBead);
