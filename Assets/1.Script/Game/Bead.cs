@@ -15,7 +15,6 @@ public enum BeadType
 public enum SpecialBT
 {
     Normal,
-    Three,
     Four,
     Five
 }
@@ -40,8 +39,6 @@ public class Bead : MonoBehaviour
             {
                 case SpecialBT.Normal:
                     GetComponent<SpriteRenderer>().sprite = _NormalSprite[(int)type];
-                    break;
-                case SpecialBT.Three:
                     break;
                 case SpecialBT.Four:
                     GetComponent<SpriteRenderer>().sprite = _FourSprite[(int)type];
