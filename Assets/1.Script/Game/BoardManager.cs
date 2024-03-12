@@ -107,6 +107,13 @@ public class BoardManager : Singleton<BoardManager>
                                 if (checkCnt == 4)
                                     checkbeads[i, delcnt] = SpecialBT.Five;
                             }
+                            else
+                            {
+                                if (checkCnt == 3)
+                                    checkbeads[i, j] = SpecialBT.Four;
+                                if (checkCnt == 4)
+                                    checkbeads[i, j] = SpecialBT.Five;
+                            }
                         }
                     }
                     checkCnt = 0;
@@ -150,6 +157,13 @@ public class BoardManager : Singleton<BoardManager>
                                     checkbeads[delcnt, i] = SpecialBT.Four;
                                 if (checkCnt == 4)
                                     checkbeads[delcnt, i] = SpecialBT.Five;
+                            }
+                            else 
+                            {
+                                if (checkCnt == 3)
+                                    checkbeads[j, i] = SpecialBT.Four;
+                                if (checkCnt == 4)
+                                    checkbeads[j, i] = SpecialBT.Five;
                             }
                         }
                     }
