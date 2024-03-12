@@ -29,7 +29,7 @@ public class BoardManager : Singleton<BoardManager>
         CreateBeadBG();
         CreateBead();
 
-        BeadBoardCheck();
+        BeadBoardCheck(true);
     }
 
     /// <summary>
@@ -162,7 +162,7 @@ public class BoardManager : Singleton<BoardManager>
     /// <summary>
     /// 상호작용이 가능한 구슬이 있는지 체크
     /// </summary>
-    public void BeadBoardCheck()
+    public void BeadBoardCheck(bool isF)
     {
         bool[,] check = new bool[height, width];
 
@@ -216,14 +216,14 @@ public class BoardManager : Singleton<BoardManager>
             }
         }
 
-        StartCoroutine(BeadDown(isRefresh));
+        StartCoroutine(BeadDown(isRefresh, isF));
     }
 
     #region 구슬 교환
     /// <summary>
     /// 빈자리 구슬을 있는것과 데이터 교체
     /// </summary>
-    IEnumerator BeadDown(bool isRefresh)
+    IEnumerator BeadDown(bool isRefresh, bool isF)
     {
         float speed = 0.2f;
 
@@ -250,8 +250,13 @@ public class BoardManager : Singleton<BoardManager>
                     beads[i, j].gameObject.SetActive(false);
                     beads[i + 1, j].gameObject.SetActive(true);
 
-                    beads[i + 1, j].transform.localPosition = new Vector2(0, 1.25f);
-                    beads[i + 1, j].transform.DOLocalMoveY(0, speed).SetEase(Ease.Linear);
+                    if (isF == false)
+                    {
+                        beads[i + 1, j].transform.localPosition = new Vector2(0, 1.25f);
+                        beads[i + 1, j].transform.DOLocalMoveY(0, speed).SetEase(Ease.Linear);
+                    }
+                    else
+                        beads[i + 1, j].transform.localPosition = Vector2.zero;
                 }
             }
         }
@@ -263,20 +268,27 @@ public class BoardManager : Singleton<BoardManager>
                 beads[0, i].gameObject.SetActive(true);
                 beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark), SpecialBT.Normal);
 
-                beads[0, i].transform.localPosition = new Vector2(0, 1.25f);
-                beads[0, i].transform.DOLocalMoveY(0, speed).SetEase(Ease.Linear);
+                if (isF == false)
+                {
+                    beads[0, i].transform.localPosition = new Vector2(0, 1.25f);
+                    beads[0, i].transform.DOLocalMoveY(0, speed).SetEase(Ease.Linear);
+                }
+                else
+                    beads[0, i].transform.localPosition = Vector2.zero;
             }
         }
 
         if (isChange == true)
         {
-            yield return new WaitForSeconds(speed);
-            StartCoroutine(BeadDown(isRefresh));
+            if (isF == false)
+                yield return new WaitForSeconds(speed);
+            StartCoroutine(BeadDown(isRefresh, isF));
         }
-        else if(isRefresh)
+        else if (isRefresh)
         {
-            yield return new WaitForSeconds(0.2f);
-            BeadBoardCheck();
+            if (isF == false)
+                yield return new WaitForSeconds(speed);
+            BeadBoardCheck(isF);
         }
     }
 
