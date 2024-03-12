@@ -319,6 +319,7 @@ public class BoardManager : Singleton<BoardManager>
     /// </summary>
     public void ChangeBead(Bead bead, Vector2 dir)
     {
+        Bead nextBead;
         int x = -1;
         int y = -1;
 
@@ -351,12 +352,16 @@ public class BoardManager : Singleton<BoardManager>
 
         targetVector2 = new Vector2Int(y, x);
 
-        Bead nextBead = beads[y, x];
+        if (x >= width || y >= height || x < 0 || y < 0)   // || y >= height || y <= height
+            return;
+        else
+            nextBead = beads[y, x];
+
         SwapBeads(bead, nextBead);
+
         if (IsMoveCheck() == false)
-        {
             SwapBeads(bead, nextBead);
-        }
+
         //비드를 교환하는 함수
         void SwapBeads(Bead bead1, Bead bead2)
         {
