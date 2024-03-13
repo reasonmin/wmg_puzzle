@@ -217,7 +217,7 @@ public class BoardManager : Singleton<BoardManager>
             {
                 if (check[i, j])
                 {
-                    if (checkbeads[i, j] == SpecialBT.Normal)
+                    if (checkbeads[i, j] == SpecialBT.Normal || isF)
                     {
                         isRefresh = true;
                         beads[i, j].gameObject.SetActive(false);
