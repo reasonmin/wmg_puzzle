@@ -18,11 +18,14 @@ public class BoardManager : Singleton<BoardManager>
     private Bead[,] beads;
     private SpecialBT[,] checkbeads;
 
+    [HideInInspector] public bool isPlay;
+
     private Vector2Int curVector2;
     private Vector2Int targetVector2;
 
     void Start()
     {
+        isPlay = true;
         beads = new Bead[height, width];
         checkbeads = new SpecialBT[height, width];
 
@@ -315,6 +318,11 @@ public class BoardManager : Singleton<BoardManager>
             if (isF == false)
                 yield return new WaitForSeconds(speed);
             BeadBoardCheck(isF);
+        }
+
+        if (!isRefresh)
+        {
+            isPlay = true;
         }
     }
 

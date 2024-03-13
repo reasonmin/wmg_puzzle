@@ -63,15 +63,19 @@ public class Bead : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))    //마우스를 눌렀을 때
+        if (BoardManager.Instance.isPlay)
         {
-            if (GetHit2D().collider != null)
+            if (Input.GetMouseButtonDown(0))    //마우스를 눌렀을 때
             {
-                target = GetHit2D().collider;
-                target.GetComponent<SpriteRenderer>().sortingOrder = 1;
-                startPos = Vector2.zero;
+                if (GetHit2D().collider != null)
+                {
+                    target = GetHit2D().collider;
+                    target.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                    startPos = Vector2.zero;
+                }
             }
         }
+        
 
         if (Input.GetMouseButton(0))    //마우스를 누르고 있을 때
         {
@@ -136,6 +140,7 @@ public class Bead : MonoBehaviour
 
             if (distanceX > 0.7f || distanceY > 0.7f)
             {
+                BoardManager.Instance.isPlay = false;
                 BoardManager.Instance.ChangeBead(this, directionVector);
                 transform.localPosition = Vector2.zero;
                 BoardManager.Instance.BeadBoardCheck(false);
