@@ -102,7 +102,7 @@ public class BoardManager : Singleton<BoardManager>
                                 isf = false;
                                 if (checkCnt == 3)
                                     checkbeads[i, delcnt] = SpecialBT.Four;
-                                if (checkCnt == 4)
+                                else if (checkCnt == 4)
                                     checkbeads[i, delcnt] = SpecialBT.Five;
                             }
                             else if (targetVector2 == new Vector2Int(i, delcnt))
@@ -110,7 +110,7 @@ public class BoardManager : Singleton<BoardManager>
                                 isf = false;
                                 if (checkCnt == 3)
                                     checkbeads[i, delcnt] = SpecialBT.Four;
-                                if (checkCnt == 4)
+                                else if(checkCnt == 4)
                                     checkbeads[i, delcnt] = SpecialBT.Five;
                             }
                         }
@@ -120,7 +120,7 @@ public class BoardManager : Singleton<BoardManager>
                             {
                                 if (checkCnt == 3)
                                     checkbeads[j, i] = SpecialBT.Four;
-                                if (checkCnt == 4)
+                                else if (checkCnt == 4)
                                     checkbeads[j, i] = SpecialBT.Five;
                             }
                         }
