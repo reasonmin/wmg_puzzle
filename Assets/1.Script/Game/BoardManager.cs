@@ -66,7 +66,7 @@ public class BoardManager : Singleton<BoardManager>
             for (int j = 0; j < width; j++)
             {
                 Bead b = Instantiate(bead, transform.GetChild(t));
-                b.SetBead(Random.Range(0, (int)BeadType.Dark), SpecialBT.Normal);
+                b.SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
                 beads[i, j] = b;
                 t++;
             }
@@ -203,6 +203,9 @@ public class BoardManager : Singleton<BoardManager>
         // 세로 체크
         ColCheck(ref check);
 
+        curVector2 = new Vector2Int(height + 1, width + 1);
+        targetVector2 = new Vector2Int(height + 1, width + 1);
+
         bool isRefresh = false;
         // 체크된것 전부 비활성화
         for (int i = 0; i < height; i++)
@@ -232,7 +235,7 @@ public class BoardManager : Singleton<BoardManager>
             if (beads[0, i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
             {
                 beads[0, i].gameObject.SetActive(true);
-                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark), SpecialBT.Normal);
+                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
 
                 beads[0, i].transform.localPosition = new Vector2(0, 1.25f);
                 beads[0, i].transform.DOLocalMoveY(0, 0.2f).SetEase(Ease.Linear);
@@ -289,7 +292,7 @@ public class BoardManager : Singleton<BoardManager>
             if (beads[0, i].gameObject.activeInHierarchy == false)  //activeInHierarchy가 꺼져있을 때 동작
             {
                 beads[0, i].gameObject.SetActive(true);
-                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark), SpecialBT.Normal);
+                beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
 
                 if (isF == false)
                 {
