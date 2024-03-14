@@ -76,7 +76,6 @@ public class Bead : MonoBehaviour
                 }
             }
         }
-        
 
         if (Input.GetMouseButton(0))    //마우스를 누르고 있을 때
         {

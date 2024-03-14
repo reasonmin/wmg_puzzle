@@ -93,13 +93,11 @@ public class BoardManager : Singleton<BoardManager>
                 {
                     if (checkCnt >= 2)
                     {
-                        bool isf = true;
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[i, delcnt] = true;
                             if(curVector2 == new Vector2Int(i, delcnt))
                             {
-                                isf = false;
                                 if (checkCnt == 3)
                                     checkbeads[i, delcnt] = SpecialBT.Four;
                                 else if (checkCnt == 4)
@@ -107,14 +105,13 @@ public class BoardManager : Singleton<BoardManager>
                             }
                             else if (targetVector2 == new Vector2Int(i, delcnt))
                             {
-                                isf = false;
                                 if (checkCnt == 3)
                                     checkbeads[i, delcnt] = SpecialBT.Four;
                                 else if(checkCnt == 4)
                                     checkbeads[i, delcnt] = SpecialBT.Five;
                             }
                         }
-                        if (isf)
+                        if (curVector2 == null)
                         {
                             for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                             {
@@ -150,13 +147,11 @@ public class BoardManager : Singleton<BoardManager>
                 {
                     if (checkCnt >= 2)
                     {
-                        bool isf = true;
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[delcnt, i] = true;
                             if (curVector2 == new Vector2Int(delcnt, i))
                             {
-                                isf = false;
                                 if (checkCnt == 3)
                                     checkbeads[delcnt, i] = SpecialBT.Four;
                                 if (checkCnt == 4)
@@ -164,14 +159,13 @@ public class BoardManager : Singleton<BoardManager>
                             }
                             else if (targetVector2 == new Vector2Int(delcnt, i))
                             {
-                                isf = false;
                                 if (checkCnt == 3)
                                     checkbeads[delcnt, i] = SpecialBT.Four;
                                 if (checkCnt == 4)
                                     checkbeads[delcnt, i] = SpecialBT.Five;
                             }
                         }
-                        if (isf)
+                        if (curVector2 == null)
                         {
                             for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                             {
