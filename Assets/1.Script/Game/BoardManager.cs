@@ -399,8 +399,11 @@ public class BoardManager : Singleton<BoardManager>
 
         SwapBeads(bead, nextBead);
 
-        if (IsMoveCheck() == false)
-            SwapBeads(bead, nextBead);
+        if (nextBead.stype != SpecialBT.Five && bead.stype != SpecialBT.Five)
+        {
+            if (IsMoveCheck() == false)
+                SwapBeads(bead, nextBead);
+        }
 
         //비드를 교환하는 함수
         void SwapBeads(Bead bead1, Bead bead2)
