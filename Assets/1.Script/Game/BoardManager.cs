@@ -93,11 +93,13 @@ public class BoardManager : Singleton<BoardManager>
                 {
                     if (checkCnt >= 2)
                     {
+                        bool isf = true;
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[i, delcnt] = true;
                             if(curVector2 == new Vector2Int(i, delcnt))
                             {
+                                isf = false;
                                 if (checkCnt == 3)
                                     checkbeads[i, delcnt] = SpecialBT.Four;
                                 else if (checkCnt == 4)
@@ -105,21 +107,19 @@ public class BoardManager : Singleton<BoardManager>
                             }
                             else if (targetVector2 == new Vector2Int(i, delcnt))
                             {
+                                isf = false;
                                 if (checkCnt == 3)
                                     checkbeads[i, delcnt] = SpecialBT.Four;
                                 else if(checkCnt == 4)
                                     checkbeads[i, delcnt] = SpecialBT.Five;
                             }
                         }
-                        if (curVector2 == null)
+                        if (isf)
                         {
-                            for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
-                            {
-                                if (checkCnt == 3)
-                                    checkbeads[j, i] = SpecialBT.Four;
-                                else if (checkCnt == 4)
-                                    checkbeads[j, i] = SpecialBT.Five;
-                            }
+                            if (checkCnt == 3)
+                                checkbeads[i, j] = SpecialBT.Four;
+                            else if (checkCnt == 4)
+                                checkbeads[i, j] = SpecialBT.Five;
                         }
                     }
                     checkCnt = 0;
@@ -147,11 +147,13 @@ public class BoardManager : Singleton<BoardManager>
                 {
                     if (checkCnt >= 2)
                     {
+                        bool isf = true;
                         for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
                         {
                             check[delcnt, i] = true;
                             if (curVector2 == new Vector2Int(delcnt, i))
                             {
+                                isf = false;
                                 if (checkCnt == 3)
                                     checkbeads[delcnt, i] = SpecialBT.Four;
                                 if (checkCnt == 4)
@@ -159,21 +161,19 @@ public class BoardManager : Singleton<BoardManager>
                             }
                             else if (targetVector2 == new Vector2Int(delcnt, i))
                             {
+                                isf = false;
                                 if (checkCnt == 3)
                                     checkbeads[delcnt, i] = SpecialBT.Four;
                                 if (checkCnt == 4)
                                     checkbeads[delcnt, i] = SpecialBT.Five;
                             }
                         }
-                        if (curVector2 == null)
+                        if (isf)
                         {
-                            for (int delcnt = j; delcnt >= j - checkCnt; delcnt--)
-                            {
-                                if (checkCnt == 3)
-                                    checkbeads[j, i] = SpecialBT.Four;
-                                if (checkCnt == 4)
-                                    checkbeads[j, i] = SpecialBT.Five;
-                            }
+                            if (checkCnt == 3)
+                                checkbeads[j, i] = SpecialBT.Four;
+                            if (checkCnt == 4)
+                                checkbeads[j, i] = SpecialBT.Five;
                         }
                     }
                     checkCnt = 0;
