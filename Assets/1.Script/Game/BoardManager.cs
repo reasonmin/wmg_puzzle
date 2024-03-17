@@ -101,7 +101,7 @@ public class BoardManager : Singleton<BoardManager>
                             {
                                 isf = false;
                                 if (checkCnt == 3)
-                                    checkbeads[i, delcnt] = SpecialBT.Four;
+                                    checkbeads[i, delcnt] = SpecialBT.HFour;
                                 else if (checkCnt == 4)
                                     checkbeads[i, delcnt] = SpecialBT.Five;
                             }
@@ -109,7 +109,7 @@ public class BoardManager : Singleton<BoardManager>
                             {
                                 isf = false;
                                 if (checkCnt == 3)
-                                    checkbeads[i, delcnt] = SpecialBT.Four;
+                                    checkbeads[i, delcnt] = SpecialBT.HFour;
                                 else if(checkCnt == 4)
                                     checkbeads[i, delcnt] = SpecialBT.Five;
                             }
@@ -117,7 +117,7 @@ public class BoardManager : Singleton<BoardManager>
                         if (isf)
                         {
                             if (checkCnt == 3)
-                                checkbeads[i, j] = SpecialBT.Four;
+                                checkbeads[i, j] = SpecialBT.HFour;
                             else if (checkCnt == 4)
                                 checkbeads[i, j] = SpecialBT.Five;
                         }
@@ -155,7 +155,7 @@ public class BoardManager : Singleton<BoardManager>
                             {
                                 isf = false;
                                 if (checkCnt == 3)
-                                    checkbeads[delcnt, i] = SpecialBT.Four;
+                                    checkbeads[delcnt, i] = SpecialBT.VFour;
                                 if (checkCnt == 4)
                                     checkbeads[delcnt, i] = SpecialBT.Five;
                             }
@@ -163,7 +163,7 @@ public class BoardManager : Singleton<BoardManager>
                             {
                                 isf = false;
                                 if (checkCnt == 3)
-                                    checkbeads[delcnt, i] = SpecialBT.Four;
+                                    checkbeads[delcnt, i] = SpecialBT.VFour;
                                 if (checkCnt == 4)
                                     checkbeads[delcnt, i] = SpecialBT.Five;
                             }
@@ -171,7 +171,7 @@ public class BoardManager : Singleton<BoardManager>
                         if (isf)
                         {
                             if (checkCnt == 3)
-                                checkbeads[j, i] = SpecialBT.Four;
+                                checkbeads[j, i] = SpecialBT.VFour;
                             if (checkCnt == 4)
                                 checkbeads[j, i] = SpecialBT.Five;
                         }
@@ -402,11 +402,11 @@ public class BoardManager : Singleton<BoardManager>
 
         SwapBeads(bead, nextBead);
 
-        if (nextBead.stype != SpecialBT.Five && bead.stype != SpecialBT.Five)
+        /*if (nextBead.stype != SpecialBT.Five && bead.stype != SpecialBT.Five)
         {
             if (IsMoveCheck() == false)
                 SwapBeads(bead, nextBead);
-        }
+        }*/
 
         //비드를 교환하는 함수
         void SwapBeads(Bead bead1, Bead bead2)

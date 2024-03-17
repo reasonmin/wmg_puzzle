@@ -15,14 +15,16 @@ public enum BeadType
 public enum SpecialBT
 {
     Normal,
-    Four,
+    VFour, // 세로
+    HFour, // 가로
     Five
 }
 
 public class Bead : MonoBehaviour
 {
     [SerializeField] private Sprite[] _NormalSprite;
-    [SerializeField] private Sprite[] _FourSprite;
+    [SerializeField] private Sprite[] _VFourSprite;
+    [SerializeField] private Sprite[] _HFourSprite;
     [SerializeField] private Sprite _FiveSprite;
 
     [SerializeField] private Sprite[] _BurstSprite;
@@ -41,8 +43,11 @@ public class Bead : MonoBehaviour
                 case SpecialBT.Normal:
                     GetComponent<SpriteRenderer>().sprite = _NormalSprite[(int)type];
                     break;
-                case SpecialBT.Four:
-                    GetComponent<SpriteRenderer>().sprite = _FourSprite[(int)type];
+                case SpecialBT.VFour:
+                    GetComponent<SpriteRenderer>().sprite = _VFourSprite[(int)type];
+                    break;
+                case SpecialBT.HFour:
+                    GetComponent<SpriteRenderer>().sprite = _HFourSprite[(int)type];
                     break;
                 case SpecialBT.Five:
                     GetComponent<SpriteRenderer>().sprite = _FiveSprite;

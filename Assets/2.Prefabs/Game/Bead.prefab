@@ -104,13 +104,20 @@ MonoBehaviour:
   - {fileID: 138564630, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
   - {fileID: -372352177, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
   - {fileID: -973794597, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
-  _FourSprite:
-  - {fileID: 1078774157, guid: 9ac76027abdfe074994de8a8d2744f1b, type: 3}
-  - {fileID: -1233459170, guid: 9ac76027abdfe074994de8a8d2744f1b, type: 3}
-  - {fileID: -2131209659, guid: 9ac76027abdfe074994de8a8d2744f1b, type: 3}
-  - {fileID: 219320109, guid: 9ac76027abdfe074994de8a8d2744f1b, type: 3}
-  - {fileID: -466519166, guid: 9ac76027abdfe074994de8a8d2744f1b, type: 3}
+  _VFourSprite:
+  - {fileID: 143348402, guid: f0c0c584adcad904c8ff1fb19a141626, type: 3}
+  - {fileID: 2125149870, guid: f0c0c584adcad904c8ff1fb19a141626, type: 3}
+  - {fileID: -1924351101, guid: f0c0c584adcad904c8ff1fb19a141626, type: 3}
+  - {fileID: -205477596, guid: f0c0c584adcad904c8ff1fb19a141626, type: 3}
+  - {fileID: 1176981710, guid: f0c0c584adcad904c8ff1fb19a141626, type: 3}
+  _HFourSprite:
+  - {fileID: -422653611, guid: 04b30f0b5e38b274f8d1acb57ee2d8bc, type: 3}
+  - {fileID: 1543879690, guid: 04b30f0b5e38b274f8d1acb57ee2d8bc, type: 3}
+  - {fileID: 984827316, guid: 04b30f0b5e38b274f8d1acb57ee2d8bc, type: 3}
+  - {fileID: -970442725, guid: 04b30f0b5e38b274f8d1acb57ee2d8bc, type: 3}
+  - {fileID: -1386685497, guid: 04b30f0b5e38b274f8d1acb57ee2d8bc, type: 3}
   _FiveSprite: {fileID: 1112564460, guid: d5b448ea11754e048a95dd08fb608836, type: 3}
+  _BurstSprite: []
   stype: 0
   type: 0
   clampVec2: {x: 1.35, y: 1.35}
