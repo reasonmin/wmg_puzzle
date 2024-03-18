@@ -245,16 +245,14 @@ public class BoardManager : Singleton<BoardManager>
             {
                 if (beads[i, j].Burst)
                 {
-                    Debug.Log($"{i}, {j}");
                     if (beads[i, j].stype == SpecialBT.HFour)
                     {
                         beads[i, j].stype = SpecialBT.Normal;
+                        isRefresh = true;
                         for (int k = 0; k < width; k++)
                         {
-                            if(beads[i, k].stype == SpecialBT.HFour || beads[i, k].stype == SpecialBT.VFour)
-                            {
+                            if(beads[i, k].stype != SpecialBT.Normal)
                                 checkbeadsBurst[i, k] = true;
-                            }
                             else
                                 beads[i, k].gameObject.SetActive(false);
                         }
@@ -262,15 +260,21 @@ public class BoardManager : Singleton<BoardManager>
                     else if (beads[i, j].stype == SpecialBT.VFour)
                     {
                         beads[i, j].stype = SpecialBT.Normal;
+                        isRefresh = true;
                         for (int k = 0; k < height; k++)
                         {
-                            if (beads[k, j].stype == SpecialBT.HFour || beads[k, j].stype == SpecialBT.VFour)
-                            {
+                            if (beads[k, j].stype != SpecialBT.Normal)
                                 checkbeadsBurst[k, j] = true;
-                            }
                             else
                                 beads[k, j].gameObject.SetActive(false);
                         }
+                    }
+                    else if (beads[i, j].stype == SpecialBT.Five)
+                    {
+                        FiveBurst(beads[i, j].Type);
+                        beads[i, j].stype = SpecialBT.Normal;
+                        beads[i, j].gameObject.SetActive(false);
+                        isRefresh = true;
                     }
                     beads[i, j].Burst = false;
                 }
@@ -301,6 +305,28 @@ public class BoardManager : Singleton<BoardManager>
         }
 
         StartCoroutine(BeadDown(isRefresh, isF));
+    }
+
+    public void FiveBurst(BeadType beadType)
+    {
+        Debug.Log(beadType);
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                if (beads[i, j].Type == beadType)
+                {
+                    if (beads[i, j].stype == SpecialBT.HFour || beads[i, j].stype == SpecialBT.VFour)
+                    {
+                        beads[i, j].Burst = true;
+                    }
+                    else
+                    {
+                        beads[i, j].gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
     }
 
     #region 구슬 교환
@@ -460,7 +486,17 @@ public class BoardManager : Singleton<BoardManager>
 
         SwapBeads(bead, nextBead);
 
-        if (nextBead.stype != SpecialBT.Five && bead.stype != SpecialBT.Five)
+        if (nextBead.stype == SpecialBT.Five)
+        {
+            nextBead.Burst = true;
+            nextBead.Type = bead.Type;
+        }
+        else if (bead.stype == SpecialBT.Five)
+        {
+            bead.Burst = true;
+            bead.Type = nextBead.Type;
+        }
+        else
         {
             if (IsMoveCheck() == false)
                 SwapBeads(bead, nextBead);
