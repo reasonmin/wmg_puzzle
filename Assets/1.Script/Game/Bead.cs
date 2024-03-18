@@ -28,9 +28,11 @@ public class Bead : MonoBehaviour
     [SerializeField] private Sprite _FiveSprite;
 
     [SerializeField] private Sprite[] _BurstSprite;
+
+    public bool Burst = false;
     public SpecialBT stype;
     // Á¾·ù
-    public BeadType type;
+    private BeadType type;
     public BeadType Type
     {
         get { return type; }
