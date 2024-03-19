@@ -30,6 +30,8 @@ public class Bead : MonoBehaviour
     [SerializeField] private Sprite[] _BurstSprite;
 
     public bool Burst = false;
+    public SpecialBT SBurst = SpecialBT.Normal;
+
     public SpecialBT stype;
     // Á¾·ù
     private BeadType type;
