@@ -6,24 +6,20 @@ using UnityEngine.UI;
 public class HP : MonoBehaviour
 {
     [SerializeField] public Image hpImage;
+    private Skill skills;
 
     private void Start()
     {
         hpImage.fillAmount = 1;
     }
 
-    private void Update()
-    {   
-        /*
-        if (hpImage.fillAmount == 0)
-        {
-            hpImage.fillAmount = 1;
-        }
-        */
-    }
-
-    public void Damage()
+    public void Damage(Image hp, Skill sk)
     {
         hpImage.fillAmount -= 0.1f;
+
+        if (hpImage.fillAmount == 0)
+        {
+            skills.enabled = false;
+        }
     }
 }

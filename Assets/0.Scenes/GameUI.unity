@@ -259,9 +259,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 57659553}
   fillButton: {fileID: 57659552}
+  hps: {fileID: 722661893}
   hp: {fileID: 1330094569}
   skillCs: {fileID: 57659555}
   key: 286
+  beadsType: 2
 --- !u!1 &116527269
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,9 +400,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 116527272}
   fillButton: {fileID: 116527271}
+  hps: {fileID: 722661893}
   hp: {fileID: 1330094569}
   skillCs: {fileID: 116527274}
   key: 285
+  beadsType: 4
 --- !u!1 &234284252
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,9 +839,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 433286020}
   fillButton: {fileID: 433286019}
+  hps: {fileID: 722661893}
   hp: {fileID: 1330094569}
   skillCs: {fileID: 433286022}
   key: 283
+  beadsType: 3
 --- !u!1 &537778880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,9 +1445,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 895018892}
   fillButton: {fileID: 895018891}
+  hps: {fileID: 722661893}
   hp: {fileID: 1330094569}
   skillCs: {fileID: 895018894}
   key: 284
+  beadsType: 1
 --- !u!1 &1221469486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,9 +1995,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 1385895402}
   fillButton: {fileID: 1385895401}
+  hps: {fileID: 722661893}
   hp: {fileID: 1330094569}
   skillCs: {fileID: 1385895404}
   key: 282
+  beadsType: 0
 --- !u!1 &1675944018
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,7 +2016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1675944019
 MonoBehaviour:
   m_ObjectHideFlags: 0

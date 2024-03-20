@@ -29,6 +29,7 @@ public class Bead : MonoBehaviour
 
     [SerializeField] private Sprite[] _BurstSprite;
 
+    private Bead bead;
     public bool Burst = false;
     public SpecialBT SBurst = SpecialBT.Normal;
 
