@@ -248,23 +248,37 @@ public class BoardManager : Singleton<BoardManager>
                     if (beads[i, j].stype == SpecialBT.HFour)
                     {
                         beads[i, j].SetBead((int)beads[i, j].Type, SpecialBT.Normal);
-                        for (int k = 0; k < width; k++)
+                        if (beads[i, j].SBurst == SpecialBT.VFour)
                         {
-                            if(beads[i, k].stype != SpecialBT.Normal)
-                                checkbeadsBurst[i, k] = true;
-                            else
-                                beads[i, k].gameObject.SetActive(false);
+                            checkbeadsBurst = VHFourBurst(i, j, checkbeadsBurst);
+                        }
+                        else
+                        {
+                            for (int k = 0; k < width; k++)
+                            {
+                                if (beads[i, k].stype != SpecialBT.Normal)
+                                    checkbeadsBurst[i, k] = true;
+                                else
+                                    beads[i, k].gameObject.SetActive(false);
+                            }
                         }
                     }
                     else if (beads[i, j].stype == SpecialBT.VFour)
                     {
                         beads[i, j].SetBead((int)beads[i, j].Type, SpecialBT.Normal);
-                        for (int k = 0; k < height; k++)
+                        if (beads[i, j].SBurst == SpecialBT.VFour)
                         {
-                            if (beads[k, j].stype != SpecialBT.Normal)
-                                checkbeadsBurst[k, j] = true;
-                            else
-                                beads[k, j].gameObject.SetActive(false);
+                            checkbeadsBurst = VHFourBurst(i, j, checkbeadsBurst);
+                        }
+                        else
+                        {
+                            for (int k = 0; k < height; k++)
+                            {
+                                if (beads[k, j].stype != SpecialBT.Normal)
+                                    checkbeadsBurst[k, j] = true;
+                                else
+                                    beads[k, j].gameObject.SetActive(false);
+                            }
                         }
                     }
                     else if (beads[i, j].stype == SpecialBT.Five)
@@ -310,8 +324,31 @@ public class BoardManager : Singleton<BoardManager>
         StartCoroutine(BeadDown(isRefresh, isF));
     }
 
+    public bool[,] VHFourBurst(int i, int j, bool[,] checkbeadsBurst)
+    {
+        for (int k = 0; k < width; k++)
+        {
+            if (beads[i, k].stype != SpecialBT.Normal)
+                checkbeadsBurst[i, k] = true;
+            else
+                beads[i, k].gameObject.SetActive(false);
+        }
+
+        for (int k = 0; k < height; k++)
+        {
+            if (beads[k, j].stype != SpecialBT.Normal)
+                checkbeadsBurst[k, j] = true;
+            else
+                beads[k, j].gameObject.SetActive(false);
+        }
+
+        return checkbeadsBurst;
+    }
+
     public bool[, ] FiveBurst(Bead curbead, bool[,] checkbeadsBurst)
     {
+        bool isFiveFive = false;
+
         for (int i = 0; i < height; i++)
         {
             for (int j = 0; j < width; j++)
@@ -336,11 +373,24 @@ public class BoardManager : Singleton<BoardManager>
                         }
                         else if(curbead.SBurst == SpecialBT.Five)
                         {
-                            
+                            isFiveFive = true;
+                            break;
                         }
                         else
                             beads[i, j].gameObject.SetActive(false);
                     }
+                }
+            }
+        }
+
+        if (isFiveFive)
+        {
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    beads[i, j].SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
+                    beads[i, j].gameObject.SetActive(false);
                 }
             }
         }
@@ -516,6 +566,13 @@ public class BoardManager : Singleton<BoardManager>
             nextBead.Burst = true;
             nextBead.Type = bead.Type;
             nextBead.SBurst = bead.stype;
+            bead.SetBead((int)bead.Type, SpecialBT.Normal);
+        }
+        else if (bead.stype == SpecialBT.VFour || bead.stype == SpecialBT.HFour && nextBead.stype == SpecialBT.VFour || nextBead.stype == SpecialBT.HFour)
+        {
+            SwapBeads(bead, nextBead);
+            nextBead.Burst = true;
+            nextBead.SBurst = SpecialBT.VFour;
             bead.SetBead((int)bead.Type, SpecialBT.Normal);
         }
         else
