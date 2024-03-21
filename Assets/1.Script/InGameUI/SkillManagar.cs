@@ -19,6 +19,17 @@ public class SkillManagar: Singleton<SkillManagar>
         }
     }
 
+    private void Update()
+    {
+        for (int i = 0; i < skills.Length; i++)
+        {
+            if (skills[0].isfilling)
+            {
+
+            }
+        }
+    }
+
     public IEnumerator BeadBurst(BeadType beadType)
     {
         float score = 0.05f;

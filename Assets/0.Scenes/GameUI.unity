@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 57659554}
   - component: {fileID: 57659553}
   - component: {fileID: 57659552}
+  - component: {fileID: 57659555}
   m_Layer: 5
   m_Name: healB1
   m_TagString: Untagged
@@ -256,6 +257,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57659550}
   m_CullTransparentMesh: 1
+--- !u!114 &57659555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57659550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885b13f3836928c44b00306f4acd6ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 57659553}
+  fillButton: {fileID: 57659552}
+  isfilling: 0
 --- !u!1 &116527269
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +284,7 @@ GameObject:
   - component: {fileID: 116527273}
   - component: {fileID: 116527272}
   - component: {fileID: 116527271}
+  - component: {fileID: 116527274}
   m_Layer: 5
   m_Name: darkB1
   m_TagString: Untagged
@@ -389,6 +406,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116527269}
   m_CullTransparentMesh: 1
+--- !u!114 &116527274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116527269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885b13f3836928c44b00306f4acd6ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 116527272}
+  fillButton: {fileID: 116527271}
+  isfilling: 0
 --- !u!1 &234284252
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +731,7 @@ GameObject:
   - component: {fileID: 433286021}
   - component: {fileID: 433286020}
   - component: {fileID: 433286019}
+  - component: {fileID: 433286022}
   m_Layer: 5
   m_Name: lightB1
   m_TagString: Untagged
@@ -820,6 +853,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433286017}
   m_CullTransparentMesh: 1
+--- !u!114 &433286022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433286017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885b13f3836928c44b00306f4acd6ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 433286020}
+  fillButton: {fileID: 433286019}
+  isfilling: 0
 --- !u!1 &537778880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,6 +1345,7 @@ GameObject:
   - component: {fileID: 895018893}
   - component: {fileID: 895018892}
   - component: {fileID: 895018891}
+  - component: {fileID: 895018894}
   m_Layer: 5
   m_Name: iceB1
   m_TagString: Untagged
@@ -1418,6 +1467,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895018889}
   m_CullTransparentMesh: 1
+--- !u!114 &895018894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895018889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885b13f3836928c44b00306f4acd6ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 895018892}
+  fillButton: {fileID: 895018891}
+  isfilling: 0
 --- !u!1 &1221469486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,6 +1903,7 @@ GameObject:
   - component: {fileID: 1385895403}
   - component: {fileID: 1385895402}
   - component: {fileID: 1385895401}
+  - component: {fileID: 1385895404}
   m_Layer: 5
   m_Name: fireB1
   m_TagString: Untagged
@@ -1960,6 +2025,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385895399}
   m_CullTransparentMesh: 1
+--- !u!114 &1385895404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385895399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885b13f3836928c44b00306f4acd6ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 1385895402}
+  fillButton: {fileID: 1385895401}
+  isfilling: 0
 --- !u!1 &1675944018
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,18 +2135,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d6f7d5a11850744babb4dfcbb8b40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillImage:
-  - {fileID: 1385895402}
-  - {fileID: 433286020}
-  - {fileID: 895018892}
-  - {fileID: 116527272}
-  - {fileID: 57659553}
-  fillButton:
-  - {fileID: 1385895401}
-  - {fileID: 433286019}
-  - {fileID: 895018891}
-  - {fileID: 116527271}
-  - {fileID: 57659552}
+  skills:
+  - {fileID: 1385895404}
+  - {fileID: 433286022}
+  - {fileID: 895018894}
+  - {fileID: 116527274}
+  - {fileID: 57659555}
   hps: {fileID: 722661893}
   hp: {fileID: 1330094569}
 --- !u!1 &1739252867
