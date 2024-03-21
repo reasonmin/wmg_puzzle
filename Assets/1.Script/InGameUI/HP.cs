@@ -13,7 +13,7 @@ public class HP : MonoBehaviour
         hpImage.fillAmount = 1;
     }
 
-    public void Damage(Image hp, Skill sk)
+    public void Damage()
     {
         hpImage.fillAmount -= 0.1f;
 
