@@ -262,7 +262,7 @@ public class BoardManager : Singleton<BoardManager>
                                 else
                                 {
                                     beads[i, k].gameObject.SetActive(false);
-                                    StartCoroutine(SkillManagar.Instance.BeadBurst(beads[i, j].Type));
+                                    StartCoroutine(SkillManagar.Instance.BeadBurst(beads[i, k].Type));
                                 }
 
                             }
@@ -284,7 +284,7 @@ public class BoardManager : Singleton<BoardManager>
                                 else
                                 {
                                     beads[k, j].gameObject.SetActive(false);
-                                    StartCoroutine(SkillManagar.Instance.BeadBurst(beads[i, j].Type));
+                                    StartCoroutine(SkillManagar.Instance.BeadBurst(beads[k, j].Type));
                                 }
                             }
                         }
@@ -295,7 +295,6 @@ public class BoardManager : Singleton<BoardManager>
                         beads[i, j].SetBead((int)beads[i, j].Type, SpecialBT.Normal);
                         beads[i, j].SBurst = SpecialBT.Normal;
                         beads[i, j].gameObject.SetActive(false);
-                        StartCoroutine(SkillManagar.Instance.BeadBurst(beads[i, j].Type));
                     }
 
                     isRefresh = true;
@@ -340,7 +339,10 @@ public class BoardManager : Singleton<BoardManager>
             if (beads[i, k].stype != SpecialBT.Normal)
                 checkbeadsBurst[i, k] = true;
             else
+            {
                 beads[i, k].gameObject.SetActive(false);
+                StartCoroutine(SkillManagar.Instance.BeadBurst(beads[i, k].Type));
+            }
         }
 
         for (int k = 0; k < height; k++)
@@ -348,7 +350,10 @@ public class BoardManager : Singleton<BoardManager>
             if (beads[k, j].stype != SpecialBT.Normal)
                 checkbeadsBurst[k, j] = true;
             else
+            {
                 beads[k, j].gameObject.SetActive(false);
+                StartCoroutine(SkillManagar.Instance.BeadBurst(beads[k, j].Type));
+            }
         }
 
         return checkbeadsBurst;
@@ -386,7 +391,10 @@ public class BoardManager : Singleton<BoardManager>
                             break;
                         }
                         else
+                        {
                             beads[i, j].gameObject.SetActive(false);
+                            StartCoroutine(SkillManagar.Instance.BeadBurst(beads[i, j].Type));
+                        }
                     }
                 }
             }
@@ -400,6 +408,7 @@ public class BoardManager : Singleton<BoardManager>
                 {
                     beads[i, j].SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
                     beads[i, j].gameObject.SetActive(false);
+                    StartCoroutine(SkillManagar.Instance.BeadBurst(beads[i, j].Type));
                 }
             }
         }
