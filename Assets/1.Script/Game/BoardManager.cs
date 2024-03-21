@@ -586,7 +586,7 @@ public class BoardManager : Singleton<BoardManager>
             nextBead.SBurst = bead.stype;
             bead.SetBead((int)bead.Type, SpecialBT.Normal);
         }
-        else if (bead.stype == SpecialBT.VFour || bead.stype == SpecialBT.HFour && nextBead.stype == SpecialBT.VFour || nextBead.stype == SpecialBT.HFour)
+        else if ((bead.stype == SpecialBT.VFour || bead.stype == SpecialBT.HFour) && (nextBead.stype == SpecialBT.VFour || nextBead.stype == SpecialBT.HFour))
         {
             SwapBeads(bead, nextBead);
             nextBead.Burst = true;
