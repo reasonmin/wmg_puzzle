@@ -9,11 +9,16 @@ public class SkillManagar: Singleton<SkillManagar>
     [SerializeField] private HP hps;
     [SerializeField] private Image hp;
 
+    private float fillTime = 2f;
+    private float fillTimer = 0f;
+
     void Start()
     {
         //fillButton.onClick.AddListener(StartFilling);
         for (int i = 0; i < skills.Length; i++)
         {
+            skills[i].fillButton.onClick.AddListener(skills[i].StartFilling);
+
             skills[i].fillImage.fillAmount = 0;
             skills[i].fillButton.interactable = false;
         }
@@ -23,9 +28,12 @@ public class SkillManagar: Singleton<SkillManagar>
     {
         for (int i = 0; i < skills.Length; i++)
         {
-            if (skills[0].isfilling)
+            if (skills[i].isFilling)
             {
-
+                skills[i].fillButton.interactable = false;
+                fillTimer += Time.deltaTime;
+                float fillvalue = 1f - (fillTimer / fillTime);
+                skills[i].fillImage.fillAmount = Mathf.Clamp01(fillvalue);
             }
         }
     }

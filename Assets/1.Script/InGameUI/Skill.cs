@@ -7,5 +7,11 @@ public class Skill : MonoBehaviour
 {
     public Image fillImage;
     public Button fillButton;
-    public bool isfilling = false;
+
+    public bool isFilling = false;
+
+    public void StartFilling()
+    {
+        isFilling = true;
+    }
 }
