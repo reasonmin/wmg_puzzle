@@ -5,18 +5,17 @@ using UnityEngine.UI;
 
 public class SkillManagar: Singleton<SkillManagar>
 {
-    [SerializeField] private Image[] fillImage;
-    [SerializeField] private Button[] fillButton;
+    [SerializeField] private Skill[] skills;
     [SerializeField] private HP hps;
     [SerializeField] private Image hp;
 
     void Start()
     {
         //fillButton.onClick.AddListener(StartFilling);
-        for (int i = 0; i < fillImage.Length; i++)
+        for (int i = 0; i < skills.Length; i++)
         {
-            fillImage[i].fillAmount = 0;
-            fillButton[i].interactable = false;
+            skills[i].fillImage.fillAmount = 0;
+            skills[i].fillButton.interactable = false;
         }
     }
 
@@ -27,35 +26,35 @@ public class SkillManagar: Singleton<SkillManagar>
         switch (beadType)
         {
             case BeadType.Fire:
-                fillImage[0].fillAmount += score;
+                skills[0].fillImage.fillAmount += score;
                 break;
             case BeadType.Light:
-                fillImage[1].fillAmount += score;
+                skills[1].fillImage.fillAmount += score;
                 break;
             case BeadType.Ice:
-                fillImage[2].fillAmount += score;
+                skills[2].fillImage.fillAmount += score;
                 break;
             case BeadType.Dark:
-                fillImage[3].fillAmount += score;
+                skills[3].fillImage.fillAmount += score;
                 break;
             case BeadType.Heal:
-                fillImage[4].fillAmount += score;
+                skills[4].fillImage.fillAmount += score;
                 break;
             default:
                 break;
         }
 
-        for (int i = 0; i < fillImage.Length; i++)
-            if (fillImage[i].fillAmount == 1)
-                fillButton[i].interactable = true;
+        for (int i = 0; i < skills.Length; i++)
+            if (skills[i].fillImage.fillAmount == 1)
+                skills[i].fillButton.interactable = true;
 
         yield return true;
     }
 
     public void UseSkill(int t)
     {
-        fillButton[t].interactable = false;
-        fillImage[t].fillAmount = 0;
+        skills[t].fillButton.interactable = false;
+        skills[t].fillImage.fillAmount = 0;
         hps.Attack();
     }
 }
