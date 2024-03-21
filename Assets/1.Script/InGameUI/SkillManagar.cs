@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Skill: Singleton<Skill>
+public class SkillManagar: Singleton<SkillManagar>
 {
     [SerializeField] private Image[] fillImage;
     [SerializeField] private Button[] fillButton;
     [SerializeField] private HP hps;
     [SerializeField] private Image hp;
-
-    private float fillTime = 2f;
-    private float fillTimer = 0f;
 
     void Start()
     {
@@ -55,10 +52,10 @@ public class Skill: Singleton<Skill>
         yield return true;
     }
 
-    public void StartFilling(int t)
+    public void UseSkill(int t)
     {
         fillButton[t].interactable = false;
         fillImage[t].fillAmount = 0;
-        hps.Damage();
+        hps.Attack();
     }
 }
