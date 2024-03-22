@@ -132,10 +132,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 57659551}
+  - component: {fileID: 57659555}
   - component: {fileID: 57659554}
   - component: {fileID: 57659553}
   - component: {fileID: 57659552}
-  - component: {fileID: 57659555}
   m_Layer: 5
   m_Name: healB1
   m_TagString: Untagged
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 57659553}
   fillButton: {fileID: 57659552}
-  isfilling: 0
+  isFilling: 0
 --- !u!1 &116527269
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,10 +281,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 116527270}
+  - component: {fileID: 116527274}
   - component: {fileID: 116527273}
   - component: {fileID: 116527272}
   - component: {fileID: 116527271}
-  - component: {fileID: 116527274}
   m_Layer: 5
   m_Name: darkB1
   m_TagString: Untagged
@@ -420,7 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 116527272}
   fillButton: {fileID: 116527271}
-  isfilling: 0
+  isFilling: 0
 --- !u!1 &234284252
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,10 +728,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 433286018}
+  - component: {fileID: 433286022}
   - component: {fileID: 433286021}
   - component: {fileID: 433286020}
   - component: {fileID: 433286019}
-  - component: {fileID: 433286022}
   m_Layer: 5
   m_Name: lightB1
   m_TagString: Untagged
@@ -867,7 +867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 433286020}
   fillButton: {fileID: 433286019}
-  isfilling: 0
+  isFilling: 0
 --- !u!1 &537778880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,10 +1342,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 895018890}
+  - component: {fileID: 895018894}
   - component: {fileID: 895018893}
   - component: {fileID: 895018892}
   - component: {fileID: 895018891}
-  - component: {fileID: 895018894}
   m_Layer: 5
   m_Name: iceB1
   m_TagString: Untagged
@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 895018892}
   fillButton: {fileID: 895018891}
-  isfilling: 0
+  isFilling: 0
 --- !u!1 &1221469486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1900,10 +1900,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1385895400}
+  - component: {fileID: 1385895404}
   - component: {fileID: 1385895403}
   - component: {fileID: 1385895402}
   - component: {fileID: 1385895401}
-  - component: {fileID: 1385895404}
   m_Layer: 5
   m_Name: fireB1
   m_TagString: Untagged
@@ -2039,7 +2039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 1385895402}
   fillButton: {fileID: 1385895401}
-  isfilling: 0
+  isFilling: 0
 --- !u!1 &1675944018
 GameObject:
   m_ObjectHideFlags: 0
