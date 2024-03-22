@@ -26,13 +26,14 @@ public class Skill : MonoBehaviour
             fillTimer += Time.deltaTime;
             float fillvalue = 1f - (fillTimer / fillTime);
             fillImage.fillAmount = Mathf.Clamp01(fillvalue);
+            
+            if (fillTimer >= fillTime)
+            {
+                isFilling = false;
+                fillTimer = 0f;
+            }
         }
 
-        if (fillTimer >= fillTime)
-        {
-            isFilling = false;
-            fillTimer = 0f;
-        }
 
     }
 
