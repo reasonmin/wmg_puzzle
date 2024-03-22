@@ -85,85 +85,85 @@ public class Bead : MonoBehaviour
                     startPos = Vector2.zero;
                 }
             }
-        }
 
-        if (Input.GetMouseButton(0))    //마우스를 누르고 있을 때
-        {
-            if (target == GetComponent<Collider2D>())
+            if (Input.GetMouseButton(0))    //마우스를 누르고 있을 때
             {
-                Vector2 vec = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                vec = Camera.main.ScreenToWorldPoint(vec);
-
-                // 위치 제한을 위해 Mathf.Clamp 사용
-
-                float clampedX = Mathf.Clamp(vec.x - transform.parent.transform.position.x, -(clampVec2.x), clampVec2.x);
-                float clampedY = Mathf.Clamp(vec.y - transform.parent.transform.position.y, -(clampVec2.y), clampVec2.y);
-
-                //transform.position과 startPos 사이의 거리 계산
-                float distanceX = Mathf.Abs(transform.localPosition.x - startPos.x);
-                float distanceY = Mathf.Abs(transform.localPosition.y - startPos.y);
-
-                vec = new Vector2(clampedX, clampedY);
-                Vector2 diff = vec - startPos;
-
-                if (distanceY < 0.3f)
+                if (target == GetComponent<Collider2D>())
                 {
-                    if (diff.normalized.x > 0 && (diff.normalized.y > -0.5f  //오른쪽
-                        && diff.normalized.y < 0.5f))
-                    {
-                        target.transform.localPosition = new Vector2(vec.x, startPos.y);
-                        directionVector = Vector2.right;
-                    }
-                    else if (diff.normalized.x < 0 && (diff.normalized.y > -0.5f    //왼쪽
-                        && diff.normalized.y < 0.5f))
-                    {
-                        target.transform.localPosition = new Vector2(vec.x, startPos.y);
-                        directionVector = Vector2.left;
-                    }
-                }
+                    Vector2 vec = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                    vec = Camera.main.ScreenToWorldPoint(vec);
 
-                if (distanceX < 0.3f)
-                {
-                    if (diff.normalized.y > 0 && (diff.normalized.x > -0.5f    //위쪽
-                        && diff.normalized.x < 0.5f))
+                    // 위치 제한을 위해 Mathf.Clamp 사용
+
+                    float clampedX = Mathf.Clamp(vec.x - transform.parent.transform.position.x, -(clampVec2.x), clampVec2.x);
+                    float clampedY = Mathf.Clamp(vec.y - transform.parent.transform.position.y, -(clampVec2.y), clampVec2.y);
+
+                    //transform.position과 startPos 사이의 거리 계산
+                    float distanceX = Mathf.Abs(transform.localPosition.x - startPos.x);
+                    float distanceY = Mathf.Abs(transform.localPosition.y - startPos.y);
+
+                    vec = new Vector2(clampedX, clampedY);
+                    Vector2 diff = vec - startPos;
+
+                    if (distanceY < 0.3f)
                     {
-                        target.transform.localPosition = new Vector2(startPos.x, vec.y);
-                        directionVector = Vector2.up;
+                        if (diff.normalized.x > 0 && (diff.normalized.y > -0.5f  //오른쪽
+                            && diff.normalized.y < 0.5f))
+                        {
+                            target.transform.localPosition = new Vector2(vec.x, startPos.y);
+                            directionVector = Vector2.right;
+                        }
+                        else if (diff.normalized.x < 0 && (diff.normalized.y > -0.5f    //왼쪽
+                            && diff.normalized.y < 0.5f))
+                        {
+                            target.transform.localPosition = new Vector2(vec.x, startPos.y);
+                            directionVector = Vector2.left;
+                        }
                     }
-                    else if (diff.normalized.y < 0 && (diff.normalized.x > -0.5f    // 아래
-                        && diff.normalized.x < 0.5f))
+
+                    if (distanceX < 0.3f)
                     {
-                        target.transform.localPosition = new Vector2(startPos.x, vec.y);
-                        directionVector = Vector2.down;
+                        if (diff.normalized.y > 0 && (diff.normalized.x > -0.5f    //위쪽
+                            && diff.normalized.x < 0.5f))
+                        {
+                            target.transform.localPosition = new Vector2(startPos.x, vec.y);
+                            directionVector = Vector2.up;
+                        }
+                        else if (diff.normalized.y < 0 && (diff.normalized.x > -0.5f    // 아래
+                            && diff.normalized.x < 0.5f))
+                        {
+                            target.transform.localPosition = new Vector2(startPos.x, vec.y);
+                            directionVector = Vector2.down;
+                        }
                     }
                 }
             }
-        }
 
-        if (Input.GetMouseButtonUp(0))  //마우스를 눌렀다가 놓았을 때
-        {
-            endPos = transform.localPosition;
-
-            //endPos와 startPos 사이의 거리 계산
-            float distanceX = Mathf.Abs(endPos.x - startPos.x);
-            float distanceY = Mathf.Abs(endPos.y - startPos.y);
-
-            if (distanceX > 0.7f || distanceY > 0.7f)
+            if (Input.GetMouseButtonUp(0))  //마우스를 눌렀다가 놓았을 때
             {
-                BoardManager.Instance.isPlay = false;
-                BoardManager.Instance.ChangeBead(this, directionVector);
-                transform.localPosition = Vector2.zero;
-                BoardManager.Instance.BeadBoardCheck(false);
+                endPos = transform.localPosition;
 
-                //일치하는 항목이 없다면 이동 한 구슬을 원 상태로 되돌리기
+                //endPos와 startPos 사이의 거리 계산
+                float distanceX = Mathf.Abs(endPos.x - startPos.x);
+                float distanceY = Mathf.Abs(endPos.y - startPos.y);
+
+                if (distanceX > 0.7f || distanceY > 0.7f)
+                {
+                    BoardManager.Instance.isPlay = false;
+                    BoardManager.Instance.ChangeBead(this, directionVector);
+                    transform.localPosition = Vector2.zero;
+                    BoardManager.Instance.BeadBoardCheck(false);
+
+                    //일치하는 항목이 없다면 이동 한 구슬을 원 상태로 되돌리기
+                }
+                else
+                    transform.localPosition = Vector2.zero;
+
+                if (target != null)
+                    target.GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+                target = null;
             }
-            else
-                transform.localPosition = Vector2.zero;
-
-            if (target != null)
-                target.GetComponent<SpriteRenderer>().sortingOrder = 0;
-
-            target = null;
         }
     }
 

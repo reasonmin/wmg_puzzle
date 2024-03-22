@@ -574,19 +574,15 @@ public class BoardManager : Singleton<BoardManager>
         else
             nextBead = beads[y, x];
 
-        SwapBeads(bead, nextBead);
-
-        if (nextBead.stype == SpecialBT.Five)
+        if (bead.stype == SpecialBT.Five)
         {
-            SwapBeads(bead, nextBead);
             bead.Burst = true;
             bead.Type = nextBead.Type;
             bead.SBurst = nextBead.stype;
             nextBead.SetBead((int)nextBead.Type, SpecialBT.Normal);
         }
-        else if (bead.stype == SpecialBT.Five)
+        else if (nextBead.stype == SpecialBT.Five)
         {
-            SwapBeads(bead, nextBead);
             nextBead.Burst = true;
             nextBead.Type = bead.Type;
             nextBead.SBurst = bead.stype;
@@ -594,13 +590,13 @@ public class BoardManager : Singleton<BoardManager>
         }
         else if ((bead.stype == SpecialBT.VFour || bead.stype == SpecialBT.HFour) && (nextBead.stype == SpecialBT.VFour || nextBead.stype == SpecialBT.HFour))
         {
-            SwapBeads(bead, nextBead);
             nextBead.Burst = true;
             nextBead.SBurst = SpecialBT.VFour;
             bead.SetBead((int)bead.Type, SpecialBT.Normal);
         }
         else
         {
+            SwapBeads(bead, nextBead);
             if (IsMoveCheck() == false)
                 SwapBeads(bead, nextBead);
         }
