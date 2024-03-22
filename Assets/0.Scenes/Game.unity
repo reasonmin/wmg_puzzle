@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: 7
-  height: 8
+  height: 7
   imageSizeX: 131
   imageSizeY: 125
   beadBG: {fileID: 6902920276832668293, guid: 2f8fac7e76d9da74f88ee3682d1e5042, type: 3}

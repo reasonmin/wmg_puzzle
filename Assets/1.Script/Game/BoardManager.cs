@@ -52,7 +52,7 @@ public class BoardManager : Singleton<BoardManager>
             }
         }
         // 부모의 보드 위치 수정
-        transform.position = new Vector2(-3.95f, 1);
+        transform.position = new Vector2(-3.95f, 1.7f);
     }
 
     /// <summary>
