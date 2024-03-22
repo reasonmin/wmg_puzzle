@@ -176,7 +176,7 @@ public class Bead : MonoBehaviour
         return Physics2D.Raycast(ray.origin, ray.direction);
     }
 
-    public IEnumerator BeadBurst()   //터트리기
+    public IEnumerator BeadDestory()   //터트리기
     {
         foreach (var burstSprite in _BurstSprite)
         {
