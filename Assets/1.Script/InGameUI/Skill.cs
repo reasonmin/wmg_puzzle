@@ -33,8 +33,6 @@ public class Skill : MonoBehaviour
                 fillTimer = 0f;
             }
         }
-
-
     }
 
     public void StartFilling()

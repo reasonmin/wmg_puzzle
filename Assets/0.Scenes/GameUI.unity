@@ -868,6 +868,11 @@ MonoBehaviour:
   fillImage: {fileID: 433286020}
   fillButton: {fileID: 433286019}
   isFilling: 0
+--- !u!212 &469711640 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 9004148123409344354, guid: 34a3833850ccfea4d8e03f8f79f95a8e, type: 3}
+  m_PrefabInstance: {fileID: 859291611}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &537778880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,6 +1125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpImage: {fileID: 1330094569}
+  spriteRenderer: {fileID: 469711640}
 --- !u!1 &778785328
 GameObject:
   m_ObjectHideFlags: 0
