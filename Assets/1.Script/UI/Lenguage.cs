@@ -24,7 +24,7 @@ public class Lenguage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (Singleton<PlayerDataManager>.Instance.playerData.language)
+        switch (PlayerDataManager.Instance.playerData.language)
         {
             case LanguageType.English:
                 _Text.text = sentence.English;

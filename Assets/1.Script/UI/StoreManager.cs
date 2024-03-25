@@ -19,13 +19,13 @@ public class StoreManager : MonoBehaviour
 
     public void BuyProduct(int Value, Item items)
     {
-        if(Value <= Singleton<PlayerDataManager>.Instance.playerData.coin)
+        if(Value <= PlayerDataManager.Instance.playerData.coin)
         {
-            Singleton<PlayerDataManager>.Instance.playerData.item.bronze += items.bronze;
-            Singleton<PlayerDataManager>.Instance.playerData.item.silver += items.silver;
-            Singleton<PlayerDataManager>.Instance.playerData.item.gold += items.gold;
+            PlayerDataManager.Instance.playerData.item.bronze += items.bronze;
+            PlayerDataManager.Instance.playerData.item.silver += items.silver;
+            PlayerDataManager.Instance.playerData.item.gold += items.gold;
 
-            Singleton<PlayerDataManager>.Instance.playerData.coin -= Value;
+            PlayerDataManager.Instance.playerData.coin -= Value;
             MainManager.instance.SetCoin();
         }
         else

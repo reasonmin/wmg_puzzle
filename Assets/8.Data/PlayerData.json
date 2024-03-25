@@ -1,9 +1,9 @@
 {
-    "coin": 50,
+    "coin": 24,
     "item": {
-        "gold": 0,
-        "silver": 0,
-        "bronze": 0
+        "gold": 4,
+        "silver": 3,
+        "bronze": 2
     },
     "language": 0,
     "musicVolume": 50,

@@ -77,8 +77,8 @@ public class MainManager : MonoBehaviour
 
         gameStartPanel.Panel.SetActive(false);
 
-        Singleton<PlayerDataManager>.Instance.ResetJson();
-        Singleton<PlayerDataManager>.Instance.LoadJson();// Player 정보 불러오기
+        //PlayerDataManager.Instance.ResetJson();
+        PlayerDataManager.Instance.LoadJson();// Player 정보 불러오기
 
         SetStageButton();// 불러온 정보로 스테이지 버튼 세팅
         SetVolume();// 음향 세팅
@@ -94,22 +94,22 @@ public class MainManager : MonoBehaviour
 
     public void SetCoin()
     {
-        Coin_Text.text = Singleton<PlayerDataManager>.Instance.playerData.coin.ToString();
-        Singleton<PlayerDataManager>.Instance.SaveJson();
+        Coin_Text.text = PlayerDataManager.Instance.playerData.coin.ToString();
+        PlayerDataManager.Instance.SaveJson();
     }
 
     private void SetVolume()
     {
-        if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
+        if (PlayerDataManager.Instance.playerData.isMusic)
             MusicSlider.value = PlayerDataManager.Instance.playerData.musicVolume;
-        if (Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect)
-            SoundEffectSlider.value = Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume;
+        if (PlayerDataManager.Instance.playerData.isSoundEffect)
+            SoundEffectSlider.value = PlayerDataManager.Instance.playerData.soundEffectVolume;
 
-        Music_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.musicVolume / 100f;
-        click_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume / 100f;
+        Music_Audio.volume = PlayerDataManager.Instance.playerData.musicVolume / 100f;
+        click_Audio.volume = PlayerDataManager.Instance.playerData.soundEffectVolume / 100f;
 
-        MusicBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isMusic);
-        SoundEffectBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect);
+        MusicBanImage.SetActive(!PlayerDataManager.Instance.playerData.isMusic);
+        SoundEffectBanImage.SetActive(!PlayerDataManager.Instance.playerData.isSoundEffect);
     }
 
     private void SetStageButton()
@@ -121,7 +121,7 @@ public class MainManager : MonoBehaviour
             {
                 chapterBoards[i].stageButtons[j].stageNumText.text = (i + 1).ToString() + "-" + (j + 1).ToString();
 
-                for (int k = 0; k < Singleton<PlayerDataManager>.Instance.playerData.chapterDatas[i].stageDatas[j]; k++)
+                for (int k = 0; k < PlayerDataManager.Instance.playerData.chapterDatas[i].stageDatas[j]; k++)
                 {
                     chapterBoards[i].stageButtons[j].starImages[k].sprite = StarImage.sprite;
                 }
@@ -129,11 +129,11 @@ public class MainManager : MonoBehaviour
         }
 
         // 스테이지 해금
-        for (int i = 0; i < Singleton<PlayerDataManager>.Instance.playerData.curChapter; i++)
-            for (int j = 0; j < Singleton<PlayerDataManager>.Instance.playerData.curStage; j++)
+        for (int i = 0; i < PlayerDataManager.Instance.playerData.curChapter; i++)
+            for (int j = 0; j < PlayerDataManager.Instance.playerData.curStage; j++)
                 chapterBoards[i].stageButtons[j].gameObject.SetActive(true);
 
-        chapterBoards[Singleton<PlayerDataManager>.Instance.playerData.curChapter - 1].stageButtons[Singleton<PlayerDataManager>.Instance.playerData.curStage - 1].ButtonImage.sprite = LockStageButtonImage.sprite;
+        chapterBoards[PlayerDataManager.Instance.playerData.curChapter - 1].stageButtons[PlayerDataManager.Instance.playerData.curStage - 1].ButtonImage.sprite = LockStageButtonImage.sprite;
     }
 
     public void OnLanguageChange(int n)
@@ -143,14 +143,14 @@ public class MainManager : MonoBehaviour
         switch (n)
         {
             case (int)LanguageType.English:
-                Singleton<PlayerDataManager>.Instance.playerData.language = LanguageType.English;
+                PlayerDataManager.Instance.playerData.language = LanguageType.English;
                 break;
             case (int)LanguageType.Korean:
-                Singleton<PlayerDataManager>.Instance.playerData.language = LanguageType.Korean;
+                PlayerDataManager.Instance.playerData.language = LanguageType.Korean;
                 break;
         }
 
-        Singleton<PlayerDataManager>.Instance.SaveJson();
+        PlayerDataManager.Instance.SaveJson();
         //Debug.Log(playerData.language);
     }
 
@@ -161,9 +161,9 @@ public class MainManager : MonoBehaviour
         click_Audio.Play();
 
         gameStartPanel.Title_Text.text = stageNum;
-        gameStartPanel.bronze._Text.text = Singleton<PlayerDataManager>.Instance.playerData.item.bronze.ToString();
-        gameStartPanel.silver._Text.text = Singleton<PlayerDataManager>.Instance.playerData.item.silver.ToString();
-        gameStartPanel.gold._Text.text = Singleton<PlayerDataManager>.Instance.playerData.item.gold.ToString();
+        gameStartPanel.bronze._Text.text = PlayerDataManager.Instance.playerData.item.bronze.ToString();
+        gameStartPanel.silver._Text.text = PlayerDataManager.Instance.playerData.item.silver.ToString();
+        gameStartPanel.gold._Text.text = PlayerDataManager.Instance.playerData.item.gold.ToString();
 
         gameStartPanel.bronze.ReSetting();
         gameStartPanel.silver.ReSetting();
@@ -183,6 +183,15 @@ public class MainManager : MonoBehaviour
     {
         click_Audio.Play();
 
+        if (gameStartPanel.bronze.CheckImage.activeSelf)
+            PlayerDataManager.Instance.playerData.item.bronze--;
+        if (gameStartPanel.silver.CheckImage.activeSelf)
+            PlayerDataManager.Instance.playerData.item.silver--;
+        if (gameStartPanel.gold.CheckImage.activeSelf)
+            PlayerDataManager.Instance.playerData.item.gold--;
+
+        PlayerDataManager.Instance.SaveJson();
+
         PlayerPrefs.SetString("bronze", gameStartPanel.bronze.CheckImage.activeSelf.ToString());
         PlayerPrefs.SetString("silver", gameStartPanel.silver.CheckImage.activeSelf.ToString());
         PlayerPrefs.SetString("gold", gameStartPanel.gold.CheckImage.activeSelf.ToString());
@@ -196,58 +205,58 @@ public class MainManager : MonoBehaviour
     //-----------------------------------------------------
     public void OnMusicVolume()
     {
-        if (Singleton<PlayerDataManager>.Instance.playerData.isMusic)
-            Singleton<PlayerDataManager>.Instance.playerData.musicVolume = (int)MusicSlider.value;
+        if (PlayerDataManager.Instance.playerData.isMusic)
+            PlayerDataManager.Instance.playerData.musicVolume = (int)MusicSlider.value;
 
-        Music_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.musicVolume / 100f;
-        Singleton<PlayerDataManager>.Instance.SaveJson();
-        //Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.musicVolume);
+        Music_Audio.volume = PlayerDataManager.Instance.playerData.musicVolume / 100f;
+        PlayerDataManager.Instance.SaveJson();
+        //Debug.Log(PlayerDataManager.Instance.playerData.musicVolume);
     }
 
     public void OnSoundEffectVolume()
     {
-        if (Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect)
-            Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
+        if (PlayerDataManager.Instance.playerData.isSoundEffect)
+            PlayerDataManager.Instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
-        click_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume / 100f;
-        Singleton<PlayerDataManager>.Instance.SaveJson();
-        //Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume);
+        click_Audio.volume = PlayerDataManager.Instance.playerData.soundEffectVolume / 100f;
+        PlayerDataManager.Instance.SaveJson();
+        //Debug.Log(PlayerDataManager.Instance.playerData.soundEffectVolume);
     }
 
     public void OnMusic()
     {
         click_Audio.Play();
 
-        Singleton<PlayerDataManager>.Instance.playerData.isMusic = !Singleton<PlayerDataManager>.Instance.playerData.isMusic;
+        PlayerDataManager.Instance.playerData.isMusic = !PlayerDataManager.Instance.playerData.isMusic;
 
-        if (!Singleton<PlayerDataManager>.Instance.playerData.isMusic)
-            Singleton<PlayerDataManager>.Instance.playerData.musicVolume = 0;
+        if (!PlayerDataManager.Instance.playerData.isMusic)
+            PlayerDataManager.Instance.playerData.musicVolume = 0;
         else
-            Singleton<PlayerDataManager>.Instance.playerData.musicVolume = (int)MusicSlider.value;
+            PlayerDataManager.Instance.playerData.musicVolume = (int)MusicSlider.value;
 
-        MusicBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isMusic);
+        MusicBanImage.SetActive(!PlayerDataManager.Instance.playerData.isMusic);
 
-        Music_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.musicVolume / 100f;
-        Singleton<PlayerDataManager>.Instance.SaveJson();
-        //Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.musicVolume);
+        Music_Audio.volume = PlayerDataManager.Instance.playerData.musicVolume / 100f;
+        PlayerDataManager.Instance.SaveJson();
+        //Debug.Log(PlayerDataManager.Instance.playerData.musicVolume);
     }
 
     public void OnSoundEffect()
     {
         click_Audio.Play();
 
-        Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect = !Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect;
+        PlayerDataManager.Instance.playerData.isSoundEffect = !PlayerDataManager.Instance.playerData.isSoundEffect;
 
-        if (!Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect)
-            Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume = 0;
+        if (!PlayerDataManager.Instance.playerData.isSoundEffect)
+            PlayerDataManager.Instance.playerData.soundEffectVolume = 0;
         else
-            Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
+            PlayerDataManager.Instance.playerData.soundEffectVolume = (int)SoundEffectSlider.value;
 
-        SoundEffectBanImage.SetActive(!Singleton<PlayerDataManager>.Instance.playerData.isSoundEffect);
+        SoundEffectBanImage.SetActive(!PlayerDataManager.Instance.playerData.isSoundEffect);
 
-        click_Audio.volume = Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume / 100f;
-        Singleton<PlayerDataManager>.Instance.SaveJson();
-        //Debug.Log(Singleton<PlayerDataManager>.Instance.playerData.soundEffectVolume);
+        click_Audio.volume = PlayerDataManager.Instance.playerData.soundEffectVolume / 100f;
+        PlayerDataManager.Instance.SaveJson();
+        //Debug.Log(PlayerDataManager.Instance.playerData.soundEffectVolume);
     }
     //-----------------------------------------------------
 

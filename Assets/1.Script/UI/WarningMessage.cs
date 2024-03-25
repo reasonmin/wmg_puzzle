@@ -10,7 +10,7 @@ public class WarningMessage : MonoBehaviour
 
     private void Awake()
     {
-        switch (Singleton<PlayerDataManager>.Instance.playerData.language)
+        switch (PlayerDataManager.Instance.playerData.language)
         {
             case LanguageType.English:
                 _Text.text = sentence.English;
