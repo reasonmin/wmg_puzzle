@@ -312,7 +312,6 @@ public class BoardManager : Singleton<BoardManager>
             {
                 if (checkbeadsBurst[i, j])
                 {
-                    Debug.Log($"{i}, {j}");
                     beads[i, j].Burst = true;
                 }
                 else
