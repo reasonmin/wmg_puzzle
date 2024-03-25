@@ -1517,6 +1517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpImage: {fileID: 1330094569}
+  gameObjects: {fileID: 317261372}
   spriteRenderer: {fileID: 469711640}
 --- !u!1001 &859291611
 PrefabInstance:
@@ -2791,6 +2792,8 @@ MonoBehaviour:
   - {fileID: 57659555}
   hps: {fileID: 722661893}
   hp: {fileID: 1330094569}
+  php: {fileID: 2037481622}
+  recT: {fileID: 1316000850}
 --- !u!114 &1685247564
 MonoBehaviour:
   m_ObjectHideFlags: 0

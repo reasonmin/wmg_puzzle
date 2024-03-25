@@ -8,6 +8,8 @@ public class SkillManagar: Singleton<SkillManagar>
     [SerializeField] private Skill[] skills;
     [SerializeField] private HP hps;
     [SerializeField] private Image hp;
+    [SerializeField] private Php php;
+    [SerializeField] private RectTransform recT;
 
     void Start()
     {
@@ -54,6 +56,13 @@ public class SkillManagar: Singleton<SkillManagar>
     {
         skills[t].fillButton.interactable = false;
         skills[t].fillImage.fillAmount = 0;
-        hps.Attack();
+        if(t == 4)
+        {
+            php.FillHp(recT);
+        }
+        else
+        {
+            hps.Attack();
+        }
     }
 }
