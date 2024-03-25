@@ -6,7 +6,7 @@ using TMPro;
 public class ItemButton : MonoBehaviour
 {
     public TMP_Text _Text;
-    [SerializeField] private GameObject CheckImage;
+    public GameObject CheckImage;
 
     public void OnUseItem()
     {

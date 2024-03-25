@@ -183,6 +183,10 @@ public class MainManager : MonoBehaviour
     {
         click_Audio.Play();
 
+        PlayerPrefs.SetString("bronze", gameStartPanel.bronze.CheckImage.activeSelf.ToString());
+        PlayerPrefs.SetString("silver", gameStartPanel.silver.CheckImage.activeSelf.ToString());
+        PlayerPrefs.SetString("gold", gameStartPanel.gold.CheckImage.activeSelf.ToString());
+
         SceneChange.instance.y = rTransform.anchoredPosition.y;
         SceneChange.instance.OnGoGame();
     }
