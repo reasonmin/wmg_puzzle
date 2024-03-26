@@ -20,6 +20,18 @@ public class SkillManagar: Singleton<SkillManagar>
         }
     }
 
+    public void UseSilverItem()
+    {
+        float score = 0.5f;
+
+        for (int i = 0; i < skills.Length; i++)
+        {
+            skills[i].fillImage.fillAmount += score;
+            if (skills[i].fillImage.fillAmount == 1)
+                skills[i].fillButton.interactable = true;
+        }
+    }
+
     public IEnumerator BeadBurst(BeadType beadType)
     {
         float score = 0.05f;
@@ -49,7 +61,7 @@ public class SkillManagar: Singleton<SkillManagar>
             if (skills[i].fillImage.fillAmount == 1)
                 skills[i].fillButton.interactable = true;
 
-        yield return true;
+        yield return 0;
     }
 
     public void UseSkill(int t)

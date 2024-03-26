@@ -36,12 +36,13 @@ public class ItemManager : MonoBehaviour
 
     public void OnSilver()
     {
-
+        ItemButton[1].SetActive(false);
+        SkillManagar.Instance.UseSilverItem();
     }
 
     public void OnGold()
     {
-        
+        ItemButton[2].SetActive(false);
     }
 
     [HideInInspector] public Collider2D target = null; //내가 누른 구슬
