@@ -14,12 +14,12 @@ public class Php : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Attacked());
+        StartCoroutine(AttackManage());
     }
 
     void Update()
     {
-        
+
     }
 
     public void FillHp(RectTransform rect)
@@ -43,14 +43,24 @@ public class Php : MonoBehaviour
         rectTransform.pivot = new Vector2(0f, 0.5f);
     }
 
-    private IEnumerator Attacked()
+    private IEnumerator Attacked(bool t)
     {
-        while (true)
+        if(t)
         {
-            ani.SetTrigger("attack");
-            UnfillHp(rectTransform);
+            while (true)
+            {
+                ani.SetTrigger("attack");
+                UnfillHp(rectTransform);
 
-            yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(5f);
+            }
         }
+    }
+
+    private IEnumerator AttackManage()
+    {
+        StartCoroutine(Attacked(false));
+        yield return new WaitForSeconds(5f);
+        StartCoroutine(Attacked(true));
     }
 }
