@@ -34,6 +34,16 @@ public class ItemManager : MonoBehaviour
         }
     }
 
+    public void OnSilver()
+    {
+
+    }
+
+    public void OnGold()
+    {
+        
+    }
+
     [HideInInspector] public Collider2D target = null; //내가 누른 구슬
 
     public IEnumerator UseBronzeItem()
