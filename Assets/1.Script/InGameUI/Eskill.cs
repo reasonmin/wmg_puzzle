@@ -1,60 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Eskill : MonoBehaviour
 {
+    [SerializeField] private Image _image;
     [SerializeField] private Sprite[] sprites;
-    [SerializeField] private GameObject BoomtPrefab;
-    [SerializeField] private Transform parent;
 
     void Update()
     {
         // 스페이스 바를 눌렀을 때
         if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject newObject = Instantiate(BoomtPrefab, parent);
-            Eskillexample script = newObject.AddComponent<Eskillexample>();
-            script.sprites = sprites;
-            script.isRunning = true;
-        }
-    }
-}
-
-public class Eskillexample : MonoBehaviour
-{
-    public Sprite[] sprites;
-    public bool isRunning = false;
-
-    private SpriteRenderer spriteRenderer;
-    private int currentIndex = 0;
-    private float timer = 0.5f;
-
-    void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        if (sprites.Length > 0)
-            spriteRenderer.sprite = sprites[0];
+            StartCoroutine(ImageChange());
     }
 
-    void Update()
+    private IEnumerator ImageChange()
     {
-        if (!isRunning)
-            return;
+        _image.gameObject.SetActive(true);
 
-        timer -= Time.deltaTime;
-
-        if (timer <= 0f)
+        foreach (var sprite in sprites)
         {
-            currentIndex = (currentIndex + 1) % sprites.Length;
-            spriteRenderer.sprite = sprites[currentIndex];
-            timer = 0.2f;
-
-            if (currentIndex == 0)
-            {
-                Destroy(gameObject);
-            }
+            _image.sprite = sprite;
+            yield return new WaitForSeconds(0.2f);
         }
+
+        _image.gameObject.SetActive(false);
     }
 }
