@@ -1161,6 +1161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7902aa9b87e71744099b3a28d2885507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   hpImage: {fileID: 1731596789}
   gameObjects: {fileID: 271791016}
   spriteRenderer: {fileID: 271791015}

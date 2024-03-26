@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HP : MonoBehaviour
 {
+    public Animator animator;
+
     [SerializeField] public Image hpImage;
     [SerializeField] private GameObject gameObjects;
     private SkillManagar skills;
@@ -24,6 +26,7 @@ public class HP : MonoBehaviour
 
     public void Attack()
     {
+        animator.SetTrigger("isHit");
         hpImage.fillAmount -= 0.2f;
 
         if (hpImage.fillAmount == 0)
@@ -33,7 +36,6 @@ public class HP : MonoBehaviour
 
         StartCoroutine(FadeOver(0.9f));
     }
-
 
     private IEnumerator FadeOver(float duration)
     {
