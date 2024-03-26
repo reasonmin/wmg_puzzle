@@ -17,13 +17,15 @@ public class Eskill : MonoBehaviour
 
     public IEnumerator ImageChange()
     {
-        StartCoroutine(ImageChangea(0));
+        int rand = Random.Range(0, 3);
+
+        StartCoroutine(ImageChanges(rand));
         yield return new WaitForSeconds(0.2f);
-        StartCoroutine(ImageChangea(1));
+        StartCoroutine(ImageChanges((rand + 1) % 3));
         yield return new WaitForSeconds(0.1f);
-        StartCoroutine(ImageChangea(2));
+        StartCoroutine(ImageChanges((rand + 2) % 3));
     }
-    private IEnumerator ImageChangea(int index)
+    private IEnumerator ImageChanges(int index)
     {
         _image[index].gameObject.SetActive(true);
 

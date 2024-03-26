@@ -41,16 +41,16 @@ public class SkillManagar: Singleton<SkillManagar>
                 skills[0].fillImage.fillAmount += 0.1f;
                 break;
             case BeadType.Light:
-                skills[1].fillImage.fillAmount += 0.06f;
+                skills[1].fillImage.fillAmount += 0.08f;
                 break;
             case BeadType.Ice:
-                skills[2].fillImage.fillAmount += 0.07f;
+                skills[2].fillImage.fillAmount += 0.05f;
                 break;
             case BeadType.Dark:
                 skills[3].fillImage.fillAmount += 0.02f;
                 break;
             case BeadType.Heal:
-                skills[4].fillImage.fillAmount += 0.05f;
+                skills[4].fillImage.fillAmount += 0.04f;
                 break;
             default:
                 break;
@@ -67,13 +67,23 @@ public class SkillManagar: Singleton<SkillManagar>
     {
         skills[t].fillButton.interactable = false;
         skills[t].fillImage.fillAmount = 0;
-        if(t == 4)
+        switch (t)
         {
-            php.FillHp(recT);
-        }
-        else
-        {
-            hps.Attack();
+            case 0:
+                hps.Attack(3);
+                break;
+            case 1:
+                hps.Attack(5);
+                break;
+            case 2:
+                hps.Attack(8);
+                break;
+            case 3:
+                hps.Attack(20);
+                break;
+            case 4:
+                php.FillHp(recT);
+                break;
         }
     }
 }

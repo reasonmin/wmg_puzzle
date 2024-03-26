@@ -24,10 +24,10 @@ public class HP : MonoBehaviour
 
     }
 
-    public void Attack()
+    public void Attack(int Dmg)
     {
         animator.SetTrigger("isHit");
-        hpImage.fillAmount -= 0.2f;
+        hpImage.fillAmount -= Dmg / 100f;
 
         if (hpImage.fillAmount == 0)
         {

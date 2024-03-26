@@ -3176,7 +3176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932ec959cc304f24384c80abf2b04106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _image: []
+  _image:
+  - {fileID: 633820655}
+  - {fileID: 2042100340}
+  - {fileID: 30460773}
   sprites:
   - {fileID: 5986030973748356752, guid: 54eba9c24be4c474180c23dcccfd6630, type: 3}
   - {fileID: -5600206312213581617, guid: 54eba9c24be4c474180c23dcccfd6630, type: 3}
