@@ -34,24 +34,23 @@ public class SkillManagar: Singleton<SkillManagar>
 
     public IEnumerator BeadBurst(BeadType beadType)
     {
-        float score = 0.05f;
 
         switch (beadType)
         {
             case BeadType.Fire:
-                skills[0].fillImage.fillAmount += score;
+                skills[0].fillImage.fillAmount += 0.1f;
                 break;
             case BeadType.Light:
-                skills[1].fillImage.fillAmount += score;
+                skills[1].fillImage.fillAmount += 0.06f;
                 break;
             case BeadType.Ice:
-                skills[2].fillImage.fillAmount += score;
+                skills[2].fillImage.fillAmount += 0.07f;
                 break;
             case BeadType.Dark:
-                skills[3].fillImage.fillAmount += score;
+                skills[3].fillImage.fillAmount += 0.02f;
                 break;
             case BeadType.Heal:
-                skills[4].fillImage.fillAmount += score;
+                skills[4].fillImage.fillAmount += 0.05f;
                 break;
             default:
                 break;

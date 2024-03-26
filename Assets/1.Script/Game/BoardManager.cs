@@ -427,7 +427,7 @@ public class BoardManager : Singleton<BoardManager>
     /// </summary>
     IEnumerator BeadDown(bool isRefresh, bool isF)
     {
-        float speed = 0.2f;
+        float speed = 0.15f;
 
         bool isChange = false;
         for (int i = height - 2; i >= 0; i--)

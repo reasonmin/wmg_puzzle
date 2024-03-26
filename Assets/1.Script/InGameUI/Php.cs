@@ -5,20 +5,21 @@ using UnityEngine.UI;
 
 public class Php : MonoBehaviour
 {
+    public Animator ani;
+
     [SerializeField] private RectTransform rectTransform;
-    private float damage = 72.0f;
-    private float Heal = 72.0f;
+    [SerializeField] private Eskill eskill;
+    private float damage = 50;
+    private float Heal = 216;
+
+    private void Start()
+    {
+        StartCoroutine(Attacked());
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Vector2 currentSize = rectTransform.sizeDelta;
-            currentSize.x -= damage;
-            currentSize.x = Mathf.Max(0, currentSize.x);
-            rectTransform.sizeDelta = currentSize;
-            rectTransform.pivot = new Vector2(0f, 0.5f);
-        }
+        
     }
 
     public void FillHp(RectTransform rect)
@@ -30,6 +31,26 @@ public class Php : MonoBehaviour
             currentSize.x = Mathf.Max(0, currentSize.x);
             rectTransform.sizeDelta = currentSize;
             rectTransform.pivot = new Vector2(0f, 0.5f);
+        }
+    }
+
+    public void UnfillHp(RectTransform rect)
+    {
+        Vector2 currentSize = rectTransform.sizeDelta;
+        currentSize.x -= damage;
+        currentSize.x = Mathf.Max(0, currentSize.x);
+        rectTransform.sizeDelta = currentSize;
+        rectTransform.pivot = new Vector2(0f, 0.5f);
+    }
+
+    private IEnumerator Attacked()
+    {
+        while (true)
+        {
+            ani.SetTrigger("attack");
+            UnfillHp(rectTransform);
+
+            yield return new WaitForSeconds(5f);
         }
     }
 }

@@ -15,50 +15,24 @@ public class Eskill : MonoBehaviour
             StartCoroutine(ImageChange());
     }
 
-    private IEnumerator ImageChange()
+    public IEnumerator ImageChange()
     {
-        StartCoroutine(ImageChangea());
+        StartCoroutine(ImageChangea(0));
         yield return new WaitForSeconds(0.2f);
-        StartCoroutine(ImageChangeb());
+        StartCoroutine(ImageChangea(1));
         yield return new WaitForSeconds(0.1f);
-        StartCoroutine(ImageChangec());
+        StartCoroutine(ImageChangea(2));
     }
-    private IEnumerator ImageChangea()
+    private IEnumerator ImageChangea(int index)
     {
-        _image[0].gameObject.SetActive(true);
+        _image[index].gameObject.SetActive(true);
 
         foreach (var sprite in sprites)
         {
-            _image[0].sprite = sprite;
+            _image[index].sprite = sprite;
             yield return new WaitForSeconds(0.1f);
         }
 
-        _image[0].gameObject.SetActive(false);
-    }
-
-    private IEnumerator ImageChangeb()
-    {
-        _image[1].gameObject.SetActive(true);
-
-        foreach (var sprite in sprites)
-        {
-            _image[1].sprite = sprite;
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        _image[1].gameObject.SetActive(false);
-    }
-
-    private IEnumerator ImageChangec()
-    {
-        _image[2].gameObject.SetActive(true);
-
-        foreach (var sprite in sprites)
-        {
-            _image[2].sprite = sprite;
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        _image[2].gameObject.SetActive(false);
+        _image[index].gameObject.SetActive(false);
     }
 }
