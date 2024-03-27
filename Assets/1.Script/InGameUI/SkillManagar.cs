@@ -7,7 +7,6 @@ public class SkillManagar: Singleton<SkillManagar>
 {
     [SerializeField] private Skill[] skills;
     [SerializeField] private HP hps;
-    [SerializeField] private Image hp;
     [SerializeField] private Php php;
     [SerializeField] private RectTransform recT;
 

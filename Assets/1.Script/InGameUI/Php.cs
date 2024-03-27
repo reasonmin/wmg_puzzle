@@ -8,8 +8,6 @@ public class Php : MonoBehaviour
     public Animator ani;
 
     [SerializeField] private RectTransform rectTransform;
-    [SerializeField] private Eskill eskill;
-    private float damage = 50;
 
     private void Start()
     {
@@ -37,7 +35,7 @@ public class Php : MonoBehaviour
             while (true)
             {
                 ani.SetTrigger("attack");
-                ModifyHp(rectTransform, -damage);
+                ModifyHp(rectTransform, -50);
 
                 yield return new WaitForSeconds(5f);
             }

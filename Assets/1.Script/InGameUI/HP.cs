@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class HP : MonoBehaviour
 {
-    public Animator animator;
-
     [SerializeField] public Image hpImage;
     [SerializeField] private GameObject gameObjects;
     [SerializeField] private Eskill eskill;
+
+    public Animator animator;
     private SkillManagar skills;
     public SpriteRenderer spriteRenderer;
     private Color originalColor;
@@ -18,11 +18,6 @@ public class HP : MonoBehaviour
     {
         hpImage.fillAmount = 1;
         originalColor = spriteRenderer.color;
-    }
-
-    private void Update()
-    {
-
     }
 
     public void Attack(int Dmg)

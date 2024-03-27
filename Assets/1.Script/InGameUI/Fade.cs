@@ -9,7 +9,6 @@ public class Fade : MonoBehaviour
     [SerializeField] private Animator eAni;
     [SerializeField] private Image hp;
     [SerializeField] private Image hpbg;
-    [SerializeField] private GameObject hpGameobject;
 
     private float destroytimer = 0f;
     private float destroytime = 2f;
