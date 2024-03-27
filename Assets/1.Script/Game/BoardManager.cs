@@ -327,7 +327,7 @@ public class BoardManager : Singleton<BoardManager>
                 beads[0, i].SetBead(Random.Range(0, (int)BeadType.Dark + 1), SpecialBT.Normal);
 
                 beads[0, i].transform.localPosition = new Vector2(0, 1.25f);
-                beads[0, i].transform.DOLocalMoveY(0, 0.2f).SetEase(Ease.Linear);
+                beads[0, i].transform.DOLocalMoveY(0, 0.15f).SetEase(Ease.Linear);
             }
         }
 
