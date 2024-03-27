@@ -5,18 +5,12 @@ using UnityEngine.UI;
 
 public class Php : MonoBehaviour
 {
-    public Animator ani;
-
     [SerializeField] private RectTransform rectTransform;
+    [SerializeField] private Animator ani;
 
     private void Start()
     {
         StartCoroutine(AttackManage());
-    }
-
-    void Update()
-    {
-
     }
 
     public void ModifyHp(RectTransform rect, float amount)
