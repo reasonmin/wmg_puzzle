@@ -82,7 +82,7 @@ public class SkillManagar: Singleton<SkillManagar>
                 hps.Attack(20);
                 break;
             case 4:
-                php.FillHp(recT);
+                php.ModifyHp(recT, 216);
                 break;
         }
     }

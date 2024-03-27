@@ -10,7 +10,6 @@ public class Php : MonoBehaviour
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private Eskill eskill;
     private float damage = 50;
-    private float Heal = 216;
 
     private void Start()
     {
@@ -22,23 +21,11 @@ public class Php : MonoBehaviour
 
     }
 
-    public void FillHp(RectTransform rect)
+    public void ModifyHp(RectTransform rect, float amount)
     {
         Vector2 currentSize = rectTransform.sizeDelta;
-        if(currentSize.x != 720)
-        {
-            currentSize.x += Heal;
-            currentSize.x = Mathf.Max(0, currentSize.x);
-            rectTransform.sizeDelta = currentSize;
-            rectTransform.pivot = new Vector2(0f, 0.5f);
-        }
-    }
-
-    public void UnfillHp(RectTransform rect)
-    {
-        Vector2 currentSize = rectTransform.sizeDelta;
-        currentSize.x -= damage;
-        currentSize.x = Mathf.Max(0, currentSize.x);
+        currentSize.x += amount;
+        currentSize.x = Mathf.Clamp(currentSize.x, 0f, 720f);
         rectTransform.sizeDelta = currentSize;
         rectTransform.pivot = new Vector2(0f, 0.5f);
     }
@@ -50,7 +37,7 @@ public class Php : MonoBehaviour
             while (true)
             {
                 ani.SetTrigger("attack");
-                UnfillHp(rectTransform);
+                ModifyHp(rectTransform, -damage);
 
                 yield return new WaitForSeconds(5f);
             }

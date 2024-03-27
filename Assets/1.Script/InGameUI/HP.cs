@@ -9,6 +9,7 @@ public class HP : MonoBehaviour
 
     [SerializeField] public Image hpImage;
     [SerializeField] private GameObject gameObjects;
+    [SerializeField] private Eskill eskill;
     private SkillManagar skills;
     public SpriteRenderer spriteRenderer;
     private Color originalColor;
@@ -28,6 +29,7 @@ public class HP : MonoBehaviour
     {
         animator.SetTrigger("isHit");
         hpImage.fillAmount -= Dmg / 100f;
+        StartCoroutine(eskill.ImageChange());
 
         if (hpImage.fillAmount == 0)
         {
@@ -39,14 +41,14 @@ public class HP : MonoBehaviour
 
     private IEnumerator FadeOver(float duration)
     {
-        StartCoroutine(FadeOutGetChild(gameObjects, duration));
+        StartCoroutine(Fade(gameObjects, originalColor.a, 0f, duration * 0.5f));
         yield return new WaitForSeconds(0.005f);
-        StartCoroutine(FadeInGetChildren(gameObjects, duration));
+        StartCoroutine(Fade(gameObjects, 0f, originalColor.a, duration * 0.5f));
 
         spriteRenderer.color = originalColor;
     }
 
-    private IEnumerator FadeOutGetChild(GameObject attackImage, float duration)
+    private IEnumerator Fade(GameObject attackImage, float startAlpha, float targetAlpha, float duration)
     {
         SpriteRenderer[] attackChild = attackImage.GetComponentsInChildren<SpriteRenderer>();
         float elapsedTime = 0f;
@@ -55,31 +57,11 @@ public class HP : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float lerpFactor = elapsedTime / duration;
             Color newColor = originalColor;
-            newColor.a = Mathf.Lerp(originalColor.a, 140f, lerpFactor);
-            for (int i = 0; i < attackChild.Length; i++)
+            newColor.a = Mathf.Lerp(startAlpha, targetAlpha, lerpFactor);
+            foreach (SpriteRenderer childRenderer in attackChild)
             {
-                attackChild[i].color = newColor;
+                childRenderer.color = newColor;
             }
-
-            yield return null;
-        }
-    }
-
-    private IEnumerator FadeInGetChildren(GameObject attackImage, float duration)
-    {
-        SpriteRenderer[] attackChild = attackImage.GetComponentsInChildren<SpriteRenderer>();
-        float elapsedTime = 0f;
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float lerpFactor = elapsedTime / duration;
-            Color newColor = originalColor;
-            newColor.a = Mathf.Lerp(0f, originalColor.a, lerpFactor);
-            for (int i = 0; i < attackChild.Length; i++)
-            {
-                attackChild[i].color = newColor;
-            }
-
             yield return null;
         }
     }

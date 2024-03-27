@@ -1035,6 +1035,7 @@ MonoBehaviour:
   animator: {fileID: 271791017}
   hpImage: {fileID: 1731596789}
   gameObjects: {fileID: 271791016}
+  eskill: {fileID: 2016908273}
   spriteRenderer: {fileID: 271791015}
 --- !u!1 &633820653
 GameObject:
