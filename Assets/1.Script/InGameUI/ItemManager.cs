@@ -6,10 +6,13 @@ public class ItemManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] ItemButton;
     [SerializeField] private Animator ani;
+    [SerializeField] private GameObject faint_image;
 
     // Start is called before the first frame update
     void Start()
     {
+        faint_image.SetActive(false);
+
         if (PlayerPrefs.GetString("bronze") == "True")
             ItemButton[0].SetActive(true);
         else
@@ -49,9 +52,11 @@ public class ItemManager : MonoBehaviour
 
     public IEnumerator UseGoldItem()
     {
+        faint_image.SetActive(true);
         ani.SetBool("faint", true);
         SkillManagar.Instance.Ongold = true;
         yield return new WaitForSeconds(10f);
+        faint_image.SetActive(false);
         ani.SetBool("faint", false);
         SkillManagar.Instance.Ongold = false;
     }
