@@ -8,6 +8,11 @@ public class Eskill : MonoBehaviour
     [SerializeField] private Image[] _image;
     [SerializeField] private Sprite[] sprites;
 
+    /// <summary>
+    /// enemy 공격했을 때 터지는 이미지 생성
+    /// </summary>
+    /// <returns></returns>
+
     public IEnumerator ImageChange()
     {
         int rand = Random.Range(0, 3);

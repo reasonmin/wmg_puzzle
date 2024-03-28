@@ -13,6 +13,12 @@ public class Skill : MonoBehaviour
 
     public bool isFilling = false;
 
+    /// <summary>
+    /// skill 버튼을 사용했을 때
+    /// 한 번에 버튼이 비활성화 되지 않고 
+    /// 2초 동안 서서히 비활성화 되는 이미지 연출
+    /// </summary>
+
     private void Start()
     {
         fillButton.onClick.AddListener(StartFilling);

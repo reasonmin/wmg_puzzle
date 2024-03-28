@@ -15,6 +15,11 @@ public class Fade : MonoBehaviour
 
     private Color originColor;
 
+    /// <summary>
+    /// enemy의 hp가 다 떨어졌을 때 
+    /// 알파 값을 줄여 서서히 사라지는 것처럼 연출
+    /// </summary>
+
     void Start()
     {
         originColor = new(255f, 255f, 255f);
