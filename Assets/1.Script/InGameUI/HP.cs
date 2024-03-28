@@ -14,12 +14,20 @@ public class HP : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     private Color originalColor;
 
+    /// <summary>
+    /// 전체적으로 enemy가 공격받는 함수들
+    /// </summary>
+
     private void Start()
     {
         hpImage.fillAmount = 1;
         originalColor = spriteRenderer.color;
     }
 
+    /// <summary>
+    /// enemy 공격
+    /// </summary>
+    /// <param name="Dmg"></param>
     public void Attack(int Dmg)
     {
         animator.SetTrigger("isHit");
@@ -34,6 +42,12 @@ public class HP : MonoBehaviour
         StartCoroutine(FadeOver(0.9f));
     }
 
+    /// <summary>
+    /// enemy가 player에게 공격 받았을 때 
+    /// 타격 받은 것처럼 잠시 알파 값이 줄어들었다 늘어남
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <returns></returns>
     private IEnumerator FadeOver(float duration)
     {
         StartCoroutine(Fade(gameObjects, originalColor.a, 0f, duration * 0.5f));

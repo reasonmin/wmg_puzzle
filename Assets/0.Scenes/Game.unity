@@ -216,7 +216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &124936372
 RectTransform:
   m_ObjectHideFlags: 0
@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 541448334}
   - component: {fileID: 541448333}
   m_Layer: 0
-  m_Name: demo02_PixelSky
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1027,8 +1027,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541448332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.07, z: 0}
-  m_LocalScale: {x: 4, y: 3.3576565, z: 1}
+  m_LocalPosition: {x: 0, y: -3.1, z: 0}
+  m_LocalScale: {x: 3.75, y: 4.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1577,7 +1577,7 @@ GameObject:
   - component: {fileID: 1068624182}
   - component: {fileID: 1068624181}
   m_Layer: 0
-  m_Name: demo06_PixelSky
+  m_Name: BackGroundSky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1644,7 +1644,7 @@ Transform:
   m_GameObject: {fileID: 1068624180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 5.35, z: 0}
-  m_LocalScale: {x: 4, y: 4.5, z: 1}
+  m_LocalScale: {x: 4, y: 4.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2320,8 +2320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dae24229dce4064d95035012d949674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ani: {fileID: 271791017}
   rectTransform: {fileID: 320091155}
+  ani: {fileID: 271791017}
 --- !u!1 &1421548744
 GameObject:
   m_ObjectHideFlags: 0
