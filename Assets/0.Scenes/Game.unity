@@ -216,7 +216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &124936372
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3301,6 +3301,7 @@ MonoBehaviour:
   - {fileID: 1593588322}
   - {fileID: 523580392}
   - {fileID: 2039599344}
+  ani: {fileID: 271791017}
   target: {fileID: 0}
 --- !u!114 &2016908271
 MonoBehaviour:
@@ -3323,6 +3324,7 @@ MonoBehaviour:
   hps: {fileID: 593120775}
   php: {fileID: 1277077843}
   recT: {fileID: 320091155}
+  Ongold: 0
 --- !u!4 &2016908272
 Transform:
   m_ObjectHideFlags: 0
