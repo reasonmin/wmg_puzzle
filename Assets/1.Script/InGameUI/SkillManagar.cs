@@ -10,6 +10,8 @@ public class SkillManagar: Singleton<SkillManagar>
     [SerializeField] private Php php;
     [SerializeField] private RectTransform recT;
 
+    public bool Ongold = false;
+
     void Start()
     {
         for (int i = 0; i < skills.Length; i++)

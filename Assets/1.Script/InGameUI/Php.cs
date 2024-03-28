@@ -10,7 +10,7 @@ public class Php : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(AttackManage());
+        StartCoroutine(Attacked());
     }
 
     public void ModifyHp(RectTransform rect, float amount)
@@ -22,24 +22,22 @@ public class Php : MonoBehaviour
         rectTransform.pivot = new Vector2(0f, 0.5f);
     }
 
-    private IEnumerator Attacked(bool t)
+    private IEnumerator Attacked()
     {
-        if(t)
+        float speed = 4f;
+
+        while (true)
         {
-            while (true)
+            float time = 0f;
+            while (time < speed)
             {
-                ani.SetTrigger("attack");
-                ModifyHp(rectTransform, -50);
-
-                yield return new WaitForSeconds(5f);
+                yield return new WaitWhile(() => SkillManagar.Instance.Ongold);
+                yield return new WaitForSeconds(0.2f);
+                time += 0.2f;
             }
-        }
-    }
 
-    private IEnumerator AttackManage()
-    {
-        StartCoroutine(Attacked(false));
-        yield return new WaitForSeconds(5f);
-        StartCoroutine(Attacked(true));
+            ani.SetTrigger("attack");
+            ModifyHp(rectTransform, -50);
+        }
     }
 }

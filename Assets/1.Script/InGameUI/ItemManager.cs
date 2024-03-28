@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] ItemButton;
+    [SerializeField] private Animator ani;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,16 @@ public class ItemManager : MonoBehaviour
     public void OnGold()
     {
         ItemButton[2].SetActive(false);
+        StartCoroutine(UseGoldItem());
+    }
+
+    public IEnumerator UseGoldItem()
+    {
+        ani.SetBool("faint", true);
+        SkillManagar.Instance.Ongold = true;
+        yield return new WaitForSeconds(10f);
+        ani.SetBool("faint", false);
+        SkillManagar.Instance.Ongold = false;
     }
 
     [HideInInspector] public Collider2D target = null; //내가 누른 구슬
