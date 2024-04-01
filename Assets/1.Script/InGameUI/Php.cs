@@ -8,6 +8,7 @@ public class Php : MonoBehaviour
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private Animator ani;
     [SerializeField] private GameObject gameOver;
+    [SerializeField] private GameObject disPan;
     [SerializeField] private Transform parent;
 
     private void Start()
@@ -49,7 +50,9 @@ public class Php : MonoBehaviour
             if (rectTransform.sizeDelta.x <= 0f)
             {
                 Instantiate(gameOver, parent);
+                disPan.SetActive(true);
                 BoardManager.Instance.isPlay = false;
+                yield break;
             }
         }
     }

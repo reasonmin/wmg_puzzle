@@ -10,6 +10,7 @@ public class Fade : MonoBehaviour
     [SerializeField] private Image hp;
     [SerializeField] private Image hpbg;
     [SerializeField] private GameObject gameClear;
+    [SerializeField] private GameObject disablePan;
     [SerializeField] private Transform parent;
 
     private float destroytimer = 0f;
@@ -27,6 +28,7 @@ public class Fade : MonoBehaviour
     void Start()
     {
         originColor = new(255f, 255f, 255f);
+        disablePan.SetActive(false);
     }
 
     void Update()
@@ -60,5 +62,7 @@ public class Fade : MonoBehaviour
         }
 
         Instantiate(gameClear, parent);
+        disablePan.SetActive(true);
+        
     }
 }
