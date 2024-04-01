@@ -323,8 +323,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: ddbab45f60bef064e8a6a4ee4f43f111, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -351,6 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 759956190}
   - component: {fileID: 759956192}
+  - component: {fileID: 759956193}
   - component: {fileID: 759956191}
   m_Layer: 5
   m_Name: Text (TMP)
@@ -476,6 +477,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759956189}
   m_CullTransparentMesh: 1
+--- !u!114 &759956193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759956189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6a9d88679dd8c4fb2629bae2fe7016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Text: {fileID: 0}
+  sentence:
+    English: Press to Start
+    Korean: "\uB204\uB974\uBA74 \uC2DC\uC791"
 --- !u!1 &1381702138
 GameObject:
   m_ObjectHideFlags: 0
