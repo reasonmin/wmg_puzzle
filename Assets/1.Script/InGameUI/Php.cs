@@ -49,6 +49,7 @@ public class Php : MonoBehaviour
 
             if (rectTransform.sizeDelta.x <= 0f)
             {
+                BoardManager.Instance.isDone = true;
                 Instantiate(gameOver, parent);
                 disPan.SetActive(true);
                 BoardManager.Instance.isPlay = false;

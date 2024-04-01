@@ -120,7 +120,8 @@ public class MainManager : MonoBehaviour
             for (int j = 0; j < chapterBoards[i].stageButtons.Count; j++)
             {
                 chapterBoards[i].stageButtons[j].stageNumText.text = (i + 1).ToString() + "-" + (j + 1).ToString();
-
+                chapterBoards[i].stageButtons[j].ChapterNum = i + 1;
+                chapterBoards[i].stageButtons[j].stageNum = j + 1;
                 for (int k = 0; k < PlayerDataManager.Instance.playerData.chapterDatas[i].stageDatas[j]; k++)
                 {
                     chapterBoards[i].stageButtons[j].starImages[k].sprite = StarImage.sprite;

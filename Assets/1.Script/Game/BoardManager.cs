@@ -19,12 +19,16 @@ public class BoardManager : Singleton<BoardManager>
     private SpecialBT[,] checkbeads;
 
     [HideInInspector] public bool isPlay;
+    public bool isDone;
 
     private Vector2Int curVector2;
     private Vector2Int targetVector2;
 
+    public float timeFlow = 0f;
+
     void Start()
     {
+        isDone = false;
         isPlay = true;
         beads = new Bead[height, width];
         checkbeads = new SpecialBT[height, width];
@@ -33,6 +37,14 @@ public class BoardManager : Singleton<BoardManager>
         CreateBead();
 
         BeadBoardCheck(true);
+    }
+
+    private void Update()
+    {
+        if (!isDone)
+        {
+            timeFlow += Time.deltaTime;
+        }
     }
 
     /// <summary>

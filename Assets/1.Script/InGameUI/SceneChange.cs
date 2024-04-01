@@ -8,6 +8,9 @@ public class SceneChange : MonoBehaviour
     public static SceneChange instance;
 
     public float y;
+    public int stageNum;
+    public int ChapterNum;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

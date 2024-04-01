@@ -7,7 +7,13 @@ public class GameEndPanal : MonoBehaviour
 {
     public void OnClear()
     {
-        PlayerDataManager.Instance.playerData.chapterDatas[PlayerDataManager.Instance.playerData.curChapter - 1].stageDatas[PlayerDataManager.Instance.playerData.curStage - 1] = 3;
+        if (BoardManager.Instance.timeFlow < 40)
+            PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 3;
+        else if (BoardManager.Instance.timeFlow < 60)
+            PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 2;
+        else
+            PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 1;
+
         PlayerDataManager.Instance.playerData.curStage++;
         if(PlayerDataManager.Instance.playerData.curStage == 11)
         {
@@ -27,7 +33,13 @@ public class GameEndPanal : MonoBehaviour
     {
         if (isClear)
         {
-            PlayerDataManager.Instance.playerData.chapterDatas[PlayerDataManager.Instance.playerData.curChapter - 1].stageDatas[PlayerDataManager.Instance.playerData.curStage - 1] = 3;
+            if (BoardManager.Instance.timeFlow < 40)
+                PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 3;
+            else if (BoardManager.Instance.timeFlow < 60)
+                PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 2;
+            else
+                PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 1;
+
             PlayerDataManager.Instance.playerData.curStage++;
             if (PlayerDataManager.Instance.playerData.curStage == 11)
             {

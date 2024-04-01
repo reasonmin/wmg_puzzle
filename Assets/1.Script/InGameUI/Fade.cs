@@ -36,6 +36,7 @@ public class Fade : MonoBehaviour
         if (hp.fillAmount == 0 && tf)
         {
             tf = false;
+            BoardManager.Instance.isDone = true;
             StartCoroutine(ChangeColor(es, hpbg));
             eAni.enabled = false;            
         }
