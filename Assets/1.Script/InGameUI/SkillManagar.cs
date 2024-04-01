@@ -71,16 +71,16 @@ public class SkillManagar: Singleton<SkillManagar>
         switch (t)
         {
             case 0:
-                hps.Attack(5);
-                break;
-            case 1:
-                hps.Attack(7);
-                break;
-            case 2:
                 hps.Attack(10);
                 break;
+            case 1:
+                hps.Attack(14);
+                break;
+            case 2:
+                hps.Attack(18);
+                break;
             case 3:
-                hps.Attack(20);
+                hps.Attack(30);
                 break;
             case 4:
                 php.ModifyHp(recT, 216);

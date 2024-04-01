@@ -8,7 +8,7 @@ public class HP : MonoBehaviour
     [SerializeField] public Image hpImage;
     [SerializeField] private GameObject gameObjects;
     [SerializeField] private Eskill eskill;
-
+    
     public Animator animator;
     private SkillManagar skills;
     public SpriteRenderer spriteRenderer;
@@ -33,11 +33,6 @@ public class HP : MonoBehaviour
         animator.SetTrigger("isHit");
         hpImage.fillAmount -= Dmg / 100f;
         StartCoroutine(eskill.ImageChange());
-
-        if (hpImage.fillAmount == 0)
-        {
-            skills.enabled = false;
-        }
 
         StartCoroutine(FadeOver(0.9f));
     }

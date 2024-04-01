@@ -7,10 +7,17 @@ public class Php : MonoBehaviour
 {
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private Animator ani;
+    [SerializeField] private GameObject gameOver;
+    [SerializeField] private Transform parent;
 
     private void Start()
     {
         StartCoroutine(Attacked());
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void ModifyHp(RectTransform rect, float amount)
@@ -38,6 +45,12 @@ public class Php : MonoBehaviour
 
             ani.SetTrigger("attack");
             ModifyHp(rectTransform, -50);
+
+            if (rectTransform.sizeDelta.x <= 0f)
+            {
+                Instantiate(gameOver, parent);
+                BoardManager.Instance.isPlay = false;
+            }
         }
     }
 }

@@ -38,10 +38,24 @@ public class PlayerData
     }
 }
 
-public class PlayerDataManager : Singleton<PlayerDataManager>
+public class PlayerDataManager : MonoBehaviour
 {
     public PlayerData playerData;
     private string filePath = "Assets/8.Data/PlayerData.json";
+
+    private static PlayerDataManager _instance;
+    public static PlayerDataManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<PlayerDataManager>();
+                DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
 
     public void LoadJson() //불러오기
     {

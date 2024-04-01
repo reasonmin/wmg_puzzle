@@ -216,7 +216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &124936372
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1127,6 +1127,8 @@ MonoBehaviour:
   hpImage: {fileID: 1731596789}
   gameObjects: {fileID: 271791016}
   eskill: {fileID: 2016908273}
+  gameClear: {fileID: 5008982905870230231, guid: 748ccfbe4b1abc343b826263f939e42c, type: 3}
+  parent: {fileID: 1251983095}
   animator: {fileID: 271791017}
   spriteRenderer: {fileID: 271791015}
 --- !u!1 &633820653
@@ -2399,6 +2401,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 320091155}
   ani: {fileID: 271791017}
+  gameOver: {fileID: 1303693425841533455, guid: a9f73126ecd661e40bd7856a37f56ff1, type: 3}
+  parent: {fileID: 1251983095}
 --- !u!1 &1421548744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2453,6 +2457,8 @@ MonoBehaviour:
   eAni: {fileID: 271791017}
   hp: {fileID: 1731596789}
   hpbg: {fileID: 593120773}
+  gameClear: {fileID: 5008982905870230231, guid: 748ccfbe4b1abc343b826263f939e42c, type: 3}
+  parent: {fileID: 1251983095}
 --- !u!1 &1434145481
 GameObject:
   m_ObjectHideFlags: 0

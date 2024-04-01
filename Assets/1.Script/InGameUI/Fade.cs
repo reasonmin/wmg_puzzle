@@ -9,9 +9,13 @@ public class Fade : MonoBehaviour
     [SerializeField] private Animator eAni;
     [SerializeField] private Image hp;
     [SerializeField] private Image hpbg;
+    [SerializeField] private GameObject gameClear;
+    [SerializeField] private Transform parent;
 
     private float destroytimer = 0f;
     private float destroytime = 2f;
+
+    private bool tf = true;
 
     private Color originColor;
 
@@ -27,24 +31,34 @@ public class Fade : MonoBehaviour
 
     void Update()
     {
-        if (hp.fillAmount == 0)
+        if (hp.fillAmount == 0 && tf)
         {
-            ChangeColor(es, hpbg);
-            eAni.enabled = false;
+            tf = false;
+            StartCoroutine(ChangeColor(es, hpbg));
+            eAni.enabled = false;            
         }
     }
 
-    private void ChangeColor(GameObject g, Image image)
+    private IEnumerator ChangeColor(GameObject g, Image image)
     {
         SpriteRenderer[] allchild = g.GetComponentsInChildren<SpriteRenderer>();
-        destroytimer += Time.deltaTime;
-        float desvalue = 1f - (destroytimer / destroytime);
-        Color newColor = new(originColor.r, originColor.g, originColor.b, Mathf.Clamp01(desvalue));
-        for (int i = 0; i < allchild.Length; i++)
+        float desvalue = 1f;
+        while (desvalue > 0)
         {
-            allchild[i].color = newColor;
+            destroytimer += Time.deltaTime;
+            desvalue = 1f - (destroytimer / destroytime);
+            Color newColor = new(originColor.r, originColor.g, originColor.b, Mathf.Clamp01(desvalue));
+            Debug.Log(desvalue);
+            for (int i = 0; i < allchild.Length; i++)
+            {
+                allchild[i].color = newColor;
+            }
+
+            image.color = newColor;
+
+            yield return null;
         }
 
-        image.color = newColor;
+        Instantiate(gameClear, parent);
     }
 }
