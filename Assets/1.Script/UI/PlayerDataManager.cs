@@ -57,6 +57,12 @@ public class PlayerDataManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        //ResetJson();
+        LoadJson();
+    }
+
     public void LoadJson() //불러오기
     {
         string json = File.ReadAllText(filePath);

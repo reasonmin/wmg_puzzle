@@ -1395,6 +1395,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 31402010}
   stageNumText: {fileID: 1941789497}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 413314264}
   - {fileID: 1391919492}
@@ -1780,6 +1782,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 38237046}
   stageNumText: {fileID: 1636217745}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1443477753}
   - {fileID: 552670318}
@@ -2355,6 +2359,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 48452764}
   stageNumText: {fileID: 1782137718}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 585204053}
   - {fileID: 513919083}
@@ -3526,6 +3532,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 86100820}
   stageNumText: {fileID: 367205181}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 144061372}
   - {fileID: 1970134749}
@@ -4046,6 +4054,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 103864436}
   stageNumText: {fileID: 714267612}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 977307883}
   - {fileID: 679753213}
@@ -5142,6 +5152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 124965168}
   stageNumText: {fileID: 1465484128}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 472576646}
   - {fileID: 465074396}
@@ -5451,6 +5463,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 129130114}
   stageNumText: {fileID: 250120216}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1305528300}
   - {fileID: 1328915631}
@@ -6308,6 +6322,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 147306027}
   stageNumText: {fileID: 1703375179}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1452574855}
   - {fileID: 1073251516}
@@ -7799,6 +7815,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 204862954}
   stageNumText: {fileID: 681327874}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1166586988}
   - {fileID: 1257193217}
@@ -8032,6 +8050,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 211558024}
   stageNumText: {fileID: 2133483360}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 560035163}
   - {fileID: 930023755}
@@ -9028,6 +9048,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 248771493}
   stageNumText: {fileID: 904911418}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1160171305}
   - {fileID: 1234971432}
@@ -10277,6 +10299,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 295648482}
   stageNumText: {fileID: 566541879}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 355343706}
   - {fileID: 467650284}
@@ -11008,6 +11032,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 313315501}
   stageNumText: {fileID: 63368668}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 649089434}
   - {fileID: 727044074}
@@ -11348,6 +11374,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 332686799}
   stageNumText: {fileID: 695494279}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 421423141}
   - {fileID: 186092061}
@@ -12097,6 +12125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 350422028}
   stageNumText: {fileID: 2036116425}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 142447701}
   - {fileID: 1698272557}
@@ -13132,6 +13162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 379049273}
   stageNumText: {fileID: 1400726685}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 779498974}
   - {fileID: 796398516}
@@ -14567,6 +14599,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 430701332}
   stageNumText: {fileID: 1413302718}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 669329147}
   - {fileID: 573938783}
@@ -14875,6 +14909,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 443876742}
   stageNumText: {fileID: 1716492022}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1563460}
   - {fileID: 997697832}
@@ -17552,6 +17588,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 550333816}
   stageNumText: {fileID: 1377523591}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 677556356}
   - {fileID: 592748150}
@@ -18610,6 +18648,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 585901841}
   stageNumText: {fileID: 512551275}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1532123825}
   - {fileID: 1320116606}
@@ -19070,6 +19110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 594428932}
   stageNumText: {fileID: 44191795}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 861780356}
   - {fileID: 1021848553}
@@ -19445,6 +19487,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 604175722}
   stageNumText: {fileID: 1280448479}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 2016600388}
   - {fileID: 2056240460}
@@ -19888,6 +19932,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 618923839}
   stageNumText: {fileID: 2055726525}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1636539534}
   - {fileID: 1213042355}
@@ -20423,6 +20469,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 631224694}
   stageNumText: {fileID: 756860272}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1851991655}
   - {fileID: 76972145}
@@ -22112,6 +22160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 686325439}
   stageNumText: {fileID: 1927715968}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1848318574}
   - {fileID: 881043822}
@@ -24746,6 +24796,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 753346594}
   stageNumText: {fileID: 821580604}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1593102715}
   - {fileID: 1047103305}
@@ -24902,6 +24954,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 755015591}
   stageNumText: {fileID: 1621792162}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 422780594}
   - {fileID: 177679033}
@@ -25491,6 +25545,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 771839476}
   stageNumText: {fileID: 1626807915}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1985812742}
   - {fileID: 1130729155}
@@ -26010,6 +26066,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 782607177}
   stageNumText: {fileID: 444835977}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 702935408}
   - {fileID: 1075615524}
@@ -27003,6 +27061,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 804119908}
   stageNumText: {fileID: 1931942089}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1682389009}
   - {fileID: 1217669110}
@@ -27159,6 +27219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 805639698}
   stageNumText: {fileID: 413240437}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 617862389}
   - {fileID: 1222939850}
@@ -27797,6 +27859,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 824869116}
   stageNumText: {fileID: 1506005579}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1983665646}
   - {fileID: 1925458361}
@@ -29399,6 +29463,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 880583877}
   stageNumText: {fileID: 1498560343}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 2086456450}
   - {fileID: 1322183459}
@@ -30716,6 +30782,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 908596328}
   stageNumText: {fileID: 244950170}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1977013028}
   - {fileID: 236358348}
@@ -30872,6 +30940,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 910018974}
   stageNumText: {fileID: 462330712}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1502002649}
   - {fileID: 701256740}
@@ -32725,6 +32795,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1006484958}
   stageNumText: {fileID: 821300285}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 737732940}
   - {fileID: 128274836}
@@ -33623,6 +33695,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1022924393}
   stageNumText: {fileID: 670529994}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 542999201}
   - {fileID: 435152248}
@@ -33933,6 +34007,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1024722512}
   stageNumText: {fileID: 1762015616}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1694572125}
   - {fileID: 1015420062}
@@ -34554,6 +34630,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1042585568}
   stageNumText: {fileID: 339931418}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1030585178}
   - {fileID: 2042961844}
@@ -35859,6 +35937,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1073642318}
   stageNumText: {fileID: 606618055}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1497251779}
   - {fileID: 1265865937}
@@ -36226,6 +36306,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1079160040}
   stageNumText: {fileID: 1265761673}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 76280889}
   - {fileID: 587576597}
@@ -36557,6 +36639,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1084130098}
   stageNumText: {fileID: 2049320792}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 197728664}
   - {fileID: 1723566855}
@@ -36867,6 +36951,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1086439825}
   stageNumText: {fileID: 1869499812}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1574933707}
   - {fileID: 787480760}
@@ -39101,6 +39187,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1168999471}
   stageNumText: {fileID: 1829308493}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1615041338}
   - {fileID: 1750979497}
@@ -39257,6 +39345,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1169657902}
   stageNumText: {fileID: 666816572}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 349814157}
   - {fileID: 1916601908}
@@ -40223,6 +40313,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1202230017}
   stageNumText: {fileID: 216457813}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 2087129946}
   - {fileID: 252210685}
@@ -40456,6 +40548,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1206708881}
   stageNumText: {fileID: 703409850}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 129276975}
   - {fileID: 748621073}
@@ -40840,6 +40934,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1211909350}
   stageNumText: {fileID: 1779202108}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1098393953}
   - {fileID: 235705762}
@@ -41454,6 +41550,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1232920799}
   stageNumText: {fileID: 311426640}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 619452296}
   - {fileID: 1015398470}
@@ -42007,6 +42105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1238769459}
   stageNumText: {fileID: 1676724002}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 746193993}
   - {fileID: 1267504486}
@@ -42240,6 +42340,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1255919808}
   stageNumText: {fileID: 176389415}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1537270970}
   - {fileID: 12765474}
@@ -42472,6 +42574,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1257973107}
   stageNumText: {fileID: 1727030514}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 793314196}
   - {fileID: 1618537293}
@@ -43799,6 +43903,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1280469080}
   stageNumText: {fileID: 66031268}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 859273744}
   - {fileID: 1600290370}
@@ -44032,6 +44138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1283783441}
   stageNumText: {fileID: 112803705}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 50937502}
   - {fileID: 593440507}
@@ -44265,6 +44373,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1290034405}
   stageNumText: {fileID: 2037468559}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1066038202}
   - {fileID: 1340832005}
@@ -45258,6 +45368,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1324996380}
   stageNumText: {fileID: 30973889}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 186221733}
   - {fileID: 726392456}
@@ -46119,6 +46231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1357939078}
   stageNumText: {fileID: 1999818084}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 835191558}
   - {fileID: 422174075}
@@ -46884,6 +46998,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1383922415}
   stageNumText: {fileID: 361927789}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1405885751}
   - {fileID: 939506998}
@@ -47306,6 +47422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1390912999}
   stageNumText: {fileID: 774055926}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1707876907}
   - {fileID: 2030244723}
@@ -47962,6 +48080,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1401646587}
   stageNumText: {fileID: 1495070988}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1835077114}
   - {fileID: 700027168}
@@ -48271,6 +48391,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1413116660}
   stageNumText: {fileID: 1438478523}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1782378424}
   - {fileID: 504656350}
@@ -48715,6 +48837,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1431008121}
   stageNumText: {fileID: 1633256595}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 2015038957}
   - {fileID: 692731932}
@@ -49938,6 +50062,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1473578331}
   stageNumText: {fileID: 309929994}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 213341603}
   - {fileID: 1357890291}
@@ -50521,6 +50647,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1496239715}
   stageNumText: {fileID: 598972393}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1721594310}
   - {fileID: 532075215}
@@ -51460,6 +51588,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1507589610}
   stageNumText: {fileID: 972641107}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 717963319}
   - {fileID: 282138533}
@@ -51802,6 +51932,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1514559251}
   stageNumText: {fileID: 929393814}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1180402334}
   - {fileID: 375752992}
@@ -52645,6 +52777,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1561669636}
   stageNumText: {fileID: 1147238004}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 302520023}
   - {fileID: 1860356702}
@@ -53637,6 +53771,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1589066146}
   stageNumText: {fileID: 1502442026}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1813580297}
   - {fileID: 788050612}
@@ -54205,6 +54341,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1604175345}
   stageNumText: {fileID: 76977244}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1872345090}
   - {fileID: 837267340}
@@ -54719,6 +54857,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1618322182}
   stageNumText: {fileID: 1153841162}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 352767956}
   - {fileID: 1463734961}
@@ -56541,6 +56681,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1669034436}
   stageNumText: {fileID: 475672277}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 781905528}
   - {fileID: 191766143}
@@ -57119,6 +57261,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1683273177}
   stageNumText: {fileID: 28923111}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 788648622}
   - {fileID: 484813702}
@@ -58238,6 +58382,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1709400535}
   stageNumText: {fileID: 894701772}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1889856847}
   - {fileID: 1910798092}
@@ -58394,6 +58540,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1711894402}
   stageNumText: {fileID: 1859885528}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1420712214}
   - {fileID: 700059424}
@@ -59048,6 +59196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1729260202}
   stageNumText: {fileID: 2109539337}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1922749904}
   - {fileID: 1538308883}
@@ -59454,6 +59604,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1743193347}
   stageNumText: {fileID: 1278813284}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1660434168}
   - {fileID: 1202082472}
@@ -60416,6 +60568,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1769891039}
   stageNumText: {fileID: 1632810945}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 501598105}
   - {fileID: 544986753}
@@ -61544,6 +61698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1801436865}
   stageNumText: {fileID: 390804352}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 625064362}
   - {fileID: 775988546}
@@ -61852,6 +62008,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1804433958}
   stageNumText: {fileID: 133398847}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1894578029}
   - {fileID: 739199892}
@@ -62008,6 +62166,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1809812177}
   stageNumText: {fileID: 1897392475}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 634184206}
   - {fileID: 853943480}
@@ -62891,6 +63051,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1828136168}
   stageNumText: {fileID: 2096599087}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 742502331}
   - {fileID: 297961101}
@@ -63411,6 +63573,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1850253207}
   stageNumText: {fileID: 854791666}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1144934003}
   - {fileID: 393905650}
@@ -64301,6 +64465,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1876348457}
   stageNumText: {fileID: 1822360846}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 2079658804}
   - {fileID: 1630512433}
@@ -64686,6 +64852,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1894221220}
   stageNumText: {fileID: 264176619}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 120614630}
   - {fileID: 2077119534}
@@ -65207,6 +65375,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1902808619}
   stageNumText: {fileID: 711672739}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 32285682}
   - {fileID: 140222895}
@@ -65740,6 +65910,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1915232052}
   stageNumText: {fileID: 1013274415}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1684201648}
   - {fileID: 138960894}
@@ -66683,6 +66855,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1935019831}
   stageNumText: {fileID: 101197584}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 882999040}
   - {fileID: 1883114800}
@@ -67234,6 +67408,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1944723564}
   stageNumText: {fileID: 648984564}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 547885738}
   - {fileID: 1630262379}
@@ -67486,6 +67662,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1965503334}
   stageNumText: {fileID: 1697018450}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 591753642}
   - {fileID: 277392559}
@@ -67660,64 +67838,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1970134747}
   m_CullTransparentMesh: 1
---- !u!1 &1971647752
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1971647754}
-  - component: {fileID: 1971647753}
-  m_Layer: 0
-  m_Name: '[PlayerDataManager]'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1971647753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971647752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8165266dca0b02f46a3df8a9e201303a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData:
-    coin: 0
-    item:
-      gold: 0
-      silver: 0
-      bronze: 0
-    language: 0
-    musicVolume: 0
-    soundEffectVolume: 0
-    isMusic: 0
-    isSoundEffect: 0
-    curChapter: 0
-    curStage: 0
-    chapterDatas: []
---- !u!4 &1971647754
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971647752}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1972301100
 GameObject:
   m_ObjectHideFlags: 0
@@ -68286,6 +68406,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1991098891}
   stageNumText: {fileID: 106748945}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 376559716}
   - {fileID: 1042830730}
@@ -68442,6 +68564,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 1997561700}
   stageNumText: {fileID: 812355911}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 454890753}
   - {fileID: 2060037401}
@@ -68810,6 +68934,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 2008802903}
   stageNumText: {fileID: 1135685780}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1036281051}
   - {fileID: 1822035288}
@@ -69043,6 +69169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 2010448906}
   stageNumText: {fileID: 1272827058}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1380514485}
   - {fileID: 190272552}
@@ -69427,6 +69555,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 2017910980}
   stageNumText: {fileID: 1323743477}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 52224370}
   - {fileID: 1145016071}
@@ -69964,6 +70094,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 2035577613}
   stageNumText: {fileID: 1780000798}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1445161371}
   - {fileID: 58741136}
@@ -70255,6 +70387,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 2036192265}
   stageNumText: {fileID: 1400450319}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1666616361}
   - {fileID: 218735558}
@@ -70622,6 +70756,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 2040011107}
   stageNumText: {fileID: 430455280}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 556213214}
   - {fileID: 1578288947}
@@ -71430,6 +71566,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 2058706224}
   stageNumText: {fileID: 2115988378}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 2146675427}
   - {fileID: 2026407887}
@@ -71662,6 +71800,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 2066292814}
   stageNumText: {fileID: 702192105}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 113345750}
   - {fileID: 1618381350}
@@ -72850,6 +72990,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonImage: {fileID: 2112335066}
   stageNumText: {fileID: 262478887}
+  stageNum: 0
+  ChapterNum: 0
   starImages:
   - {fileID: 1510262665}
   - {fileID: 2112283571}

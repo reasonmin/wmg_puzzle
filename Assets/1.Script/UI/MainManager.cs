@@ -77,9 +77,6 @@ public class MainManager : MonoBehaviour
 
         gameStartPanel.Panel.SetActive(false);
 
-        //PlayerDataManager.Instance.ResetJson();
-        PlayerDataManager.Instance.LoadJson();// Player 정보 불러오기
-
         SetStageButton();// 불러온 정보로 스테이지 버튼 세팅
         SetVolume();// 음향 세팅
         SetCoin();// 코인 개수 세팅
