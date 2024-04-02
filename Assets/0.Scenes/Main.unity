@@ -9529,7 +9529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &261530320
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42222,7 +42222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1252081336
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49106,7 +49106,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1436974456
 RectTransform:
   m_ObjectHideFlags: 0
@@ -73369,9 +73369,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2134724111}
+  - component: {fileID: 2134724114}
   - component: {fileID: 2134724113}
   - component: {fileID: 2134724112}
-  - component: {fileID: 2134724114}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -73419,7 +73419,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\n\uD37C\uC990\uC744 \uC138 \uAC1C \uC774\uC0C1 \uAC00\uB85C \uB610\uB294
+    \uC138\uB85C\uB85C \uC815\uB82C\uD558\uC5EC \uB9DE\uCD98\uB2E4\r\n\n\uB9DE\uCD98
+    \uAC1C\uC218\uB9CC\uD07C \uB9DE\uCD98 \uAD6C\uC2AC\uC5D0 \uD574\uB2F9\uD558\uB294
+    \uC18D\uC131\uC758 \uC2A4\uD0AC \uAD6C\uC2AC\uC744 \uCC44\uC6B4\uB2E4\r\n\n\uC644\uC804\uD788
+    \uCC44\uC6CC\uC9C4 \uC2A4\uD0AC \uAD6C\uC2AC\uC744 \uD65C\uC6A9\uD558\uC5EC \uBAAC\uC2A4\uD130\uB97C
+    \uACF5\uACA9\uD558\uC5EC \uC4F0\uB7EC\uD2B8\uB9AC\uC790!\r\n\r\n\uAC19\uC740
+    \uC18D\uC131\uC758 \uAD6C\uC2AC\uC744 4\uAC1C \uB9DE\uCD94\uBA74 \uD55C \uC904
+    \uD130\uD2B8\uB9B4 \uC218 \uC788\uACE0, 5\uAC1C \uB9DE\uCD94\uBA74 \uD55C \uC18D\uC131\uC758
+    \uAD6C\uC2AC\uC744 \uB2E4 \uD130\uD2B8\uB9B4 \uC218 \uC788\uB2E4!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -73510,8 +73518,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Text: {fileID: 2134724112}
   sentence:
-    English: 
-    Korean: 
+    English: Match three or more puzzle pieces horizontally or vertically.  Fill
+      the skill bead corresponding to the matched attribute for each piece matched. 
+      Utilize the completely filled skill beads to attack and defeat monsters!  Matching
+      four pieces of the same attribute allows you to clear one line, and matching
+      five pieces allows you to clear all pieces of one attribute!
+    Korean: "\uD37C\uC990\uC744 \uC138 \uAC1C \uC774\uC0C1 \uAC00\uB85C \uB610\uB294
+      \uC138\uB85C\uB85C \uC815\uB82C\uD558\uC5EC \uB9DE\uCD98\uB2E4  \uB9DE\uCD98
+      \uAC1C\uC218\uB9CC\uD07C \uB9DE\uCD98 \uAD6C\uC2AC\uC5D0 \uD574\uB2F9\uD558\uB294
+      \uC18D\uC131\uC758 \uC2A4\uD0AC \uAD6C\uC2AC\uC744 \uCC44\uC6B4\uB2E4  \uC644\uC804\uD788
+      \uCC44\uC6CC\uC9C4 \uC2A4\uD0AC \uAD6C\uC2AC\uC744 \uD65C\uC6A9\uD558\uC5EC
+      \uBAAC\uC2A4\uD130\uB97C \uACF5\uACA9\uD558\uC5EC \uC4F0\uB7EC\uD2B8\uB9AC\uC790! 
+      \uAC19\uC740 \uC18D\uC131\uC758 \uAD6C\uC2AC\uC744 4\uAC1C \uB9DE\uCD94\uBA74
+      \uD55C \uC904 \uD130\uD2B8\uB9B4 \uC218 \uC788\uACE0, 5\uAC1C \uB9DE\uCD94\uBA74
+      \uD55C \uC18D\uC131\uC758 \uAD6C\uC2AC\uC744 \uB2E4 \uD130\uD2B8\uB9B4 \uC218
+      \uC788\uB2E4!"
 --- !u!1 &2137129611
 GameObject:
   m_ObjectHideFlags: 0
