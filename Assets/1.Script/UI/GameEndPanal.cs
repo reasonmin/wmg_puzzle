@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameEndPanal : MonoBehaviour
 {
-    public void OnClear()
+    public void OnClear(bool t)
     {
         if (BoardManager.Instance.timeFlow < 40)
             PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 3;
@@ -14,14 +14,20 @@ public class GameEndPanal : MonoBehaviour
         else
             PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 1;
 
-        PlayerDataManager.Instance.playerData.curStage++;
-        if(PlayerDataManager.Instance.playerData.curStage == 11)
+        if (SceneChange.instance.ChapterNum == PlayerDataManager.Instance.playerData.curChapter && SceneChange.instance.stageNum == PlayerDataManager.Instance.playerData.curStage)
         {
-            PlayerDataManager.Instance.playerData.curChapter++;
-            PlayerDataManager.Instance.playerData.curStage = 0;
+            PlayerDataManager.Instance.playerData.curStage++;
+            if (PlayerDataManager.Instance.playerData.curStage == 11)
+            {
+                PlayerDataManager.Instance.playerData.curChapter++;
+                PlayerDataManager.Instance.playerData.curStage = 0;
+            }
         }
+        
         PlayerDataManager.Instance.SaveJson();
-        SceneManager.LoadScene("Main");
+
+        if(t)
+            SceneManager.LoadScene("Main");
     }
 
     public void OnDie()
@@ -32,22 +38,7 @@ public class GameEndPanal : MonoBehaviour
     public void OnReTray(bool isClear)
     {
         if (isClear)
-        {
-            if (BoardManager.Instance.timeFlow < 40)
-                PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 3;
-            else if (BoardManager.Instance.timeFlow < 80)
-                PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 2;
-            else
-                PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 1;
-
-            PlayerDataManager.Instance.playerData.curStage++;
-            if (PlayerDataManager.Instance.playerData.curStage == 11)
-            {
-                PlayerDataManager.Instance.playerData.curChapter++;
-                PlayerDataManager.Instance.playerData.curStage = 0;
-            }
-            PlayerDataManager.Instance.SaveJson();
-        }
+            OnClear(false);
 
         SceneManager.LoadScene("Game");
     }

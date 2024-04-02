@@ -82,7 +82,7 @@ public class PlayerDataManager : MonoBehaviour
         List<ChapterData> chapterData = new List<ChapterData>();
         List<int> li = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-        for (int i = 0; i < MainManager.instance.chapterBoards.Count; i++)
+        for (int i = 0; i < 10; i++)
             chapterData.Add(new ChapterData(li));
 
         Item items = new Item();
