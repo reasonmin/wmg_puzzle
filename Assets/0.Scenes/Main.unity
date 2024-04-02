@@ -5970,10 +5970,10 @@ RectTransform:
   m_Father: {fileID: 764917245}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 360, y: -5425}
+  m_SizeDelta: {x: 720, y: 1550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &140837486
 MonoBehaviour:
@@ -31429,10 +31429,10 @@ RectTransform:
   m_Father: {fileID: 764917245}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 360, y: -6975}
+  m_SizeDelta: {x: 720, y: 1550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &926116226
 MonoBehaviour:
@@ -35238,10 +35238,10 @@ RectTransform:
   m_Father: {fileID: 764917245}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 360, y: -10075}
+  m_SizeDelta: {x: 720, y: 1550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1055242841
 MonoBehaviour:
@@ -38699,10 +38699,10 @@ RectTransform:
   m_Father: {fileID: 764917245}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 360, y: -3875}
+  m_SizeDelta: {x: 720, y: 1550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1154820423
 MonoBehaviour:
@@ -39489,10 +39489,10 @@ RectTransform:
   m_Father: {fileID: 764917245}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 360, y: -2325}
+  m_SizeDelta: {x: 720, y: 1550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1179451770
 MonoBehaviour:
@@ -40037,10 +40037,10 @@ RectTransform:
   m_Father: {fileID: 764917245}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 360, y: -8525}
+  m_SizeDelta: {x: 720, y: 1550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1195931295
 MonoBehaviour:
@@ -41981,10 +41981,10 @@ RectTransform:
   m_Father: {fileID: 764917245}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 360, y: -14725}
+  m_SizeDelta: {x: 720, y: 1550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1237550763
 MonoBehaviour:
@@ -44669,10 +44669,10 @@ RectTransform:
   m_Father: {fileID: 764917245}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 360, y: -13175}
+  m_SizeDelta: {x: 720, y: 1550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1306371555
 MonoBehaviour:
@@ -51808,10 +51808,10 @@ RectTransform:
   m_Father: {fileID: 764917245}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 360, y: -775}
+  m_SizeDelta: {x: 720, y: 1550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1514380316
 MonoBehaviour:
@@ -66999,10 +66999,10 @@ RectTransform:
   m_Father: {fileID: 764917245}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 360, y: -11625}
+  m_SizeDelta: {x: 720, y: 1550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1936421966
 MonoBehaviour:
@@ -73419,7 +73419,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\uD37C\uC990\uC744 \uC138 \uAC1C \uC774\uC0C1 \uAC00\uB85C \uB610\uB294
+  m_text: "\uD37C\uC990\uC744 \uC138 \uAC1C \uC774\uC0C1 \uAC00\uB85C \uB610\uB294
     \uC138\uB85C\uB85C \uC815\uB82C\uD558\uC5EC \uB9DE\uCD98\uB2E4\r\n\n\uB9DE\uCD98
     \uAC1C\uC218\uB9CC\uD07C \uB9DE\uCD98 \uAD6C\uC2AC\uC5D0 \uD574\uB2F9\uD558\uB294
     \uC18D\uC131\uC758 \uC2A4\uD0AC \uAD6C\uC2AC\uC744 \uCC44\uC6B4\uB2E4\r\n\n\uC644\uC804\uD788
@@ -73518,18 +73518,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Text: {fileID: 2134724112}
   sentence:
-    English: Match three or more puzzle pieces horizontally or vertically.  Fill
-      the skill bead corresponding to the matched attribute for each piece matched. 
-      Utilize the completely filled skill beads to attack and defeat monsters!  Matching
-      four pieces of the same attribute allows you to clear one line, and matching
-      five pieces allows you to clear all pieces of one attribute!
-    Korean: "\uD37C\uC990\uC744 \uC138 \uAC1C \uC774\uC0C1 \uAC00\uB85C \uB610\uB294
-      \uC138\uB85C\uB85C \uC815\uB82C\uD558\uC5EC \uB9DE\uCD98\uB2E4  \uB9DE\uCD98
+    English: <br>Match three or more puzzle pieces horizontally or vertically. <br><br>Fill
+      the skill bead corresponding to the matched attribute for each piece matched.
+      <br><br>Utilize the completely filled skill beads to attack and defeat monsters!
+      <br><br>Matching four pieces of the same attribute allows you to clear one
+      line, and matching five pieces allows you to clear all pieces of one attribute!
+    Korean: "<br>\uD37C\uC990\uC744 \uC138 \uAC1C \uC774\uC0C1 \uAC00\uB85C \uB610\uB294
+      \uC138\uB85C\uB85C \uC815\uB82C\uD558\uC5EC \uB9DE\uCD98\uB2E4 <br><br>\uB9DE\uCD98
       \uAC1C\uC218\uB9CC\uD07C \uB9DE\uCD98 \uAD6C\uC2AC\uC5D0 \uD574\uB2F9\uD558\uB294
-      \uC18D\uC131\uC758 \uC2A4\uD0AC \uAD6C\uC2AC\uC744 \uCC44\uC6B4\uB2E4  \uC644\uC804\uD788
+      \uC18D\uC131\uC758 \uC2A4\uD0AC \uAD6C\uC2AC\uC744 \uCC44\uC6B4\uB2E4 <br><br>\uC644\uC804\uD788
       \uCC44\uC6CC\uC9C4 \uC2A4\uD0AC \uAD6C\uC2AC\uC744 \uD65C\uC6A9\uD558\uC5EC
-      \uBAAC\uC2A4\uD130\uB97C \uACF5\uACA9\uD558\uC5EC \uC4F0\uB7EC\uD2B8\uB9AC\uC790! 
-      \uAC19\uC740 \uC18D\uC131\uC758 \uAD6C\uC2AC\uC744 4\uAC1C \uB9DE\uCD94\uBA74
+      \uBAAC\uC2A4\uD130\uB97C \uACF5\uACA9\uD558\uC5EC \uC4F0\uB7EC\uD2B8\uB9AC\uC790!
+      <br><br>\uAC19\uC740 \uC18D\uC131\uC758 \uAD6C\uC2AC\uC744 4\uAC1C \uB9DE\uCD94\uBA74
       \uD55C \uC904 \uD130\uD2B8\uB9B4 \uC218 \uC788\uACE0, 5\uAC1C \uB9DE\uCD94\uBA74
       \uD55C \uC18D\uC131\uC758 \uAD6C\uC2AC\uC744 \uB2E4 \uD130\uD2B8\uB9B4 \uC218
       \uC788\uB2E4!"
