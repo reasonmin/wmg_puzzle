@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class BoardManager : Singleton<BoardManager>
@@ -16,6 +17,8 @@ public class BoardManager : Singleton<BoardManager>
     [SerializeField] private Bead bead;
 
     [SerializeField] private RectTransform TimeBar;
+    [SerializeField] private Sprite starImage;
+    [SerializeField] private Image[] starImages;
 
     private Bead[,] beads;
     private SpecialBT[,] checkbeads;
@@ -46,7 +49,18 @@ public class BoardManager : Singleton<BoardManager>
         if (!isDone)
         {
             timeFlow += Time.deltaTime;
-            TimeBar.sizeDelta = new Vector2(720 - timeFlow * 6, TimeBar.sizeDelta.y);
+            TimeBar.sizeDelta = new Vector2(320 - timeFlow * 2, TimeBar.sizeDelta.y);
+
+            if(timeFlow > 160)
+            {
+
+            }
+            else if (timeFlow > 120)
+                starImages[2].sprite = starImage;
+            else if (timeFlow > 80)
+                starImages[1].sprite = starImage;
+            else if (timeFlow > 40)
+                starImages[0].sprite = starImage;
         }
     }
 
