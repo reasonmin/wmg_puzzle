@@ -9,7 +9,7 @@ public class GameEndPanal : MonoBehaviour
     {
         if (BoardManager.Instance.timeFlow < 40)
             PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 3;
-        else if (BoardManager.Instance.timeFlow < 60)
+        else if (BoardManager.Instance.timeFlow < 80)
             PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 2;
         else
             PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 1;
@@ -35,7 +35,7 @@ public class GameEndPanal : MonoBehaviour
         {
             if (BoardManager.Instance.timeFlow < 40)
                 PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 3;
-            else if (BoardManager.Instance.timeFlow < 60)
+            else if (BoardManager.Instance.timeFlow < 80)
                 PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 2;
             else
                 PlayerDataManager.Instance.playerData.chapterDatas[SceneChange.instance.ChapterNum - 1].stageDatas[SceneChange.instance.stageNum - 1] = 1;

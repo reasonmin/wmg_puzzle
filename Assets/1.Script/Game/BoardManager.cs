@@ -15,6 +15,8 @@ public class BoardManager : Singleton<BoardManager>
     [SerializeField] private GameObject beadBG;
     [SerializeField] private Bead bead;
 
+    [SerializeField] private RectTransform TimeBar;
+
     private Bead[,] beads;
     private SpecialBT[,] checkbeads;
 
@@ -44,6 +46,7 @@ public class BoardManager : Singleton<BoardManager>
         if (!isDone)
         {
             timeFlow += Time.deltaTime;
+            TimeBar.sizeDelta = new Vector2(720 - timeFlow * 6, TimeBar.sizeDelta.y);
         }
     }
 
