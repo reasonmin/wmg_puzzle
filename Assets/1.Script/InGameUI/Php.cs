@@ -16,11 +16,6 @@ public class Php : MonoBehaviour
         StartCoroutine(Attacked());
     }
 
-    private void Update()
-    {
-        
-    }
-
     public void ModifyHp(RectTransform rect, float amount)
     {
         Vector2 currentSize = rectTransform.sizeDelta;

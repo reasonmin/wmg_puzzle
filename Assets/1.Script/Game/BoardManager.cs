@@ -51,11 +51,7 @@ public class BoardManager : Singleton<BoardManager>
             timeFlow += Time.deltaTime;
             TimeBar.sizeDelta = new Vector2(320 - timeFlow * 2, TimeBar.sizeDelta.y);
 
-            if(timeFlow > 160)
-            {
-
-            }
-            else if (timeFlow > 120)
+            if (timeFlow > 120)
                 starImages[2].sprite = starImage;
             else if (timeFlow > 80)
                 starImages[1].sprite = starImage;
@@ -256,7 +252,6 @@ public class BoardManager : Singleton<BoardManager>
                     }
                     else
                     {
-                        Debug.Log($"{i}, {j} : {checkbeads[i, j]}");
                         beads[i, j].SetBead((int)beads[i, j].Type, checkbeads[i, j]);
                     }
 

@@ -51,7 +51,6 @@ public class Fade : MonoBehaviour
             destroytimer += Time.deltaTime;
             desvalue = 1f - (destroytimer / destroytime);
             Color newColor = new(originColor.r, originColor.g, originColor.b, Mathf.Clamp01(desvalue));
-            Debug.Log(desvalue);
             for (int i = 0; i < allchild.Length; i++)
             {
                 allchild[i].color = newColor;

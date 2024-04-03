@@ -26,10 +26,8 @@ public class Bead : MonoBehaviour
     [SerializeField] private Sprite[] _VFourSprite;
     [SerializeField] private Sprite[] _HFourSprite;
     [SerializeField] private Sprite _FiveSprite;
-
     [SerializeField] private Sprite[] _BurstSprite;
 
-    private Bead bead;
     public bool Burst = false;
     public SpecialBT SBurst = SpecialBT.Normal;
 
@@ -174,15 +172,6 @@ public class Bead : MonoBehaviour
 
         // 레이캐스트를 통해 레이와 충돌한 객체에 대한 정보 저장
         return Physics2D.Raycast(ray.origin, ray.direction);
-    }
-
-    public IEnumerator BeadDestory()   //터트리기
-    {
-        foreach (var burstSprite in _BurstSprite)
-        {
-            GetComponent<SpriteRenderer>().sprite = burstSprite;
-            yield return new WaitForSeconds(0.5f / _BurstSprite.Length);
-        }
     }
 
     public void SetBead(int rand, SpecialBT specialBT)   //랜덤으로 type(sprite) 정해주기

@@ -11,14 +11,6 @@ public class SceneChange : MonoBehaviour
     public int stageNum;
     public int ChapterNum;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            OnGoStage();
-        }
-    }
-
     private void Awake()
     {
         if (instance == null)

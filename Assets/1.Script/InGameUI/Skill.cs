@@ -11,7 +11,7 @@ public class Skill : MonoBehaviour
     private float fillTime = 2f;
     private float fillTimer = 0f;
 
-    public bool isFilling = false;
+    private bool isFilling = false;
 
     /// <summary>
     /// skill 버튼을 사용했을 때
