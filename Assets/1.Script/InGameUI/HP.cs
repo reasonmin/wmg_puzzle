@@ -10,7 +10,6 @@ public class HP : MonoBehaviour
     [SerializeField] private Eskill eskill;
     
     public Animator animator;
-    private SkillManagar skills;
     public SpriteRenderer spriteRenderer;
     private Color originalColor;
 
