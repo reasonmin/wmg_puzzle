@@ -7,3 +7,5 @@
 1. Items make it easier to clear the game.
    
 # How to play video games
+
+# Play Scene
