@@ -5,8 +5,9 @@
 
 # Information
 1. Items make it easier to clear the game.
-2. You can change the language in the settings.
-3. If you pop a lot of beads at once, a special effect is triggered.
+2. You can buy items with coins in the store.
+3. You can change the language in the settings.
+4. If you pop a lot of beads at once, a special effect is triggered.
    
 # How to play video games
 - You have to break the beads and attack the enemy.
