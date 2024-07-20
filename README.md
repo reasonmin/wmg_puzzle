@@ -1,16 +1,16 @@
 # WMZ_Puzzle
 
 # Control
-- Mouse Button
+- 마우스 버튼
 
 # Information
-1. Items make it easier to clear the game.
-2. You can buy items with coins in the store.
-3. You can change the language in the settings.
-4. If you pop a lot of beads at once, a special effect is triggered.
+1. 아이템을 사용하면 게임을 더 쉽게 클리어할 수 있습니다.
+2. 상점에서 코인으로 아이템을 살 수 있습니다.
+3. 설정에서 언어를 변경할 수 있습니다.
+4. 한꺼번에 많은 구슬을 터뜨리면 특수 효과가 발동됩니다.
    
 # How to play video games
-- You have to break the beads and attack the enemy.
+- 구슬을 터트려서 적을 공격해야합니다.
 
 # Play Scene
    ## Start Scene
